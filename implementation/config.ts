@@ -1,7 +1,7 @@
 // Package02 is the sole screen-size owner.
 namespace userconfig {
-    export const ARCADE_SCREEN_WIDTH = 480
-    export const ARCADE_SCREEN_HEIGHT = 360
+    export const ARCADE_SCREEN_WIDTH = 576
+    export const ARCADE_SCREEN_HEIGHT = 720
 }
 // Tutorial customts does not inherit pxt.json's palette. Apply the same native
 // palette explicitly so first launch, Recipes and project builds match.

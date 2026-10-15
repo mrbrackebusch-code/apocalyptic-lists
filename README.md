@@ -1,66 +1,15 @@
-# Apocalyptic Lists
+# Apocalyptic Lists — current game preview
 
 ### @explicitHints true
 
-## Your code runs the room
+## Enter the expedition
 
-You can see both teams' moves, values and targets. Build and edit lists to change what happens when the battle runs. The room supplies the characters and battle rules; your Blocks control the list work at each station.
+Expand the simulator with **Fullscreen**. Move with the arrow keys; press **A** at a room object. Press **B** for the expedition menu, use **↑ / ↓** to choose, and **A** to confirm. **Release time** plays the current plan.
 
-Use the simulator's expand button to play at full size. Move the small observer with the arrow keys. Walk to a labeled station and press **A** to use it. Press **B** to open the menu; use **↑ / ↓** to choose and **A** to confirm. Use **Run the plan** after your station work to watch the current lists play out.
+Start in Room 01 with an empty allied move list. [Open R01 in this project](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r01) to add your first room event. Recipe links keep your editable code. Use [the Recipe directory](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/directory) as you continue.
 
-Start with **R01**. Its allied move list is empty. [Open R01](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r01) to build the first script. Keep this project as you continue: Recipe links add instructions around your own editable code.
+This experimental owner preview uses the current visual game. The retained Recipe images and other Recipes describe the earlier presentation; they have not been regenerated or requalified for this visual revision.
 
-#### ~ tutorialhint
-
-```blocks
-// CUMULATIVE INSTRUCTIONAL REFERENCE ONLY; never automatically install as learner code.
-// World progress belongs to supplied world settings; behavior belongs to the currently edited program.
-
-apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
-    let allyMoves: string[] = []
-    allyMoves = []
-    for (let i = 0; i <= apocalypse.numberHint() - 1; i++) {
-        allyMoves.push("Wait")
-    }
-    allyMoves.push("Ward")
-    allyMoves.push("Mend")
-    allyMoves.push("Strike")
-    allyMoves.push("Strike")
-    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
-})
-```
-
-## Read a list, change a list
-
-The six visible columns are independent lists. On the left are enemy values, moves and targets; on the right are allied targets, moves and values. Each column shows its current length. Row labels are indices: the first cell is **0**. A dash marks a cell beyond that list's length; it is different from an actual `Wait` move.
-
-A station gives your code a copy of the list. Make the changes you need, then use the matching **use … as … list** block to submit that copy. The room highlights changed cells so you can compare what your code did. A target or roster entry refers to a real Sprite; the actor's displayed name helps you recognize it.
-
-After both the task and the battle succeed, the **Exit** gate opens the next room. The B menu also offers **Retry this setup** for a fresh attempt, **Try another setup** for a changed setup, and **Revisit an unlocked room** for replay. Your earned rooms are saved; your current program remains responsible for their behavior.
-
-If you need a complete program to compare with, use the native lightbulb hint. In later rooms, try planning the operation before opening it.
-
-[Recipe directory](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/directory)
-
-#### ~ tutorialhint
-
-```blocks
-// CUMULATIVE INSTRUCTIONAL REFERENCE ONLY; never automatically install as learner code.
-// World progress belongs to supplied world settings; behavior belongs to the currently edited program.
-
-apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
-    let allyMoves: string[] = []
-    allyMoves = []
-    for (let i = 0; i <= apocalypse.numberHint() - 1; i++) {
-        allyMoves.push("Wait")
-    }
-    allyMoves.push("Ward")
-    allyMoves.push("Mend")
-    allyMoves.push("Strike")
-    allyMoves.push("Strike")
-    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
-})
-```
 
 ```template
 // Add your room events here.
@@ -213,8 +162,8 @@ namespace apocTypes {
 // SUPPLIED SOURCE config.ts
 // Package02 is the sole screen-size owner.
 namespace userconfig {
-    export const ARCADE_SCREEN_WIDTH = 480
-    export const ARCADE_SCREEN_HEIGHT = 360
+    export const ARCADE_SCREEN_WIDTH = 576
+    export const ARCADE_SCREEN_HEIGHT = 720
 }
 // Tutorial customts does not inherit pxt.json's palette. Apply the same native
 // palette explicitly so first launch, Recipes and project builds match.
@@ -3780,240 +3729,6 @@ namespace apocGoals {
 // Supplied art provenance + honest inspection scope: docs/ART_CATALOG.md.
 namespace apocArt {
     export function actor(artKey: string, side: apocTypes.Side): Image {
-        if (artKey == "A-Blade") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . b . . . . . . .
-        . . . . . . . . . . . . . b b b b b b . . . . .
-        . . . . . . . . . . . . b b . b b b b b . . . .
-        . . . . . . . . . . . . . . . . . b b b b . . .
-        . . . . . . . . . . . . . . . . . . . b b f f .
-        . . . . . . . . . . . . . . . b b . b b b f f .
-        . . . . . . . . . . . . . b b b b b b f f f f .
-        . . . . . . . . . . . . b b b b b b b f f f f .
-        . . . . . . . . . . . b b b b b b b b f f f f .
-        . . . . . . . b b b b b b b b b b b b b f f f .
-        . . . . . . b b b b b b b b b b b b b b f f f .
-        . . . . b . b b b b b b b b b f b b b b f f . .
-        . . . . b b b b b b b b b b f f f b b b b f . .
-        . . . b b b b b b b b b f f f f f f f b b f . .
-        . . . b b b b b 1 b b b f f f f f f b b f f . .
-        . . 1 f b b b 1 b b b b f f f . f f b f f . . .
-        . . 1 1 1 1 b 1 b f b b f f . . . . . . . . . .
-        . . 1 1 1 b b b f f b b f f . . . . . . . . . .
-        . b 1 b 2 b b f f f b b f . . . . . . . . . . .
-        . b 2 2 b b f f f b b f f . . . . . . . . . . .
-        . . b b b f f f b b b f . . . . . . . . . . . .
-        . . . . . . . . f f f . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Guardian") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . b 1 . . . . . . . . . . . .
-        . . . . . . . . . b 1 2 b . . . . . . . . . . .
-        . . . . b . . . . b 1 b b . . . b b b . . . . .
-        . . . b b b b . b b b b b b . b 9 b b . . . . .
-        . . b b b b b b b b b b b b b b b b b . . . . .
-        . . b b 1 9 b f b b b b b 1 b b b b b b . . . .
-        . . b b f b b b f b b 1 b b b b b 9 b f . . . .
-        . . . b b f b b b b 9 f b b b b b f f b . . . .
-        . . . b 1 b f f b b b f b f b . b 1 9 b . . . .
-        . . b 9 b . . . . b f b b b . . . b 9 b b . . .
-        . . b 1 b . . . . f b b f f . . . b b b b . . .
-        . b 1 1 f . . . . . b f b b b . . b f b b b . .
-        . b 1 f b b . . . b b b f b b b f f b b b b . .
-        . b b 1 b b b f b 9 b b f f b b b b b b b b f .
-        . b b b b b b b b b b b f f b b 1 b b b b b f .
-        . b 1 1 b b b b 1 9 b b f f f b f b 9 b b b . .
-        . b b 9 b b b b 1 b b b f f f b b b 1 b b b . .
-        . b 1 b b b b b 9 b b b f f f b b b 1 b b b . .
-        . . f f b f f b b b b b f . f f b b 1 b b b . .
-        . . . . f f f b f b b b . . . f b b 9 b b b . .
-        . . . . . . f b b f b b . . . . f b b f . . . .
-        . . . . . . . f f f f f . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Medic") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . f f f f f . . . . . . . . . .
-        . . . . . . . f 2 4 4 4 2 2 e f . . . . . . . .
-        . . . . . . f 2 2 4 5 4 4 2 2 e f . . . . . . .
-        . . . . . f 2 2 4 2 2 4 4 2 4 2 2 e . . . . . .
-        . . . . f e 2 4 2 2 4 2 2 2 2 2 2 e f . . . . .
-        . . . . 2 2 2 2 2 2 2 2 2 2 4 2 2 2 2 f . . . .
-        . . . . 2 2 2 2 2 2 2 e e 2 2 4 2 2 2 e . . . .
-        . . . f 2 2 2 2 2 e 2 2 2 2 2 e 2 2 2 2 f . . .
-        . . . f 2 2 2 e e f e e e 2 e 2 e 2 2 4 e f . .
-        . . f e 2 f e e f e e f 2 e f e 2 2 2 2 5 e . .
-        . . 2 2 2 2 f 2 f f f 2 e e 2 2 f f e 4 e 2 f .
-        . f 2 2 2 f 2 2 2 2 f 2 2 4 4 2 2 2 f f 2 f . .
-        . . f f . . f e 2 2 2 f . 2 2 f e 2 2 f . . . .
-        . . . . . . . f e 2 2 f . f f . f f 2 2 . . . .
-        . . . . . . . . . . f . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Ranger") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . f f . . . . . . . . . . . . . . . . f f . .
-        . . d d e f . . . . . . . . . . . . f e d d . .
-        . . f b d e . . . . . . . . . . . . e d b f . .
-        . . . f d d e f . . . . . . . . f e d d f . . .
-        . . . f d d e f . . . . f . . . f e d d f . . .
-        . . . f d d e f f f b . f f . f f d d d f . . .
-        . . . f b b d e f f d f f f . f e d b b f . . .
-        . . . . d d b b f b d b d b f e b b d d . . . .
-        . . . f d f d d e b f 8 b b f b d d f d f . . .
-        . . f f e d d d b b f f 1 b f d d d b e f f . .
-        . . . . f b b b e b b f c b f e b d f f . . . .
-        . . . . f b e f f e b f f e f e e b . . . . . .
-        . . . . . f f f f e b b f e f f e f . . . . . .
-        . . . . . f f f f e b d d e f f e f . . . . . .
-        . . . . . . . . . f f f f f . . f . . . . . . .
-        . . . . . . . . . f e f f f . . . . . . . . . .
-        . . . . . . . . . . . f . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . f f f f f f f f f f f f . . . . . .
-        . . . . . . f f f f f f f f f f f f . . . . . .
-        . . . . . . . . . . . f f f . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Harvester") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . f f f . . . . . . . . . . . . .
-        . . . . . . . f b f f f . . . . . . . . . . . .
-        . . . . . . . b 1 3 b f . . . . . . . . . . . .
-        . . . . . . . f 3 3 3 b f . . . . . . . . . . .
-        . . . . . . . f 3 3 d b f . . . . . . . . . . .
-        . . . . . . f 3 3 3 3 3 3 f . . . . . . . . . .
-        . . . . . f 1 d 3 3 3 3 3 3 . . . . . . . . . .
-        . . . . . f 1 1 3 1 1 1 3 3 . . . . . . . . . .
-        . . . . . 1 3 3 3 3 3 3 3 1 f . f 7 f . . . . .
-        . . . . . 1 3 3 d 3 3 d 3 1 f . . f 7 f . . . .
-        . . . f 1 3 e 3 e 3 3 3 e 3 d f . . 7 7 . . . .
-        . . . f 3 d f 1 d 3 3 e f d 3 f . . 7 6 . . . .
-        . . f 3 e . . 1 3 3 3 6 f e 3 f f f 7 f . . . .
-        . . f 3 f . . 7 3 7 7 6 f 3 e f 7 7 6 f . . . .
-        . . . . . . f 7 7 7 7 6 f 3 f f 7 7 . . . . . .
-        . . . . . . f 7 7 7 7 6 . f f f 7 7 . . . . . .
-        . . . . . f 7 7 7 7 7 6 . . f 7 7 6 f . . . . .
-        . . . . . f 7 7 7 7 7 6 . . f 7 7 6 f f f . . .
-        . . . . . f 7 7 7 7 7 7 f f 7 7 7 6 f f f . . .
-        . . . . . . f 7 7 7 7 7 7 7 7 7 7 f f f f . . .
-        . . . . . . f 7 7 7 7 7 7 7 6 6 f f f f f . . .
-        . . . . . . . . f f f f f f f f f f f . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Reaper") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . 8 8 . . . . . . . . . .
-        . . 8 1 1 8 . . . . . 8 a 8 8 . . . . . . . . .
-        . . . 1 8 8 . . . . 8 a 1 1 8 . . . . . . . . .
-        . . 8 a 1 8 . . . . 8 a 1 a 8 8 . . . . . . . .
-        . . 8 1 a . . . . . 8 1 1 1 8 8 . . . . . . . .
-        . . . 8 a . . . . 8 a 8 8 8 a 8 a 8 . . . . . .
-        . . . 8 a . . . 8 8 a 8 8 8 a 8 8 8 8 . . . . .
-        . . . 8 a . . . a 8 8 a a a 8 8 8 8 8 . . . . .
-        . . . 8 1 8 8 a a 8 8 a a a a 8 8 a a 8 8 . . .
-        . . . a a 8 a a a 8 a 8 8 8 8 a 8 a 8 8 8 . . .
-        . . . 8 1 8 a a 8 8 8 8 a 8 8 8 8 8 8 a 8 . . .
-        . . . 8 1 8 a a 8 8 8 8 a 8 8 8 8 8 8 a 8 8 . .
-        . . . 8 1 8 a 8 8 8 8 a a 8 a 8 . 8 8 8 8 . . .
-        . . . 8 1 8 8 8 8 . 8 a a 8 a 8 . 8 8 8 8 . . .
-        . . . . 8 8 8 8 8 . 8 a a a a 8 . . 8 . . . . .
-        . . . . 8 8 8 8 8 . 8 8 8 a a 8 . . . . . . . .
-        . . . . 8 8 8 8 . . 8 8 8 a a a 8 . . . . . . .
-        . . . . 8 8 . . . . 8 8 8 a 8 a 8 8 8 8 8 . . .
-        . . . . 8 8 . . . 8 8 a 8 a 8 a 8 8 8 8 8 . . .
-        . . . . . a 8 . 8 . 8 8 8 8 8 8 8 8 8 8 8 . . .
-        . . . . . a 8 8 . . a a 8 8 8 a 8 8 8 8 . . . .
-        . . . . . 8 . . . 8 8 8 8 . 8 8 8 8 8 . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Executioner") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . b b . . . . . . . . . . . .
-        . . . . . . . . . b 1 2 b . . . . . . . . . . .
-        . . . . b . . . . b 1 b b . . . b b b . . . . .
-        . . . b b b f . b b b b b b . b b b b . . . . .
-        . . b b 1 b f b b b b b b b b b b b b . . . . .
-        . . b b 1 b b b b 1 b b b b b b b b b b . . . .
-        . . b b f b b b b b b b b b b b b b b f . . . .
-        . . . b b f f b b b b b b b b f b f f b . . . .
-        . . . f f b f b b b b b b b b . f b b . . . . .
-        . . f f f . . . . f f b b f . . . b b f . . . .
-        . . b 1 b . . . . b b f f b . . . f f b b . . .
-        . b 1 b f . . . . . b f f b b . . f f b b b . .
-        . b 1 b b f . . . b 9 b f b b b f f b b b b . .
-        . b 1 b b f f f b 1 b b f f b 1 b f b b b b f .
-        . b 1 b b f f b b 1 b f f f f b 1 b b b b b f .
-        . b 1 b b b f b b b b f f f f b f b 1 b b e f .
-        . b 1 b b b f b 1 b b f f f f f b b 1 b d b f .
-        . b 1 b b b f b 1 b b f f f f f f b 1 b b b f .
-        . . b b b f f b 1 b b f f f f f f b 1 b b b f .
-        . . f f f f f b 1 b b f f f f f f b b b e b . .
-        . . . . . . f b 1 b b f f f f f f f f f f . . .
-        . . . . . . . f f f f f . . . f f f f . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Enchanter") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . f f f f f . . . . . .
-        . . . . . . . . . . . f f a 6 a 6 6 a a . . . .
-        . . . . . . . . . . . f a a 6 6 6 a 6 6 f . . .
-        . . . . f . . f 6 f f 6 a 9 9 9 9 6 a a f f . .
-        . . . . 6 f f f f 6 f 6 6 9 a a 9 9 6 b a f . .
-        . . . . f b b 6 f f f a 6 a a a 2 a 6 b f f . .
-        . f f f b b . f 6 f f 6 6 9 9 9 a 6 6 a f f . .
-        . . b 6 f f f f f f f 6 6 a 9 9 6 a 6 6 a f . .
-        . . . . . . f 6 f f f a a 6 6 a 6 6 a 6 f f . .
-        . . . . . . f b 6 f f f 6 6 6 6 a 6 a a f f . .
-        . . . f 6 6 b f 6 b b f 6 f 6 6 a 6 f f f f f .
-        . . f 6 f f f f a 1 b f 6 f f f f f f f f f f .
-        . . 6 f . . f 6 f b c 6 f f f f c f f f f f f .
-        . . b f . . 6 f f b f b f f f f f f f 6 f f . .
-        . . f 6 . . f f f b f f f f f 6 f f f 6 . . . .
-        . . . . . . . . f . f f . 6 f 6 f f . f f . . .
-        . . . . . . . . . . f f . 6 f f b f . f f . . .
-        . . . . . . f . . f b . . b f f 6 f . f f . . .
-        . . . . . . f b 6 f f . . 6 f f 6 f . . f . . .
-        . . . . . . . f f . . . . 6 f f 6 6 . . . . . .
-        . . . . . . . . . . . . . . f . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Venomist") return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . e e d . . . . . . . . . . . . . . . . . . .
-        . . d d d . . . . e d d . . . . . . . b b b b .
-        . . b d d . . . b d d d d . . . . . . b b b b .
-        . e b . . . . . b d b d b . . . . . . d d b . .
-        . e b . . . . . . b e b d . . . . . . d d d . .
-        . . b b b . 6 6 . . e e d d . . 6 6 6 e d d . .
-        . . e d d b 6 6 b b e b b b b b d b b e e e . .
-        . . . e e e 6 b b b e b 6 6 d d d b d b d d . .
-        . . . . . d d e b b e b 6 6 b d d d d . e . . .
-        . . . . . . . e e e e e 6 6 b b b . . . e . . .
-        . . . . . . . d b b b b 6 b . . . . . . . . . .
-        . . . . . . b e b b b e 6 b . . . . . . . . . .
-        . . . . . . b b e d d d 6 b . . . . . . . . . .
-        . . . . . d b d . . . . b b . . . f f . . . . .
-        . . . . . e b d . . . . d e d d f f f . . . . .
-        . . . . . d e . . . . . f d b b b f f . . . . .
-        . . . . . b d e . . . f f e b b b f f . . . . .
-        . . . . . . b e . . f f f f b b b f f . . . . .
-        . . . . . . . d . f f f f f d d d f . . . . . .
-        . . . . . . . e e f f f f f b e d . . . . . . .
-        . . . . . f f f f f . . . f f f f . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
-    `;
         if (artKey == "E-Raider") return img`
         . . . . . . . . . . . . . . . . . . . . . . . .
         . . . . . . . . . . f f f . . . . . . . . . . .
@@ -4820,196 +4535,844 @@ namespace apocArt {
         . . . . . . . . . f f f f f f . . . . . . . . .
         . . . . . . . . . . . . . . . . . . . . . . . .
     `;
+        if (artKey == "A-Blade") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Guardian") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Medic") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Ranger") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Harvester") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Reaper") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Executioner") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Enchanter") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Venomist") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero01") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero02") return img`
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero03") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero04") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero05") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero06") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero07") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero08") return img`
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero09") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero10") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero11") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero12") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
         return img`
-        . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . b . . . . . . .
-        . . . . . . . . . . . . . b b b b b b . . . . .
-        . . . . . . . . . . . . b b . b b b b b . . . .
-        . . . . . . . . . . . . . . . . . b b b b . . .
-        . . . . . . . . . . . . . . . . . . . b b f f .
-        . . . . . . . . . . . . . . . b b . b b b f f .
-        . . . . . . . . . . . . . b b b b b b f f f f .
-        . . . . . . . . . . . . b b b b b b b f f f f .
-        . . . . . . . . . . . b b b b b b b b f f f f .
-        . . . . . . . b b b b b b b b b b b b b f f f .
-        . . . . . . b b b b b b b b b b b b b b f f f .
-        . . . . b . b b b b b b b b b f b b b b f f . .
-        . . . . b b b b b b b b b b f f f b b b b f . .
-        . . . b b b b b b b b b f f f f f f f b b f . .
-        . . . b b b b b 1 b b b f f f f f f b b f f . .
-        . . 1 f b b b 1 b b b b f f f . f f b f f . . .
-        . . 1 1 1 1 b 1 b f b b f f . . . . . . . . . .
-        . . 1 1 1 b b b f f b b f f . . . . . . . . . .
-        . b 1 b 2 b b f f f b b f . . . . . . . . . . .
-        . b 2 2 b b f f f b b f f . . . . . . . . . . .
-        . . b b b f f f b b b f . . . . . . . . . . . .
-        . . . . . . . . f f f . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     `;
     }
     export function portrait(artKey: string, side: apocTypes.Side): Image {
-        if (artKey == "A-Blade") return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . b b b . . . .
-        . . . . . . . . b . b b b . . .
-        . . . . . . . . . . . . b b . .
-        . . . . . . . . . . b . b b f .
-        . . . . . . . . . b b b b f f .
-        . . . . . . b b b b b b b f f .
-        . . . . b b b b b b b b b f f .
-        . . . b b b b b b b b b b f f .
-        . . . b b b b b b f f f b b f .
-        . . f b b 1 b b f f f f b f . .
-        . . 1 1 b 1 f b f . . . . . . .
-        . 1 1 b b f b b f . . . . . . .
-        . 2 2 b f f b f f . . . . . . .
-        . f f f . f b f . . . . . . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Guardian") return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . b b b . . . . . . .
-        . . . b . . b b b . b b . . . .
-        . . b b b b b f b b b b b . . .
-        . . b b b f b b b b b b b . . .
-        . . b f b b b 1 b b b 9 b . . .
-        . . 9 b . . b b b b . b b . . .
-        . f 1 b . . f b f b . b b b . .
-        . b 1 f . . f f b b . b 1 b . .
-        . b b b b . b b f b b b 1 b f .
-        . b 1 b b b b b f f f b b b f .
-        . 9 9 b b b b b f f b b 1 b b .
-        . 1 b b f b b b f f b b b b b .
-        . . . f f b b b . . b b b b . .
-        . . . . . b b f . . . f f . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Medic") return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . f 2 2 2 f . . . . . .
-        . . . . . 2 4 4 2 2 e . . . . .
-        . . . . 2 4 2 2 2 4 2 e . . . .
-        . . . f 2 2 2 4 2 2 2 2 f . . .
-        . . . 2 2 2 2 e 2 2 4 2 e . . .
-        . . f 2 e e f f 2 e 2 2 4 e . .
-        . . 2 2 2 f e e f f f 2 2 2 e .
-        . 2 2 2 f 2 2 f 2 4 2 2 f 2 f .
-        . f f . . 2 2 e f 2 f 2 f . . .
-        . . . . . f f e . . . . f . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Ranger") return img`
-        . . . . . . . . . . . . . . . .
-        . d d f . . . . . . . . f d d .
-        . . b d f . . . . . . . d b . .
-        . . f d d . . . . . . e d f . .
-        . . f f f . . f f . . f f f . .
-        . . f b d f f f d . f d b f . .
-        . . f d b e b b f f b d d f . .
-        . . f e d b b b f f d d e f . .
-        . . . f b f e f b f e b . . . .
-        . . . . e f e f b f f f . . . .
-        . . . . f . f f f . . . . . . .
-        . . . . . . . f f . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . f f f f f f f f . . . .
-        . . . . . . f f f f . . . . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Harvester") return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . f b b . . . . . . . .
-        . . . . . b 3 b . . . . . . . .
-        . . . . . f 1 3 f . . . . . . .
-        . . . . . f 3 e f . . . . . . .
-        . . . . f 1 3 1 3 f . . . . . .
-        . . . . 1 3 d 3 3 3 . 7 f . . .
-        . . . f 3 1 1 3 3 3 f . 7 f . .
-        . . 1 3 f 3 3 3 f d f . 7 f . .
-        . . 3 f . 7 3 7 f 3 f 7 6 . . .
-        . . . . . 7 7 7 f 3 f 7 . . . .
-        . . . . f 7 7 7 . . 7 6 f . . .
-        . . . . f 7 7 7 f f 7 6 f f . .
-        . . . . . 7 7 7 7 7 7 f f f . .
-        . . . . . f 7 6 7 6 f f f f . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Reaper") return img`
-        . . . . . . . . . . . . . . . .
-        . 8 8 . . . . a a 8 . . . . . .
-        . 8 8 8 . . 8 1 1 8 . . . . . .
-        . 1 1 8 . . 8 8 a 8 . . . . . .
-        . 8 8 . . . 8 1 a 8 8 . . . . .
-        . . a . . 8 8 8 a 8 8 8 . . . .
-        . . 1 8 a 8 8 8 a a 8 a 8 . . .
-        . 8 1 8 a 8 8 a a a 8 8 8 8 . .
-        . . 1 8 8 8 8 8 8 8 . 8 8 8 . .
-        . . 1 8 8 . 8 8 8 a . 8 8 . . .
-        . . 8 8 8 . 8 8 a a . 8 . . . .
-        . . 8 8 8 . 8 a a a 8 . . . . .
-        . . 8 8 . 8 8 8 a 8 8 8 8 8 . .
-        . . . a . . 8 8 8 8 8 8 8 . . .
-        . . . a 8 8 a 8 8 8 a 8 . . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Executioner") return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . b b b . . . . . . .
-        . . . b . . b b b . b b . . . .
-        . . b b f b f f b b b b b . . .
-        . . b b b b b b b b b b b . . .
-        . . b f b b 1 b b b b b f . . .
-        . . b f . . 1 b b b . f b . . .
-        . b 1 f . . b f f b . f b b . .
-        . b b f . . b f f b . f 1 b . .
-        . b b b f . 1 b f b b f 1 b f .
-        . b b b f b b f f f f b b b b .
-        . b b b f b b f f f b b b d b .
-        . b b b f b b f f f f b b b b .
-        . . f f f b b f f f f b b e f .
-        . . . . . b b f . . f f f . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Enchanter") return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . f a f f f . . .
-        . . . . . . . f 6 6 6 a 6 f . .
-        . . . f . 6 f a 6 9 9 6 a f . .
-        . f . f f 6 f 6 a a 2 9 6 f f .
-        . f 6 f 6 f f 6 6 9 9 a 6 a f .
-        . . . . . f f f 6 6 a 6 6 f f .
-        . . . f f b f f 6 6 6 6 a f f .
-        . f f . . f b f 6 f f f f f f .
-        . f f . f f b f f f f f 6 f . .
-        . . f . . 6 f f f f 6 f 6 . . .
-        . . . . . . f f f f f f f f . .
-        . . . . . 6 f . f f f f . f . .
-        . . . . . . . . . 6 . f . . . .
-        . . . . . . . . . . . . . . . .
-    `;
-        if (artKey == "A-Venomist") return img`
-        . . . . . . . . . . . . . . . .
-        . b b d . . e d . . . . . b b .
-        . d d . . . d d d . . . d b b .
-        . b . . . . d d b . . . . d b .
-        . e b . 6 6 . e d . 6 6 . d . .
-        . e d d 6 6 b b b b d b e e d .
-        . . e d 6 b b b 6 e d b d b . .
-        . . . e . e e e 6 . b . . e . .
-        . . . . b e b e 6 b . . . . . .
-        . . . . b b d d 6 b . . . . . .
-        . . . . b d . . d b f f f . . .
-        . . . . e . . . f b b f f . . .
-        . . . . b e f f f d b f . . . .
-        . . . . . d f f f e d f . . . .
-        . . . e d b f . f e d . . . . .
-        . . . . . . . . . . . . . . . .
-    `;
         if (artKey == "E-Raider") return img`
         . . . . . . . . . . . . . . . .
         . . . . . . f 3 3 . . . . . . .
@@ -5568,61 +5931,3354 @@ namespace apocArt {
         . . . . f f 2 2 2 f . . . . . .
         . . . . . . . . . . . . . . . .
     `;
+        if (artKey == "A-Blade") return img`
+        . 4 . . . 4 4 4 4 4 . . . . . .
+        . 4 5 4 4 5 5 5 5 5 4 . . . . .
+        . . 4 5 5 5 5 5 5 5 5 4 . . . .
+        . . . 4 5 5 5 4 5 5 5 4 . . . .
+        . . 4 4 5 4 5 4 5 4 5 4 . . . .
+        . 4 . 4 5 e e 1 e e 5 4 . . . .
+        . . . . 5 1 c 1 c 1 5 . . . . .
+        . . . . 4 e 4 1 4 e 4 . . . . .
+        . . c 1 9 c 9 1 9 c 9 1 c . . .
+        . . c 9 9 c c 9 c c 9 9 c . . .
+        . . e 4 e c 1 c 1 c e 4 e . . .
+        . e 1 4 e 9 c 9 c 9 e 4 1 e . .
+        . e 1 1 9 c 1 c 1 c 9 1 1 e . .
+        . . e e c d 1 1 1 d c e e . . .
+        . . . . . c 9 9 9 c . . . . . .
+        . . . . c 1 9 c 9 1 c . . . . .
+    `;
+        if (artKey == "A-Guardian") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 5 1 1 1 5 5 e e . . .
+        . . . 4 4 4 4 5 4 4 4 4 . . . .
+        . . e e e e 4 1 4 e e a . . . .
+        . e . a e 1 a 1 a 1 e a . . . .
+        . . . . a e 4 1 4 e a 3 a . . .
+        . . a c 8 4 c b c 4 8 c a . . .
+        . . . c 8 8 4 5 4 8 8 c . . . .
+        . . c 8 8 8 c b c 8 8 8 c . . .
+        . e 1 4 c 8 c b c 8 c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e 8 c c b c c 8 e e . . .
+        . . . c 8 c c e c c 8 c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "A-Medic") return img`
+        . . . . 6 9 1 1 1 9 6 . . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 6 1 6 6 6 9 6 . . . .
+        . . . 6 6 6 4 1 4 6 6 6 . . . .
+        . . . 6 6 e e 1 e e 6 6 . . . .
+        . . 6 1 6 1 6 1 6 1 6 1 6 . . .
+        . . 6 1 6 e 4 1 4 e 6 1 6 . . .
+        . . 6 6 6 9 1 9 1 9 6 6 6 . . .
+        . . . 6 9 6 1 1 1 6 9 6 . . . .
+        . . 6 6 9 6 9 9 9 6 9 6 6 . . .
+        . e 1 4 6 9 9 9 9 9 6 4 1 e . .
+        . e 1 1 4 9 9 1 9 9 4 1 1 e . .
+        . . e e 6 9 9 1 9 9 6 e e . . .
+        . . . . 6 6 9 9 9 6 6 . . . . .
+        . . . 6 e 3 4 e 4 3 e 6 . . . .
+    `;
+        if (artKey == "A-Ranger") return img`
+        . . . . . 6 7 7 7 6 . . . . . .
+        . . . . 6 7 7 7 7 7 6 e 5 e . .
+        . . . . 6 6 6 6 7 7 6 5 e . . .
+        . . . 6 7 2 2 2 2 2 7 e . . . .
+        . . . 6 2 2 3 2 3 2 2 6 . . . .
+        . . . 6 2 e e 4 e e 2 6 . . . .
+        . . . 2 e 1 6 1 6 1 e 2 . . . .
+        . . 2 2 2 e 4 1 4 e 2 2 2 . . .
+        . . . 6 7 4 5 7 5 4 7 6 . . . .
+        . . . 6 7 6 5 7 5 6 7 6 . . . .
+        . . e 4 6 6 4 7 4 6 6 4 e . . .
+        . e 1 4 e . e 4 e . e 4 1 e . .
+        . e 1 1 4 e 4 5 4 e 4 1 1 e . .
+        . . e e . e 5 5 5 e . e e . . .
+        . . . . . e 1 4 1 e . . . . . .
+        . . . . e 5 4 e 4 5 e . . . . .
+    `;
+        if (artKey == "A-Harvester") return img`
+        . . . . . c b b b b c . . . . .
+        . . . . c b b b b b b c . . . .
+        . . . . b b b b b b b b . . . .
+        . . . c b b b 4 b b b b c . . .
+        . . . c b e e 1 b e e b c . . .
+        . . . b b 1 c 1 1 c 1 b b . . .
+        . . c b b e 4 1 1 4 e b b c . .
+        . . c b e 1 e 4 4 e 1 e b c . .
+        . . c b e 1 1 2 2 1 1 e b c . .
+        . . . e 3 2 1 1 1 1 2 3 e . . .
+        . . e 4 e 2 1 1 1 1 2 e 4 e . .
+        . e 1 4 e 2 b 1 1 b 2 e 4 1 e .
+        . e 1 1 4 b 1 1 1 1 b 4 1 1 e .
+        . . e e e b 1 1 1 1 b e e e . .
+        . . . e b 1 1 1 1 1 1 b e . . .
+        . . e e e e 2 2 2 2 e e e e . .
+    `;
+        if (artKey == "A-Reaper") return img`
+        . . . . . c b b b c . . . . . .
+        . . . . c b b b b b c . . . . .
+        . . . . b b b b b b b . . . . .
+        . . . c b b 1 b 1 b b c . . . .
+        . . . c b b 1 1 1 b b c . . . .
+        . . . c b e e 4 e e b c . . . .
+        . . . . c 1 c 1 c 1 c . . . . .
+        . . . . . c b b b c . . . . . .
+        . . . c b b b 1 b b b c . . . .
+        . . . c b c b b b c b c . . . .
+        . . e 1 c c b b b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c b b b c . e e . . .
+        . . . . . f b c b f . . . . . .
+        . . . . f b c f c b f . . . . .
+    `;
+        if (artKey == "A-Executioner") return img`
+        . . . . . 4 4 4 4 4 . . . . . .
+        . . . . 4 4 4 5 4 4 4 . . . . .
+        . . . . 4 4 5 5 4 5 4 . . . . .
+        . . . 4 4 5 5 4 5 5 5 4 . . . .
+        . . . 4 5 4 5 4 5 4 5 4 . . . .
+        . . . 4 5 e e 1 e e 5 4 . . . .
+        . . . 5 4 1 4 1 4 1 4 5 . . . .
+        . . 4 5 5 e 4 1 4 e 5 5 4 . . .
+        . . 4 a 1 a 3 1 3 a 1 a 4 . . .
+        . . . a 3 a a 3 a a 3 a . . . .
+        . . e 4 e a 1 a 1 a e 4 e . . .
+        . e 1 4 e 3 a 3 a 3 e 4 1 e . .
+        . e 1 1 3 a 4 a 4 a 3 1 1 e . .
+        . . e e a e 1 4 1 e a e e . . .
+        . . . . . a 3 3 3 a . . . . . .
+        . . . . a 1 3 a 3 1 a . . . . .
+    `;
+        if (artKey == "A-Enchanter") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 7 7 7 7 7 5 e e . . .
+        . . . 4 7 7 7 7 7 7 7 4 . . . .
+        . . e e 7 e e 1 e 7 7 e . . . .
+        . e . 7 7 1 c 1 c 1 7 7 . . . .
+        . . . 7 7 e 4 1 4 e 7 7 . . . .
+        . . . c a 7 a c a 7 a c . . . .
+        . . . c a a 4 5 4 a a c . . . .
+        . . c a a a c c c a a a c . . .
+        . e 1 4 c a c b c a c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e a c c b c c a e e . . .
+        . . . c a c c e c c a c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "A-Venomist") return img`
+        . . . . . c b 1 b c . . . . . .
+        . . . . c 1 1 1 1 1 c . . . . .
+        . . . . b 1 1 1 1 1 b . . . . .
+        . . . c 1 b 1 b 1 b 1 c . . . .
+        . . . c b b 3 2 4 2 b c . . . .
+        . . . c b 2 3 2 e e b c . . . .
+        . . . . c 3 3 1 c 1 c . . . . .
+        . . . . . c 2 1 1 c . . . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c b c 1 1 1 c b c . . . .
+        . . e 1 c c b 1 b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c 1 b 1 c . e e . . .
+        . . . . . f 1 c 1 f . . . . . .
+        . . . . f 1 c f c 1 f . . . . .
+    `;
+        if (artKey == "hero01") return img`
+        . . . . 6 9 1 1 1 9 6 . . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 6 1 6 6 6 9 6 . . . .
+        . . . 6 6 6 4 1 4 6 6 6 . . . .
+        . . . 6 6 e e 1 e e 6 6 . . . .
+        . . 6 1 6 1 6 1 6 1 6 1 6 . . .
+        . . 6 1 6 e 4 1 4 e 6 1 6 . . .
+        . . 6 6 6 9 1 9 1 9 6 6 6 . . .
+        . . . 6 9 6 1 1 1 6 9 6 . . . .
+        . . 6 6 9 6 9 9 9 6 9 6 6 . . .
+        . e 1 4 6 9 9 9 9 9 6 4 1 e . .
+        . e 1 1 4 9 9 1 9 9 4 1 1 e . .
+        . . e e 6 9 9 1 9 9 6 e e . . .
+        . . . . 6 6 9 9 9 6 6 . . . . .
+        . . . 6 e 3 4 e 4 3 e 6 . . . .
+    `;
+        if (artKey == "hero02") return img`
+        . . . . c 1 1 1 1 1 c . . . . .
+        . . . c b b b 1 b b b c . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c 1 1 1 1 1 1 1 c . . . .
+        . . . c 1 b 4 1 4 1 1 c . . . .
+        . . . 1 1 e e 1 e e 1 b . . . .
+        . . b 1 1 1 c 1 c 1 1 b . . . .
+        . b b 1 b e 4 1 4 e 1 1 . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c b c 1 1 1 c b c . . . .
+        . . c b b c b 1 b c b b c . . .
+        . e 1 4 c b 1 b 1 b c 4 1 e . .
+        . e 1 1 4 b 1 1 1 b 4 1 1 e . .
+        . . e e b b 1 1 1 b b e e . . .
+        . . . c b c 1 b 1 c b c . . . .
+        . . c c e 3 4 e 4 3 e c c . . .
+    `;
+        if (artKey == "hero03") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 7 7 7 7 7 5 e e . . .
+        . . . 4 7 7 7 7 7 7 7 4 . . . .
+        . . e e 7 e e 1 e 7 7 e . . . .
+        . e . 7 7 1 c 1 c 1 7 7 . . . .
+        . . . 7 7 e 4 1 4 e 7 7 . . . .
+        . . . c a 7 a c a 7 a c . . . .
+        . . . c a a 4 5 4 a a c . . . .
+        . . c a a a c c c a a a c . . .
+        . e 1 4 c a c b c a c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e a c c b c c a e e . . .
+        . . . c a c c e c c a c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "hero04") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 5 1 1 1 5 5 e e . . .
+        . . . 4 4 4 4 5 4 4 4 4 . . . .
+        . . e e e e 4 1 4 e e a . . . .
+        . e . a e 1 a 1 a 1 e a . . . .
+        . . . . a e 4 1 4 e a 3 a . . .
+        . . a c 8 4 c b c 4 8 c a . . .
+        . . . c 8 8 4 5 4 8 8 c . . . .
+        . . c 8 8 8 c b c 8 8 8 c . . .
+        . e 1 4 c 8 c b c 8 c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e 8 c c b c c 8 e e . . .
+        . . . c 8 c c e c c 8 c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "hero05") return img`
+        . . . . . c b 1 b c . . . . . .
+        . . . . c 1 1 1 1 1 c . . . . .
+        . . . . b 1 1 1 1 1 b . . . . .
+        . . . c 1 b 1 b 1 b 1 c . . . .
+        . . . c b b 3 2 4 2 b c . . . .
+        . . . c b 2 3 2 e e b c . . . .
+        . . . . c 3 3 1 c 1 c . . . . .
+        . . . . . c 2 1 1 c . . . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c b c 1 1 1 c b c . . . .
+        . . e 1 c c b 1 b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c 1 b 1 c . e e . . .
+        . . . . . f 1 c 1 f . . . . . .
+        . . . . f 1 c f c 1 f . . . . .
+    `;
+        if (artKey == "hero06") return img`
+        . . . . . c b b b c . . . . . .
+        . . . . c b b b b b c . . . . .
+        . . . . b b b b b b b . . . . .
+        . . . c b b 1 b 1 b b c . . . .
+        . . . c b b 1 1 1 b b c . . . .
+        . . . c b e e 4 e e b c . . . .
+        . . . . c 1 c 1 c 1 c . . . . .
+        . . . . . c b b b c . . . . . .
+        . . . c b b b 1 b b b c . . . .
+        . . . c b c b b b c b c . . . .
+        . . e 1 c c b b b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c b b b c . e e . . .
+        . . . . . f b c b f . . . . . .
+        . . . . f b c f c b f . . . . .
+    `;
+        if (artKey == "hero07") return img`
+        . . . . . 6 7 7 7 6 . . . . . .
+        . . . . 6 7 7 7 7 7 6 e 5 e . .
+        . . . . 6 6 6 6 7 7 6 5 e . . .
+        . . . 6 7 2 2 2 2 2 7 e . . . .
+        . . . 6 2 2 3 2 3 2 2 6 . . . .
+        . . . 6 2 e e 4 e e 2 6 . . . .
+        . . . 2 e 1 6 1 6 1 e 2 . . . .
+        . . 2 2 2 e 4 1 4 e 2 2 2 . . .
+        . . . 6 7 4 5 7 5 4 7 6 . . . .
+        . . . 6 7 6 5 7 5 6 7 6 . . . .
+        . . e 4 6 6 4 7 4 6 6 4 e . . .
+        . e 1 4 e . e 4 e . e 4 1 e . .
+        . e 1 1 4 e 4 5 4 e 4 1 1 e . .
+        . . e e . e 5 5 5 e . e e . . .
+        . . . . . e 1 4 1 e . . . . . .
+        . . . . e 5 4 e 4 5 e . . . . .
+    `;
+        if (artKey == "hero08") return img`
+        . . . . . 7 7 7 7 7 . . . . . .
+        . . . . 7 7 7 7 7 7 7 e 5 e . .
+        . . . . 7 7 7 7 7 7 7 5 e . . .
+        . . . 7 7 7 7 7 7 7 7 e . . . .
+        . . . 7 7 4 5 4 5 5 7 7 . . . .
+        . . . 7 7 e e 4 e e 7 7 . . . .
+        . . . . e 1 7 1 7 1 e . . . . .
+        . . . . . e 4 1 4 e . . . . . .
+        . . . 7 7 4 5 7 5 4 7 7 . . . .
+        . . . 7 7 7 5 7 5 7 7 7 . . . .
+        . . e 4 7 7 4 7 4 7 7 4 e . . .
+        . e 1 4 e . 7 7 7 . e 4 1 e . .
+        . e 1 1 4 e 4 5 4 e 4 1 1 e . .
+        . . e e . e 5 5 5 e . e e . . .
+        . . . . . e 5 4 5 e . . . . . .
+        . . . . e 5 5 e 5 5 e . . . . .
+    `;
+        if (artKey == "hero09") return img`
+        . . . . . c b b b b c . . . . .
+        . . . . c b b b b b b c . . . .
+        . . . . b b b b b b b b . . . .
+        . . . c b b b 4 b b b b c . . .
+        . . . c b e e 1 b e e b c . . .
+        . . . b b 1 c 1 1 c 1 b b . . .
+        . . c b b e 4 1 1 4 e b b c . .
+        . . c b e 1 e 4 4 e 1 e b c . .
+        . . c b e 1 1 2 2 1 1 e b c . .
+        . . . e 3 2 1 1 1 1 2 3 e . . .
+        . . e 4 e 2 1 1 1 1 2 e 4 e . .
+        . e 1 4 e 2 b 1 1 b 2 e 4 1 e .
+        . e 1 1 4 b 1 1 1 1 b 4 1 1 e .
+        . . e e e b 1 1 1 1 b e e e . .
+        . . . e b 1 1 1 1 1 1 b e . . .
+        . . e e e e 2 2 2 2 e e e e . .
+    `;
+        if (artKey == "hero10") return img`
+        . . . . . . e e e e . . . . . .
+        . . . . . e 4 1 1 4 e . . . . .
+        . . . . e 4 1 1 1 1 4 e . . . .
+        . . . . 9 4 1 1 1 1 4 9 . . . .
+        . . . b 9 e e 1 1 e e 9 b . . .
+        . . . 9 e 1 b 1 1 b 1 e 9 . . .
+        . . . . b e 4 1 1 4 e b . . . .
+        . . . . e 1 e 4 4 e 1 e . . . .
+        . . . e 4 1 1 1 1 1 1 4 e . . .
+        . . . e 4 b 1 1 1 1 b 4 e . . .
+        . . e 4 e b b 1 1 b b e 4 e . .
+        . e 1 4 e . b b b b . e 4 1 e .
+        . e 1 1 4 e 2 3 3 2 e 4 1 1 e .
+        . . e e . e 3 3 3 3 e . e e . .
+        . . . . . e 3 2 2 3 e . . . . .
+        . . . . e 5 5 e e 5 5 e . . . .
+    `;
+        if (artKey == "hero11") return img`
+        . . . . . 4 4 4 4 4 . . . . . .
+        . . . . 4 4 4 5 4 4 4 . . . . .
+        . . . . 4 4 5 5 4 5 4 . . . . .
+        . . . 4 4 5 5 4 5 5 5 4 . . . .
+        . . . 4 5 4 5 4 5 4 5 4 . . . .
+        . . . 4 5 e e 1 e e 5 4 . . . .
+        . . . 5 4 1 4 1 4 1 4 5 . . . .
+        . . 4 5 5 e 4 1 4 e 5 5 4 . . .
+        . . 4 a 1 a 3 1 3 a 1 a 4 . . .
+        . . . a 3 a a 3 a a 3 a . . . .
+        . . e 4 e a 1 a 1 a e 4 e . . .
+        . e 1 4 e 3 a 3 a 3 e 4 1 e . .
+        . e 1 1 3 a 4 a 4 a 3 1 1 e . .
+        . . e e a e 1 4 1 e a e e . . .
+        . . . . . a 3 3 3 a . . . . . .
+        . . . . a 1 3 a 3 1 a . . . . .
+    `;
+        if (artKey == "hero12") return img`
+        . 4 . . . 4 4 4 4 4 . . . . . .
+        . 4 5 4 4 5 5 5 5 5 4 . . . . .
+        . . 4 5 5 5 5 5 5 5 5 4 . . . .
+        . . . 4 5 5 5 4 5 5 5 4 . . . .
+        . . 4 4 5 4 5 4 5 4 5 4 . . . .
+        . 4 . 4 5 e e 1 e e 5 4 . . . .
+        . . . . 5 1 c 1 c 1 5 . . . . .
+        . . . . 4 e 4 1 4 e 4 . . . . .
+        . . c 1 9 c 9 1 9 c 9 1 c . . .
+        . . c 9 9 c c 9 c c 9 9 c . . .
+        . . e 4 e c 1 c 1 c e 4 e . . .
+        . e 1 4 e 9 c 9 c 9 e 4 1 e . .
+        . e 1 1 9 c 1 c 1 c 9 1 1 e . .
+        . . e e c d 1 1 1 d c e e . . .
+        . . . . . c 9 9 9 c . . . . . .
+        . . . . c 1 9 c 9 1 c . . . . .
+    `;
         return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . b b b . . . .
-        . . . . . . . . b . b b b . . .
-        . . . . . . . . . . . . b b . .
-        . . . . . . . . . . b . b b f .
-        . . . . . . . . . b b b b f f .
-        . . . . . . b b b b b b b f f .
-        . . . . b b b b b b b b b f f .
-        . . . b b b b b b b b b b f f .
-        . . . b b b b b b f f f b b f .
-        . . f b b 1 b b f f f f b f . .
-        . . 1 1 b 1 f b f . . . . . . .
-        . 1 1 b b f b b f . . . . . . .
-        . 2 2 b f f b f f . . . . . . .
-        . f f f . f b f . . . . . . . .
-        . . . . . . . . . . . . . . . .
+        . 4 . . . 4 4 4 4 4 . . . . . .
+        . 4 5 4 4 5 5 5 5 5 4 . . . . .
+        . . 4 5 5 5 5 5 5 5 5 4 . . . .
+        . . . 4 5 5 5 4 5 5 5 4 . . . .
+        . . 4 4 5 4 5 4 5 4 5 4 . . . .
+        . 4 . 4 5 e e 1 e e 5 4 . . . .
+        . . . . 5 1 c 1 c 1 5 . . . . .
+        . . . . 4 e 4 1 4 e 4 . . . . .
+        . . c 1 9 c 9 1 9 c 9 1 c . . .
+        . . c 9 9 c c 9 c c 9 9 c . . .
+        . . e 4 e c 1 c 1 c e 4 e . . .
+        . e 1 4 e 9 c 9 c 9 e 4 1 e . .
+        . e 1 1 9 c 1 c 1 c 9 1 1 e . .
+        . . e e c d 1 1 1 d c e e . . .
+        . . . . . c 9 9 9 c . . . . . .
+        . . . . c 1 9 c 9 1 c . . . . .
+    `;
+    }
+    export function largePortrait(artKey: string, side: apocTypes.Side): Image {
+        if (artKey == "E-Raider") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f d 3 3 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . f d 3 3 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . . f f f e d 3 3 3 3 3 d f f f f f . . . . . . . .
+        . . . . . . . f 3 3 3 f 2 3 3 3 2 f d d 3 3 3 3 f . . . . . . .
+        . . . . . . . . f d e d f 3 3 f f d d e e d f f . . . . . . . .
+        . . . . . . . . . f 1 d 3 3 1 3 3 d d e e f . . . . . . . . . .
+        . . . . . . . . . . f 1 2 2 2 1 d d e f f . . . . . . . . . . .
+        . . . . . . . . . . . f d 3 3 d 2 e e f . . . . . . . . . . . .
+        . . . . . . . . . . f b e d d e e e e b f . . . . . . . . . . .
+        . . . . . . . . . f b f b e e e e b b f b f . . . . . . . . . .
+        . . . . . . . . f e e b f b b b b f f b e 3 f . . . . . . . . .
+        . . . . . . . . f d b f b f f f f b b f 3 d d f . . . . . . . .
+        . . . . . . . . f d f b f b b b b f f b e d e e f . . . . . . .
+        . . . . . . . f d e f f b f f f f b b f e e e e f . . . . . . .
+        . . . . . . f e e e f f f b b b b f f f f e e e b f . . . . . .
+        . . . f f f b 1 e e f e e f f f f b e e f f e 1 b f . . . . . .
+        . . f d 3 d e b b f f e e 2 1 2 2 e e e f . f b 3 e f . . . . .
+        . . f 3 d e d b f . f f b e 2 2 e e b b f . f 3 d e f . . . . .
+        . . f d e e f f . f f f f b b b b b f f f f f e e e f . . . . .
+        . . . f f f . . . f f b f f f f f f b b f f . f e f . . . . . .
+        . . . . . . . . . f f f f b b b b b f f f f . . f . . . . . . .
+        . . . . . . . . . f e f f f f f f f b f e f f f f f f f . . . .
+        . . . . . . . . . f e d b f b b b b f e e f f f f f f f f . . .
+        . . . . . . . . . f e d e f f f f f e d e f f f f f f f f . . .
+        . . . . . . . . . f e 3 e f f f f f e 3 e e f f f f f f f . . .
+        . . . . . . . . f e e e e f f f f f e e e e f f f f f f . . . .
+        . . . . . . . . f e e e f f f f f f e e e e f f f f . . . . . .
+        . . . . . . . . f e e e f f f f f f e e e e f f f . . . . . . .
+        . . . . . . . f 2 2 e e f f f f . . f e e 2 2 f . . . . . . . .
+        . . . . . . . f e e e e f f . . . . f e e e e f . . . . . . . .
+        . . . . . . . . f f f f f . . . . . . f f f f . . . . . . . . .
+    `;
+        if (artKey == "E-Decoy") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f e e c f . . . . . . . . . . . . . .
+        . . . . . . . . . f . . f e d e e e f . . f . . . . . . . . . .
+        . . . . . . . . f 2 f f c e d e e e c f f 2 f . . . . . . . . .
+        . . . . . . . . f 2 2 c e e e e e 2 e c 2 2 f . . . . . . . . .
+        . . . . . . . . f 2 2 2 2 2 e c 2 2 2 2 e 2 f . . . . . . . . .
+        . . . . . . . . . f 2 e 5 e e c e 5 e e e f . . . . . . . . . .
+        . . . . . . . . . . f 2 e 2 2 2 2 e e f f . . . . . . . . . . .
+        . . . . . . . . . . f f 2 e 2 2 e 2 2 f e f f . . . . . . . . .
+        . . . . . . . . . f f f e 1 f f 9 2 f e f e f f . . . . . . . .
+        . . . . . . . . f e f c f b 1 b b 2 f c e e e e f . . . . . . .
+        . . . . . . . . f e e f c f 2 2 2 f e f e c e 2 e f . . . . . .
+        . . . . . . . f e 2 c e f c f f f e f e b 2 e 2 2 f . . . . . .
+        . . . . f f f e 2 2 e f e f e f e f e f e f f e 2 e f . . . . .
+        . . . f b 1 2 2 2 e f f 2 e f e f e f e f . f e 2 e f . . . . .
+        . . . f 2 e 2 e e f . f 2 2 c f c f 2 2 f . . f 2 e 2 f . . . .
+        . . . f 1 e 2 f f . . f b 2 2 2 2 2 2 b b f . f 1 2 e f . . . .
+        . . . . f f f . . . f f b b b b b b b b c f . f b 2 1 f . . . .
+        . . . . . . . . . . f b e b c b c b c c f f . . f f f . . . . .
+        . . . . . . . . . . f c c c f b f f e f e f f f . . . . . . . .
+        . . . . . . . . . . f e c 2 e f f 2 e 2 e f f f f f f . . . . .
+        . . . . . . . . . . f 2 2 2 e f f f 2 2 e f f f f f f f . . . .
+        . . . . . . . . . . . f 2 e f f f f 2 2 f f f f f f f f . . . .
+        . . . . . . . . . . f 2 2 2 f f f f 2 e e f f f f f f . . . . .
+        . . . . . . . . . f 1 2 b e f . . f e b e 1 f f f . . . . . . .
+        . . . . . . . . . f f f f f . . . . f f f f f . . . . . . . . .
+    `;
+        if (artKey == "E-Plague") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . f f e d d 4 f f . . . .
+        . . . . . . . . . . . . . . . . . . . f 5 d e e e e e 4 f . . .
+        . . . . . . . . . . . . . . . . . . f 5 4 e e f f e e d 5 f . .
+        . . . . . . . . . . . . . . . . . . f 5 d e f . . f f e d d f .
+        . . . . . . . . . . . . . . . . . . . f 4 e f . . . f e e d f .
+        . . . . . . . . . . . . . . . . . . . . f 5 d f . . . f e e f .
+        . . . . . . . . . . . . . . . . . . . . . f 5 f . . . f 4 e e f
+        . . . . . . . . . . . . . . . . . . . . f 5 f . . . . f 5 d e f
+        . . . . . . . . . . . . . . . . . . . . . f . . . . . f 5 d e f
+        . . . . . . . . . . . . . . f . . . . . . . . . . . . f d e f f
+        . . . . . . . . . . f . . f 7 f f . . . . . . . . . . f f f f .
+        . . . . . . . . . f 7 f f . f e e f . . . . . . . . f 4 e e f .
+        . . . . . . f . . f f e e f . f f 5 f . . . . . . f 5 d e f f .
+        . . . . . f 7 f f e 7 f f 5 f . f 7 f . . . . . f 5 5 e f f . .
+        . . . . . . f e e f 7 f f e f . f 7 f . . . . f f d e e f f . .
+        . . . f f f . f f f f e f f 5 f f 7 f . . f f 4 e f e f f . . .
+        . . f d 5 5 f . . . f 5 f f 7 f f d f f f 5 d e e e f f f f f .
+        . f d 5 d d e f . . f 7 f f e f 5 e d 5 d 5 e e f f f f f f f f
+        . f d 5 d e e e f f f f 5 5 e d 5 5 e d 5 e e e f f f f f f f f
+        f 4 d d e f f d 4 5 d d d 5 5 e d e e e e e e e e e 7 f f f f .
+        f 4 f e f e d 5 d d 5 e d d d e e e e e e e f f f f 7 f f . . .
+        f 4 f e f d f d 7 d 4 e e e e e e f f f f 7 f f f f 7 f . . . .
+        f e f f f e d f d e e e e e e e e e e f f 7 f f f f 5 f . . . .
+        . f . . . f e d e e e e e e e e f f 7 f f 5 f . . f e f . . . .
+        . . . . . f f e e e e d f f f f . f 4 f . f e f . f 7 f . . . .
+        . . . f f e d d d e f e d f . . . f e f . f 7 f . f 7 f . . . .
+        . . f e e 5 5 5 5 5 e e e f . . . f 5 f . f 7 f . f e 7 f . . .
+        . . . f f e e e e e 4 e e f . . . f 7 f . f 7 f . . f f . . . .
+        . . f e e f f f e e e e f . . . . f e f . f e 7 f . . . . . . .
+        . . . f e e e e e e e f . . . . . . f 7 f . f f . . . . . . . .
+        . . . . f f f f f f f . . . . . . . . f . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Boss") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        6 6 . . . . . . . . . . . . . . . . . . . . . 6 6 6 6 6 6 6 6 .
+        . 6 6 6 6 . . . . . . . . . 1 . . . 1 1 6 6 6 6 2 2 2 2 2 2 . .
+        . . 2 2 6 6 6 6 6 6 6 6 6 1 . . . . . 6 6 2 2 2 2 2 2 2 2 . . .
+        . . . 2 2 2 2 2 2 2 6 6 2 6 . . . . 6 6 6 6 6 2 2 2 2 2 . . . .
+        . . . 2 2 2 2 6 6 6 2 2 2 6 . . . . 6 2 2 2 2 6 6 2 2 2 . . . .
+        . . . 2 2 2 6 2 2 2 7 7 7 2 6 . . . 6 2 2 2 2 2 2 6 2 2 . . . .
+        . . 2 2 2 6 2 2 7 7 6 7 7 7 6 . . . 6 2 2 2 2 2 2 2 6 2 . . . .
+        . . 2 6 6 2 2 7 6 7 7 6 7 6 7 7 . . 6 2 2 2 2 2 2 2 2 6 . . . .
+        . . 6 2 2 2 2 7 7 6 6 6 6 6 7 6 7 . 6 2 2 2 2 2 2 2 2 2 6 . . .
+        . . . 2 2 2 7 7 7 6 1 7 7 6 6 6 7 6 . 6 2 2 2 2 2 2 . . . . . .
+        . . . . 1 2 7 7 7 6 1 2 7 7 7 6 6 7 7 6 2 2 2 2 2 . . . . . . .
+        . . . . b 1 7 7 7 1 1 2 2 6 7 7 6 6 7 6 2 2 2 2 . . . . . . . .
+        . . . . . 1 1 7 7 1 7 . 2 6 7 7 7 6 6 7 7 7 7 2 . . . . . . . .
+        . . . . . b 7 7 7 7 7 6 7 6 6 7 7 6 6 6 6 7 7 7 7 . . . . . . .
+        . . . . . . 7 7 7 7 7 2 6 6 6 7 7 7 6 6 6 6 6 6 7 7 7 . . . . .
+        . . . . . . 7 2 7 7 7 2 6 6 6 7 7 7 6 6 6 6 6 6 6 7 7 7 . . . .
+        . . . . . . 6 7 2 7 7 7 7 6 6 7 7 7 6 6 7 6 6 6 6 6 6 7 . . . .
+        . . . . . 6 6 7 7 7 7 7 7 6 6 7 7 7 7 6 6 6 6 6 . . 6 7 7 . . .
+        . . . . 6 6 6 6 7 7 7 7 7 6 6 7 7 7 7 6 6 6 6 . . 1 6 7 7 7 . .
+        . . 6 6 6 6 6 6 1 6 7 7 7 6 6 7 7 7 7 6 6 6 7 f f f f 1 7 1 . .
+        . 6 6 6 6 6 6 . . . 6 7 7 6 6 7 7 7 7 6 6 6 6 6 f f f 1 f f 1 .
+        . 1 . 6 6 1 . . . . . 6 . 6 6 6 7 7 7 6 6 7 6 6 7 6 f f 6 6 . .
+        1 . . 1 . 1 . . . . . . 6 6 6 6 7 7 7 6 6 7 6 7 6 6 6 6 6 f f .
+        . . . 1 . . . . . . 6 6 7 6 6 6 7 7 7 7 6 6 7 6 6 6 6 6 f f f .
+        . . . . . . . . . . 6 7 7 6 6 6 6 7 7 7 6 6 6 7 6 7 f f f f . .
+        . . . . . . . . . 6 7 6 6 6 6 6 f f 7 7 6 6 6 7 7 6 f f f . . .
+        . . . . . . . . . 6 7 6 6 6 6 f f f f f f 6 6 6 6 7 6 f f . . .
+        . . . . . . . . . 7 7 6 6 6 6 f f f f f f f 6 6 7 7 6 f f f . .
+        . . . . . . . . 6 6 6 6 6 6 f f f f f f f f 6 6 6 6 6 6 f f f .
+        . . . . . . 6 6 6 6 6 6 6 f f f f f . . f f f 6 6 6 7 6 6 f f .
+        . . . . . 9 6 f 9 6 f 6 6 9 f f . . . f f f 9 6 f 6 9 f 6 9 f .
+        . . . . . f f f f f f f f f f . . . . . . f f f f f f f f f . .
+    `;
+        if (artKey == "E-King") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . d 3 3 3 3 3 . . . . . . . . . . . . . . .
+        . . . . . . . . . . 3 3 3 3 3 3 3 3 . . . . . . . . . . . . . .
+        . . . . . . . . . . d 3 3 3 3 3 d d d . . . . . . . . . . . . .
+        . . . . . 3 3 3 3 3 f 2 3 3 3 d 2 f d d 3 3 3 3 . . . . . . . .
+        . . . . . . . d e e d f 3 3 d f f d d e e d . . . . . . . . . .
+        . . . . . . . . e 1 d 3 3 3 1 3 3 d d e e . . . . . . . . . . .
+        . . . . 2 . . . . . 1 2 2 2 2 1 d d d e . . . . . . 2 . . . . .
+        . . . . . 2 2 . 2 2 e d d d d d 2 d e 2 e 2 2 . 2 2 . . . . . .
+        . . . 2 . . . 2 2 2 2 e e e e e e 2 2 e 2 2 2 2 . . . . . . . .
+        . . . . 2 2 2 e 2 2 e 2 2 2 2 2 2 2 2 2 2 e 2 2 e . . 2 . . . .
+        . . . . . 2 2 2 e f 2 2 2 2 2 2 2 2 2 e e e 2 e 2 2 2 . . . . .
+        . . 2 . 2 e e 2 2 e e e 2 e e e 2 e e 2 e e e 2 2 e . . . . . .
+        . . . 2 e 2 2 e e e 2 2 e 2 2 2 e 2 2 2 . e e 2 e 2 . 2 . . . .
+        . . . 2 2 e 2 e e . 2 2 2 2 2 2 2 2 2 e . . e e 2 2 2 . . . . .
+        . . . . e 3 d e e . . e 2 e e 2 e e e . . . f f b b . . . . . .
+        . . . . b b b e e . . 2 e 2 2 e 2 2 2 . . . f f b b f . . . . .
+        . . . . b b b f . . e 2 2 2 2 2 2 2 e 2 . . f f f b d f . . . .
+        . . . b b b f f . 2 2 d 2 e 2 e d e 2 2 2 f f f e d e f f . . .
+        . . 3 d b f f . . 2 2 2 d 4 4 d e 2 2 2 e e f e d 3 d f f . . .
+        . . d 3 d f . 2 2 e 2 2 e 2 2 2 2 e e e 2 2 f e e d f f f . . .
+        . . d d e e . e 2 2 e e e 2 2 e e e 2 2 2 e f f e e f f f . . .
+        . . . e e . 2 2 e 2 2 e 2 e e 2 2 f e e e 2 2 f f f f f f . . .
+        . . . . . . 2 2 2 e e e f 2 2 2 f f e e 2 2 2 f f f f f f . . .
+        . . . . . . 2 2 3 3 e e f 2 2 f f f f e e 3 2 f f f f f f . . .
+        . . . . . . . . d d 2 f f f f f f f f e e 3 d f f f f f f . . .
+        . . . . . . . . 2 2 2 f f f f f f f f f e 2 2 2 f f f f f . . .
+        . . . . . . . 2 2 2 2 f f f f f f f f f 2 2 2 2 f f f f f . . .
+        . . . . . . . 2 2 2 f f f f f f f f f f 2 2 2 2 f f f f f . . .
+        . . . . . . . 2 2 2 f f f f f f f f f f 2 2 2 2 f f f f . . . .
+        . . . . . . 2 2 2 2 f f f f f f f f f f f 2 2 2 2 f f . . . . .
+        . . . . . . 2 2 2 2 f f f f f f f f f f f 2 2 2 2 f . . . . . .
+        . . . . . . . f f f f . . . . . f f f f f f f f f . . . . . . .
+    `;
+        if (artKey == "E-Wisp") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . 9 9 9 9 . . . . . . . . . . .
+        . . . . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 . . . . . . .
+        . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 . . . .
+        . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 . .
+        . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 . . . . . . . . . . . .
+        . . . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 9 9 9 9 . . . . . . 9 9 9 9 9 9 9 . . .
+        . . . . . . . . . . . . . 9 9 9 9 9 9 . . . . . . 9 9 9 9 9 9 .
+        . . . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . 9 9 9 9 9 9 9 9 9 9 9 . . . . . . . . . . . . . . .
+        . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . .
+        . 9 9 9 9 9 9 9 9 9 9 . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 . .
+        . . 9 9 9 9 9 9 . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . 9 9 9 9 . . . . . . . . . . . . . .
+        . . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . . . . . . .
+        . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . 9 9 9 9 9 9 . . . . .
+        . . . . . . . . . . c c c c c c c . . 9 9 9 9 9 9 9 9 9 9 . . .
+        . . . . . . . . . . . . . . c c c . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . c c . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . c . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . c . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . c . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Small") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . e e e e e . . . . . . . . . . . . .
+        . . . . . . . . . . . . e e e e e e e e e e 3 3 3 3 . . . . . .
+        . . . . . . . . . . . e e e e e e e e e e 2 e e e d 3 . . . . .
+        . . . . . . . . . . e e e e 2 e e e e e e e e e f f e 3 f . . .
+        . . . . . . . . . e e e e e e 2 2 e 2 e e e e f f f e 3 f . . .
+        . . . . . . . . . e e 2 e e e e e e e e e e e f f f f 3 d f . .
+        . . . . . . . . e e e 2 e 2 e e e e e e e e e f e f f d d f . .
+        . . . . 2 2 . e e e e e e e e e e e e e e e f f f f f d e f . .
+        . . . . 3 2 2 e e 2 2 e 2 e e e e e e e e e e f f f f 3 e f . .
+        . . . . d d 2 e 2 3 2 e e e e e e e e e e e f f f f 3 d f f . .
+        . . . . . e 2 e 3 d 2 e e e e e e e e e e f f f f . 3 d f . . .
+        . . . . e e e e e e e e e e e e e e f e f f f f . . 3 e f . . .
+        . . . e 1 e e e e e e e e f e f f e f e e f f . . . d e f . . .
+        . . . e e e e 1 e e f f e f f e f f 3 d f f . . . 3 e f f . . .
+        . . f e e e e e f e f f f f f f f f f f f . . . . 3 d f . . . .
+        . . f e 1 e e f f f e d f f f f f . . . . . . 3 d e f f . . . .
+        . . f f 1 1 f e f f 3 3 f f f . . . . . . 3 d d e f f . . . . .
+        . . . f f f f f f . f f f . . . . . . . . f f f f f . . . . . .
+    `;
+        if (artKey == "E-Shaman") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f . . . f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f . f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f . f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . f c f f c f 8 8 f . . . . . . . . . . .
+        . . . . . . . . . . . . f f 8 8 8 8 f f c . . . . . . . . . . .
+        . . . . . . . . . . . . f c c c c f f 8 c c . . . . . . . . . .
+        . . . . . . . . . . . . f f c c f f f c f c c . . . . . . . . .
+        . . . . . . . . . . . f f f f f f b b c f f c . . . . . . . . .
+        . . . . . . . . . . f 4 f b b b b b f e 8 4 f f . . . . . . . .
+        . . . . . . . . . . f e f b b b 2 f f 8 c e 8 4 f . . . . . . .
+        . . . . . . . . . f 8 e e f f 2 f f 4 c c e 8 4 4 f . . . . . .
+        . . . . . . . . . f e 8 e f f f 4 e 4 4 e f e e 4 f . . . . . .
+        . . . . . . . . f 4 e e f e e e e e e e f . f e e 4 f . . . . .
+        . . . . . . . . f 4 e e f e 4 e 4 e e e f . . f e e f . . . . .
+        . . . . . f f f 4 e e e f e e e e e e e f . . f e e f . . . . .
+        . . . . f e e 8 e e e f f e 4 e e e e 4 f . . f 8 e f . . . . .
+        . . . . f e e 8 e f f . f e e e 5 5 4 4 4 f f 4 4 8 f . . . . .
+        . . . . f e e f f . . . f 5 5 4 5 5 5 4 4 f f 4 4 f . . . . . .
+        . . . . . f f . . . . f 5 5 5 5 5 5 5 4 4 f f e e f . . . . . .
+        . . . . . . . . . . . f 1 5 5 5 5 4 4 4 4 f . f f . . . . . . .
+        . . . . . . . . . . f 1 1 5 4 5 4 5 4 4 4 f . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 5 4 4 4 4 4 4 f . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 1 5 4 4 4 4 4 f . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 1 9 9 4 4 4 4 f . f f f . . . . . .
+        . . . . . . . . . . f 4 e 9 9 9 9 4 4 4 4 e f f f f f . . . . .
+        . . . . . . . . . . f e e e f f f f e e e e f f f f f . . . . .
+        . . . . . . . . . . . f e e f f f f f e e e f f f f f . . . . .
+        . . . . . . . . . . f f 8 c f f f f f f 8 c f f f f . . . . . .
+        . . . . . . . . . f e 4 e e f f f . f f e 4 e f f . . . . . . .
+        . . . . . . . . f 4 4 e e e f f . . f 4 e e e f . . . . . . . .
+        . . . . . . . . . f f f f f f . . . . f f f f . . . . . . . . .
+    `;
+        if (artKey == "bat") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . f f f f . . . . . . . . . . . . . . . . . . . . . . f f f f .
+        f d d d e f . . . . . . . . . . . . . . . . . . . . f e d d d f
+        . f d d d e f . . . . . . . . . . . . . . . . . . f e d d d f .
+        . . f b d d e f . . . . . . . . . . . . . . . . f e d d b f . .
+        . . . f b b d e f . . . . . . . . . . . . . . f e d b b f . . .
+        . . . f b d d d e f . . . . . . . . . . . . f e d d d b f . . .
+        . . . f d d d d e f . . . . f . f . . . . . f e d d d d f . . .
+        . . f f f f f f f f . . . f f . f f . . . . f f f f f f f f . .
+        . . . f d d d d e f f . f b f . f b f . . f f d d d d d f . . .
+        . . . f b b b d d e f . f d f f f d f . . f e d d b b b f . . .
+        . . . . f b d d f e f . f d b b b d f . f e e f d d b f . . . .
+        . . . . f d d f b b f f b d d b d d b f f e b b f d d f . . . .
+        . . . f e d f b d d e f b f b 8 b f b f e b d d b f d e f . . .
+        . . . f e f b d d d f f d b f b f b d f f d d d d b f e f . . .
+        . . f f f e d d d d b f b f b f 1 f b f b d d d d b e f f f . .
+        . . . . f f b d b b e f b b c f c b b f e e b d b f f . . . . .
+        . . . . . f b b e f f e e b f f f b e f f e e b f . . . . . . .
+        . . . . . f e e f f f e b b b 8 b b b f f f e e f . . . . . . .
+        . . . . . . f e f f f f e b f b f b e f f f e f . . . . . . . .
+        . . . . . . f e f f f f e b d d d b e f f f e f . . . . . . . .
+        . . . . . . . f f . . f e f e b e f e f . f f . . . . . . . . .
+        . . . . . . . f . . . . f f f f f f f . . . f . . . . . . . . .
+        . . . . . . . . . . . . f e f f f e f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f . . . . . . . . . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . . . f f f f f f f f f f f f f f f f . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "wolf") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . b b . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . b b b b b b b . . . . . . .
+        . . . . . . . . . . . . . . . . . b b b b b b b b b . . . . . .
+        . . . . . . . . . . . . . . . b b b . . b b b b b b b . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . b b b b b . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . b b b . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . b b b f f f .
+        . . . . . . . . . . . . . . . . . . . . b b b . b b b b f f f .
+        . . . . . . . . . . . . . . . . . . . b b b b b b b b f f f f .
+        . . . . . . . . . . . . . . . . . b b b b b b b b b f f f f f .
+        . . . . . . . . . . . . . . . . b b b b b b b b b b f f f f f .
+        . . . . . . . . . . . . . . b b b b b b b b b b b b f f f f f .
+        . . . . . . . . . . b b b b b b b b b b b b b b b b f f f f f .
+        . . . . . . . . b b b b b b b b b b b b b b b b b b b f f f f .
+        . . . . . . . b b b b b b b b b b b b b b b b b b b b f f f f .
+        . . . . b . . b b b b b b b b b b b b b b b b b b b b f f f . .
+        . . . . b b . b b b b b b b b b b b b b f b b b b b b f f f . .
+        . . . . b b b b b b b b b b b b b b b f f f b b b b b b f f . .
+        . . . . b b b b b b b b b b b b b f f f f f f f b b b b f f . .
+        . . . b b b b b b b b b b b b b f f f f f f f f f b b b f f . .
+        . 1 . b b b b b b b 1 b b b b b f f f f f f f f b b b f f . . .
+        . . 1 f b b b b 1 1 b b b b b b f f f f . f f f b b f f . . . .
+        . 1 b b 1 b f b b b 1 b b b b b f f f . . . . f f f f . . . . .
+        . . 1 1 1 1 1 b b 1 b f f b b b f f . . . . . . . . . . . . . .
+        . b 1 1 1 1 b b b b f f f b b f f f . . . . . . . . . . . . . .
+        b 1 1 1 1 b 2 b b f f f b b b f f . . . . . . . . . . . . . . .
+        b f 1 b 2 2 b b f f f f b b b f f . . . . . . . . . . . . . . .
+        b 2 2 2 b b b f f f f b b b f f f . . . . . . . . . . . . . . .
+        . b b b b f f f . f b b b b f f . . . . . . . . . . . . . . . .
+        . f f f f f f . . f b b b f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f f . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "jelly") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . f f 2 2 2 2 2 2 e f f . . . . . . . . . . .
+        . . . . . . . . . f 2 2 4 4 4 4 2 2 2 e e f . . . . . . . . . .
+        . . . . . . . . f 2 2 4 4 5 4 4 4 2 2 2 2 e f . . . . . . . . .
+        . . . . . . . f 2 2 4 4 4 4 4 4 4 2 4 2 2 2 e f . . . . . . . .
+        . . . . . . f 2 2 2 4 4 2 2 2 4 4 2 2 4 4 2 2 e f . . . . . . .
+        . . . . . f e 2 2 4 2 2 2 4 4 2 2 2 2 2 2 2 2 e f f . . . . . .
+        . . . . . f 2 2 2 2 2 2 2 2 4 4 2 2 2 2 2 2 2 2 2 f f . . . . .
+        . . . . f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4 2 2 2 2 2 2 f . . . . .
+        . . . . f 2 2 2 2 2 2 2 2 2 e e e 2 2 2 4 4 2 2 2 2 e f . . . .
+        . . . f f 2 2 2 2 2 2 2 2 2 2 e 2 e e 2 2 2 2 2 2 2 f e f . . .
+        . . . f e 2 2 2 2 2 2 e e 2 2 2 2 2 2 2 2 e 2 2 2 2 2 f f . . .
+        . . . f 2 2 2 e 2 e e f f e f e e 2 2 e f 2 e 2 2 2 4 2 e f . .
+        . . f e 2 2 f 2 e e f f e e f f 2 f e f f e 2 2 2 2 2 2 5 e f .
+        . . f 2 2 2 2 2 2 e f e e 2 e e f f f f f f e 2 2 4 2 e 2 4 e f
+        . f 2 2 2 2 2 2 f 2 f 2 f f 2 2 e 2 e 2 e 2 f f f e 4 2 e 2 4 f
+        f 2 2 2 2 2 f f 2 2 2 2 2 f f 2 2 2 4 4 2 2 2 2 f f f e 2 f f .
+        f 2 2 2 f f . f f 2 2 2 f f f f f e 2 2 2 2 4 4 2 f f f f . . .
+        . f f f . . . . f e 2 2 2 2 e f . f 2 2 f f e 2 2 2 f f . . . .
+        . . . . . . . . . f e 2 2 2 2 f . . f f . . f f e 2 2 f . . . .
+        . . . . . . . . . . f f f 2 e f . . . . . . . . f f f . . . . .
+        . . . . . . . . . . . . . f f . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "skeleton") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 b b f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 9 b f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 9 9 f . . . . . . . . . . . . . . .
+        . . . . . . . . . . f b b b 1 9 f . . . . . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 b . f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 b f 1 9 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f 1 b 1 1 f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f c c c c b b f f . . . . . . . . . .
+        . . . . . . . . . . . f f b 1 c 1 1 9 b 1 b f . . . . . . . . .
+        . . . . . . . . . . f b 1 b c c f c b f b b f . . . . . . . . .
+        . . . . . . . . . f 9 b b f 1 c 1 1 b f f 9 1 f . . . . . . . .
+        . . . . . . . . . f 9 f f . f c c c 1 f f 9 1 f . . . . . . . .
+        . . . . . . . . f 1 b f . . f 1 1 1 b f . f 1 f . . . . . . . .
+        . . . . . . . f 1 1 f . . f 1 1 b b f f . f 1 f . . . . . . . .
+        . . . . . . . . f f . . f 1 b b b b f . f 1 f . . . . . . . . .
+        . . . . . . . . . . . . f 1 b f 1 b f . f 1 f . . . . . . . . .
+        . . . . . . . . . . . . f 1 b f 1 9 f . . f . . . . . . . . . .
+        . . . . . . . . . . . f 1 1 f . f 1 9 f . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 1 f . f 1 9 f f f . . . . . . . . . .
+        . . . . . . . . . . . f 1 1 f f f f 1 f f f f . . . . . . . . .
+        . . . . . . . . . . . . f 1 b f f f 1 1 f f f . . . . . . . . .
+        . . . . . . . . . . . f f 1 f f f f f 1 f f f . . . . . . . . .
+        . . . . . . . . . . f 1 1 f f f f 1 1 f f . . . . . . . . . . .
+        . . . . . . . . . . . f f . f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "lich") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . .
+        . . f f f f . . . . . . . . f b b b f f . . . . . . . . . . . .
+        . f 1 1 1 b f . . . . . . . f b b f b f . . . . . . . . . . . .
+        . . f 1 f 9 f . . . . . . f b 1 1 1 f f . . . . . . . . . . . .
+        . f 1 f 9 b f . . . . . . f f 1 f f b f . . . . . . . . . . . .
+        . f 1 b 1 b f . . . . . . f b f 1 b f f f . . . . . . . . . . .
+        . f b 1 b f . . . . . . . f 1 b 1 1 f f f . . . . . . . . . . .
+        . . f b f f . . . . . . f f f 1 b b f f f f f . . . . . . . . .
+        . . . f b f . . . . . f f b f f f f f b f f b f . . . . . . . .
+        . . . f b f . . . . f f f b f f f f f b f b f f f . . . . . . .
+        . . . f b f . . . f b f f f b f b b b f f b f f f f . . . . . .
+        . . . f 1 f . . f f b f f b b f b f f f b f f f b b f . . . . .
+        . . . f 1 f f f b f b f f f b f b b b b f f f b b f f f . . . .
+        . . f b b f f b b f b f f b f b f f f f b f f b f f f f f . . .
+        . . f b 1 f f b b f b f f f b b b b b b f . f b f b f f f . . .
+        . . . f 1 f f b b f f f f f f b b f b f f . f f f b b f f . . .
+        . . . f 1 f f b b f f f f f f b b f b f f . f f f b b f f f . .
+        . . . f 1 f f b f f f f f f b f b f b f f f . f f f f f f f . .
+        . . . f 1 f f b f f f f f f b f b f b b f f . f f f f f f . . .
+        . . . f 1 f f f f f f . f f b f b f b b f f . f f f f f . . . .
+        . . . . f 1 f f f f f . f f b f b b f b f f . f f f f f . . . .
+        . . . . f 9 f f f f f . f f b f b b f b f f . . f f . . . . . .
+        . . . . f 9 f f f f f . f f f b f b f b f f . . . . . . . . . .
+        . . . . f 9 f f f f . . f f f b f b f b b f f . . . . . . . . .
+        . . . . f 9 f . . . . . f f f b f b b f b f f f f f f f . . . .
+        . . . . f 9 f . . . . . f f f b f b b f b b f f f f f f f . . .
+        . . . . f b f . . . . f f f b f f b b f b b f f f f f f f . . .
+        . . . . . f b f . . f f f f b f f b b f f b f f f f f f . . . .
+        . . . . . f b f . f f . f f f f f f f f f f f f f f f f . . . .
+        . . . . . f b f f f . . f b b f f f f f b f f f f f f . . . . .
+        . . . . . f b f f . . f b b f f f f f f b b b f f f . . . . . .
+        . . . . . . f . . . . f f f f f f . . f f f f f f . . . . . . .
+    `;
+        if (artKey == "zombie") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . d d . . . . . . . . . . . . .
+        . . . . . . . . d d d d . . . . d d . . . . . . . . . . . . . .
+        . . . . . . . . . b b b d d d d b b . . . . . . . . . . . . . .
+        . . . . . . . . . . d b d d d 2 d b b . . . . . . . . . . . . .
+        . . . . . . . . . . d d d d d d d d b . . . . . . . . . . . . .
+        . . . . . . . . . . 2 d d f d d f f d . . . . . . . . . . . . .
+        . . . . . . . . . . d d f f d d f f b . 1 . . . . . . . . . . .
+        . . . . . . . . . . d d d d d 1 1 d b 1 1 . . . . . . . . . . .
+        . . . . . . . . . . d d 2 2 1 1 2 2 1 1 . . . . . . . . . . . .
+        . . . . . . . . . . . d d d d b d b b b . . . . . . . . . . . .
+        . . . . . . . . . . 7 d 4 d d d 4 b d e . . . . . . . . . . . .
+        . . . . . . . . . e 7 7 d d d b b e e . . . . . . . . . . . . .
+        . . . . . . . . 7 7 d d 7 7 e e e e d . . . . . . . . . . . . .
+        . . . . . . . 7 7 d 2 d b e 7 e e 2 d d d . . . . . . . . . . .
+        . . . . . . . 7 7 e d 4 d 7 e e e b 4 d 4 d . . . . . . . . . .
+        . . . . . . . 7 e b d 4 b b e 7 f e b d b d . . . . . . . . . .
+        . . . . . . . e e 7 2 d d b e e f f . b d d d . . . . . . . . .
+        . . . . . . 7 7 e e 7 d 4 b 7 e f f . f 2 d 2 . . . . . . . . .
+        . . . . . . 7 e 7 e e d b b e e f f f f b b 2 f f f . . . . . .
+        . . . . . . 7 e 7 e 7 d d b e 7 e f f f f b f f f f f . . . . .
+        . . . . . . 7 7 e 7 e 7 2 d e 7 e f f f f f f f f f f . . . . .
+        . . . . . 7 7 d b e e 7 e e b 7 e f f f f f f f f f . . . . . .
+        . . . . . . d d b e f f e b d b f f f f f f f f f . . . . . . .
+        . . . . . . b d d e f f f d e d f f f f f f f . . . . . . . . .
+        . . . . . . d e d f f f f b 2 d f f f f f f . . . . . . . . . .
+        . . . . . . 2 d d f f f f f b d d f f f . . . . . . . . . . . .
+        . . . . . f d d e d f f f f d b b b f . . . . . . . . . . . . .
+        . . . . . f b d b d f f . f f d b f f . . . . . . . . . . . . .
+        . . . . . . f b 2 b f . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "ogre") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f 3 3 1 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 3 3 1 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . . . . . f 3 3 3 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . . . . f 3 2 e 3 e 2 3 3 f . . . . . . . . . . . .
+        . . . . . . . . . . f 3 3 3 3 3 3 3 d f . . . . . . . . . . . .
+        . . . . . . . . . f 3 3 2 2 2 2 3 3 d d f . . . . . . . . . . .
+        . . . . . . . f f d 3 2 2 2 2 2 2 3 e e d f . . . . . . . . . .
+        . . . . . f f 3 3 d 3 2 1 2 2 1 2 d e d 3 d f f . . . . . . . .
+        . . . . f 3 3 3 3 d e 3 3 3 3 3 3 e d 3 3 d 3 3 f f . . . . . .
+        . . . f 3 3 3 3 d d 3 e e e e e e d 3 e d 3 3 3 3 3 f . . . . .
+        . . f 3 3 3 3 d e d 3 3 3 d d d d 3 3 d e d 3 3 3 3 3 f . . . .
+        . f 3 3 3 3 3 e e e 3 3 3 3 3 3 3 3 3 3 d e d 3 3 3 3 3 f . . .
+        . f 3 d d d e f f d e 3 3 3 3 d 3 3 3 3 e e f d d d d 3 d f . .
+        . f 3 3 3 f f f e e d d d d d 3 3 d d d e e f f f e 3 3 d f . .
+        . f 3 3 3 e f f e d d 3 3 3 3 3 3 3 3 d d e f . f d 3 3 d f . .
+        . . f 3 3 d e f e d 3 3 3 3 3 3 3 3 3 3 d d f . f 3 3 3 e f . .
+        . . . f d e 3 3 e d 3 3 3 3 3 3 3 3 3 3 3 d f f e d 3 e f . . .
+        . . . . f 3 3 3 d e d d 3 3 3 3 3 3 3 d d e f f d 3 d f . . . .
+        . . . . f e d d d e e e d d d f d d d e e e f d 3 3 e f . . . .
+        . . . . . f f f 4 4 e 2 2 e e e e e e e e 4 f e 3 e f f . . . .
+        . . . . . . f e 4 d 4 e 2 2 2 2 2 2 2 e 4 e 4 f e f f f . . . .
+        . . . . . . f 4 4 4 d 5 4 4 2 2 2 2 4 4 4 4 4 f f f f f f . . .
+        . . . . . f e 4 d e 4 4 5 4 5 4 5 4 5 4 d 4 e f f f f f f . . .
+        . . . . f 4 4 4 4 e 4 5 e 5 5 5 5 5 e 4 4 e 4 f f f f f . . . .
+        . . . . . f 4 e 4 4 5 4 e 4 5 e 4 5 e d 4 d f f f f f f . . . .
+        . . . . . . f e 3 d 4 d e e 4 f 5 e d 3 4 3 3 f f f f . . . . .
+        . . . . . . f e 3 3 5 d e f f f 5 e d 3 3 3 d f f f f . . . . .
+        . . . . . f e d 3 3 d e f f f f f e d 3 d d f f f f . . . . . .
+        . . . . . f d 3 3 3 d f f . . . . f e d d 3 3 3 f . . . . . . .
+        . . . . . f d d d e e f . . . . . f e e d d d d f . . . . . . .
+        . . . . . f f f f f f f . . . . . f f f f f f f . . . . . . . .
+    `;
+        if (artKey == "troll") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . 7 7 . . 7 7 7 2 . . . . . . . . . . . . . . . . .
+        . . . . . . . 7 7 7 7 7 7 e e 2 e 2 . . . . . . . . . . . . . .
+        . . . . . 2 7 2 2 7 7 2 2 7 e e 2 7 7 . . . . . . . . . . . . .
+        . . . . 2 . 7 2 7 7 7 2 2 7 7 2 e 2 7 7 7 7 . . . . . . . . . .
+        . . . . . e 7 7 7 7 7 7 7 7 e e 2 e e 7 7 7 7 7 7 . . . . . . .
+        . . . . 2 e 7 7 2 2 2 2 7 7 7 e e 2 e 7 7 7 7 7 7 7 . . . . . .
+        . . . . . 7 7 7 7 7 7 7 7 7 e 7 e 7 2 7 7 7 7 7 7 7 7 . . . . .
+        . . . . . 7 7 e 7 7 7 7 7 7 e 7 e 7 7 7 7 7 7 7 7 7 7 7 . . . .
+        . . . . . e 7 e 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . .
+        . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 7 . 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . . . 7 7 7 7 7 7 7 7 7 7 . . . 7 7 7 7 . .
+        . . . . . . 7 7 7 . . . . 7 7 7 7 7 7 7 7 7 7 . . . 7 7 7 7 7 .
+        . . . . . . 7 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 . . . 7 7 7 7 f .
+        . . . . . . . 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 . . . f 7 7 7 f .
+        . . . . . . 7 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 . . f f 7 7 7 f .
+        . . . . . . 7 7 7 7 . . . 7 7 7 7 7 . 7 7 7 7 . f f f 7 7 7 f .
+        . . . . . 7 7 7 7 7 7 . . 7 7 7 7 7 . 7 7 7 7 f f f 7 7 7 7 f .
+        . . . . 7 7 7 7 7 7 . . 7 7 7 7 7 7 . 7 7 7 7 7 f f 7 7 7 7 f .
+        . . . 7 7 7 7 . . . . . 7 7 7 7 7 7 f 7 7 7 7 7 f f 5 7 7 7 7 .
+        . . 7 7 7 7 . . . . . 7 7 7 7 7 7 f f f 7 7 7 7 f f 5 f 5 f 5 .
+        . 7 7 7 7 7 . . . . 7 7 7 7 7 7 7 f f f 7 7 7 7 7 f 5 f 5 f 5 .
+        7 7 7 7 7 7 . . . . 7 7 7 7 7 7 f f f f f 7 7 7 7 f 5 f 5 f 5 .
+        7 . 7 7 7 . . . . . 7 7 7 7 7 f f f f f f 7 7 7 7 f 5 f 5 . 5 .
+        5 . 5 . 5 . . . . . 7 7 7 7 f f f f f f f 7 7 7 7 f f f 5 . 5 .
+        5 . 5 . 5 . . . f f 7 7 7 7 f f f f f f f 7 7 7 7 7 f . 5 . 5 .
+        5 . 5 . 5 . . . f f 7 7 7 7 f f f f f f f 7 7 7 7 7 f . 5 . 5 .
+        . . 5 . 5 . . f f 7 7 7 7 7 f f f f f f 7 7 7 7 7 7 f . 5 . . .
+        . . 5 . . . . f f 7 7 7 7 7 f . . . f f 7 7 7 7 7 f f . . . . .
+        . . . . . . . f f f f f f f f . . . . f f f f f f f . . . . . .
+    `;
+        if (artKey == "stone-golem") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b 1 b . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 1 b b b b b . . . . . . . . . . . . . . .
+        . . . . . . . . . . . b 2 1 2 2 b . . . . . . . . . . . . . . .
+        . . . . b b . . . . . b b 1 b b b . . . . b 1 b b . . . . . . .
+        . . . b b b b b . . b b b b b b b b b . b 9 b b b b . . . . . .
+        . . b b b b b b b b b b b b f b b b b b b b b b b b . . . . . .
+        . . b b b 1 b b b b b b b b b b b b b b b b 9 b b b . . . . . .
+        . . b b 1 b 9 b b f b b b b b b b 1 b b b b b b b b b . . . . .
+        . . b b 9 1 b b b b f 1 b 1 b b b b b b b b 1 1 b b f . . . . .
+        . . b b f f b b b b f b b b 1 b b b b b b b 1 9 b b f . . . . .
+        . . . b b b f b b b b b b 9 f b b b b b b b 9 f f f b . . . . .
+        . . . b 1 b b f f f b b b b f b b f b b . b f 1 9 b b . . . . .
+        . . b 9 1 b b . . . b b b f b b b f b b . . b b 9 b b . . . . .
+        . . b 9 b b . . . . . b b f b f b b f . . . b b 9 b b b . . . .
+        . f b 1 b b . . . . . f f b b b f f b . . . . b b b b b . . . .
+        . b f f b b . . . . . . b f b f b b . . . . . b b f f f b . . .
+        b b 1 1 f f . . . . . . f b f b b b b b . . . b f 1 b b b . . .
+        b b 1 f b b b . . . . b b b b b f b b b b f f f b 1 b b b f . .
+        b b 1 b b b b b . . b b b b b f f f b b b b f b b 1 1 b b f f .
+        b b b 1 b b b b . f b 9 b b b f f f f b b b b b b 1 b b b b f .
+        b b b b b b b b . b b b b b b f f f f b b 1 b b b b b b b b f .
+        b b 1 1 b b b b b b 1 9 b b b f f f f f b f b b 9 b b b b f . .
+        b b 1 9 b 9 b b b b 9 b b b f f f f f f b b b b 1 1 1 b b b . .
+        b 9 b 9 b b b b b b 1 b b b b f f f f f b b b b 1 1 b b b b . .
+        b 1 1 b b b b b b b 9 b b b b f f f f f b b b b 1 b b b b b . .
+        . 1 1 b b b b f b b b b b b b f f f f f b b b b 9 b b b f b . .
+        . f f f b b f f b b b b b b b f f . f f f b b b 1 1 b b b . . .
+        . . . . f f f f b b f b b b b f . . . . f b b b 9 b b b b . . .
+        . . . . . . . f b b b f b b b . . . . . . f b b b b f . . . . .
+        . . . . . . . . . b b f b f f . . . . . . . f f f f . . . . . .
+        . . . . . . . . . f f f f f f . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "iron-golem") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b b b . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . b b b b b b . . . . . . . . . . . . . . .
+        . . . . . . . . . . . b 2 1 2 2 b . . . . . . . . . . . . . . .
+        . . . . b b . . . . . b b 1 b b b . . . . b 1 b b . . . . . . .
+        . . . b b b b f . . b b b b b b b b b . b b 1 b b b . . . . . .
+        . . b b 1 b b f f b b b f f f f b b b b b b 1 b b b . . . . . .
+        . . b b 1 b b f f b b b b b b b b b b b b b 1 b b b . . . . . .
+        . . b b 1 b b b b b b 1 b b b b b b b b b b 1 b b b b . . . . .
+        . . b b 1 b b b b b b 1 b b b b b b b b b b 1 b b b b . . . . .
+        . . b b f f b b f b b b 1 b b b b b b b b b 1 b b f f . . . . .
+        . . . b b b f f f b b b 1 b b b b b b b f b b f f b b . . . . .
+        . . . f f b b f f b b b 1 b b b b b b b . f f b b f . . . . . .
+        . . b b 1 f f . . . b b 1 b b b b b b f . . f f f b b . . . . .
+        . . f f f . . . . . . f f f b b b f f . . . f b b f f . . . . .
+        . b b 1 b f . . . . . b b b f f f b b . . . . f f b b b . . . .
+        . b f f b f . . . . . . f f b b b f . . . . . f b f f f b . . .
+        b b 1 b f f . . . . . . b b f f f b b b . . f f f 1 b b b . . .
+        b b 1 b b f f . . . . b b 9 b b f b b b b f f f b 1 b b b f . .
+        b b 1 b b b f f . . b b 1 b b b f f b 1 b b f f b 1 b b b f f .
+        b b 1 b b b f f . f b 1 b b b f f f f b 1 b b f b 1 b b b b f .
+        b b 1 b b e f f . b b 1 b b f f f f f f b 1 f b b 1 b b b b f .
+        b b 1 b b b b f b b b b b b f f f f f f b f f b 1 b b b e b f .
+        b b 1 b b b f f b b 1 b b b f f f f f f f b f b 1 b b b b b f .
+        b b 1 b b b b f b b 1 b b b f f f f f f f b f b 1 b b d b b f .
+        b b 1 b b e b f b b 1 b b b f f f f f f f f f b 1 b b b b b f .
+        . b 1 b b b b f b b 1 b b b f f f f f f f f b b 1 b b b b b f .
+        . b b b b b f f b b 1 b b b f f f f f f f f f b 1 b b b b f f .
+        . . f f f f f f b b 1 b b b f f f f f f f f f b b b b e b f . .
+        . . . . . . . f b b 1 b b b f f f f f f f f f f f f f f . . . .
+        . . . . . . . . f b 1 b b b f f . . . . f f f f f f . . . . . .
+        . . . . . . . . . f f f f f f . . . . . f f f f f f . . . . . .
+    `;
+        if (artKey == "naga") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f f f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f b b b b f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f b f f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . f b 1 3 3 b f f . . . . . . . . . . . . . . .
+        . . . . . . . . . f b d 3 d 3 b f f . . . . . . . . . . . . . .
+        . . . . . . . . . f f 3 1 3 3 b f f . . . . . . . . . . . . . .
+        . . . . . . . . . . f 3 1 3 d b f f . . . . . . . . . . . . . .
+        . . . . . . . . . f f f 3 d e f f f . . . . . . . . . . . . . .
+        . . . . . . . . f d 3 3 3 3 3 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . f 1 3 d 3 3 3 3 3 3 3 3 f . . . . . . . . . . . .
+        . . . . . . . f 1 1 1 3 3 1 1 1 3 3 3 f . . . . . . . . . . . .
+        . . . . . . . f 1 3 3 3 3 3 3 3 3 1 3 3 f . . . f . . . . . . .
+        . . . . . . f 1 3 3 3 3 d 3 3 3 d 3 1 3 f . . f 7 f f . . . . .
+        . . . . . . f 1 3 e 3 d e 3 3 d e 3 1 3 f . . . f 7 7 f . . . .
+        . . . . . f 1 3 3 e 1 3 1 3 3 3 f 3 1 3 e f . . . f 7 6 f . . .
+        . . . . f 1 3 3 e f 3 e 3 3 3 3 f e 3 3 d f . . . f 7 7 f . . .
+        . . . f f 3 3 d f f 1 d 1 3 3 e f f d 3 3 f . . . f 7 6 f . . .
+        . . f 1 1 3 e f . f 3 e 3 3 3 e f f e d 3 f . . . f 7 6 f . . .
+        . . f 3 3 e f . . f 1 3 1 3 3 6 f f e 3 3 f . f f 7 7 f . . . .
+        . . f 3 3 f . . . f 7 3 3 7 7 6 f f 3 3 e f f 7 7 7 6 f . . . .
+        . . . f f . . . . f 7 7 7 7 7 6 f f 1 3 f f 6 7 7 6 f . . . . .
+        . . . . . . . . f 7 7 7 7 7 7 6 f f 3 3 f f 7 7 7 f . . . . . .
+        . . . . . . . . f 7 7 7 7 7 7 6 f . f f f f 7 7 7 f . . . . . .
+        . . . . . . . f 7 7 7 7 7 7 7 6 f . . . f 7 7 7 6 f f . . . . .
+        . . . . . . . f 7 7 7 7 7 7 7 f . . . . f 7 7 7 7 f f f f . . .
+        . . . . . . . f 7 7 7 7 7 7 7 6 f . . . f 7 7 7 6 f f f f f . .
+        . . . . . . . f 7 7 7 7 7 7 7 7 6 f f f 7 7 7 7 6 f f f f f . .
+        . . . . . . . f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 f f f f f f . .
+        . . . . . . . . f 7 7 7 7 7 7 7 7 7 7 7 7 7 6 7 f f f f f f . .
+        . . . . . . . . f 7 7 7 7 7 7 7 7 7 7 7 6 6 f f f f f f f f . .
+        . . . . . . . . . f f 6 7 6 6 7 6 7 6 6 f f f f f f f f f . . .
+        . . . . . . . . . . . f f f f f f f f f f f f f f f f . . . . .
+    `;
+        if (artKey == "minotaur") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . b 1 1 1 1 . . . e 2 2 2 2 2 2 . . . . . . . . . . .
+        . . . . . . 1 1 1 1 1 1 1 e 2 2 2 2 2 2 2 . . . . . . . . . . .
+        . . . . . 1 1 1 b b b 1 1 e 5 2 2 2 2 2 2 2 1 1 1 . . . . . . .
+        . . . . 3 1 b 3 3 3 3 b b e 5 5 2 2 2 5 2 1 1 1 1 1 1 1 . . . .
+        . . . 3 3 3 1 b 3 3 3 3 e 2 2 2 2 2 5 5 2 1 1 1 1 1 1 1 1 . . .
+        . . 3 3 3 3 3 1 3 3 3 e 2 2 2 2 2 2 2 e e e b b b b 1 1 1 . . .
+        . . 3 3 3 3 3 3 3 3 d e 2 f 2 2 2 2 e e e e 3 3 3 3 b 1 b . . .
+        . . 3 3 3 3 3 3 3 3 3 e 2 2 2 f 2 e e e 3 3 3 3 3 3 3 1 b . . .
+        . . 3 3 3 3 3 3 3 3 3 3 e e 2 2 e e e 3 3 3 3 3 3 3 1 b . . . .
+        . . 3 3 3 3 3 3 3 3 3 3 3 3 e e e 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . . d 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . . . . d 3 3 3 3 3 3 3 3 3 3 3 3 3 3 d 3 3 3 3 3 3 3 . . .
+        . . . . . . . . d 3 3 3 3 3 3 3 3 d d d d 3 3 3 3 3 3 3 d f . .
+        . . . . . . . . . d d d d d d d d 3 3 3 3 3 3 3 3 3 3 3 d f . .
+        . . . . . . . . . . e e 2 2 d d 3 3 3 3 3 3 3 3 3 3 3 d f f . .
+        . . . . . . . . . . e 2 2 2 2 e d d 3 3 3 3 3 3 3 3 d d f f . .
+        . . . . . . . . . e 2 2 2 2 e e 2 e d d 3 3 3 3 3 3 d f f f . .
+        . . . . . . . . . e 2 2 2 e 2 e e e 2 2 d d d d d d d f f . . .
+        . . . . . . . . e 2 2 2 2 2 e e e e 2 2 2 2 d d d d f f f . . .
+        . . . . . . . . e e 2 e e e e e e 2 2 2 2 2 e e f f f f . . . .
+        . . . . . . . . e e 2 e e e f f f e 2 2 2 2 e 2 f f f f . . . .
+        . . . . . . . . e e e e e f f f f e e 2 2 2 e f f f f f . . . .
+        . . . . . . . . . e e e e f f f f e e e 2 e e e f f f . . . . .
+        . . . . . . . . . e e e f f f f f f e 2 e e e f f f . . . . . .
+        . . . . . . . . . . b e f f f f f f e e e e f f f f . . . . . .
+        . . . . . . . . . 9 1 b f f f f f f f e e e f f f f . . . . . .
+        . . . . . . . . . 9 1 9 f f f f f f f e e f f f f f . . . . . .
+        . . . . . . . . . f f f f f f f f f f b 1 f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . f 9 1 9 f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . f f f f f f . . . . . . .
+    `;
+        if (artKey == "orb-spider") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . f f f f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . f f f a f f a f f f f . . . . .
+        . . . . . . . . . . . . . . . f f f a 6 6 a 6 6 6 a a f . . . .
+        . . . . . . . . . . . . . . f f a 6 a 6 a 6 6 a a 6 6 f f . . .
+        . . . . . . . . . . f . . f f 6 a 6 a 9 a 9 a 6 6 b 6 f f f . .
+        . . . . . f . . . f 6 f f f a 6 a 6 9 9 a 9 9 6 a a a a f f . .
+        . . . . f 6 f f f f f 6 6 f a 6 6 a 9 a a a 9 9 6 6 b 6 a f f .
+        . . . . . f b b b 6 f f f f 6 a 6 9 a a 1 a 2 a a 6 b 6 f f f .
+        . f f . f f f f f f 6 f f f 6 6 a a 9 a a 2 9 9 6 a 6 6 f f f .
+        f 6 f f b b b f . f 6 f f f 6 6 6 6 9 9 2 9 a 6 6 6 a a f f f .
+        . f b 6 f f f 6 f f f 6 f f 6 6 6 6 a 9 a 9 6 a 6 6 6 a a f f .
+        . . f f . . . f 6 f f 6 f f a 6 6 a 6 6 6 a 6 6 a 6 6 f a f f .
+        . . . . . . . . f 6 f 6 f f f a a 6 6 6 6 a 6 6 6 a 6 f f f f .
+        . . . . . . . . f b 6 6 f f f f 6 6 6 6 6 6 a 6 6 a a f f f . .
+        . . . . . f f f f f b f f f f f f 6 6 6 6 6 a 6 6 f a f f f f .
+        . . . f f 6 6 b b f 6 6 b b f f 6 f f 6 6 6 a 6 f f f f f f f f
+        . . f 6 b f f f f f a b 1 b b f 6 6 f f f f f f f f f f f f f f
+        . f 6 f f . . . f 6 f c b c f 6 f 6 f f f f c f f f f f f f f f
+        . f b f . . . f 6 6 f f f a f b f f f f f f 6 b b b 6 f f f f .
+        . f b f . . . f 6 f f 6 b f f b f f f f f f f f f f 6 f f f . .
+        . . f 6 f . . . f f f 6 b f f f f b f f f 6 f f f f 6 f . . . .
+        . . . f . . . . . f 6 b f . f f f f b f f 6 f f f f 6 f . . . .
+        . . . . . . . . . . f f . f b f . f 6 f f 6 f f . . f 6 f . . .
+        . . . . . . . . . . . . . f b f . f 6 f . f b f . . f 6 f . . .
+        . . . . . . . . f . . . f b f . . f b f . f 6 f . . f 6 f . . .
+        . . . . . . . f 6 f f f 6 b f . . f 6 f . f 6 f . . f 6 6 f . .
+        . . . . . . . . f b 6 6 f f . . . f 6 f . f 6 f . . . f f . . .
+        . . . . . . . . . f f f . . . . . f 6 f . f 6 6 f . . . . . . .
+        . . . . . . . . . . . . . . . . . . f 6 f . f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . f . . . . . . . . . . . .
+    `;
+        if (artKey == "earth-elemental") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . e e d . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . b b b b d . . . . . . e d d d . . . . . . . . . . b b b b . .
+        . d d d d . . . . . . e e d d d . . . . . . . . . d b b b b b .
+        . d b d d . . . . . b d d d d d d . . . . . . . . d b b b b b .
+        . d b d d . . . . . b d d d d e b . . . . . . . . d b b b b b .
+        e b b . . . . . . . b d d b d d b . . . . . . . . . d d b b . .
+        e b b . . . . . 6 . . b b e b d d . . . . . 6 . . . d d d d . .
+        . e b b b . . 6 6 6 . . . e e e d d . . . 6 6 6 6 . e d d . . .
+        . e d b b b 6 6 b 6 b e e e d d d d d d d b 6 b 6 . e d d d . .
+        . e e d d d b 6 e 6 b b b e b b b b b b b d 6 b b e e e e d . .
+        . . . e e d e 6 b b b b b e b 6 6 6 e d d d d b d d b d d . . .
+        . . . e e d e 6 b b b b b e b 6 6 6 e d d d d b d d b b . . . .
+        . . . . . e d d d e b b b e b 6 6 6 b b d d b d d b . e . . . .
+        . . . . . e . . d e e e e e e e 6 6 . b b b b . . . . e . . . .
+        . . . . . e . . . . e d d b e e 6 d . . . . . . . . . . . . . .
+        . . . . . . . . d d b b b b b e 6 b . . . . . . . . . . . . . .
+        . . . . . . . b b e b b b b e e 6 b b . . . . . . . . . . . . .
+        . . . . . . . b b b e d d d d e 6 b b . . . . . . . . . . . . .
+        . . . . . . . b b b e d d d d e 6 b b . . . . . . . . . . . . .
+        . . . . . . d b b d . . . . . d b b b . . . . f f . . . . . . .
+        . . . . . . e b b d . . . . . d d e b d d f f f f f . . . . . .
+        . . . . . . e b e . . . . . . e e d b b b d f f f f . . . . . .
+        . . . . . . d e e . . . . . . e f d b b b b f f f f . . . . . .
+        . . . . . . b d e e . . . . f e f e d b b b f f f f . . . . . .
+        . . . . . . . b e e . . f f f f f f d b b b f f f . . . . . . .
+        . . . . . . . b e d . f f f f f f f d b b b f f . . . . . . . .
+        . . . . . . . . d d . f f f f f f f e d d d f f . . . . . . . .
+        . . . . . . . . d e e f f f f f f f f b e d f . . . . . . . . .
+        . . . . . e d d d b e f f . . . f f e e e d d . . . . . . . . .
+        . . . . . . f f f f f f . . . . . f f f f f . . . . . . . . . .
+    `;
+        if (artKey == "elf-knight") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f 1 1 1 1 1 f . . . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 3 3 1 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . . f f 1 1 1 1 3 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 2 1 2 2 1 1 1 f . . . . . . . . . .
+        . . . . . . . . . . . f f 1 1 1 3 d 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 3 3 d 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . f f f 1 1 3 d b 1 1 f f f f . . . . . . . .
+        . . . . . . . . f f 1 1 1 1 1 f f f 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . . f 1 1 9 b b 1 b b f 1 1 b b b 9 1 1 f . . . . . .
+        . . . . . . f 1 9 b b b b f b b b 1 b f b b b b 9 1 f . . . . .
+        . . . . . . f b b b b b b b f b b 1 f b b b b b b b f . . . . .
+        . . . . . . . f f b b b b b b f b f b b b f b b f f . . . . . .
+        . . . . . . . f b 1 b f f f f b b 1 f f f b b b b f . . . . . .
+        . . . . . . . f b 1 f f b b b f b f b b b f f b b b f . . . . .
+        . . . . . . f b b b f f f f b b f 1 b f f f f f b b b f . . . .
+        . . . . f f b 1 b f f . f b f b b 1 f b f . f b b b f f . . . .
+        . . . f 1 b 1 b f f . f f b b f b f b b f f b b b b f f . . . .
+        . . f b b b b f f . . f b f b b f 1 b f b b b b b f f . . . . .
+        . . f b b b f f . . . f b 1 f b b 1 f 1 b b f b f f . . . . . .
+        . . . f b f f . . . . f b 1 1 f b f 1 1 b f b f f f f . . . . .
+        . . . . f f . . . . . f b 1 b b f b b 1 b f f f f f f f . . . .
+        . . . . . . . . . . . f b 1 b b f b b 1 b f f f f f f f f . . .
+        . . . . . . . . . . f b b b b f f f b b b b f f f f f f f . . .
+        . . . . . . . . . . f b 1 b b f f f b b 1 b f f f f f f f . . .
+        . . . . . . . . . . f b 1 b b f f f b b 1 b f f f f f f . . . .
+        . . . . . . . . . . f b 1 b b f f f b b 1 b f f f f f f . . . .
+        . . . . . . . . . . f b b b f f f f f b b b f f f f f . . . . .
+        . . . . . . . . . f 1 b b b f f f f f b b b 1 f f f . . . . . .
+        . . . . . . . . f 1 b b b b f f f f f b b b b 1 f . . . . . . .
+        . . . . . . . . f b b b b b f . . . f b b b b b f . . . . . . .
+        . . . . . . . . . f f f f f f . . . . f f f f f . . . . . . . .
+    `;
+        if (artKey == "dwarf") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . f 1 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f 1 1 f f . f . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 b b b b f 1 f . . . . . . . . .
+        . . . . . . . . . . . . . f 1 1 b b b b 1 1 f . . . . . . . . .
+        . . . . . . . . . . . . . f 5 4 b 5 b 4 1 f . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 b b 1 1 b f . . . . . . . . . . .
+        . . . . . . . . . . . . . f 3 e e 1 b b b f . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 3 3 1 b b b f f . . . . . . . . .
+        . . . . . . . . . . . . f b 4 4 4 b b b b 1 b f f . . . . . . .
+        . . . . . . . . . . . f b 4 4 4 4 b b b 1 b b b b f . . . . . .
+        . . . . . . . . . . f 1 f 4 4 4 b f b 1 b 1 b b b b f . . . . .
+        . . . . . . . . . . f 1 b 4 4 4 f b b b b b 1 b b b b f . . . .
+        . . . . . . . f f f b b 1 b 4 b b 1 b b b b b 1 b b b b f . . .
+        . . . . . . f 1 1 f b 1 b 1 b 1 b b b b b b b b b b b b f . . .
+        . . . . . f f 2 b b b b b 1 1 b b b b b b b b b 1 b b b f . . .
+        . . . . f b 1 2 b b b b 1 b b 1 b b b b b b b b b b b f f . . .
+        . . . . f b b f b b b b b b b b 1 b b b b 1 1 b b b f f f . . .
+        . . . . f 1 b f b b f f 4 4 4 f b b b b 1 b b b b f f f f . . .
+        . . . . . f 2 2 b f f b 4 5 4 b 5 b 4 b 1 1 1 b b f f f f . . .
+        . . . . . f 2 2 f . f b 4 4 4 f f b b f b b 1 b f f f f f f . .
+        . . . . f 2 2 2 f . f b b f f b b 1 b b f b b f f f f f f f f .
+        . . . . f 2 2 f . . f b b b f b b b b b b f f f f f f f f f f .
+        . . . . f 2 2 f . f b 1 b 1 f f b 1 b b b b f f f f f f f f . .
+        . . f f 2 2 2 f . f b b b b f f b b b b b b f f f f f f f . . .
+        . f 1 1 2 2 b f . f f 5 4 2 2 f f 2 2 5 4 f f f f f f f . . . .
+        . f 1 1 1 1 1 b f 2 5 4 2 2 2 f f 2 2 2 5 4 f f f f . . . . . .
+        . f f b 1 1 b b 2 2 2 2 2 2 e f f e 2 2 2 2 2 f f . . . . . . .
+        . f f 1 1 b b b 2 2 e e e e f f f f e e e e e f . . . . . . . .
+        . . f f f f f f f f f f f f f f f f f f f f f . . . . . . . . .
+    `;
+        if (artKey == "angel") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . .
+        . . . . . . f f f . . . . . f 5 5 5 f f . . . f f f . . . . . .
+        . . . . . f 1 1 1 f . . . f 5 5 5 5 5 5 f . f 1 1 1 f . . . . .
+        . . . . f 1 9 1 1 9 f . f 5 5 3 3 5 5 5 4 f 9 1 1 9 1 f . . . .
+        . . . f 9 1 9 1 1 9 1 f f 5 9 3 9 3 5 5 f 1 9 1 1 9 1 1 f . . .
+        . . . f 1 1 1 1 1 1 1 1 f 5 3 3 3 3 5 4 1 1 1 1 1 1 1 9 1 f . .
+        . . f 1 1 b b b b b b 9 b 4 d 3 3 d 4 b 9 b b b b b b 1 9 f . .
+        . . f 1 1 1 b b b b 9 b b 1 b b b b 1 b b 9 b b b b 1 1 1 1 f .
+        . . f 9 1 1 1 9 1 b b b 1 1 1 2 2 1 1 1 b b b 1 9 1 1 1 9 1 f .
+        . f 1 1 1 9 1 9 b 9 b b 1 1 1 2 2 1 1 1 b b 9 b 9 1 9 1 9 1 1 f
+        . f 1 1 1 9 1 b 9 b b c 1 1 1 2 2 1 1 1 c b b 9 b 1 9 1 1 1 1 f
+        . f 1 9 1 1 9 b b b b b 2 2 2 2 2 2 2 2 b b b b b 9 1 1 9 1 1 f
+        . f 1 9 1 1 1 b b b b f b 2 2 2 2 2 2 b f b b b b 1 1 1 9 1 1 f
+        . f 1 1 9 1 b 9 b b f f b 1 1 2 2 1 1 b f f b b 9 b 1 9 1 9 1 f
+        . f 1 1 9 1 b b b b f f b 1 1 2 2 1 1 b f f b b b b 1 9 1 9 1 f
+        . f 9 1 1 d 5 4 b f f f c 4 4 5 5 4 4 b f f f b b b b 1 1 9 1 f
+        . f 9 1 9 d 5 5 5 f f b b 1 1 5 5 1 1 b b f f f b b b 1 1 1 1 f
+        f 1 1 1 9 1 d 5 d f b 9 b 1 1 2 2 1 1 b 9 b f f b 4 5 d 1 1 1 f
+        f 1 9 1 1 f f f f f 9 b b 1 1 2 2 1 1 b b b 9 f 5 5 5 d 1 1 1 f
+        f 9 1 1 1 f . . . f b b b 1 1 2 2 1 1 b b b 9 f d 5 d 9 1 1 9 f
+        f 9 1 9 f . . . . f b c 1 1 2 2 2 1 1 b b b 9 f f f f 9 1 1 1 f
+        f 1 1 f . . . . . f f b 1 1 2 2 2 1 1 c b b b f . f 9 1 1 1 1 f
+        f 1 1 f . . . . . f b b 1 1 2 2 1 1 1 b c b b f . f 1 9 9 1 f .
+        . f f . . . . . . f 9 c 1 1 2 2 1 1 1 b b 9 f . . . f 1 1 1 f .
+        . . . . . . . . . f 9 b 1 1 2 2 1 1 1 b 9 b f . . . f 1 1 1 f f
+        . . . . . . . . . f b b b c f 2 1 1 1 b b b f . f f f 1 1 1 f f
+        . . . . . . . . f 9 9 b c c f f f f c b b b f f f f f 1 1 f f f
+        . . . . . . . f b b b c f f . . . f c b b b f f f f f 1 1 f f .
+        . . . . . . . . f f f f . . . . . f c b 9 b f f f f f f f . . .
+        . . . . . . . . . . . . . . . . . f b b b 9 b f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . f c b b b f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . f f f f f . . . . . . . .
+    `;
+        if (artKey == "elf-archer") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . 7 7 . 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 7 7 7 1 . 7 . . . . . . . . . . . . .
+        . . . . . . . . . . 7 . 7 7 7 b 7 7 . . . . . . . . . . . . . .
+        . . . . . . . . . . . 7 7 7 7 7 7 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . 1 1 1 1 3 1 1 . . . . . . . . . . . . . .
+        . . . . . . . . . 1 1 1 2 1 2 2 1 1 1 . . e . . . . . . . . . .
+        . . . . . . . . . . . 1 1 1 3 d 1 1 . . e . e . . . . . . . . .
+        . . . . . . . . . . . 1 1 3 3 d 1 1 . 4 . e . . . . . . . . . .
+        . . . . . . . . . . . 1 1 3 d b 1 1 4 e e . . . . . . . . . . .
+        . . . . . . . . . . 7 1 1 f f f 1 1 7 e . . . . . . . . . . . .
+        . . . . . . . . . 7 f 1 7 f f f 1 7 f 7 . . . . . . . . . . . .
+        . . . . . . . . . 7 6 f 7 f 7 7 7 f 6 7 . . . . . . . . . . . .
+        . . . . . . . . 7 6 7 f 7 f 7 7 7 f 7 6 7 . . . . . . . . . . .
+        . . . . . . . . 6 c . 6 f 7 7 7 f 6 . 8 7 . . . . . . . . . . .
+        . . . . . . . 8 c c . . 6 f f f 6 . c c c . . . . . . . . . . .
+        . . . . 3 3 7 7 6 . . . 6 f f f 6 . 7 7 6 . . . . . . . . . . .
+        . . . . 3 3 6 6 . . . f 6 6 6 6 6 3 3 6 . . . . . . . . . . . .
+        . . . . 3 3 . . . . . 6 f f f f f 3 3 . . . . . . . . . . . . .
+        . . . . . . . . . . . 6 6 f f f 6 6 . . . . . . . . . . . . . .
+        . . . . . . . . . . 6 6 6 f 6 6 6 6 6 . . . . . . . . . . . . .
+        . . . . . . . . . . 6 6 6 6 6 6 6 6 6 . . . . . . . . . . . . .
+        . . . . . . . . . . f f f . . . e f f . . . . . . . . . . . . .
+        . . . . . . . . . . f f . . . . . e f . . . f f f f f . . . . .
+        . . . . . . . . . e f f . . . . . e f f f f f f f f f . . . . .
+        . . . . . . . . . e f f . . . . . f f f f f f f f f f . . . . .
+        . . . . . . . . . e e e . . . . . e e e f f f f f f f . . . . .
+        . . . . . . . . . e e f . . f f f f e e f f f f f f . . . . . .
+        . . . . . . . . e e e f f f f f f f e e e f f f f f . . . . . .
+        . . . . . . . e e e f f f f f f f f f e e e f f f . . . . . . .
+        . . . . . . . e e e f f f f f f f f f e e e f f . . . . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f . . . . . . . . .
+    `;
+        if (artKey == "mummy") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f 3 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f 3 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f b 3 d f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 3 d b b d f . . f . . . . . . . . . . .
+        . . . . . . . . . . . f d 3 3 3 3 3 f f 3 f . . . . . . . . . .
+        . . . . . . . . . . . f b d 3 d 3 f 3 3 f . . . . . . . . . . .
+        . . . . . . . . . . f f 3 b e d f . f f . . . . . . . . . . . .
+        . . . . . . . . . f 3 b d 3 3 3 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . f 3 3 b d d 3 e f . f f . . . . . . . . . . .
+        . . . . . . . . f b d b 3 b b b 3 e f 3 3 f . . . . . . . . . .
+        . . . . . . . . f d b b d 3 3 b 3 3 3 f f . . . . . . . . . . .
+        . . . . . . . . f 3 d b b 3 d b d d f . . . . . . . . . . . . .
+        . . . . . . . . f d 3 b 3 b b b d b f . . . . . . . . . . . . .
+        . . . . . . . f 3 d b b d 3 d 3 b d f . . . . . . . . . . . . .
+        . . . . . . . f 3 d b 3 3 d b f f 3 3 f . . . . . . . . . . . .
+        . . . . . . . f 3 3 b d d 3 3 f f 3 e f . . . . . . . . . . . .
+        . . . . . . . f d d b 3 3 d b f f 3 d f . . . . . . . . . . . .
+        . . . . . . f d b f d d 3 b d e f 3 b f . . . . . . . . . . . .
+        . . . . . . f b d f b d 3 b 3 d f b 3 d f . . . . . . . . . . .
+        . . . . . . f 3 b f d b f f d b f f d b f f f f f . . . . . . .
+        . . . . . . f b f f d 3 f f b d f f b d f f f f f f . . . . . .
+        . . . . . . . f 3 f 3 3 f 3 3 3 f f f d f f f f f f . . . . . .
+        . . . . . . . . f f d 3 f d d b f f 3 f f f f f f . . . . . . .
+        . . . . . . . . . f d d f f b b 3 f f f f f f f . . . . . . . .
+        . . . . . . . . . f 3 d f f f 3 d f f f f f f . . . . . . . . .
+        . . . . . . . . . f d 3 b f f f d b f f f f . . . . . . . . . .
+        . . . . . . . . f b b d f f f 3 b d f f f . . . . . . . . . . .
+        . . . . . . . f 3 d d f f f 3 d d f f f . . . . . . . . . . . .
+        . . . . . . . . f f f f . . f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "scythe-reaper") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f c c f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . f c c b b c c f . . . . . . . . . . . .
+        . . . . . . . . . . . . f c c b b b c c f . . . . . . . . . . .
+        . . . . . . . . . . . f c f f f c c c c f . . . . . . . . . . .
+        f f f . . . . . . . f c f 9 f f 9 c c f . . . . . . . . . . . .
+        f 2 2 f . . . . . . f c f b b 9 b f c c f . . . . . . . . . . .
+        . f 2 2 f f f . . . . f c b 9 b b f c c b f . . . . . . . . . .
+        . . f 2 1 9 f . . . f c b f 1 1 f c c b c f . . . . . . . . . .
+        . . . f b 1 1 f . . f c b c f f c c c c c f f . . . . . . . . .
+        . . . f 1 9 2 2 f . f c c c c c c c c c c c c f . . . . . . . .
+        . . . f f b f 2 2 f f f f c c c c c c c b b c c f f f f . . . .
+        . . . . . f b f 2 2 2 f f b f f b b b f f f c c c c c c f . . .
+        . . . . . f 9 b f 2 2 2 f f f f f b b b f f f f f f f f c f . .
+        . . . . . f b 1 f f b 2 2 2 f f 9 1 1 b f f b b f f f f f f . .
+        . . . . . . f 1 b b f f 2 2 2 f b b b f f f f b b b f f f f . .
+        . . . . . . f 9 b f f f f f 2 2 2 b f f f f f 9 b f f c f . . .
+        . . . f f f f b f f f f f f f 2 2 2 f f f f 1 b f f c f c f . .
+        . f f f c c c f f f f f f f f f b 2 2 f f 1 b c c c f . f f . .
+        . f f c f f f f f f f f f f b b b b 2 9 1 b f c c c f f . . . .
+        . . f f f f f . f f f f f f b b b b f 9 9 2 f f c c c f . . f .
+        . . f f . f f f f f . f f b b f f f f f 9 2 2 2 f c c f f f f .
+        . . f . . f . f f . f f f 1 b f f f f b f f 2 2 2 f f f f f f .
+        . . . . . . . . . . f f 9 1 f f f f f f b f f f 2 2 f f f f f f
+        . . . . . . . . . f f f 1 9 f f . . f f b 9 f f f 2 2 2 f 3 3 f
+        . . . . . . . . . . f f b 1 f f . f f f f 1 9 f f f 2 2 2 3 f .
+        . . . . . . . . . . . f f 9 f f f f f f f f b b f 3 3 3 2 2 f .
+        . . . . . . f f f f f f f f f f f f f f 3 3 1 1 1 3 3 f f f f .
+        . . . . . . f 3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 b f f . . . .
+        . . . . f f f f f f 3 3 3 3 3 3 1 3 1 1 3 3 f f f b 9 f f f f f
+        . . . . . f f f f f f 1 b 1 b f f f f f f f f 1 9 1 b f f f f .
+        . . . . . . . . . f f f f f f f f f f f f f f f f f f . . . . .
+    `;
+        if (artKey == "executioner") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . f f f f . . . . . . f f f f f f . . . . . . .
+        . . . . . . . f f e e e e f . . . . f 3 3 3 3 3 3 f f . . . . .
+        . . . . . . f e e b b b b e f . . f 3 f f 1 1 3 3 3 3 f . . . .
+        . . . . . f e b b d d f f f f f f f f f f f f 1 3 3 3 3 f . . .
+        . . . . f e b d d f f f f b 1 1 b b f f f e f f 1 3 3 3 f . . .
+        . . . f e b d f f . . f b 1 b b b b b b f f b e e 1 3 3 3 f . .
+        . . f e b d f . . . f b 1 b b b b b b b f f f d b e 1 3 3 f . .
+        . f e b d f . . . . f f f b 1 b f f b b b f . f f b e 3 3 f . .
+        . f e f f f f . . f f f 2 f 1 f f 2 f b b f . . f d e 3 3 3 f .
+        f e f . f 1 1 f f f f f f b b b f f 1 b b f . . . f d 1 3 3 f .
+        . f . . f 1 1 1 1 f f b 1 1 b b 1 1 b b b f f f . . f 1 1 3 f .
+        . . . . f 1 b b 1 1 f b b b f f b b b b b f f f f f 1 1 b e f .
+        . . . f 1 1 f f b b f b b f b f b b b b b f f f f f 1 b d e e f
+        . . . f 1 1 f f f f b f b b b b b b b b f f f f f 1 1 f f d e f
+        . . . f 1 b f f f . f f f f f f f f f b f f f f f 1 b f f d e f
+        . . . f 1 b f f . . . . f f f e f f b f 1 f f f 1 1 f f f f e f
+        . . f 1 1 f f f . . . . f b f f f f b f 1 1 f 1 1 b f f f f f .
+        . f f 1 1 f f f . . . . . f b b b b f f f 1 1 1 b f . . . f . .
+        f f f 1 b f f . . . . . f 1 f f f f f . f b 1 b f . . . f e f .
+        f e f 1 b f . . . . . . f 1 b f f f f . . f b f . . . f b e f .
+        f e 1 1 e b f f f f . f 1 1 b f f f f . . . f f . . f d e f . .
+        . f 1 1 e b b d d d f f 1 1 f f f f f . . . f 3 f f d e f . . .
+        . f 3 3 1 e e b b b d d 1 b d d b e e f . . . f 3 3 e f . . . .
+        . f 3 3 1 f f e e e e 1 1 b e e e f f . . . f f 3 3 3 f . . . .
+        . . f 3 3 1 f f f f f 1 b f f f f f f f f f d d e 3 3 f . . . .
+        . . f 3 3 3 1 f f f f 1 b f f f f f f b d d e e 1 3 f . . . . .
+        . . . f 3 3 1 f f f 1 1 b f f f f f e e e e f 1 3 3 f . . . . .
+        . . . . f 3 3 1 f f 1 1 b f f f f f f f f f 1 3 3 f f f f . . .
+        . . . f f f 3 3 1 f f 1 1 3 1 1 f f f 1 1 1 3 3 f f f f f f f .
+        . . f f f f f 3 3 3 3 3 3 1 1 1 1 1 3 3 3 3 3 f f f f f f . . .
+        . . . f f f f f f 3 3 3 f f f f 1 1 3 3 3 f f f f f f f . . . .
+        . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . . .
+    `;
+        if (artKey == "wizard") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . a a a . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . 8 a a a . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . 8 a a a 8 8 . . . . . . . . . . . . . . . .
+        . . . . . . . a a a a a a a a a a a a . . . . . . . . . . . . .
+        . . . . . . . . . 8 a a a a 8 8 c . . . . . . . . . . . . . . .
+        . . . . . . . . . . . e 3 1 e 3 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 1 3 3 . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . a e 8 8 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . a a a a a 8 8 . . . . . . . . . . . . . .
+        . . . . . . . . . . a a a a a a a a a . . . . . . . . . . . . .
+        . . . . . . . . . . a a a a a a 8 a a 8 . . . . . . . . . . . .
+        . . . . . . . . . a a a a 8 a 8 8 8 a a 8 . . . . . . . . . . .
+        . . . . . . . a a a 8 a a 8 a 8 1 1 a a 8 . . . . . . . . . . .
+        . . . . . 3 d a a 8 . 8 a c c 1 2 2 2 a 8 . . . . . . . . . . .
+        . . . . . 3 d 8 8 . . 8 a c c 1 2 3 d 8 . . . . . . . . . . . .
+        . . . . . . . . . . . 8 8 8 c 1 2 3 d 8 . . . . . . . . . . . .
+        . . . . . . . . . . . 8 8 a 8 8 8 2 2 . . . . . . . . . . . . .
+        . . . . . . . . . . . 8 a a a 8 8 8 . . . . . . . . . . . . . .
+        . . . . . . . . . . 8 a a a a a 8 8 f f f f f . . . . . . . . .
+        . . . . . . . . . . 8 a 8 a a a a a a f f f f f f . . . . . . .
+        . . . . . . . . . . a a c a a 8 a a a f f f f f f f . . . . . .
+        . . . . . . . . . . 8 a c a a 8 a 8 a a f f f f f f . . . . . .
+        . . . . . . . . . . 8 a c a a 8 a 8 a a f f f f f . . . . . . .
+        . . . . . . . . . . 8 a 8 8 a 8 a 8 8 a f f f f . . . . . . . .
+        . . . . . . . . . 8 c a a c a 8 a a c a a f f . . . . . . . . .
+        . . . . . . . . . 8 c a 8 c 8 8 8 8 c 8 8 f . . . . . . . . . .
+        . . . . . . . . . . 2 2 8 c 8 8 c 2 2 . . . . . . . . . . . . .
+        . . . . . . . . . 2 2 2 . . . . . 2 2 . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-mage") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 1 1 1 1 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 1 1 3 3 1 1 1 . . . . . . . . . . . . .
+        . . . . . . . . . . . . 1 1 1 1 3 1 1 . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 2 1 2 2 1 1 1 . . . . . . 3 . . . . .
+        . . . . . . . . . . . . 1 1 1 3 d 1 1 . . . . . . . 3 3 . . . .
+        . . . . . . . . . . . . 1 1 3 3 d 1 1 . . . . 2 2 2 d d . . . .
+        . . . . . . . . . . . 2 1 1 3 d b 1 1 . . 2 2 2 2 e e . . . . .
+        . . . . . . . . . 2 2 2 1 1 2 2 2 1 1 2 2 2 2 2 2 e e . . . . .
+        . . . . . . . 2 2 2 2 2 1 2 2 2 2 1 2 2 2 2 2 2 2 e e . . . . .
+        . . . . . . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 e e . . . . .
+        . . . . . 2 2 2 2 2 e 2 e 2 2 2 2 2 2 2 2 2 2 2 e e e . . . . .
+        . . 3 3 2 2 2 2 2 2 e 2 e 2 2 2 2 2 2 e 2 2 2 2 e e . . . . . .
+        . . d d 2 2 2 2 2 e e e 2 2 2 2 2 e e e e 2 2 2 e e f f . . . .
+        . . . . 2 2 2 2 e e e e 2 2 2 2 2 e e e f 2 2 2 e e f f f . . .
+        . . . . . 2 2 e 2 e . e 2 2 2 2 2 e 2 e f e 2 2 e e f f f . . .
+        . . . . . 2 e e e . . 2 e 2 2 2 e e e e f f 2 e e f f f f . . .
+        . . . . . . e e . . . 2 2 e e 2 e e 2 e f f f e e f f f . . . .
+        . . . . . . e e . . . 2 2 e e e e 2 2 e f f f f e f f . . . . .
+        . . . . . . e . . . . 2 2 e 2 e 2 2 e e f f f f f f f . . . . .
+        . . . . . . . . . . . 2 2 e 2 e 2 2 e e f f f f f f . . . . . .
+        . . . . . . . . . . 2 2 2 e 2 e 2 2 e e f f f f f f . . . . . .
+        . . . . . . . . . . 2 2 2 2 2 e 2 2 2 e e f f f f f . . . . . .
+        . . . . . . . . . . 2 2 2 2 2 e 2 2 2 e e f f f f . . . . . . .
+        . . . . . . . . . 2 2 2 2 2 2 e 2 2 2 e e f f f f . . . . . . .
+        . . . . . . . . . 2 2 2 2 2 2 2 2 2 e 2 e e f f . . . . . . . .
+        . . . . . . . . . 2 2 2 2 2 2 2 2 2 e 2 e e f f . . . . . . . .
+        . . . . . . . . f 2 2 2 2 2 2 2 2 2 e 2 e e f . . . . . . . . .
+        . . . . . . . . f f 2 2 2 2 2 2 2 2 e 2 f f . . . . . . . . . .
+        . . . . . . . . . f f f f 2 2 2 2 2 f f f . . . . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Blade") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Guardian") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Medic") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Ranger") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Harvester") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Reaper") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Executioner") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Enchanter") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Venomist") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero01") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero02") return img`
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero03") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero04") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero05") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero06") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero07") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero08") return img`
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero09") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero10") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero11") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero12") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     `;
     }
     export function observer(): Image {
         return img`
-        . . . . . 9 9 . . . . .
-        . . . . 9 9 9 9 . . . .
-        . . . 9 f f 9 f f . . .
-        . . . 9 f f 9 f f . . .
-        . . . . 9 9 9 9 . . . .
-        . . . 6 6 6 6 6 6 . . .
-        . . . 6 6 6 6 6 6 . . .
-        . . . 1 6 6 6 6 6 1 . .
-        . . . 1 6 6 6 6 6 1 . .
-        . . . 1 6 6 6 6 6 . 1 .
-        . . 1 . . . . . . . 1 .
-        . . 1 . . . . . . . 1 .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function observerFrame(direction: number, step: number): Image {
+        let phase = step % 3; if (phase < 0) phase = 0;
+        if (direction == 1) {
+            if (step == -2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f f b b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f f f 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 f f f f b b 1 1 1 b . . . . . .
+        . . . . . . . . b 1 1 1 1 f f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . b b b f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . . 1 1 b b f f f f f f f f b 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 b f f f f f b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 b b b b b 1 1 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . 1 1 1 1 1 1 1 f f f f f 1 1 1 1 1 b b b . . . . . .
+        . . . . . . . 1 1 1 1 1 f f f f f f f 1 1 b b b b . . . . . . .
+        . . . . . . . b 1 1 1 f f f f f f f f f b b b b . . . . . . . .
+        . . . . . . . . b 1 1 f f f f f f f f f b b b . . . . . . . . .
+        . . . . . . . . . f f f f f f f f f f f b b . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f f b b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f f f 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 f f f f b b 1 1 1 b . . . . . .
+        . . . . . . . . b 1 1 1 1 f f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . b b b f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 b b f f f f f f f f b 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 b f f f f f b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 b b b b b b 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . . . 1 1 1 1 1 b b b b b 1 1 1 1 1 1 b b b . . . . . .
+        . . . . . . . b 1 1 1 1 1 f f f f f 1 1 1 b b b b . . . . . . .
+        . . . . . . . b b 1 1 1 f f f f f f f 1 b b b b . . . . . . . .
+        . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . . .
+        . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f f b b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f f f 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 f f f f b b 1 1 1 b . . . . . .
+        . . . . . . . . b 1 1 1 1 f f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . b b b f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . . 1 1 b b f f f f f f f f b 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 b f f f f f b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 b b b b b b 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . . . 1 1 1 1 1 b b b b b 1 1 1 1 1 1 b b b . . . . . .
+        . . . . . . . b 1 1 1 1 1 f f f f f 1 1 1 b b b b . . . . . . .
+        . . . . . . . b b 1 1 1 f f f f f f f 1 b b b b . . . . . . . .
+        . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . . .
+        . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f b b . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f 1 1 b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f 1 1 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . . b f f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . . f f f f f f f f f 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . f f f f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . . f f f f f f f f f f b b b b 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 f f f f f f f b b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 b f f f f b b b b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 b b b 1 b b b b b 1 1 1 1 b b . . . . . .
+        . . . . . . f 1 1 1 1 1 1 1 b f f f f f f f f b b . . . . . . .
+        . . . . . . f b 1 1 1 1 1 1 f f f f f f f f f f . . . . . . . .
+        . . . . . . f f b 1 1 1 1 f f f f f f f f f f f . . . . . . . .
+        . . . . . . f f f b b b b f f f f f f f f f f f . . . . . . . .
+        . . . . . . . f f f f f b f f f f f f f f f f . . . . . . . . .
+        . . . . . . . . f f f f . b f f f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f b b . . . . . . . . . . . .
+        . . . . . . . . . . . 1 1 f f f f f 1 1 b b . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 1 1 f f 1 1 1 1 1 b . . . . . . . . .
+        . . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 1 f f f 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b 1 1 1 b . . . . .
+        . . . . . . . b 1 1 b f f f f f f f f f f b b 1 1 1 b . . . . .
+        . . . . . . . 1 1 1 1 1 b f f f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b b b f f f f f b 1 1 b b . . . . . .
+        . . . . . . . 1 1 f f f f b b b b b b b 1 1 1 b f . . . . . . .
+        . . . . . . . . f f f f f f f b b b b b 1 b b f f . . . . . . .
+        . . . . . . . f f f f f f f f b b b b b b f f f f . . . . . . .
+        . . . . . . . f f f f f f f f f b b b b f f f f . . . . . . . .
+        . . . . . . . . f f f f f f f f f b b f f f f f . . . . . . . .
+        . . . . . . . . . f f f f f f f . f f f f f . . . . . . . . . .
+        . . . . . . . . . f f f f f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        if (direction == 2) {
+            if (step == -2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b b f f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 f f f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 b b f f f f 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f f 1 1 1 1 b . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f b b b . . . . . . .
+        . . . . . b 1 1 1 1 1 1 b f f f f f f f f b b 1 1 . . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b f f f f f b 1 1 1 1 . . . . . .
+        . . . . . . 1 1 1 1 1 1 1 1 1 b b b b b 1 1 1 1 1 1 . . . . . .
+        . . . . . . b b b 1 1 1 1 1 f f f f f 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . . b b b b 1 1 f f f f f f f 1 1 1 1 1 . . . . . . .
+        . . . . . . . . b b b b f f f f f f f f f 1 1 1 b . . . . . . .
+        . . . . . . . . . b b b f f f f f f f f f 1 1 b . . . . . . . .
+        . . . . . . . . . . b b f f f f f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b b f f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 f f f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 b b f f f f 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f f 1 1 1 1 b . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f b b b . . . . . . .
+        . . . . . b 1 1 1 1 1 1 b f f f f f f f f b b 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b f f f f f b 1 1 1 1 . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 b b b b b b 1 1 1 1 1 . . . . . .
+        . . . . . . b b b 1 1 1 1 1 1 b b b b b 1 1 1 1 1 . . . . . . .
+        . . . . . . . b b b b 1 1 1 f f f f f 1 1 1 1 1 b . . . . . . .
+        . . . . . . . . b b b b 1 f f f f f f f 1 1 1 b b . . . . . . .
+        . . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . .
+        . . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b b f f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 f f f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 b b f f f f 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f f 1 1 1 1 b . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f b b b . . . . . . .
+        . . . . . b 1 1 1 1 1 1 b f f f f f f f f b b 1 1 . . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b f f f f f b 1 1 1 1 . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 b b b b b b 1 1 1 1 1 . . . . . .
+        . . . . . . b b b 1 1 1 1 1 1 b b b b b 1 1 1 1 1 . . . . . . .
+        . . . . . . . b b b b 1 1 1 f f f f f 1 1 1 1 1 b . . . . . . .
+        . . . . . . . . b b b b 1 f f f f f f f 1 1 1 b b . . . . . . .
+        . . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . .
+        . . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b 1 1 f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 1 1 f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f f b . . . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 f f f f f f f f f . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f f f f . . . . . . .
+        . . . . . b 1 1 1 1 1 b b b b f f f f f f f f f f . . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b b f f f f f f f 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b b b b f f f f b 1 1 . . . . . .
+        . . . . . . b b 1 1 1 1 b b b b b 1 b b b 1 1 1 1 1 . . . . . .
+        . . . . . . . b b f f f f f f f f b 1 1 1 1 1 1 1 f . . . . . .
+        . . . . . . . . f f f f f f f f f f 1 1 1 1 1 1 b f . . . . . .
+        . . . . . . . . f f f f f f f f f f f 1 1 1 1 b f f . . . . . .
+        . . . . . . . . f f f f f f f f f f f b b b b f f f . . . . . .
+        . . . . . . . . . f f f f f f f f f f b f f f f f . . . . . . .
+        . . . . . . . . . f f f f f f f f f b . f f f f . . . . . . . .
+        . . . . . . . . . f f f f f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f f f f f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b 1 1 f f f f f 1 1 . . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 1 1 f f 1 1 1 1 1 . . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 f f f 1 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f 1 1 1 1 1 1 . . . . . . . .
+        . . . . . b 1 1 1 b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 b b f f f f f f f f f f b 1 1 b . . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f f f b 1 1 1 1 1 . . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . b b 1 1 b f f f f f b b b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . . f b 1 1 1 b b b b b b b f f f f 1 1 . . . . . . .
+        . . . . . . . f f b b 1 b b b b b f f f f f f f . . . . . . . .
+        . . . . . . . f f f f b b b b b b f f f f f f f f . . . . . . .
+        . . . . . . . . f f f f b b b b f f f f f f f f f . . . . . . .
+        . . . . . . . . f f f f f b b f f f f f f f f f . . . . . . . .
+        . . . . . . . . . . f f f f f . f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        if (direction == 3) {
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b f . . .
+        . . f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 b f f f f . . . .
+        . . . . . f f f f f b b b b b b b b b b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b f . . .
+        . . f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 b f f f f . . . .
+        . . . . . f f f f f b b b b b b b b b b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f f . . . . . .
+        . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f . . .
+        . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b f f . .
+        . . f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b 1 f f . .
+        . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . . . .
+        . . . . . f f f b b b 1 1 1 1 1 1 1 1 b f f f f f f f f . . . .
+        . . . . . . f f f f b b b b b b b b b b f f f f f f f . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f . . . . . .
+        . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f . . .
+        . . f f b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . .
+        . . f f 1 b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . .
+        . . . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f f f f f 1 1 1 1 1 1 1 1 1 b b b f f f . . . . .
+        . . . . . f f f f f f f b b b b b b b b b b f f f f . . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . f f f f f f . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        if (direction == 0) {
+            if (step == -2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f 1 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f . . . .
+        . . . . f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f . . . .
+        . . . . f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . . f f f b 1 1 1 1 1 1 1 1 1 1 b b b b b f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . . f f f f 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 1 f f f . . .
+        . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . . .
+        . . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f . .
+        . . . f f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . . f f f f f f f f b b 1 1 1 1 1 1 1 b b b f f f f f f f . .
+        . . . f f f f f f f f b b b b b b b b b b b 1 f f f f f f . . .
+        . . . . f f f f f f f 1 1 1 b b b b b b 1 1 1 1 f f f f f . . .
+        . . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f f . . . .
+        . . . . f f f f b b 1 1 1 1 1 1 1 1 1 f f f f f f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 f f f f f f f f . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b b 1 1 1 1 f f f 1 1 f f f 1 1 1 1 1 b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 f f f f f f f 1 1 f f f f f f 1 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f 1 1 1 1 1 f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 f f f f f 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . .
+        . . f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f f . . .
+        . . f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . . .
+        . . . f f f f f f 1 b b b b b b b b b b b f f f f f f f f . . .
+        . . . f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f f . . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f b b . . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . .
+        . . . . f f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f f f f f f 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f f f f 1 1 1 1 1 1 1 b b f f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . f f f f f f . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function prop(name: string): Image {
+        if (name == "altar-primary") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f a 8 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f a a 8 8 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . f a 8 8 8 a 8 f . . . . . . . . . . . .
+        . . . . . . . . . . . f a a a a a a 8 8 f . . . . . . . . . . .
+        . . . . . . . . . . f 8 a a a a a a 8 a 8 f . . . . . . . . . .
+        . . . . . . . . . f a 8 a a 8 8 8 a 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a a 8 a a a a 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a 8 8 a a 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 a 8 a a a a 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a a a a 8 a 8 8 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . .
+        . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . .
+        . . . . . . . f a a a a a a a a a 8 a a 8 a a a f . . . . . . .
+        . . . . . . . f a 8 a 8 8 8 a 8 8 8 a a 8 a a 8 f . . . . . . .
+        . . . . . . . f a 8 a 8 a 8 a 8 a a a a 8 8 8 8 f . . . . . . .
+        . . . . . . . f a 8 a a 8 8 a 8 a 8 8 a a a 8 8 f . . . . . . .
+        . . . . . . f 8 a 8 8 8 8 a a a a a 8 a 8 8 8 8 8 f . . . . . .
+        . . . . . f 8 8 a a a a a a a a 8 8 8 8 8 a 8 8 8 8 f . . . . .
+        . . . . f f 8 8 a 8 8 a a 8 8 8 8 8 8 8 a 8 8 8 8 8 f f . . . .
+        . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f . . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c c c c c c c c c c c c f . .
+        . . f f f f f f f f f f f f f f f f f f f f f f f f f f f f . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "altar-secondary") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f b b f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f . f b b f . f . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 f f 1 1 f f 1 f . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 b 1 b b 1 b 1 1 f . . . . . . . . . .
+        . . . . . . . . . . . f 1 f f 1 1 f f 1 f . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f f f 1 1 f f f f f . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 1 b 1 1 b b b b b f . . . . . . . . .
+        . . . . . . . . . f b b b b b 1 1 b b b b b b . . . . . . . . .
+        . . . . . . . . f 9 b b b 1 1 1 1 1 1 b b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b b b b b b 1 b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b b 9 9 b b 1 b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b 9 1 1 9 b 1 b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b 9 1 1 9 b 1 b b b f . . . . . . . .
+        . . . . . . . f b b b b 1 b 9 1 1 9 b 1 b b b b f . . . . . . .
+        . . . . . . f b b b b b 1 b b 9 9 b b 1 b b b b b f . . . . . .
+        . . . . f b 1 1 1 1 1 1 1 9 1 b b 1 b 9 9 1 1 1 9 1 b f . . . .
+        . . . f 1 b 1 1 1 1 1 1 1 1 9 1 1 b 9 1 1 1 9 9 9 1 b b f . . .
+        . . . f 1 b b b b b b b b b b b b b b b b b b b b b b b f . . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 9 9 b f . . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 9 9 9 9 9 9 9 b f . . .
+        . . . f 1 b b b b b b b b b b b b b b b b b b b b b b b f . . .
+        . . . f f f f f f f f f f f f f f f f f f f f f f f f f f . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "fountain-reset") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f . . . f . . . . . . . . . . . . . .
+        . . . . . . . . . f f . f b f f f b f . f f . . . . . . . . . .
+        . . . . . . . . f b b f f f b b b f f f b b f . . . . . . . . .
+        . . . . . . . . b b b b f b b b b b f b b b b . . . . . . . . .
+        . . . . . . . f b b b b f b b b b b f b b b b f . . . . . . . .
+        . . . . . . . f f b f b b f b b b f b b f b f f . . . . . . . .
+        . . . . . . . f f b f b b f f b f f b b f b f f . . . . . . . .
+        . . . . . . . f f f f b f f f f f f f b f f f f . . . . . . . .
+        . . . . . . . . . . . f f b b f b b f f . . . . . . . . . . . .
+        . . . . . . . . . . f b b b f 9 f b b b f . . . . . . . . . . .
+        . . . . . . . . . . f b b f f 9 f f b b f . . . . . . . . . . .
+        . . . . . . . . . . . f b b f f f b b f . . . . . . . . . . . .
+        . . . . . . . . . . f b f b f 9 f b f b f . . . . . . . . . . .
+        . . . . . . . . f f b b b b b 9 b b b b b f f . . . . . . . . .
+        . . . . . . f f b b b b b b b 9 b b b b b b 9 f f . . . . . . .
+        . . . . . f b 9 b b b b b b b 9 b b b b b b b b 1 f f . . . . .
+        . . . f f 9 b b b b 6 6 9 9 9 9 9 9 9 6 6 b b b b b b f . . . .
+        . . f b 9 1 b 6 9 9 9 9 9 9 9 9 9 1 9 9 9 9 9 6 b b b b f . . .
+        . f 1 b b b 6 9 9 9 9 9 1 9 9 9 1 9 1 9 9 9 9 9 9 b b b b f . .
+        . f b b 6 9 9 9 9 1 9 9 9 9 1 9 9 9 1 9 9 9 9 9 9 6 6 b 1 f . .
+        . f b 1 9 9 9 9 9 9 9 1 9 9 9 9 9 9 9 9 9 1 9 9 9 9 9 1 b f . .
+        . f b b 9 9 9 9 9 9 9 9 9 9 9 9 1 9 9 9 9 9 9 9 9 9 6 b b f . .
+        . f b b 6 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 6 6 9 6 6 6 b b f . .
+        . f b b b b b 6 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 b 9 b b b f . .
+        . f b b b 1 b 9 b b 6 6 6 9 9 6 6 6 6 6 6 b b 1 b b b b b f . .
+        . . f b b b b b 9 b b 9 b b b 9 b b b b 9 1 b b b b b b f . . .
+        . . . f b b b b b b b 9 1 b b 1 9 b b 1 b b b b b b b f . . . .
+        . . . . f f b b b b b b b b b b b b b b b b b b f f f . . . . .
+        . . . . . . f f f f b b b b b b b b b b b f f f . . . . . . . .
+        . . . . . . . . . . f f f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "exit-gate") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f .
+        . f b b b b b b f b b b b f b b b b b f b b b b b f b b b b f .
+        . f b b b b b b f b b b b f b b b b b f b b b b b f b b b b f .
+        . f b b b f f f f f f f f f f f f f f b b b b b b f b b b b f .
+        . f f f f f b b b b f b b b b f b b f b b b f f f f f b b b f .
+        . f b b b f b b b b f b b b b f b b b f f f f b b b f b b b f .
+        . f b b b f f f f f f b b b b f b b b b b b f b b b f b b b f .
+        . f b b b b b b f b f f f f f f f b b b b b f b b b f f f f f .
+        . f f f f b b b f b b f b b b b b f b b b b b f f f b b b b f .
+        . f b b b f f f f b b f b b f f f f b b b b b f b b b b b b f .
+        . f b b b f b b f f b f f f f f f f f f b b f f f f f b b b f .
+        . f b b b f b b b f f f f f f 5 f f f f f f b b b b f b b b f .
+        . f b b b f b b b f f f f f e 5 e f f f f f f b b b f b b f f .
+        . f f f f f b b b f f f f f e 5 e f f f f f f f b f f f f f f .
+        . f b b b f f f f f f f f e 5 5 5 e f f f f f f b f b b b b f .
+        . f b b b b b f b f f f e 4 5 5 5 4 f f f f f f b f b b b b f .
+        . f b b b b b f b f f f e 4 5 5 5 4 e f f f f f b f b b b b f .
+        . f b b b b f b b f f e 4 4 5 5 5 4 4 e f f f f f f f b b b f .
+        . f f f f f f b b f e 4 4 4 5 1 5 4 4 4 e f f f b b f b b b f .
+        . f b b b f b b b e 5 5 5 5 5 1 5 5 5 5 5 e e f b b f b b b f .
+        . f b b b f f f f 5 5 5 5 1 1 1 1 1 5 5 5 5 5 5 b f f f f f f .
+        . f b b b b f b b e 5 5 5 5 5 1 5 5 5 5 5 e e f b f b b b b f .
+        . f b b b b f b b e e 4 4 4 5 5 5 4 4 4 e e f f b f b b b b f .
+        . f b b f b b b b f f e e 4 5 5 5 4 e e f f f f b f b b b b f .
+        . f b b f b b b b b b b e e 5 5 5 e e b b b b f f f f b b b f .
+        . f b b f f f f f b b b b e e 5 e e b b b b b f b b f b b b f .
+        . f b b b f b b b b b b b b e 5 e b b b b b b f b b f f f f f .
+        . f b b b f b b b b b b b b b 5 b b b b b b b f b b f b b b f .
+        . f b b b f b b b b b b b b b 5 b b b b b b b f b b f b b b f .
+        . f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "clock-crystal") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 9 9 9 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 9 9 . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . a a a a a a a . . 9 . . . . . . . . . . .
+        . . . . . . . . . 9 a 9 1 1 a a a a . . . 9 . . . . . . . . . .
+        . . . . . . . . 9 . a 1 1 1 a a a a . . . . . . . . . . . . . .
+        . . . . . . . . 9 . a 1 1 9 a 8 a a a . . . . . . . . . . . . .
+        . . . . . . . 9 . . 8 a a a a 8 a 8 a a a 8 9 . . . . . . . . .
+        . . . . . . . 9 . . 8 a 8 a 8 8 8 8 8 a 8 8 a . . . . . . . . .
+        . . . . . . . 1 . . 8 8 8 8 8 8 8 8 a a 8 8 a f . . . . . . . .
+        . . . . . . . . . . 8 8 8 8 8 8 8 8 8 8 8 8 9 f f . . . . . . .
+        . . . . . . . . . . 8 8 8 8 8 8 8 8 8 8 8 8 b . . f . . . . . .
+        . . . . . . . . . . 8 8 8 8 8 8 8 8 8 8 a a . . . f . . . . . .
+        . . . . . . . . . 9 . 8 8 8 8 8 8 8 8 9 9 1 . . f f . . . . . .
+        . . . . . . . . . . . . 8 8 8 8 8 8 9 9 1 b . f f . . . . . . .
+        . . . . . . . . . . 9 . . 8 8 8 8 8 9 1 9 c f . . . . . . . . .
+        . . . . . . . . . . . . . 9 9 1 1 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f b b b b b b . . . . . . . . . . . . .
+        . . . . . . . . . . . f b b b b b b b b . . . . . . . . . . . .
+        . . . . . . . . . . . f b b b b b b b b . . . . . . . . . . . .
+        . . . . . . . . . . . f b b b b b b b b . . . . . . . . . . . .
+        . . . . . . . . . . f b b b b b b b b b b . . . . . . . . . . .
+        . . . . . . . . . f 1 1 1 1 1 1 1 1 1 1 9 b . . . . . . . . . .
+        . . . . . . . . . 1 b b b b b b b b b b b b f . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 1 1 1 9 9 9 9 f . . . . . . . . .
+        . . . . . . . . . f f f f f f f f f f f f f f . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f a 8 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f a a 8 8 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . f a 8 8 8 a 8 f . . . . . . . . . . . .
+        . . . . . . . . . . . f a a a a a a 8 8 f . . . . . . . . . . .
+        . . . . . . . . . . f 8 a a a a a a 8 a 8 f . . . . . . . . . .
+        . . . . . . . . . f a 8 a a 8 8 8 a 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a a 8 a a a a 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a 8 8 a a 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 a 8 a a a a 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a a a a 8 a 8 8 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . .
+        . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . .
+        . . . . . . . f a a a a a a a a a 8 a a 8 a a a f . . . . . . .
+        . . . . . . . f a 8 a 8 8 8 a 8 8 8 a a 8 a a 8 f . . . . . . .
+        . . . . . . . f a 8 a 8 a 8 a 8 a a a a 8 8 8 8 f . . . . . . .
+        . . . . . . . f a 8 a a 8 8 a 8 a 8 8 a a a 8 8 f . . . . . . .
+        . . . . . . f 8 a 8 8 8 8 a a a a a 8 a 8 8 8 8 8 f . . . . . .
+        . . . . . f 8 8 a a a a a a a a 8 8 8 8 8 a 8 8 8 8 f . . . . .
+        . . . . f f 8 8 a 8 8 a a 8 8 8 8 8 8 8 a 8 8 8 8 8 f f . . . .
+        . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f . . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c c c c c c c c c c c c f . .
+        . . f f f f f f f f f f f f f f f f f f f f f f f f f f f f . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     `;
     }
     export function station(kind: apocTypes.Station): Image {
         if (kind == apocTypes.Station.Secondary) return img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . a f . . . . . . .
-        . . . . . . a 8 a f . . . . . .
-        . . . . . 8 a a a a f . . . . .
-        . . . . f 8 8 a a a 8 . . . . .
-        . . . . f 8 8 a a 8 a . . . . .
-        . . . . f 8 8 8 8 8 8 . . . . .
-        . . . . 8 8 8 8 8 8 8 f . . . .
-        . . . f a a a a 8 a a a . . . .
-        . . . f 8 8 8 8 a a 8 8 . . . .
-        . . . 8 8 8 a a a a 8 8 f . . .
-        . . f 8 8 a 8 8 8 8 8 8 8 f . .
-        . 8 8 8 8 8 8 8 8 8 8 8 8 f f .
-        . 8 8 8 8 8 8 8 8 8 8 8 8 8 f .
-        . 8 8 8 8 8 8 8 c c c c c c f .
-        . . . . . . . . . . . . . . . .
-    `;
-        return img`
         . . . . . . . . . . . . . . . .
         . . . . . . . f f . . . . . . .
         . . . . . . . f f . . . . . . .
@@ -5638,6 +9294,24 @@ namespace apocArt {
         . . 1 1 1 1 1 9 b 1 1 9 1 b . .
         . . 1 1 1 1 1 1 1 1 1 1 9 b . .
         . . 1 b b b b b b b b b b b . .
+        . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . a f . . . . . . .
+        . . . . . . a 8 a f . . . . . .
+        . . . . . 8 a a a a f . . . . .
+        . . . . f 8 8 a a a 8 . . . . .
+        . . . . f 8 8 a a 8 a . . . . .
+        . . . . f 8 8 8 8 8 8 . . . . .
+        . . . . 8 8 8 8 8 8 8 f . . . .
+        . . . f a a a a 8 a a a . . . .
+        . . . f 8 8 8 8 a a 8 8 . . . .
+        . . . 8 8 8 a a a a 8 8 f . . .
+        . . f 8 8 a 8 8 8 8 8 8 8 f . .
+        . 8 8 8 8 8 8 8 8 8 8 8 8 f f .
+        . 8 8 8 8 8 8 8 8 8 8 8 8 8 f .
+        . 8 8 8 8 8 8 8 c c c c c c f .
         . . . . . . . . . . . . . . . .
     `;
     }
@@ -6575,56 +10249,56 @@ namespace apocArt {
     `;
         if (name == "run") return img`
         . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . 9 9 9 9 9 . . 7 . . . . . . .
-        . 9 9 9 9 9 . . 7 7 . . . . . .
-        . . . . . . . . 7 7 7 . . . . .
-        . . . . . . . . 7 7 7 7 . . . .
-        . . . . . . . . 7 7 7 7 7 7 . .
-        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
-        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 7
-        . . . . . . . . 7 7 7 7 7 7 7 .
-        . . . . . . . . 7 7 7 7 7 7 . .
-        . . . . . . . . 7 7 7 7 . . . .
-        . 9 9 9 9 9 . . 7 7 7 . . . . .
-        . 9 9 9 9 9 . . 7 7 . . . . . .
-        . . . . . . . . 7 . . . . . . .
+        . . . . . 9 9 . . . . . . . . .
+        . . . . a a a a . . . . . . . .
+        . . . . 1 1 a a . . . . . . . .
+        . . 9 . a a a a a a 8 . . . . .
+        . . 1 . 8 8 8 8 a a 8 f . . . .
+        . . . . 8 8 8 8 8 8 8 f . . . .
+        . . . . 8 8 8 8 8 8 a . f . . .
+        . . . . . 8 8 8 9 9 b f . . . .
+        . . . . . 9 9 1 . . . . . . . .
+        . . . . . b b b b . . . . . . .
+        . . . . f b b b b b . . . . . .
+        . . . . b b b b b b . . . . . .
+        . . . 1 b b b b b b b . . . . .
+        . . . f f f f f f f f . . . . .
         . . . . . . . . . . . . . . . .
     `;
         if (name == "reset") return img`
         . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . 9 9 9 9 1 . . . . . . . . . .
-        . 9 9 9 9 1 1 1 . 5 5 5 . . . .
-        . . . . . 1 1 1 1 1 1 5 5 . . .
-        . . . . . 1 1 1 1 . . . 5 . . .
-        . . . . . 1 1 1 . . . . . . . .
-        . 9 9 9 9 1 5 5 . . . . . . . .
-        . 9 9 9 9 9 5 5 . . . . . . . .
-        . . . . . . 5 5 . . . . . . . .
-        . . . . . . . 5 5 . . . 5 5 . .
-        . . . . . . . . 5 5 5 5 5 . . .
-        . 9 9 9 9 9 . . . 5 5 5 . . . .
-        . 9 9 9 9 9 . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
+        . . . . . f f f f f f . . . . .
+        . . . . b b f b b f b b . . . .
+        . . . . f f b b b b f f . . . .
+        . . . . f f f f f f f f . . . .
+        . . . . . f b f f b f . . . . .
+        . . . . . . b f f b . . . . . .
+        . . . . f b b b b b b f . . . .
+        . . f b b 6 9 9 9 9 6 b b b . .
+        . 1 b 6 9 9 1 9 1 1 9 9 9 b b .
+        . b 9 9 9 9 9 9 9 9 9 9 9 9 b .
+        . b 6 9 9 9 9 9 9 9 9 6 6 6 b .
+        . b b b b 6 6 9 6 6 6 b b b b .
+        . . b b b b 1 b 9 b b b b b . .
+        . . . f f b b b b b b f . . . .
         . . . . . . . . . . . . . . . .
     `;
         if (name == "exit") return img`
         . . . . . . . . . . . . . . . .
-        . . . . . . . 9 9 9 9 9 9 9 . .
-        . 9 9 9 9 9 . 9 . . . . . 9 . .
-        . 9 9 9 9 9 . 9 . . . . . 9 . .
-        . . . . . . . 9 . . . . 1 9 . .
-        . . . . . . . 9 . . . 1 1 1 . .
-        . . . . . . . 9 . . . . 1 1 1 .
-        . 9 9 9 9 9 . 9 . . . . . 1 1 1
-        . 9 9 9 9 9 . 9 1 1 1 1 1 1 1 1
-        . . . . . . . 9 1 1 1 1 1 1 1 1
-        . . . . . . . 9 . . . . . 9 . .
-        . . . . . . . 9 . . . . . 9 . .
-        . 9 9 9 9 9 . 9 . . . . . 9 . .
-        . 9 9 9 9 9 . 9 . . . . . 9 . .
-        . . . . . . . 9 9 9 9 9 9 9 . .
+        . b b b f b b b b f b b f b b .
+        . b b f f f f f f b b b f b b .
+        . b b b b f b b b f f b b b b .
+        . b b b f f f f b b b b b f f .
+        . b b f f b b f f b b f b b b .
+        . b b b b f f f f f f b b b b .
+        . f f b b f f e f f f f f f f .
+        . b b b b f e 5 4 f f f f b b .
+        . f f f b e 4 5 4 4 f f b b b .
+        . b b f f 5 5 1 1 5 5 5 f f f .
+        . b b f b e 4 5 4 4 e f f b b .
+        . b f b b b e 5 e b b f f b b .
+        . b b b b b b e b b b f b f f .
+        . b b b b b b b b b b f b b b .
         . . . . . . . . . . . . . . . .
     `;
         return img`
@@ -6645,6 +10319,103 @@ namespace apocArt {
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
     `;
+    }
+    export function creditCount(): number { return 4; }
+    export function creditLine(index: number): string {
+        if (index == 0) return "Panda: @danielmahon | CC-BY-SA 3.0";
+        if (index == 1) return "Panda: opengameart.org/content/panda-character-32x32";
+        if (index == 2) return "Heroes: Antifarea | CC-BY 3.0";
+        if (index == 3) return "Heroes: OpenGameArt.org | fixed set by Maxion";
+        return "";
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/advice.ts
+// Generated by tools/generate-room-advice.mjs. Read-only optional help.
+namespace apocAdvice {
+    export function text(room: number, variant: number): string {
+        if (room == 1 && variant == 1) return "Create allied moves: Ward, Mend, Strike, Strike. Guardian's Ward 4 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 8 and Decoy for 2."
+        if (room == 1 && variant == 2) return "Create allied moves: Wait, Ward, Mend, Strike, Strike. Guardian's Ward 3 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 10 and Decoy for 2. Keep the 1 leading Wait entry."
+        if (room == 1 && variant == 3) return "Create allied moves: Wait, Wait, Ward, Mend, Strike, Strike. Guardian's Ward 5 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 12 and Decoy for 2. Keep the 2 leading Wait entries."
+        if (room == 2 && variant == 1) return "Get roster index 0: Raider. Hold that Sprite so its Strike cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan."
+        if (room == 2 && variant == 2) return "Get roster index 1: Wisp. Hold that Sprite so its Flurry cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan."
+        if (room == 2 && variant == 3) return "Get roster index 1: Raider. Hold that Sprite so its Strike cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan."
+        if (room == 3 && variant == 1) return "Set enemy move index 0 from Strike to Wait. This cancels Raider's 6 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass."
+        if (room == 3 && variant == 2) return "Set enemy move index 1 from Strike to Wait. This cancels Raider's 8 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass."
+        if (room == 3 && variant == 3) return "Set enemy move index 2 from Strike to Wait. This cancels Raider's 8 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass."
+        if (room == 4 && variant == 1) return "Append Strike to allied moves. It lands at index 4, using the waiting power 3 to deal 6 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive."
+        if (room == 4 && variant == 2) return "Append Strike to allied moves. It lands at index 5, using the waiting power 4 to deal 8 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive."
+        if (room == 4 && variant == 3) return "Append Strike to allied moves. It lands at index 6, using the waiting power 5 to deal 10 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive."
+        if (room == 5 && variant == 1) return "Insert Ward at allied index 1, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put."
+        if (room == 5 && variant == 2) return "Insert Ward at allied index 2, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put."
+        if (room == 5 && variant == 3) return "Insert Ward at allied index 3, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put."
+        if (room == 6 && variant == 1) return "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider."
+        if (room == 6 && variant == 2) return "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider."
+        if (room == 6 && variant == 3) return "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider."
+        if (room == 7 && variant == 1) return "Remove the Ward at enemy index 0; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies."
+        if (room == 7 && variant == 2) return "Remove the Ward at enemy index 1; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies."
+        if (room == 7 && variant == 3) return "Remove the Ward at enemy index 2; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies."
+        if (room == 8 && variant == 1) return "Set the existing last allied move, index 4 (length minus 1), to Strike. Its power 3 deals 6 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row."
+        if (room == 8 && variant == 2) return "Set the existing last allied move, index 5 (length minus 1), to Strike. Its power 4 deals 8 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row."
+        if (room == 8 && variant == 3) return "Set the existing last allied move, index 6 (length minus 1), to Strike. Its power 5 deals 10 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row."
+        if (room == 9 && variant == 1) return "Remove just the first allied Wait. Ward moves to index 0 and uses power 4 to block Raider's 4 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers."
+        if (room == 9 && variant == 2) return "Remove just the first allied Wait. Ward moves to index 0 and uses power 6 to block Raider's 6 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers."
+        if (room == 9 && variant == 3) return "Remove just the first allied Wait. Ward moves to index 0 and uses power 4 to block Raider's 4 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers."
+        if (room == 10 && variant == 1) return "Remove the last enemy move at index 3. This deletes Raider's final Strike 3, which would deal 6 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins."
+        if (room == 10 && variant == 2) return "Remove the last enemy move at index 4. This deletes Raider's final Strike 4, which would deal 8 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins."
+        if (room == 10 && variant == 3) return "Remove the last enemy move at index 5. This deletes Raider's final Strike 5, which would deal 10 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins."
+        if (room == 11 && variant == 1) return "Get-and-remove the first roster Sprite: Raider. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy."
+        if (room == 11 && variant == 2) return "Get-and-remove the first roster Sprite: Wisp. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy."
+        if (room == 11 && variant == 3) return "Get-and-remove the first roster Sprite: Raider. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy."
+        if (room == 12 && variant == 1) return "Find Ward in enemy moves: index 0. Set that entry to Wait, keeping the list length. This prevents Shaman's power 4 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets."
+        if (room == 12 && variant == 2) return "Find Ward in enemy moves: index 1. Set that entry to Wait, keeping the list length. This prevents Shaman's power 5 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets."
+        if (room == 12 && variant == 3) return "Find Ward in enemy moves: index 2. Set that entry to Wait, keeping the list length. This prevents Shaman's power 6 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets."
+        if (room == 13 && variant == 1) return "Hold every roster Sprite, in this setup: Raider, Wisp, Plague. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies."
+        if (room == 13 && variant == 2) return "Hold every roster Sprite, in this setup: Plague, Raider, Wisp. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies."
+        if (room == 13 && variant == 3) return "Hold every roster Sprite, in this setup: Wisp, Plague, Raider. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies."
+        if (room == 14 && variant == 1) return "Swap allied powers at indices 0 and 3 using a saved number: 4 and 1 become 1 and 4. Blade's first Strike now deals 2 to Small (2 HP); the last deals 8 to Boss (8 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small."
+        if (room == 14 && variant == 2) return "Swap allied powers at indices 0 and 3 using a saved number: 5 and 1 become 1 and 5. Blade's first Strike now deals 2 to Small (2 HP); the last deals 10 to Boss (10 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small."
+        if (room == 14 && variant == 3) return "Swap allied powers at indices 0 and 3 using a saved number: 6 and 1 become 1 and 6. Blade's first Strike now deals 2 to Small (2 HP); the last deals 12 to Boss (12 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small."
+        if (room == 15 && variant == 1) return "Change BOTH enemy Wards, indices 0, 2, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield."
+        if (room == 15 && variant == 2) return "Change BOTH enemy Wards, indices 1, 3, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield."
+        if (room == 15 && variant == 3) return "Change BOTH enemy Wards, indices 2, 4, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield."
+        if (room == 16 && variant == 1) return "Build allied moves from empty: Ward, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order."
+        if (room == 16 && variant == 2) return "Build allied moves from empty: Strike, Ward, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order."
+        if (room == 16 && variant == 3) return "Build allied moves from empty: Ward, Strike, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order."
+        if (room == 17 && variant == 1) return "Get-and-remove the last reserve move: Strike. Append that returned move to allied moves at index 4. It uses power 5 against Raider. Blade's final Strike deals 10 damage to finish Raider. Keep the other reserve entries."
+        if (room == 17 && variant == 2) return "Get-and-remove the last reserve move: Strike. Append that returned move to allied moves at index 4. It uses power 6 against Raider. Blade's final Strike deals 12 damage to finish Raider. Keep the other reserve entries."
+        if (room == 17 && variant == 3) return "Get-and-remove the last reserve move: Reap. Append that returned move to allied moves at index 4. It uses power 7 against Raider. The earlier Strike wounds Raider, so Executioner's Reap can finish the missing-HP target. Keep the other reserve entries."
+        if (room == 18 && variant == 1) return "Remove enemy power 5 at index 2; append that returned number to allied values at index 4. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 5 and deals 10 damage. Leave move and target lists unchanged."
+        if (room == 18 && variant == 2) return "Remove enemy power 6 at index 3; append that returned number to allied values at index 5. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 6 and deals 12 damage. Leave move and target lists unchanged."
+        if (room == 18 && variant == 3) return "Remove enemy power 7 at index 4; append that returned number to allied values at index 6. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 7 and deals 14 damage. Leave move and target lists unchanged."
+        if (room == 19 && variant == 1) return "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Raider, Wisp; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass."
+        if (room == 19 && variant == 2) return "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Wisp, Raider; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass."
+        if (room == 19 && variant == 3) return "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Wisp, Raider; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass."
+        if (room == 20 && variant == 1) return "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Flurry, Strike. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan."
+        if (room == 20 && variant == 2) return "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Strike, Flurry. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan."
+        if (room == 20 && variant == 3) return "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Flurry, Strike. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan."
+        if (room == 21 && variant == 1) return "Find the first enemy Strike at index 1; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows."
+        if (room == 21 && variant == 2) return "Find the first enemy Strike at index 2; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows."
+        if (room == 21 && variant == 3) return "Find the first enemy Strike at index 3; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows."
+        if (room == 22 && variant == 1) return "Remove the Raider Sprite from enemy targets at index 1, then prepend that SAME Sprite to this target list. Blade's first Strike 4 now deals 8 to Raider (8 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists."
+        if (room == 22 && variant == 2) return "Remove the Raider Sprite from enemy targets at index 2, then prepend that SAME Sprite to this target list. Blade's first Strike 5 now deals 10 to Raider (9 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists."
+        if (room == 22 && variant == 3) return "Remove the Raider Sprite from enemy targets at index 3, then prepend that SAME Sprite to this target list. Blade's first Strike 5 now deals 10 to Raider (10 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists."
+        if (room == 23 && variant == 1) return "Find and remove enemy Ward at index 0. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 3. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies."
+        if (room == 23 && variant == 2) return "Find and remove enemy Ward at index 1. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 5. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies."
+        if (room == 23 && variant == 3) return "Find and remove enemy Ward at index 2. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 7. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies."
+        if (room == 24 && variant == 1) return "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 0 to 1. THEN use Station 2: set that shifted Strike to Wait. Its 8 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order."
+        if (room == 24 && variant == 2) return "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 1 to 2. THEN use Station 2: set that shifted Strike to Wait. Its 10 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order."
+        if (room == 24 && variant == 3) return "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 2 to 3. THEN use Station 2: set that shifted Strike to Wait. Its 12 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order."
+        if (room == 25 && variant == 1) return "Set allied Wait to Ward only at indices 0, 2, 4, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider."
+        if (room == 25 && variant == 2) return "Set allied Wait to Ward only at indices 1, 3, 5, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider."
+        if (room == 25 && variant == 3) return "Set allied Wait to Ward only at indices 2, 4, 6, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider."
+        if (room == 26 && variant == 1) return "Build from empty: Ward, Mend, Ward, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend."
+        if (room == 26 && variant == 2) return "Build from empty: Strike, Ward, Mend, Ward, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend."
+        if (room == 26 && variant == 3) return "Build from empty: Ward, Mend, Strike, Ward, Strike, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend."
+        if (room == 27 && variant == 1) return "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 3 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
+        if (room == 27 && variant == 2) return "Station 1: hold Wisp, Raider. Station 2: change enemy Wards at indices 1, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
+        if (room == 27 && variant == 3) return "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
+        return "Advice unavailable for this room setup."
     }
 }
 
@@ -6713,242 +10484,462 @@ namespace apocSave {
 }
 
 // SUPPLIED SOURCE supplied-world/view.ts
-// Icon-first fixed 480x360 view. Read-only rendering, all six streams visible.
+// Native room renderer. World owns trial state and the exact combat forecast.
+// Conserve usage. Before/after motion depicts edits, not learner statement tracing.
 namespace apocView {
-    const X = [26, 76, 148, 242, 336, 410]
-    const W = [46, 68, 90, 90, 70, 45]
-    const TOP = 125
-    const STEP = 17
+    const WIDTH = 576
+    const CENTER = 288
     const JOBS = ["Write plan", "Hold threat", "Rewrite", "Append", "Insert Ward", "Delay", "Remove Ward", "Repair last", "Remove first", "Remove last", "Banish first", "Find Ward", "Hold hazards", "Swap power", "Clear Wards", "Build counters", "Use reserve", "Steal power", "Hold one", "Reverse", "Find defense", "Move target", "Find + remove", "Delay", "Repair gaps", "Build recovery", "Hold hazards"]
     const OPS = ["create", "get", "set", "append", "insert", "prepend", "remove", "length", "remove", "remove", "remove", "find", "foreach", "swap", "foreach", "build", "transfer", "transfer", "get", "reverse", "find", "transfer", "find", "order", "foreach", "build", "foreach"]
-    const MENU = ["Use first station", "Use second station", "Run the plan", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Which Recipe do I open?", "Reset saved progress"]
+    const MENU = ["Use first altar", "Use second altar", "Release time", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Room instructions + strategy", "Reset saved progress"]
     const MOVES = ["Strike", "Flurry", "Mend", "Ward", "Venom", "Reap", "Empower", "Wait"]
-    const TRAITS = ["Plain", "Piercer", "Cleanser", "Steadfast", "Leech"]
-    let spriteCache: Sprite[] = []
-    let iconCache: Image[] = []
-    let moveImages: Image[] = []
-    let smallMoves: Image[] = []
-    let traitImages: Image[] = []
-    let markImages: Image[] = []
+    let moveIcons: Image[] = []
+    let actorRefs: Sprite[] = []
+    let portraits: Image[] = []
+    let bodies: Image[] = []
+    let pandaFrames: Image[] = []
+    let props: Image[] = []
     let digits: Image[] = []
-    let allImage: Image = null
-    let unknownImage: Image = null
+    let floor: Image = null
+    let pads: Image[] = []
+    let allPortrait: Image = null
+    let unknown: Image = null
     let ready = false
+    let cachedRoom = -1
+    let cachedVariant = -1
+    let motionStamp = -1
+    let motions: CellMotion[] = []
+    class CellMotion {
+        constructor() {}
+        side: number = 0
+        part: number = 0 // move, power, target, roster, source
+        fromSide: number = 0
+        fromPart: number = 0
+        merged: boolean = false
+        from: number = -1
+        to: number = -1
+        move: string = ""
+        power: number = 0
+        target: Sprite = null
+    }
+    function text(s: string, x: number, y: number, color: number = 1): void { screen.print(s, x, y, color, image.font8) }
+    function tiny(s: string, x: number, y: number, color: number = 1): void { screen.print(s, x, y, color, image.font5) }
+    function centered(s: string, x: number, y: number, color: number = 1): void { text(s, x - Math.idiv(s.length * 6, 2), y, color) }
+    function smallCentered(s: string, x: number, y: number, color: number = 1): void { tiny(s, x - Math.idiv(s.length * 6, 2), y, color) }
+    function shortName(s: string): string { return s.substr(0, 2) == "A-" || s.substr(0, 2) == "E-" ? s.substr(2) : s }
+    function resize(source: Image, w: number, h: number): Image {
+        const out = image.create(w, h)
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) out.setPixel(x, y, source.getPixel(Math.idiv(x * source.width, w), Math.idiv(y * source.height, h)))
+        return out
+    }
+    function oval(pic: Image, cx: number, cy: number, rx: number, ry: number, fill: number, edge: number): void {
+        for (let y = -ry; y <= ry; y++) {
+            const w = Math.floor(rx * Math.sqrt(Math.max(0, 1 - y * y / (ry * ry))))
+            pic.drawLine(cx - w, cy + y, cx + w, cy + y, fill)
+            if (edge) { pic.setPixel(cx - w, cy + y, edge); pic.setPixel(cx + w, cy + y, edge) }
+        }
+        if (edge) { pic.drawLine(cx - 16, cy - ry, cx + 16, cy - ry, edge); pic.drawLine(cx - 16, cy + ry, cx + 16, cy + ry, edge) }
+    }
+    function cross(x: number, y: number, r: number, color: number = 2): void {
+        for (let d = -1; d <= 1; d++) { screen.drawLine(x - r, y - r + d, x + r, y + r + d, 15); screen.drawLine(x + r, y - r + d, x - r, y + r + d, 15) }
+        screen.drawLine(x - r, y - r, x + r, y + r, color); screen.drawLine(x + r, y - r, x - r, y + r, color)
+    }
     function init(): void {
         if (ready) return
         ready = true
-        for (let i = 0; i < MOVES.length; i++) {
-            moveImages.push(apocArt.move(MOVES[i]))
-            smallMoves.push(resize(moveImages[i], 12))
-        }
-        for (let i = 0; i < TRAITS.length; i++) traitImages.push(apocArt.trait(TRAITS[i]))
-        const marks = ["Ward", "Venom", "Empower", "Hold"]
-        for (let i = 0; i < marks.length; i++) markImages.push(resize(apocArt.status(marks[i]), 8))
+        for (let i = 0; i < MOVES.length; i++) moveIcons.push(resize(apocArt.move(MOVES[i]), 16, 16))
         for (let i = 0; i < 10; i++) digits.push(apocArt.digit(i))
-        allImage = apocArt.targetAll()
-        unknownImage = apocArt.move("?")
+        const names = ["altar-primary", "altar-secondary", "clock-crystal", "fountain-reset", "exit-gate"]
+        for (let i = 0; i < names.length; i++) props.push(apocArt.prop(names[i]))
+        for (let d = 0; d < 4; d++) for (let s = -1; s < 3; s++) pandaFrames.push(apocArt.observerFrame(d, s))
+        unknown = resize(apocArt.move("?"), 16, 16); allPortrait = resize(apocArt.targetAll(), 24, 24)
+        for (let i = 0; i < 3; i++) {
+            const pic = image.create(239, 51)
+            oval(pic, 119, 26, 118, 24, 15, 0); oval(pic, 119, 24, 117, 24, i == 0 ? 12 : 8, i == 0 ? 11 : i == 1 ? 5 : 9); pads.push(pic)
+        }
     }
-    function text(s: string, x: number, y: number, color: number): void { screen.print(s, x, y, color, image.font5) }
-    function resize(source: Image, size: number): Image {
-        const result = image.create(size, size)
-        for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) result.setPixel(x, y, source.getPixel(Math.idiv(x * source.width, size), Math.idiv(y * source.height, size)))
-        return result
+    function makeFloor(): void {
+        floor = image.create(WIDTH, 720); floor.fill(15); floor.fillRect(14, 40, WIDTH - 28, 644, 11)
+        for (let y = 40; y < 684; y += 12) {
+            floor.drawLine(14, y, WIDTH - 15, y, 15)
+            for (let x = 14 + (Math.idiv(y, 12) % 2) * 24; x < WIDTH - 14; x += 48) floor.drawLine(x, y, x, y + 11, 15)
+        }
+        floor.fillRect(29, 78, WIDTH - 58, 592, 12)
+        for (let y = 78; y < 670; y += 32) for (let x = 30; x < WIDTH - 29; x += 32) {
+            floor.drawLine(x, y, x + 30, y, 15)
+            floor.drawLine(x, y, x, y + 30, 15)
+            floor.drawLine(x + 4, y + 23, x + 10, y + 23, 15)
+        }
+        for (let i = 0; i < 4; i++) {
+            const x = i % 2 == 0 ? 116 : WIDTH - 130, y = i < 2 ? 88 : 608
+            floor.fillRect(x, y, 14, 5, 11); floor.fillRect(x + 4, y + 5, 17, 4, 15)
+        }
+        for (let x = 40; x < WIDTH; x += WIDTH - 90) { floor.fillRect(x, 56, 8, 14, 13); floor.fillRect(x + 1, 52, 6, 12, 5); floor.fillRect(x + 3, 49, 2, 9, 1) }
     }
-    function fit(s: string, n: number): string { return !s ? "" : s.length <= n ? s : s.substr(0, n - 2) + ".." }
-    function shortName(id: string): string { return id.substr(0, 2) == "A-" || id.substr(0, 2) == "E-" ? id.substr(2) : id }
-    function number(n: number, x: number, y: number): void {
-        const value = "" + Math.max(0, Math.floor(n))
-        const left = x - Math.idiv(value.length * 7 - 1, 2)
-        for (let i = 0; i < value.length; i++) screen.drawTransparentImage(digits[parseInt(value.charAt(i))], left + i * 7, y)
-    }
-    function actorFor(sprite: Sprite, state: apocTypes.TrialSnapshot): apocTypes.ActorState {
-        if (state && sprite) for (let i = 0; i < state.actors.length; i++) if (state.actors[i].sprite == sprite) return state.actors[i]
+    function actorFor(ref: Sprite, state: apocTypes.TrialSnapshot): apocTypes.ActorState {
+        if (state && ref) for (let i = 0; i < state.actors.length; i++) if (state.actors[i].sprite == ref) return state.actors[i]
         return null
     }
-    function name(sprite: Sprite, state: apocTypes.TrialSnapshot): string {
-        if (sprite == apocWorld.uiSentinel()) return "ALL"
-        const a = actorFor(sprite, state)
-        return a ? shortName(a.id) : "?"
-    }
-    function icon(sprite: Sprite, state: apocTypes.TrialSnapshot): Image {
-        if (sprite == apocWorld.uiSentinel()) return allImage
-        for (let i = 0; i < spriteCache.length; i++) if (spriteCache[i] == sprite) return iconCache[i]
-        if (spriteCache.length > 12) { spriteCache = []; iconCache = [] }
-        const a = actorFor(sprite, state)
-        const pic = a ? apocArt.portrait(a.id, a.side) : image.create(16, 16)
-        spriteCache.push(sprite); iconCache.push(pic)
-        return pic
-    }
-    function move(s: string): Image { const at = MOVES.indexOf(s); return at >= 0 ? moveImages[at] : unknownImage }
-    function card(a: apocTypes.ActorState, x: number, y: number): void {
-        const ev = apocWorld.uiEvent()
-        const focus = apocWorld.uiPlaying() && ev && (ev.actor == a.sprite || ev.target == a.sprite)
-        const edge = !a.present || a.hp <= 0 ? 11 : a.held ? 10 : a.side == apocTypes.Side.Ally ? 9 : 2
-        screen.fillRect(x, y, 116, 30, focus ? 8 : 12)
-        screen.drawRect(x, y, 116, 30, focus ? 5 : edge)
-        screen.drawTransparentImage(a.sprite.image, x + 1, y + 2)
-        if (!a.present || a.hp <= 0) {
-            screen.drawLine(x + 3, y + 3, x + 22, y + 23, 2)
-            screen.drawLine(x + 22, y + 3, x + 3, y + 23, 2)
-        }
-        text(shortName(a.id), x + 27, y + 2, 1)
-        const ability = MOVES.indexOf(a.ability)
-        if (ability >= 0) screen.drawTransparentImage(smallMoves[ability], x + 27, y + 17)
-        text("" + a.hp + "/" + a.maxHP, x + 27, y + 10, a.hp <= 0 ? 2 : 1)
-        text(a.trait, x + 58, y + 10, 11)
-        screen.fillRect(x + 43, y + 18, 45, 3, 15)
-        screen.fillRect(x + 43, y + 18, Math.idiv(45 * a.hp, a.maxHP), 3, edge)
-        const trait = TRAITS.indexOf(a.trait)
-        if (trait >= 0) screen.drawTransparentImage(traitImages[trait], x + 99, y + 17)
-        let markX = x + 43
-        if (a.ward) { screen.drawTransparentImage(markImages[0], markX, y + 21); markX += 10 }
-        if (a.venom) { screen.drawTransparentImage(markImages[1], markX, y + 21); markX += 10 }
-        if (a.empower) { screen.drawTransparentImage(markImages[2], markX, y + 21); markX += 10 }
-        if (a.held) screen.drawTransparentImage(markImages[3], markX, y + 21)
-    }
-    function party(state: apocTypes.TrialSnapshot): void {
-        let a = 0, e = 0
+    function actorIndex(ref: Sprite): number { return actorRefs.indexOf(ref) }
+    function rebuild(state: apocTypes.TrialSnapshot): void {
+        cachedRoom = apocWorld.uiRoom(); cachedVariant = apocWorld.uiVariant(); actorRefs = []; portraits = []; bodies = []
         for (let i = 0; i < state.actors.length; i++) {
-            const actor = state.actors[i]
-            if (actor.side == apocTypes.Side.Ally) { card(actor, 3 + a * 119, 15); a++ }
-            else { card(actor, 3 + e * 119, 47); e++ }
+            const a = state.actors[i], pic = resize(apocArt.largePortrait(a.id, a.side), 28, 31)
+            for (let y = 0; y < 31; y++) for (let x = 0; x < 28; x++) if ((x - 13.5) * (x - 13.5) + (y - 15) * (y - 15) > 196) pic.setPixel(x, y, 0)
+            actorRefs.push(a.sprite); portraits.push(pic)
+            const size = a.id == "E-Boss" || a.id == "E-King" ? 64 : 48
+            bodies.push(resize(apocArt.actor(a.id, a.side), size, a.side == apocTypes.Side.Ally ? 54 : size))
         }
+        makeFloor()
     }
-    function wraps(s: string, y: number): void {
-        let rest = s
-        for (let row = 0; row < 2 && rest.length; row++) {
-            let cut = Math.min(rest.length, 77)
-            if (cut < rest.length) { let at = cut; while (at > cut - 18 && rest.charAt(at) != " ") at--; if (at > cut - 18) cut = at }
-            text(rest.substr(0, cut), 7, y + row * 7, 1)
-            rest = rest.substr(cut)
-            while (rest.charAt(0) == " ") rest = rest.substr(1)
+    function moveIcon(s: string): Image { const i = MOVES.indexOf(s); return i < 0 ? unknown : moveIcons[i] }
+    function rowY(row: number): number { return 114 + row * 54 }
+    function px(side: number, part: number): number { return part == 2 ? (side == 0 ? 265 : 311) : part == 1 ? (side == 0 ? 197 : 379) : side == 0 ? 215 : 361 }
+    function listLength(t: apocTypes.TrialSnapshot, side: number, part: number): number {
+        if (part == 3) return t.roster.length
+        if (part == 4) return t.sourceMoves.length
+        if (part == 0) return side == 0 ? t.lists.allyMoves.length : t.lists.enemyMoves.length
+        if (part == 1) return side == 0 ? t.lists.allyValues.length : t.lists.enemyValues.length
+        return side == 0 ? t.lists.allyTargets.length : t.lists.enemyTargets.length
+    }
+    function equalCell(a: apocTypes.TrialSnapshot, b: apocTypes.TrialSnapshot, side: number, part: number, i: number, j: number): boolean {
+        if (part == 3) return a.roster[i] == b.roster[j]
+        if (part == 4) return a.sourceMoves[i] == b.sourceMoves[j]
+        if (part == 0) return side == 0 ? a.lists.allyMoves[i] == b.lists.allyMoves[j] : a.lists.enemyMoves[i] == b.lists.enemyMoves[j]
+        if (part == 1) return side == 0 ? a.lists.allyValues[i] == b.lists.allyValues[j] : a.lists.enemyValues[i] == b.lists.enemyValues[j]
+        return side == 0 ? a.lists.allyTargets[i] == b.lists.allyTargets[j] : a.lists.enemyTargets[i] == b.lists.enemyTargets[j]
+    }
+    function loadMotion(m: CellMotion, state: apocTypes.TrialSnapshot, row: number): void {
+        m.fromSide = m.side; m.fromPart = m.part
+        if (m.part == 0) m.move = m.side == 0 ? state.lists.allyMoves[row] : state.lists.enemyMoves[row]
+        if (m.part == 1) m.power = m.side == 0 ? state.lists.allyValues[row] : state.lists.enemyValues[row]
+        if (m.part == 2) m.target = m.side == 0 ? state.lists.allyTargets[row] : state.lists.enemyTargets[row]
+        if (m.part == 3) m.target = state.roster[row]
+        if (m.part == 4) m.move = state.sourceMoves[row]
+    }
+    function prepareMotion(): void {
+        const stamp = apocWorld.uiEditStarted(), record = apocWorld.uiEditRecord()
+        if (stamp == motionStamp || !record) return
+        motionStamp = stamp; motions = []
+        for (let side = 0; side < 2; side++) for (let part = 0; part < 5; part++) {
+            if (side == 1 && part >= 3) continue
+            const before = record.before, after = record.after, oldLen = listLength(before, side, part), newLen = listLength(after, side, part)
+            let used: boolean[] = [], fixed: boolean[] = []
+            for (let i = 0; i < 10; i++) { used.push(false); fixed.push(false) }
+            for (let i = 0; i < Math.min(oldLen, newLen); i++) if (equalCell(before, after, side, part, i, i)) { used[i] = true; fixed[i] = true }
+            for (let j = 0; j < newLen; j++) {
+                if (fixed[j]) continue
+                let from = -1, distance = 99
+                for (let i = 0; i < oldLen; i++) if (!used[i] && equalCell(before, after, side, part, i, j) && Math.abs(i - j) < distance) { from = i; distance = Math.abs(i - j) }
+                if (from >= 0) used[from] = true
+                const m = new CellMotion(); m.side = side; m.part = part; m.from = from; m.to = j; loadMotion(m, after, j); motions.push(m)
+            }
+            for (let i = 0; i < oldLen; i++) if (!used[i]) { const m = new CellMotion(); m.side = side; m.part = part; m.from = i; m.to = -1; loadMotion(m, before, i); motions.push(m) }
         }
-    }
-    function objective(): string {
-        const r = apocWorld.uiRoom(), s = apocWorld.uiSpec()
-        const tasks = ["", "Hold the marked monster in the roster. Keep the roster intact.", "Change the marked enemy Strike to Wait. Keep every other cell.", "Append Strike to allyMoves. Its final power and target are already waiting.", "", "Prepend Wait to enemyMoves. Delay the first attack until your Ward is ready.", "Remove the marked Ward from enemyMoves. Later moves shift left.", "Use length - 1 to change the last allyMoves entry to Strike.", "Remove the first allyMoves entry. Your opening Ward must arrive sooner.", "Remove the last enemyMoves entry. An absent cell is different from Wait.", "Remove the first roster Sprite, then banish that exact monster.", "Find Ward in enemyMoves; replace it with Wait at the found index.", "Hold every monster in the roster. Keep the roster and combat lists.", "Swap allyValues[0] and allyValues[3]. Save the strong hit for the boss.", "Visit every enemyMoves index. Replace Ward with Wait; preserve other moves.", "Build allyMoves from the source: Ward for Strike; Strike for Wait.", "Pop the last reserve move; append that returned move to allyMoves.", "Remove the marked enemyValues number; append that number to allyValues.", "Pick one roster monster at random and hold it. Keep both roster entries.", "Reverse enemyMoves. Values and targets stay where they are.", "Find enemy Strike; insert Ward into allyMoves at that same index.", "Remove the marked enemyTargets Sprite; prepend that same Sprite to that list.", "Find Ward in enemyMoves; remove it at the found index.", "First Delay prepends Wait. Then Rewrite changes the shifted marked Strike to Wait.", "Visit allyMoves: where Wait faces enemy Strike, change only that Wait to Ward.", "Build Ward for Strike; Mend at the first opening after a Strike; Strike otherwise.", "Hold both hazards first. At the second station, change every enemy Ward to Wait."]
-        if (r == 1) return "Build Ward, Mend, Strike, Strike in allyMoves. Leading Waits: " + s.numberHint
-        if (r == 5) return "Insert Ward at marked index " + s.primaryIndex + ". Watch only the move list shift."
-        return tasks[r - 1]
-    }
-    function legend(state: apocTypes.TrialSnapshot): void {
-        let seen: string[] = []
-        const lists = [state.lists.allyMoves, state.lists.enemyMoves]
-        for (let s = 0; s < 2; s++) for (let i = 0; i < lists[s].length; i++) if (seen.indexOf(lists[s][i]) < 0 && MOVES.indexOf(lists[s][i]) >= 0) seen.push(lists[s][i])
-        for (let i = 0; i < state.actors.length; i++) if (seen.indexOf(state.actors[i].ability) < 0) seen.push(state.actors[i].ability)
-        for (let i = 0; i < seen.length && i < 8; i++) { const x = 4 + i * 59; screen.drawTransparentImage(move(seen[i]), x, 96); text(seen[i], x + 17, 102, 1) }
-    }
-    function length(s: apocTypes.TrialSnapshot, c: number): number {
-        const l = s.lists
-        return c == 0 ? l.enemyValues.length : c == 1 ? l.enemyMoves.length : c == 2 ? l.enemyTargets.length : c == 3 ? l.allyTargets.length : c == 4 ? l.allyMoves.length : l.allyValues.length
-    }
-    function at(s: apocTypes.TrialSnapshot, c: number, i: number): string {
-        if (i >= length(s, c)) return ""
-        const l = s.lists
-        return c == 0 ? "" + l.enemyValues[i] : c == 1 ? l.enemyMoves[i] : c == 2 ? name(l.enemyTargets[i], s) : c == 3 ? name(l.allyTargets[i], s) : c == 4 ? l.allyMoves[i] : "" + l.allyValues[i]
-    }
-    function columns(s: apocTypes.TrialSnapshot, actors: apocTypes.TrialSnapshot): void {
-        const records = apocWorld.uiRecords(), ev = apocWorld.uiEvent(), spec = apocWorld.uiSpec(), room = apocWorld.uiRoom()
-        const before = records.length ? records[records.length - 1].before : apocWorld.uiInitial()
-        const headers = ["enemy", "enemyMoves", "enemyTargets", "allyTargets", "allyMoves", "ally"]
-        for (let c = 0; c < 6; c++) {
-            text(headers[c], X[c], 113, c < 3 ? 3 : 9)
-            if (c == 0 || c == 5) text("Values", X[c], 119, c < 3 ? 3 : 9)
-            text("" + length(s, c), X[c] + W[c] - 5, 119, 11)
-        }
-        for (let r = 0; r < 10; r++) {
-            const y = TOP + r * STEP
-            number(r, 9, y + 4)
-            const marked = room == 14 ? r == 0 || r == 3 : (room != 2 && spec.primaryIndex == r) || spec.secondaryIndex == r
-            for (let c = 0; c < 6; c++) {
-                const changed = before && ((r < length(before, c)) != (r < length(s, c)) || at(before, c, r) != at(s, c, r))
-                let bg = changed ? 14 : r % 2 == 0 ? 12 : 15
-                if (apocWorld.uiPlaying() && ev && ev.index == r) bg = ev.side == apocTypes.Side.Ally ? 8 : 14
-                screen.fillRect(X[c] - 2, y, W[c], STEP - 1, bg)
-                if (changed) screen.fillRect(X[c] - 2, y + 3, 2, STEP - 7, 5)
-                if (marked) screen.drawRect(X[c] - 2, y, W[c], STEP - 1, 5)
-                if (r >= length(s, c)) { text("-", X[c] + Math.idiv(W[c], 2) - 3, y + 6, 11); continue }
-                const value = at(s, c, r)
-                if (c == 0 || c == 5) number(parseInt(value), X[c] + 19, y + 4)
-                else if (c == 1 || c == 4) { screen.drawTransparentImage(move(value), X[c], y); text(fit(value, 9), X[c] + 18, y + 6, 1) }
-                else {
-                    const ref = c == 2 ? s.lists.enemyTargets[r] : s.lists.allyTargets[r]
-                    screen.drawTransparentImage(icon(ref, s), X[c], y); text(value, X[c] + 18, y + 6, 1)
-                    const actor = actorFor(ref, actors)
-                    if (actor && (!actor.present || actor.hp <= 0)) screen.drawLine(X[c] + 1, y + 1, X[c] + 15, y + 15, 2)
-                    else if (actor && actor.held) screen.drawRect(X[c], y, 16, 16, 10)
-                }
+        // A returned number, move or Sprite transferred to another list is one
+        // traveling piece, rather than an unrelated disappearance/appearance.
+        for (let i = 0; i < motions.length; i++) {
+            const incoming = motions[i]
+            if (incoming.from >= 0 || incoming.to < 0) continue
+            for (let j = 0; j < motions.length; j++) {
+                const outgoing = motions[j]
+                if (outgoing.merged || outgoing.from < 0 || outgoing.to >= 0) continue
+                const sameMove = (incoming.part == 0 || incoming.part == 4) && (outgoing.part == 0 || outgoing.part == 4) && incoming.move == outgoing.move
+                const sameNumber = incoming.part == 1 && outgoing.part == 1 && incoming.power == outgoing.power
+                const sameTarget = (incoming.part == 2 || incoming.part == 3) && (outgoing.part == 2 || outgoing.part == 3) && incoming.target == outgoing.target
+                if (sameMove || sameNumber || sameTarget) { incoming.from = outgoing.from; incoming.fromSide = outgoing.side; incoming.fromPart = outgoing.part; outgoing.merged = true; break }
             }
         }
     }
-    function sources(s: apocTypes.TrialSnapshot): void {
-        if (s.roster.length) {
-            text("ROSTER", 6, 299, 9)
-            for (let i = 0; i < s.roster.length; i++) {
-                const x = 52 + i * 43
-                screen.drawTransparentImage(icon(s.roster[i], s), x + 9, 298); text("" + i, x, 305, 1)
-                if (apocWorld.uiRoom() == 2 && i == apocWorld.uiSpec().primaryIndex) screen.drawRect(x + 7, 297, 20, 18, 5)
-                const actor = actorFor(s.roster[i], s)
-                if (actor && actor.held) screen.drawRect(x + 8, 298, 18, 16, 10)
+    function target(ref: Sprite, x: number, y: number, side: number, picked: boolean, dead: boolean, held: boolean): void {
+        screen.fillCircle(x, y, 16, 15)
+        const i = actorIndex(ref)
+        if (ref == apocWorld.uiSentinel()) screen.drawTransparentImage(allPortrait, x - 12, y - 12)
+        else if (i >= 0) screen.drawTransparentImage(portraits[i], x - 14, y - 15)
+        else screen.fillCircle(x, y, 2, 11)
+        screen.drawCircle(x, y, 16, ref ? (side == 0 ? 9 : 3) : 11)
+        if (picked) screen.drawCircle(x, y, 19, 5)
+        if (dead) cross(x, y, 10)
+        else if (held) { screen.drawCircle(x, y, 18, 10); tiny("H", x - 2, y - 3, 1) }
+    }
+    function moveBubble(move: string, x: number, y: number, side: number, picked: boolean, dead: boolean): void {
+        screen.fillCircle(x, y, 12, !move ? 15 : side == 0 ? 6 : 14); screen.drawCircle(x, y, 12, picked ? 5 : !move ? 11 : side == 0 ? 9 : 3)
+        if (move) screen.drawTransparentImage(moveIcon(move), x - 8, y - 8)
+        else screen.fillCircle(x, y, 1, 11)
+        if (dead) cross(x, y, 7)
+    }
+    function powerBubble(power: number, x: number, y: number, side: number, picked: boolean): void {
+        screen.fillCircle(x, y, 9, 15); screen.drawCircle(x, y, 9, picked ? 5 : power < 0 ? 11 : side == 0 ? 9 : 3)
+        if (power >= 0) screen.drawTransparentImage(digits[Math.constrain(power, 0, 9)], x - 3, y - 4)
+    }
+    function helpful(move: string): boolean { return move == "Mend" || move == "Ward" || move == "Empower" }
+    function chosen(state: apocTypes.TrialSnapshot, side: number, row: number): Sprite {
+        const moves = side == 0 ? state.lists.allyMoves : state.lists.enemyMoves
+        if (row >= moves.length || !moves[row] || moves[row] == "Wait") return null
+        const toSide = helpful(moves[row]) ? side : 1 - side, targets = toSide == 0 ? state.lists.allyTargets : state.lists.enemyTargets
+        return row < targets.length ? targets[row] : null
+    }
+    function route(state: apocTypes.TrialSnapshot, side: number, row: number, now: number): void {
+        const ref = chosen(state, side, row)
+        if (!ref) return
+        const moves = side == 0 ? state.lists.allyMoves : state.lists.enemyMoves, same = helpful(moves[row]), toSide = same ? side : 1 - side
+        const y = rowY(row), start = px(side, 0) + (side == 0 ? 12 : -12), tx = px(toSide, 2), sign = side == 0 ? -1 : 1
+        const x0 = start, y0 = y + sign * 2, x1 = start + (side == 0 ? 8 : -8), y1 = y + sign * (same ? 7 : 25)
+        const x2 = same ? tx + (side == 0 ? -23 : 23) : tx + (side == 0 ? -3 : 3), y2 = y + sign * (same ? 7 : 26)
+        const x3 = same ? tx + (side == 0 ? -18 : 18) : tx, y3 = y + sign * (same ? 2 : 18)
+        const hovered = apocWorld.uiNearRow() == row && !apocWorld.uiPlaying() && !apocWorld.uiAnimating()
+        const dt = (now - apocWorld.uiHoverStarted()) % 3500, progress = Math.constrain((dt - (side == 0 ? 0 : 1150)) / 850, 0, 1)
+        let lastX = x0, lastY = y0
+        for (let i = 1; i <= 36; i++) {
+            const t = i / 36, s = 1 - t, x = s * s * s * x0 + 3 * s * s * t * x1 + 3 * s * t * t * x2 + t * t * t * x3
+            const yy = s * s * s * y0 + 3 * s * s * t * y1 + 3 * s * t * t * y2 + t * t * t * y3
+            screen.drawLine(lastX, lastY, x, yy, side == 0 ? 6 : 14)
+            if (hovered && t <= progress && i % 2 == 0) screen.fillCircle(x, yy, 1, side == 0 ? 9 : 3)
+            if (hovered && t <= progress && t + 1 / 36 > progress) screen.fillCircle(x, yy, 2, 1)
+            lastX = x; lastY = yy
+        }
+        if (hovered && progress >= 1) screen.drawCircle(tx, y, 19, side == 0 ? 9 : 3)
+    }
+    function timeline(state: apocTypes.TrialSnapshot, now: number): void {
+        const spec = apocWorld.uiSpec(), near = apocWorld.uiNearRow(), active = apocWorld.uiActiveRow(), activeSide = apocWorld.uiActiveSide()
+        for (let row = 0; row < 10; row++) {
+            const cy = rowY(row), playing = apocWorld.uiPlaying() && active == row
+            screen.drawTransparentImage(pads[playing ? 2 : near == row ? 1 : 0], CENTER - 119, cy - 24)
+            route(state, 0, row, now); route(state, 1, row, now)
+            const aftermath = apocWorld.uiAfter(apocTypes.Side.Enemy, row) || apocWorld.uiAfter(apocTypes.Side.Ally, row) || apocWorld.uiTerminal()
+            for (let side = 0; side < 2; side++) {
+                const selected = apocWorld.uiSelectedRow() == row && apocWorld.uiSelectedSide() == side
+                const marked = (apocWorld.uiRoom() == 14 && (row == 0 || row == 3)) || spec.primaryIndex == row || spec.secondaryIndex == row
+                const targets = side == 0 ? state.lists.allyTargets : state.lists.enemyTargets, ref = row < targets.length ? targets[row] : null
+                const a = actorFor(ref, aftermath || state), moves = side == 0 ? state.lists.allyMoves : state.lists.enemyMoves, values = side == 0 ? state.lists.allyValues : state.lists.enemyValues
+                const move = row < moves.length ? moves[row] : "", before = apocWorld.uiBefore(side, row) || apocWorld.uiTerminal()
+                let owner = actorFor(apocWorld.uiActionActor(side, row), before)
+                if (!owner && before) for (let n = 0; n < before.actors.length; n++) if (before.actors[n].side == side && before.actors[n].ability == move) owner = before.actors[n]
+                target(ref, px(side, 2), cy, side, selected, !!a && (!a.present || a.hp <= 0), !!a && a.held)
+                moveBubble(move, px(side, 0), cy, side, selected || marked, !!owner && (owner.hp <= 0 || !owner.present || owner.held))
+                powerBubble(row < values.length ? values[row] : -1, px(side, 1), cy, side, marked)
+                if (playing && activeSide == side) { screen.drawCircle(px(side, 0), cy, 15, 1); screen.fillCircle(px(side, 0), cy - 19, 2, 5) }
             }
-        } else if (s.sourceMoves.length) {
-            text(apocWorld.uiRoom() == 17 ? "RESERVE" : "SOURCE", 5, 299, 9); text(apocWorld.uiRoom() == 17 ? "edit" : "read", 5, 307, 11)
-            for (let i = 0; i < s.sourceMoves.length; i++) { const x = 52 + i * 38; text("" + i, x, 305, 1); screen.drawTransparentImage(move(s.sourceMoves[i]), x + 8, 298) }
-        } else text("Notch = edited; outline = marked. Dash = missing. D-pad walk; A use; B menu.", 6, 304, 11)
+        }
     }
-    function eventText(): string {
-        const ev = apocWorld.uiEvent(), s = apocWorld.uiDisplay()
-        if (!ev || !apocWorld.uiPlaying()) return apocWorld.uiNotice()
-        if (ev.kind == "action") return name(ev.actor, s) + " uses " + ev.move + " on " + name(ev.target, s)
-        if (ev.kind == "damage") return name(ev.target, s) + " takes " + ev.amount + ". HP: " + ev.hp
-        if (ev.kind == "heal") return name(ev.target, s) + " recovers. HP: " + ev.hp
-        if (ev.kind == "skip") return "Index " + ev.index + ": " + ev.reason
-        if (ev.kind == "ward-consumed") return name(ev.target, s) + "'s Ward absorbs a hit."
-        if (ev.kind == "venom-tick") return name(ev.target, s) + " takes Poison damage."
-        if (ev.kind == "empower-used") return name(ev.actor, s) + " uses the stored Empower bonus."
-        return "Playing index " + ev.index + " - A finishes this preview"
+    function actorX(side: number): number { return side == 0 ? 62 : WIDTH - 62 }
+    function actorY(ref: Sprite, state: apocTypes.TrialSnapshot): number {
+        const a = actorFor(ref, state)
+        if (!a) return 300
+        let pos = 0, count = 0
+        for (let i = 0; i < state.actors.length; i++) if (state.actors[i].side == a.side) { if (state.actors[i].sprite == ref) pos = count; count++ }
+        return count <= 1 ? 340 : 170 + pos * Math.idiv(370, count - 1)
     }
-    export function stationLabel(i: number): string { return i == 0 ? JOBS[apocWorld.uiRoom() - 1] : i == 1 ? (apocWorld.uiRoom() == 24 ? "Rewrite" : "Clear Wards") : i == 2 ? "Run" : i == 3 ? "Reset" : "Exit" }
+    function focusSide(now: number): number { return apocWorld.uiPlaying() ? apocWorld.uiActiveSide() : (now - apocWorld.uiHoverStarted()) % 3500 < 1150 ? 0 : 1 }
+    function party(state: apocTypes.TrialSnapshot, now: number): void {
+        smallCentered("ALLIES", 62, 119, 9); smallCentered("ENEMIES", WIDTH - 62, 119, 3)
+        const row = apocWorld.uiPlaying() ? apocWorld.uiActiveRow() : apocWorld.uiNearRow(), side = focusSide(now)
+        const events = row >= 0 ? apocWorld.uiActionEvents(side, row) : [], phase = apocWorld.uiPhase()
+        let event: apocTypes.TraceEvent = null
+        for (let i = 0; i < events.length; i++) if (events[i].kind == "action") { event = events[i]; break }
+        const source = row >= 0 ? apocWorld.uiActionActor(side, row) : null, recipient = row >= 0 ? chosen(apocWorld.uiTrial(), side, row) : null
+        for (let i = 0; i < state.actors.length; i++) {
+            const a = state.actors[i], k = actorIndex(a.sprite), body = k < 0 ? unknown : bodies[k]
+            let x = actorX(a.side), y = actorY(a.sprite, state)
+            if (apocWorld.uiPlaying() && event && event.actor == a.sprite) x += (a.side == 0 ? 1 : -1) * Math.sin(phase * Math.PI) * 8
+            oval(screen, x, y + body.height / 2, 23, 6, 15, recipient == a.sprite ? 5 : 0)
+            if (recipient == a.sprite) screen.drawCircle(x, y, Math.idiv(body.height, 2) + 6, event && helpful(event.move) ? 7 : 5)
+            if (a.present) screen.drawTransparentImage(body, x - body.width / 2, y - body.height / 2)
+            if (!a.present || a.hp <= 0) cross(x, y, 19)
+            smallCentered(shortName(a.id).toUpperCase(), x, y - body.height / 2 - 12, 1)
+            const hpY = y + body.height / 2 + 8
+            screen.fillRect(x - 24, hpY, 48, 4, 15); screen.fillRect(x - 24, hpY, Math.idiv(48 * a.hp, a.maxHP), 4, a.side == 0 ? 9 : 2)
+            smallCentered(a.hp + "/" + a.maxHP, x, hpY + 7, 1)
+            moveBubble(a.ability, x + (a.side == 0 ? 1 : -1) * (body.width / 2 + 14), y, a.side, source == a.sprite, false)
+            if (a.ward) screen.drawTransparentImage(moveIcon("Ward"), x + 23, y - 25)
+            if (a.venom) screen.drawTransparentImage(moveIcon("Venom"), x + 23, y - 7)
+            if (a.empower) screen.drawTransparentImage(moveIcon("Empower"), x + 23, y + 11)
+            if (a.held) { screen.drawCircle(x, y, 30, 10); smallCentered("HELD", x, y + 13, 1) }
+            if (a.trait != "Plain") smallCentered(a.trait, x, hpY + 19, 11)
+        }
+    }
+    export function stationLabel(i: number): string { return i == 0 ? JOBS[apocWorld.uiRoom() - 1] : i == 1 ? (apocWorld.uiRoom() == 24 ? "Rewrite" : "Clear Wards") : i == 2 ? "Release time" : i == 3 ? "Reset" : "Exit" }
     export function stationIcon(i: number): string { return i == 0 ? OPS[apocWorld.uiRoom() - 1] : i == 1 ? "set" : i == 2 ? "run" : i == 3 ? "reset" : "exit" }
-    function stations(): void {
-        const positions = [70, 150, 230, 310, 390], spec = apocWorld.uiSpec(), observer = apocWorld.uiObserverX()
-        const suggested = apocWorld.uiSuggestedStation()
+    function stations(now: number): void {
+        const xs = [86, 490, 288, 82, 288], ys = [650, 650, 66, 84, 664], spec = apocWorld.uiSpec(), suggested = apocWorld.uiSuggestedStation()
         for (let i = 0; i < 5; i++) {
             if (i == 1 && !spec.twoStations) continue
-            const near = Math.abs(observer - positions[i]) <= 28
-            if (i == suggested && control.millis() % 900 < 450) {
-                screen.fillRect(positions[i] - 35, 325, 70, 8, 8)
-                text("v", positions[i] - 2, 334, 5)
-            }
-            const label = stationLabel(i)
-            text(label, positions[i] - Math.idiv(label.length * 6, 2), 326, i == suggested || near ? 5 : 1)
+            const x = xs[i], y = ys[i], near = apocWorld.uiNearStation() == i, glow = i == suggested
+            if (glow || near) oval(screen, x, y + 6, i == 2 ? 28 : 24, 8, 8, now % 900 < 550 ? 5 : 11)
+            screen.drawTransparentImage(props[i], x - 16, y - 28 + (i == 2 ? Math.sin(now / 340) * 2 : 0))
+            smallCentered(stationLabel(i), x, y + (i == 2 ? 12 : 14), glow || near ? 5 : 1)
         }
+        const forecast = apocWorld.uiForecast(), outcome = forecast ? forecast.status : "invalid"
+        const label = outcome == "victory" ? "VICTORY" : outcome == "defeat" ? "DEFEAT" : outcome == "incomplete" ? "ENEMIES REMAIN" : "REPAIR PLAN"
+        screen.fillRect(CENTER - 95, 628, 190, 15, 15); smallCentered("FORECAST: " + label, CENTER, 633, outcome == "victory" ? 9 : 3)
+    }
+    function sources(state: apocTypes.TrialSnapshot): void {
+        if (state.roster.length) {
+            smallCentered("ROSTER", 143, 139, 9)
+            for (let i = 0; i < state.roster.length; i++) {
+                const x = 143, y = 180 + i * 40, k = actorIndex(state.roster[i]), a = actorFor(state.roster[i], state)
+                if (k >= 0) screen.drawTransparentImage(portraits[k], x - 14, y - 15)
+                screen.drawCircle(x, y, 16, a && a.held ? 10 : 11); if (a && !a.present) cross(x, y, 10)
+            }
+        } else if (state.sourceMoves.length) {
+            smallCentered(apocWorld.uiRoom() == 17 ? "RESERVE" : "SOURCE", 143, 139, 9)
+            for (let i = 0; i < state.sourceMoves.length; i++) moveBubble(state.sourceMoves[i], 143, 180 + i * 40, 0, false, false)
+        }
+    }
+    function editAnimation(now: number): void {
+        const dt = now - motionStamp, duration = apocWorld.uiEditDuration()
+        if (dt < 0 || dt >= duration) return
+        const opening = apocWorld.uiEditFizzleDuration()
+        const t = Math.constrain((dt - opening - 60) / (duration - opening - 160), 0, 1), q = t * t * (3 - 2 * t)
+        for (let i = 0; i < motions.length; i++) {
+            const m = motions[i]
+            if (m.merged) continue
+            const startY = m.from >= 0 ? (m.fromPart >= 3 ? 180 + m.from * 40 : rowY(m.from)) : 650
+            const endY = m.to >= 0 ? (m.part >= 3 ? 180 + m.to * 40 : rowY(m.to)) : 650
+            const startX = m.fromPart >= 3 ? 143 : px(m.fromSide, m.fromPart), endX = m.part >= 3 ? 143 : px(m.side, m.part)
+            const bend = m.from < 0 || m.to < 0 ? 60 : m.from < m.to ? 21 : 65
+            const x = startX + (endX - startX) * q + (m.side == 0 ? -1 : 1) * Math.sin(q * Math.PI) * bend, y = startY + (endY - startY) * q
+            screen.drawCircle(x, y, m.part == 2 || m.part == 3 ? 20 : 13, 5)
+            if (m.part == 0 || m.part == 4) moveBubble(m.move, x, y, m.side, true, false)
+            else if (m.part == 1) powerBubble(m.power, x, y, m.side, true)
+            else target(m.target, x, y, m.side, false, false, false)
+        }
+        const record = apocWorld.uiEditRecord()
+        if (!record) return
+        for (let i = 0; i < record.effects.length; i++) {
+            const effect = record.effects[i], a = actorFor(effect.actor, record.before), index = actorIndex(effect.actor)
+            if (!a || index < 0) continue
+            const body = bodies[index], x = actorX(a.side), y = actorY(effect.actor, record.before) - Math.sin(q * Math.PI) * 16
+            screen.drawTransparentImage(body, x - body.width / 2, y - body.height / 2)
+            if (effect.kind == "hold") {
+                screen.drawCircle(x, y, 30, 10); screen.drawCircle(x, y, 34, 9)
+                for (let bar = -2; bar <= 2; bar++) screen.drawLine(x + bar * 10, y - 25, x + bar * 10, y + 25, 10)
+            } else {
+                const gone = Math.floor(body.height * q)
+                for (let line = 0; line < gone; line++) screen.drawLine(x - body.width / 2, y + body.height / 2 - line, x + body.width / 2, y + body.height / 2 - line, 12)
+                screen.drawLine(x - 29, y + body.height / 2 - gone, x + 29, y + body.height / 2 - gone, 9)
+            }
+        }
+    }
+    function combatAnimation(state: apocTypes.TrialSnapshot): void {
+        if (!apocWorld.uiPlaying()) return
+        const row = apocWorld.uiActiveRow(), side = apocWorld.uiActiveSide(), phase = apocWorld.uiPhase(), events = apocWorld.uiActionEvents(side, row)
+        if (phase <= 0 || phase >= 1) return
+        for (let i = 0; i < events.length; i++) {
+            const e = events[i]
+            if (e.kind == "action" && e.actor && e.target) {
+                const a = actorFor(e.actor, state), b = actorFor(e.target, state)
+                if (!a || !b) continue
+                const tx = actorX(b.side), ty = actorY(e.target, state), sx = actorX(a.side), sy = actorY(e.actor, state)
+                if (!helpful(e.move)) {
+                    const p = Math.min(1, phase * 1.5), x = sx + (tx - sx) * p, y = sy + (ty - sy) * p - Math.sin(p * Math.PI) * 24
+                    screen.drawTransparentImage(moveIcon(e.move), x - 8, y - 8)
+                    if (phase > .6) { screen.drawLine(tx - 23, ty, tx + 23, ty, 5); screen.drawLine(tx, ty - 23, tx, ty + 23, 1) }
+                } else for (let k = 0; k < 5; k++) {
+                    const angle = k * Math.PI * 2 / 5 + phase * 2
+                    screen.drawTransparentImage(moveIcon(e.move), tx + Math.cos(angle) * (12 + phase * 12) - 8, ty + Math.sin(angle) * 12 - phase * 20 - 8)
+                }
+            }
+            if ((e.kind == "damage" || e.kind == "heal" || e.kind == "leech") && phase > .6 && e.target) {
+                const a = actorFor(e.target, state)
+                if (a) centered((e.kind == "damage" ? "-" : "+") + e.amount, actorX(a.side), actorY(e.target, state) - 38 - phase * 12, e.kind == "damage" ? 5 : 7)
+            }
+            if (e.kind == "skip" && e.target && phase > .4) { const a = actorFor(e.target, state); if (a) cross(actorX(a.side), actorY(e.target, state), 23, 11) }
+        }
+    }
+    function distortion(now: number): void {
+        if (apocWorld.uiFizzle()) {
+            for (let i = 0; i < 16; i++) { const y = 45 + (i * 43 + Math.idiv(now, 13) * 7) % 630; screen.drawLine((i * 37) % 180, y, WIDTH - (i * 53) % 160, y, i % 2 ? 9 : 1) }
+        }
+    }
+    function editVeil(now: number): void {
+        // Opaque temporal mist, not a black screen or a dimmed room. Only the
+        // affected pieces are drawn over it during the isolated travel phase.
+        screen.fill(12)
+        for (let i = 0; i < 20; i++) {
+            const y = (i * 37 + Math.idiv(now, 35)) % 720, x = (i * 83 + Math.idiv(now, 50) * 3) % WIDTH
+            screen.drawLine(x, y, Math.min(WIDTH - 1, x + 15 + i % 4 * 8), y, i % 3 == 0 ? 6 : 11)
+            screen.setPixel((x + 160) % WIDTH, (y + 230) % 720, 9)
+        }
+    }
+    function screenFizzle(now: number, covered: number): void {
+        const threshold = Math.constrain(covered, 0, 1) * 31, seed = Math.idiv(now, 27)
+        for (let y = 0; y < 720; y += 16) for (let x = 0; x < WIDTH; x += 16) {
+            const noise = (Math.idiv(x, 16) * 13 + Math.idiv(y, 16) * 7 + seed * 3) % 31
+            if (noise < threshold) {
+                screen.fillRect(x, y, 16, 16, 12)
+                if ((noise + seed) % 5 == 0) screen.drawLine(x, y + 3, x + 15, y + 3, noise % 2 == 0 ? 9 : 11)
+            }
+        }
+        for (let i = 0; i < 14; i++) {
+            const y = (i * 53 + seed * 11) % 720, x = (i * 97 + seed * 17) % WIDTH
+            screen.drawLine(x, y, Math.min(WIDTH - 1, x + 16 + i % 4 * 8), y, i % 2 == 0 ? 9 : 1)
+        }
+    }
+    function wrap(s: string, x: number, y: number, width: number, color: number = 1): number {
+        let rest = s
+        while (rest.length > 0) {
+            let cut = Math.min(rest.length, Math.idiv(width, 6))
+            if (cut < rest.length) { let i = cut; while (i > cut - 18 && rest.charAt(i) != " ") i--; if (i > cut - 18) cut = i }
+            text(rest.substr(0, cut), x, y, color); y += 14; rest = rest.substr(cut); while (rest.charAt(0) == " ") rest = rest.substr(1)
+        }
+        return y
     }
     function menu(): void {
-        screen.fillRect(72, 37, 336, 274, 15); screen.drawRect(72, 37, 336, 274, 5)
-        if (apocWorld.uiEraseConfirm()) { text("Reset saved expedition progress?", 103, 111, 2); text("A confirm    B keep progress", 116, 147, 1); return }
-        if (apocWorld.uiPicking()) { text("Revisit an unlocked room", 113, 68, 9); number(apocWorld.uiPickRoom(), 240, 118); text("Left/Right choose. A travel. B back.", 95, 164, 1); return }
-        text("EXPEDITION MENU    A choose   B close", 94, 47, 9)
-        const room = apocWorld.uiRoom(), spec = apocWorld.uiSpec(), p = apocWorld.uiProgress()
-        for (let i = 0; i < MENU.length; i++) {
-            const y = 66 + i * 21
-            const locked = (i == 1 && !spec.twoStations) || (i == 6 && (p.completedMask & (1 << (room - 1))) == 0)
-            if (i == apocWorld.uiMenuIndex()) screen.fillRect(82, y - 2, 316, 17, 8)
-            text((i == apocWorld.uiMenuIndex() ? "> " : "  ") + MENU[i] + (locked ? " [locked]" : ""), 88, y, locked ? 11 : 1)
+        screen.fillRect(64, 112, WIDTH - 128, 470, 15); screen.drawRect(64, 112, WIDTH - 128, 470, 5)
+        if (apocWorld.uiEraseConfirm()) { centered("Reset saved expedition progress?", CENTER, 235, 2); centered("A confirm    B keep progress", CENTER, 270, 1); return }
+        if (apocWorld.uiPicking()) { centered("Revisit an unlocked room", CENTER, 174, 9); centered("Room " + apocWorld.uiPickRoom(), CENTER, 230, 5); centered("Left/Right choose. A travel. B back.", CENTER, 278, 1); return }
+        if (apocWorld.uiHelp()) {
+            centered("ROOM " + apocWorld.uiRoom() + " INSTRUCTIONS", CENTER, 134, 9)
+            let y = wrap(apocWorld.uiSpec().instruction, 83, 170, 408)
+            y = wrap("Walk to the glowing altar. A uses your current code. The crystal at the top releases time. B beside a moment previews only that action.", 83, y + 22, 408)
+            text("IF YOU NEED IT, HERE IS A STRATEGY", 83, y + 25, 5); wrap(apocAdvice.text(apocWorld.uiRoom(), apocWorld.uiVariant()), 83, y + 48, 408)
+            centered("B returns to the room", CENTER, 547, 9); return
         }
-        text("Run plays once. Reset keeps earned progress.", 91, 286, 11)
+        centered("EXPEDITION MENU", CENTER, 132, 9)
+        const progress = apocWorld.uiProgress(), spec = apocWorld.uiSpec()
+        for (let i = 0; i < MENU.length; i++) {
+            const y = 168 + i * 29, locked = (i == 1 && !spec.twoStations) || (i == 6 && (progress.completedMask & (1 << (apocWorld.uiRoom() - 1))) == 0)
+            if (i == apocWorld.uiMenuIndex()) screen.fillRect(76, y - 5, WIDTH - 152, 23, 8)
+            text((i == apocWorld.uiMenuIndex() ? "> " : "  ") + MENU[i], 86, y, locked ? 11 : 1)
+        }
+        centered("A choose    B close", CENTER, 482, 9)
+        for (let i = 0; i < apocArt.creditCount(); i++) tiny(apocArt.creditLine(i), 83, 515 + i * 13, 11)
+    }
+    function footer(now: number): void {
+        screen.fillRect(14, 690, WIDTH - 28, 25, 15)
+        let s = apocWorld.uiNotice(), row = apocWorld.uiNearRow(), side = apocWorld.uiNearSide()
+        if (!apocWorld.uiPlaying() && !apocWorld.uiAnimating() && row >= 0) {
+            const t = apocWorld.uiTrial(), moves = side == 0 ? t.lists.allyMoves : t.lists.enemyMoves, values = side == 0 ? t.lists.allyValues : t.lists.enemyValues
+            const ref = chosen(t, side, row), a = actorFor(ref, t)
+            s = "A select | B watch: " + (row < moves.length ? moves[row] : "No move") + " " + (row < values.length ? "" + values[row] : "") + " > " + (ref == apocWorld.uiSentinel() ? "ALL" : a ? shortName(a.id) : "nothing")
+        }
+        if (apocWorld.uiAnimating() && !apocWorld.uiPlaying()) s = now - apocWorld.uiEditStarted() < apocWorld.uiEditDuration() ? "The changed pieces travel to their new positions." : "The room returns with the new future already resolved."
+        if (s.length > 89) s = s.substr(0, 86) + "..."
+        tiny(s, 23, 695, apocWorld.uiPlaying() ? 5 : 1)
+        tiny("Arrows walk | A select/use | B watch/menu | X = fallen by this moment", 23, 706, 11)
     }
     export function draw(): void {
-        init(); screen.fill(15)
-        const spec = apocWorld.uiSpec(), state = apocWorld.uiTrial()
-        if (!spec || !state) { text("Preparing the expedition...", 160, 150, 1); return }
-        const actors = apocWorld.uiDisplay() || state, p = apocWorld.uiProgress(), r = apocWorld.uiRoom()
-        const room = r < 10 ? "0" + r : "" + r
-        text("APOCALYPTIC LISTS", 5, 3, 5); text("R" + room + " / 27   SETUP " + apocWorld.uiVariant(), 173, 3, 1); text("OPEN RECIPE R" + room, 367, 3, 9)
-        party(actors); wraps(objective(), 79); legend(state); columns(state, actors); sources(state)
-        text(fit(eventText(), 77), 6, 319, apocWorld.uiPlaying() ? 5 : 9); stations()
-        if (r == 27 && (p.completedMask & (1 << 26)) != 0 && !apocWorld.uiPlaying()) { screen.fillRect(82, 81, 316, 29, 8); text("ALL 27 ROOMS CLEARED. THE EXPEDITION SURVIVED!", 96, 86, 5); text("B opens the map to revisit your list powers.", 107, 99, 1) }
-        if (apocWorld.uiMenu() || apocWorld.uiPicking() || apocWorld.uiEraseConfirm()) menu()
+        init()
+        const state = apocWorld.uiTrial(), spec = apocWorld.uiSpec(), now = control.millis()
+        if (!state || !spec) { screen.fill(15); text("Preparing the expedition...", 160, 330, 1); return }
+        if (cachedRoom != apocWorld.uiRoom() || cachedVariant != apocWorld.uiVariant() || actorRefs[0] != state.actors[0].sprite) rebuild(state)
+        prepareMotion()
+        const dt = now - apocWorld.uiEditStarted(), opening = apocWorld.uiEditFizzleDuration(), travelEnd = apocWorld.uiEditDuration(), reveal = apocWorld.uiEditRevealDuration(), record = apocWorld.uiEditRecord()
+        if (record && dt >= opening && dt < travelEnd) { editVeil(now); editAnimation(now); return }
+        const openingEdit = !!record && dt >= 0 && dt < opening
+        const scene = openingEdit ? record.before : state
+        screen.drawImage(floor, 0, 0); text("APOCALYPTIC LISTS", 16, 9, 5); tiny("A future held outside time", 16, 25, 1)
+        const label = "ROOM " + apocWorld.uiRoom() + " / 27  |  SETUP " + apocWorld.uiVariant()
+        tiny(label, WIDTH - label.length * 6 - 16, 10, 9)
+        smallCentered(apocWorld.uiPlaying() ? "TIME IN MOTION" : apocWorld.uiAnimating() ? "FUTURE CHANGING" : "TIME IS FROZEN", WIDTH - 77, 26, apocWorld.uiPlaying() ? 5 : 11)
+        timeline(scene, now); party(openingEdit ? scene : apocWorld.uiDisplay() || state, now); sources(scene); stations(now)
+        const step = apocWorld.uiStep(), frame = pandaFrames[apocWorld.uiDirection() * 4 + (step < 0 ? 0 : step % 3 + 1)], x = apocWorld.uiObserverX(), y = apocWorld.uiObserverY()
+        oval(screen, x, y + 2, 9, 3, 15, 0); screen.drawTransparentImage(frame, x - 16, y - 30); smallCentered("YOU", x, y - 40, 1)
+        combatAnimation(apocWorld.uiDisplay() || state); distortion(now); footer(now)
+        if (openingEdit) { screenFizzle(now, dt / opening); editAnimation(now) }
+        else if (record && dt >= travelEnd && dt < travelEnd + reveal) screenFizzle(now, 1 - (dt - travelEnd) / reveal)
+        if (apocWorld.uiMenu() || apocWorld.uiPicking() || apocWorld.uiEraseConfirm() || apocWorld.uiHelp()) menu()
     }
 }
 
@@ -6963,14 +10954,53 @@ namespace SpriteKind {
 }
 namespace apocWorld {
     const LIMIT = 10
-    const TRACK_X = [70, 150, 230, 310, 390]
+    const STATION_X = [86, 490, 288, 82, 288]
+    const STATION_Y = [650, 650, 66, 84, 664]
+    const WALK_SPEED = 110
+    const HALF_MS = 900
+    const PREVIEW_MS = 2300
+    const EDIT_MS = 1400
+    const RIPPLE_MS = 650
+    const EDIT_FIZZLE_MS = 220
+    const EDIT_REVEAL_MS = 260
+    const NO_EVENTS: apocTypes.TraceEvent[] = []
+    class HalfAction {
+        constructor() {}
+        side: number = 0
+        row: number = 0
+        before: apocTypes.TrialSnapshot = null
+        after: apocTypes.TrialSnapshot = null
+        events: apocTypes.TraceEvent[] = []
+        actor: Sprite = null
+        target: Sprite = null
+        fizzle: boolean = false
+        status: string = "continue"
+    }
     let begun = false
     let busy = false
     let invoking = false
     let generation = 0
     let playing = false
-    let lastTick = 0
-    let tracePos = 0
+    let forecast: apocTypes.BattleResult = null
+    let terminal: apocTypes.TrialSnapshot = null
+    let halves: HalfAction[] = []
+    let activeHalf: HalfAction = null
+    let halfIndex = 0
+    let halfStarted = 0
+    let halfDuration = HALF_MS
+    let halfEventPos = 0
+    let previewing = false
+    let previewReturn: apocTypes.TrialSnapshot = null
+    let previewReturnEvent: apocTypes.TraceEvent = null
+    let selectedRow = -1
+    let selectedSide = 0
+    let nearRow = -1
+    let nearSide = -1
+    let nearStation = -1
+    let hoverStarted = 0
+    let editStarted = -10000
+    let editRecord: apocTypes.StationRecord = null
+    let editForecastPending = false
     let selectedRoom = 1
     let selectedVariant = 1
     let progress: apocTypes.Progress = null
@@ -7000,12 +11030,105 @@ namespace apocWorld {
     let lastAction = ""
     let resultingVictory = false
     let eraseConfirm = false
-    let observerLockX = 70
+    let help = false
+    let observerLockX = 171
+    let observerLockY = 650
     let motionLocked = false
+    let direction = 0
 
     function copyStrings(a: string[]): string[] { let b: string[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
     function copyNumbers(a: number[]): number[] { let b: number[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
     function copySprites(a: Sprite[]): Sprite[] { let b: Sprite[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
+    function copyPower(p: apocTypes.PowerSource): apocTypes.PowerSource {
+        if (!p) return null
+        const q = new apocTypes.PowerSource()
+        q.side = p.side; q.index = p.index; q.isAll = p.isAll; q.bonus = copyPower(p.bonus)
+        return q
+    }
+    function applyTo(state: apocTypes.TrialSnapshot, e: apocTypes.TraceEvent): void {
+        if (!state || !e || !e.target) return
+        for (let i = 0; i < state.actors.length; i++) {
+            const a = state.actors[i]
+            if (a.sprite != e.target) continue
+            if (e.hp >= 0) a.hp = e.hp
+            if (e.kind == "ward-set") a.ward = copyPower(e.mark)
+            else if (e.kind == "ward-consumed") a.ward = null
+            else if (e.kind == "venom-set") a.venom = copyPower(e.mark)
+            else if (e.kind == "venom-cleared") a.venom = null
+            else if (e.kind == "empower-set") a.empower = copyPower(e.mark)
+            else if (e.kind == "empower-used") a.empower = null
+            return
+        }
+    }
+    function halfFor(side: number, row: number): HalfAction {
+        for (let i = 0; i < halves.length; i++) if (halves[i].side == side && halves[i].row == row) return halves[i]
+        return null
+    }
+    // This cache is derived only from the actual resolver trace. It never edits
+    // the authored trial, invokes a learner callback, draws randomness or awards.
+    function refreshForecast(): void {
+        forecast = trial ? apocCombat.resolve(trial, allTarget) : null
+        terminal = trial ? apocCombat.cloneTrial(trial) : null
+        halves = []
+        if (!trial || !forecast || forecast.status == "invalid") return
+        const state = apocCombat.cloneTrial(trial)
+        let half: HalfAction = null
+        for (let i = 0; i < forecast.trace.length; i++) {
+            const e = forecast.trace[i]
+            if (e.kind == "cursor" && (e.reason == "before ally half-turn" || e.reason == "before enemy half-turn")) {
+                if (half) half.after = apocCombat.cloneTrial(state)
+                half = new HalfAction()
+                half.side = e.side; half.row = e.index; half.before = apocCombat.cloneTrial(state)
+                const moves = e.side == apocTypes.Side.Ally ? state.lists.allyMoves : state.lists.enemyMoves
+                const move = e.index < moves.length ? moves[e.index] : ""
+                for (let j = 0; j < state.actors.length; j++) {
+                    const a = state.actors[j]
+                    if (a.side == e.side && a.ability == move) half.actor = a.sprite
+                }
+                const helpful = move == "Mend" || move == "Ward" || move == "Empower"
+                const targetSide = helpful ? e.side : e.side == apocTypes.Side.Ally ? apocTypes.Side.Enemy : apocTypes.Side.Ally
+                const targets = targetSide == apocTypes.Side.Ally ? state.lists.allyTargets : state.lists.enemyTargets
+                if (e.index < targets.length) half.target = targets[e.index]
+                halves.push(half)
+            }
+            if (half) {
+                half.events.push(e)
+                if (e.kind == "skip") half.fizzle = true
+                if (e.kind == "result") half.status = forecast.status
+            }
+            applyTo(state, e)
+        }
+        if (half) half.after = apocCombat.cloneTrial(state)
+        terminal = apocCombat.cloneTrial(state)
+    }
+    function animationActive(): boolean {
+        return playing || previewing || control.millis() < editStarted + EDIT_MS + RIPPLE_MS
+    }
+    function lockObserver(): void {
+        if (observer) { observerLockX = observer.x; observerLockY = observer.y }
+    }
+    function updateNear(): void {
+        let row = -1, side = -1, station = -1
+        if (observer) {
+            // The panda may stand on any move, portrait or target in the pad.
+            // Keep a small approach margin at both ends and a separate band
+            // for each row; the centre line determines which half is selected.
+            let distance = 24
+            if (observer.x >= 157 && observer.x <= 419) for (let r = 0; r < 10; r++) {
+                const d = Math.abs(observer.y - (114 + 54 * r))
+                if (d <= distance) { row = r; side = observer.x < 288 ? 0 : 1; distance = d }
+            }
+            distance = 36 * 36 + 1
+            for (let i = 0; i < STATION_X.length; i++) {
+                if (i == 1 && (!roomSpec || !roomSpec.twoStations)) continue
+                const dx = observer.x - STATION_X[i], dy = observer.y - STATION_Y[i]
+                const d = dx * dx + dy * dy
+                if (d < distance) { station = i; distance = d }
+            }
+        }
+        if (row != nearRow || side != nearSide) hoverStarted = control.millis()
+        nearRow = row; nearSide = side; nearStation = station
+    }
     function active(): boolean { return invoking && busy && draft != null }
     function indexFor(room: apocTypes.Room, station: apocTypes.Station): number {
         if (room < 1 || room > 27 || (station != 1 && station != 2)) return -1
@@ -7172,7 +11295,7 @@ namespace apocWorld {
         return !!roomSpec && (station == apocTypes.Station.Primary || (station == apocTypes.Station.Secondary && roomSpec.twoStations))
     }
     function interact(station: apocTypes.Station): void {
-        if (busy || playing || menu || !trial) return
+        if (busy || animationActive() || menu || help || !trial) return
         if (!canVisitStation(station)) { recent = "No secondary station in R" + roomLabel(); return }
         const slot = indexFor(selectedRoom, station)
         if (slot < 0 || slot >= handlers.length || !handlers[slot]) {
@@ -7209,6 +11332,10 @@ namespace apocWorld {
             result = null
             goal = null
             resultingVictory = false
+            editRecord = record
+            editStarted = control.millis()
+            editForecastPending = true
+            lockObserver()
             recent = selectedRoom == 24 && station == apocTypes.Station.Primary ? "The list shifted. Use Rewrite next, then Run." :
                 selectedRoom == 27 && station == apocTypes.Station.Primary ? "Hazards held. Use Clear Wards next, then Run." :
                 "Plan changed. Follow the glowing Run station to see the result."
@@ -7229,13 +11356,28 @@ namespace apocWorld {
         result = null
         goal = null
         records = []
+        forecast = null
+        terminal = null
+        halves = []
+        activeHalf = null
+        previewReturn = null
+        previewReturnEvent = null
+        previewing = false
+        editRecord = null
+        editStarted = -10000
+        editForecastPending = false
+        selectedRow = -1
+        selectedSide = apocTypes.Side.Ally
+        nearRow = -1
+        nearSide = -1
+        nearStation = -1
         effectDraft = []
         staged = []
         for (let i = 0; i < actors.length; i++) sprites.destroy(actors[i])
         actors = []
     }
     function build(room: number, variant: number): void {
-        if (busy || playing) return
+        if (busy || animationActive()) return
         generation++
         destroyActors()
         selectedRoom = room
@@ -7274,25 +11416,28 @@ namespace apocWorld {
         trial.sourceMoves = copyStrings(roomSpec.sourceMoves)
         trial.goal = battle.goal
         trial.requiredIDs = copyStrings(battle.requiredIDs)
-        if (props.length > 1) props[1].setFlag(SpriteFlag.Invisible, !roomSpec.twoStations)
-        for (let i = 0; i < props.length; i++) props[i].setImage(apocArt.operation(apocView.stationIcon(i)))
-        if (observer) observer.setPosition(TRACK_X[0], 353)
+        if (observer) observer.setPosition(171, 650)
+        direction = 0
         initial = apocCombat.cloneTrial(trial)
         display = apocCombat.cloneTrial(trial)
+        refreshForecast()
         lastAction = ""
         recent = "Open Recipe R" + roomLabel() + ". Use the glowing station, then Run. B opens the menu."
         menu = false
         roomPicker = false
         playing = false
+        previewing = false
         eraseConfirm = false
+        help = false
+        updateNear()
     }
     function roomLabel(): string { return selectedRoom < 10 ? "0" + selectedRoom : "" + selectedRoom }
-    function reset(): void { if (!busy && !playing) build(selectedRoom, selectedVariant) }
+    function reset(): void { if (!busy && !animationActive()) build(selectedRoom, selectedVariant) }
     function nextVariant(): void {
-        if (!busy && !playing) build(selectedRoom, selectedVariant % 3 + 1)
+        if (!busy && !animationActive()) build(selectedRoom, selectedVariant % 3 + 1)
     }
     function travel(to: number): void {
-        if (busy || playing || !progress || to < 1 || to > progress.highestUnlocked) return
+        if (busy || animationActive() || !progress || to < 1 || to > progress.highestUnlocked) return
         build(to, 1)
         progress.resumeRoom = to
         apocSave.store(progress)
@@ -7316,59 +11461,92 @@ namespace apocWorld {
         }
     }
     function applyTrace(e: apocTypes.TraceEvent): void {
-        if (!e || !display) return
+        if (!e) return
         recentEvent = e
-        if (e.target) {
-            for (let i = 0; i < display.actors.length; i++) {
-                const actor = display.actors[i]
-                if (actor.sprite != e.target) continue
-                if (e.hp >= 0) actor.hp = e.hp
-                if (e.kind == "ward-set") actor.ward = e.mark
-                else if (e.kind == "ward-consumed") actor.ward = null
-                else if (e.kind == "venom-set") actor.venom = e.mark
-                else if (e.kind == "venom-cleared") actor.venom = null
-                else if (e.kind == "empower-set") actor.empower = e.mark
-                else if (e.kind == "empower-used") actor.empower = null
-                break
-            }
+        applyTo(display, e)
+    }
+    function beginHalf(half: HalfAction, duration: number): void {
+        activeHalf = half
+        halfDuration = duration
+        halfStarted = control.millis()
+        halfEventPos = 0
+        recentEvent = null
+        display = apocCombat.cloneTrial(half.before)
+    }
+    function previewMoment(side: number, row: number): void {
+        if (busy || animationActive() || menu || help || !trial) return
+        const half = halfFor(side, row)
+        if (!half) {
+            recent = "The pass ends before this moment. Its cells stay in place."
+            return
+        }
+        previewReturn = apocCombat.cloneTrial(display || trial)
+        previewReturnEvent = recentEvent
+        previewing = true
+        lockObserver()
+        beginHalf(half, PREVIEW_MS)
+        recent = "Preview only: " + (side == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + row
+    }
+    function tickAnimation(): void {
+        // Keep the old scene through the opening fizzle. Resolve exactly once
+        // while the edit pieces are isolated, before the room is revealed.
+        if (editForecastPending && control.millis() >= editStarted + EDIT_FIZZLE_MS) {
+            editForecastPending = false
+            refreshForecast()
+        }
+        if ((!playing && !previewing) || !activeHalf) return
+        const elapsed = control.millis() - halfStarted
+        const phase = Math.min(1, elapsed / halfDuration)
+        // Preview holds its exact before/after states around a single action.
+        // Full playback approaches, applies events, and returns within 900 ms.
+        const eventPhase = previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) :
+            Math.max(0, Math.min(1, (phase - 0.25) / 0.5))
+        const count = Math.min(activeHalf.events.length, Math.floor(eventPhase * activeHalf.events.length))
+        while (halfEventPos < count) applyTrace(activeHalf.events[halfEventPos++])
+        if (phase < 1) return
+        while (halfEventPos < activeHalf.events.length) applyTrace(activeHalf.events[halfEventPos++])
+        display = apocCombat.cloneTrial(activeHalf.after)
+        if (previewing) {
+            previewing = false
+            display = previewReturn
+            recentEvent = previewReturnEvent
+            previewReturn = null
+            previewReturnEvent = null
+            activeHalf = null
+            recent = "Preview finished. The plan and saved progress are unchanged."
+        } else {
+            halfIndex++
+            if (halfIndex < halves.length) beginHalf(halves[halfIndex], HALF_MS)
+            else { activeHalf = null; doneWithTrace() }
         }
     }
-    function skipTrace(): void {
-        if (!playing || !result) return
-        while (tracePos < result.trace.length) applyTrace(result.trace[tracePos++])
-        doneWithTrace()
-    }
     function run(): void {
-        if (busy || playing || menu || !trial || !roomSpec) return
+        if (busy || animationActive() || menu || help || !trial || !roomSpec) return
         busy = true
         // Do not leave an old cursor/mark on screen if validation rejects this run.
         recentEvent = null
         const frozen = apocCombat.cloneTrial(trial)
-        const messages = apocCombat.validate(frozen, allTarget)
         goal = apocGoals.assess(roomSpec, apocCombat.cloneTrial(initial), apocCombat.cloneTrial(frozen), records.slice())
-        if (messages.length > 0) {
-            result = new apocTypes.BattleResult()
-            result.status = "invalid"
-            result.errors = messages.slice()
-            recent = "Invalid combat: " + messages[0]
+        result = forecast
+        if (!result || result.status == "invalid") {
+            recent = "Invalid combat: " + (result && result.errors.length ? result.errors[0] : "no forecast")
             display = apocCombat.cloneTrial(trial)
             busy = false
             return
         }
-        result = apocCombat.resolve(frozen, allTarget) // exactly once; no learner handler
         resultingVictory = result.status == "victory" && goal.met
-        tracePos = 0
         display = apocCombat.cloneTrial(frozen)
         recentEvent = null
         playing = true
-        observerLockX = observer ? observer.x : TRACK_X[0]
-        lastTick = control.millis()
-        recent = "Watch your plan play once. A finishes the preview."
+        lockObserver()
+        halfIndex = 0
+        recent = "The frozen plan plays once, one half-action at a time."
         busy = false
-        if (!result.trace || result.trace.length == 0) doneWithTrace()
+        if (halves.length) beginHalf(halves[0], HALF_MS)
+        else doneWithTrace()
     }
     function useAction(n: number): void {
-        if (busy || playing || eraseConfirm) return
+        if (busy || animationActive() || eraseConfirm || help) return
         if (n == 0) interact(apocTypes.Station.Primary)
         else if (n == 1) interact(apocTypes.Station.Secondary)
         else if (n == 2) run()
@@ -7378,26 +11556,26 @@ namespace apocWorld {
             const completed = progress && (progress.completedMask & (1 << (selectedRoom - 1))) != 0
             if (completed && selectedRoom < 27) travel(selectedRoom + 1)
             else recent = selectedRoom == 27 && completed ? "The End - replay any earned room from B" : "EXIT locked: finish task AND win"
-        } else if (n == 7) { roomPicker = true; pickerRoom = selectedRoom; observerLockX = observer ? observer.x : TRACK_X[0] }
-        else if (n == 8) recent = "Open R" + roomLabel() + " Recipe in the SAME project; edit current handler"
+        } else if (n == 7) { roomPicker = true; pickerRoom = selectedRoom; lockObserver() }
+        else if (n == 8) { help = true; lockObserver(); recent = "Room instructions and advice. B returns to the room." }
         else if (n == 9) {
             eraseConfirm = true
-            observerLockX = observer ? observer.x : TRACK_X[0]
+            lockObserver()
             recent = "ERASE game progress? A confirm, B cancel"
         }
     }
     function stationAction(): void {
         if (!observer) return
-        let nearest = 0
-        let distance = 999
-        for (let i = 0; i < TRACK_X.length; i++) {
-            const delta = Math.abs(observer.x - TRACK_X[i])
-            if (delta < distance) { nearest = i; distance = delta }
-        }
-        if (distance > 28) { recent = "Move near a labeled object (or press B)"; return }
-        useAction(nearest == 0 ? 0 : nearest == 1 ? 1 : nearest == 2 ? 2 : nearest == 3 ? 3 : 6)
+        updateNear()
+        if (nearStation >= 0) { useAction(nearStation == 4 ? 6 : nearStation); return }
+        if (nearRow >= 0) {
+            selectedRow = nearRow
+            selectedSide = nearSide
+            recent = "Selected " + (selectedSide == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + selectedRow + ". B previews this half-action."
+        } else recent = "Walk beside a moment to select it, or approach a room object. B opens the menu."
     }
     function menuUp(delta: number): void {
+        if (animationActive() || help || eraseConfirm) return
         if (roomPicker) { pickerRoom += delta; if (pickerRoom < 1) pickerRoom = 1; if (pickerRoom > progress.highestUnlocked) pickerRoom = progress.highestUnlocked }
         else if (menu) { menuIndex += delta; if (menuIndex < 0) menuIndex = 9; if (menuIndex > 9) menuIndex = 0 }
     }
@@ -7409,18 +11587,21 @@ namespace apocWorld {
         allTarget.setFlag(SpriteFlag.Invisible, true)
         allTarget.setFlag(SpriteFlag.Ghost, true)
         observer = sprites.create(apocArt.observer(), SpriteKind.ApocObserver)
-        observer.setPosition(TRACK_X[0], 353)
-        controller.moveSprite(observer, 105, 0)
-        for (let i = 0; i < TRACK_X.length; i++) {
-            let station = sprites.create(apocArt.station(i == 1 ? apocTypes.Station.Secondary : apocTypes.Station.Primary), SpriteKind.ApocStation)
-            station.setPosition(TRACK_X[i], 341)
+        observer.setFlag(SpriteFlag.Invisible, true)
+        observer.setFlag(SpriteFlag.Ghost, true)
+        observer.setPosition(171, 650)
+        controller.moveSprite(observer, WALK_SPEED, WALK_SPEED)
+        for (let i = 0; i < STATION_X.length; i++) {
+            let station = sprites.create(image.create(1, 1), SpriteKind.ApocStation)
+            station.setPosition(STATION_X[i], STATION_Y[i])
             station.setFlag(SpriteFlag.Ghost, true)
+            station.setFlag(SpriteFlag.Invisible, true)
             props.push(station)
         }
         build(progress.resumeRoom, 1)
         if (apocSave.notice()) recent = apocSave.notice()
         controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-            if (busy) return
+            if (busy || animationActive() || help) return
             if (eraseConfirm) {
                 eraseConfirm = false
                 apocSave.clear()
@@ -7429,7 +11610,6 @@ namespace apocWorld {
                 recent = "Only Apocalyptic Lists progress was erased"
                 return
             }
-            if (playing) { skipTrace(); return }
             if (roomPicker) { roomPicker = false; menu = false; travel(pickerRoom); return }
             if (menu) {
                 const selected = menuIndex
@@ -7440,12 +11620,14 @@ namespace apocWorld {
             stationAction()
         })
         controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-            if (busy) return
+            if (busy || animationActive()) return
+            if (help) { help = false; recent = "Back in the room. A selects a nearby moment; B previews it."; return }
             if (eraseConfirm) { eraseConfirm = false; recent = "Progress erase canceled"; return }
-            if (playing) { skipTrace(); return }
             if (roomPicker) { roomPicker = false; return }
+            updateNear()
+            if (!menu && nearRow >= 0) { previewMoment(nearSide, nearRow); return }
             menu = !menu
-            if (menu) { menuIndex = 0; observerLockX = observer ? observer.x : TRACK_X[0] }
+            if (menu) { menuIndex = 0; lockObserver() }
         })
         controller.up.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(-1) })
         controller.down.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(1) })
@@ -7453,25 +11635,30 @@ namespace apocWorld {
         controller.right.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker) menuUp(1) })
         game.onUpdate(function () {
             if (observer) {
-                const lock = menu || roomPicker || playing || busy || eraseConfirm
+                const lock = menu || roomPicker || animationActive() || busy || eraseConfirm || help
                 if (lock != motionLocked) {
                     motionLocked = lock
-                    controller.moveSprite(observer, lock ? 0 : 105, 0)
+                    controller.moveSprite(observer, lock ? 0 : WALK_SPEED, lock ? 0 : WALK_SPEED)
                 }
-                if (observer.x < 45) observer.x = 45
-                if (observer.x > 435) observer.x = 435
-                observer.y = 353
-                observer.vy = 0
-                if (menu || roomPicker || playing || busy || eraseConfirm) {
+                if (observer.x < 36) observer.x = 36
+                if (observer.x > 540) observer.x = 540
+                if (observer.y < 86) observer.y = 86
+                if (observer.y > 674) observer.y = 674
+                if (lock) {
                     observer.vx = 0
+                    observer.vy = 0
                     observer.x = observerLockX
+                    observer.y = observerLockY
+                } else if (Math.abs(observer.vx) > Math.abs(observer.vy)) {
+                    if (observer.vx < 0) direction = 1
+                    else if (observer.vx > 0) direction = 2
+                } else {
+                    if (observer.vy < 0) direction = 3
+                    else if (observer.vy > 0) direction = 0
                 }
             }
-            if (playing && result && control.millis() - lastTick >= 180) {
-                lastTick = control.millis()
-                if (tracePos < result.trace.length) applyTrace(result.trace[tracePos++])
-                if (tracePos >= result.trace.length) doneWithTrace()
-            }
+            updateNear()
+            tickAnimation()
         })
         game.onPaint(function () { apocView.draw() })
     }
@@ -7495,11 +11682,74 @@ namespace apocWorld {
     export function uiRoom(): number { return selectedRoom }
     export function uiVariant(): number { return selectedVariant }
     export function uiSentinel(): Sprite { return allTarget }
-    export function uiObserverX(): number { return observer ? observer.x : 70 }
+    export function uiObserverX(): number { return observer ? observer.x : 171 }
+    export function uiObserverY(): number { return observer ? observer.y : 650 }
+    export function uiDirection(): number { return direction }
+    export function uiStep(): number {
+        return observer && !motionLocked && (Math.abs(observer.vx) > 4 || Math.abs(observer.vy) > 4) ? Math.idiv(control.millis(), 140) % 2 : -1
+    }
+    export function uiSelectedRow(): number { return selectedRow }
+    export function uiSelectedSide(): number { return selectedSide }
+    export function uiNearRow(): number { return nearRow }
+    export function uiNearSide(): number { return nearSide }
+    export function uiNearStation(): number { return nearStation }
+    export function uiHoverStarted(): number { return hoverStarted }
+    export function uiStationX(index: number): number { return index >= 0 && index < STATION_X.length ? STATION_X[index] : -1 }
+    export function uiStationY(index: number): number { return index >= 0 && index < STATION_Y.length ? STATION_Y[index] : -1 }
+    export function uiMomentX(side: number): number { return side == apocTypes.Side.Ally ? 171 : 405 }
+    export function uiMomentY(row: number): number { return 114 + 54 * row }
+    export function uiForecast(): apocTypes.BattleResult { return forecast }
+    export function uiTerminal(): apocTypes.TrialSnapshot { return terminal }
+    export function uiBefore(side: number, row: number): apocTypes.TrialSnapshot {
+        const h = halfFor(side, row); return h ? h.before : null
+    }
+    export function uiAfter(side: number, row: number): apocTypes.TrialSnapshot {
+        const h = halfFor(side, row); return h ? h.after : null
+    }
+    export function uiActionEvents(side: number, row: number): apocTypes.TraceEvent[] {
+        const h = halfFor(side, row); return h ? h.events : NO_EVENTS
+    }
+    export function uiReached(side: number, row: number): boolean { return !!halfFor(side, row) }
+    export function uiActionActor(side: number, row: number): Sprite {
+        const h = halfFor(side, row); return h ? h.actor : null
+    }
+    export function uiActionTarget(side: number, row: number): Sprite {
+        const h = halfFor(side, row); return h ? h.target : null
+    }
+    export function uiActionStatus(side: number, row: number): string {
+        const h = halfFor(side, row); return h ? h.status : "not-reached"
+    }
+    export function uiSkipReason(side: number, row: number): string {
+        const h = halfFor(side, row)
+        if (h) for (let i = 0; i < h.events.length; i++) if (h.events[i].kind == "skip") return h.events[i].reason
+        return ""
+    }
+    export function uiActiveRow(): number { return activeHalf ? activeHalf.row : selectedRow }
+    export function uiActiveSide(): number { return activeHalf ? activeHalf.side : selectedSide }
+    export function uiPhase(): number {
+        if (!activeHalf) return 0
+        const elapsed = control.millis() - halfStarted
+        return previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) : Math.max(0, Math.min(1, elapsed / halfDuration))
+    }
+    export function uiPreview(): boolean { return previewing }
+    export function uiFizzle(): boolean {
+        if (!activeHalf) return false
+        const elapsed = control.millis() - halfStarted
+        if (previewing) return elapsed < 200 || elapsed >= 2100 || (activeHalf.fizzle && elapsed >= 960 && elapsed < 1120)
+        return activeHalf.fizzle && elapsed >= 315 && elapsed < 525
+    }
+    export function uiEditStarted(): number { return editStarted }
+    export function uiEditDuration(): number { return EDIT_MS }
+    export function uiEditFizzleDuration(): number { return EDIT_FIZZLE_MS }
+    export function uiEditRevealDuration(): number { return EDIT_REVEAL_MS }
+    export function uiRippleDuration(): number { return RIPPLE_MS }
+    export function uiEditRecord(): apocTypes.StationRecord { return editRecord }
+    export function uiAnimating(): boolean { return animationActive() }
+    export function uiHelp(): boolean { return help }
     export function uiLastAction(): string { return lastAction }
     // Guide the physical interaction, without doing or grading the learner's edit.
     export function uiSuggestedStation(): number {
-        if (playing) return -1
+        if (animationActive()) return -1
         if (result) return resultingVictory ? 4 : 3
         if (records.length == 0) return 0
         if (roomSpec && roomSpec.twoStations && records.length == 1 && records[0].station == apocTypes.Station.Primary) return 1

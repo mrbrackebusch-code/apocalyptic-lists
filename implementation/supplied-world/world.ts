@@ -8,14 +8,53 @@ namespace SpriteKind {
 }
 namespace apocWorld {
     const LIMIT = 10
-    const TRACK_X = [70, 150, 230, 310, 390]
+    const STATION_X = [86, 490, 288, 82, 288]
+    const STATION_Y = [650, 650, 66, 84, 664]
+    const WALK_SPEED = 110
+    const HALF_MS = 900
+    const PREVIEW_MS = 2300
+    const EDIT_MS = 1400
+    const RIPPLE_MS = 650
+    const EDIT_FIZZLE_MS = 220
+    const EDIT_REVEAL_MS = 260
+    const NO_EVENTS: apocTypes.TraceEvent[] = []
+    class HalfAction {
+        constructor() {}
+        side: number = 0
+        row: number = 0
+        before: apocTypes.TrialSnapshot = null
+        after: apocTypes.TrialSnapshot = null
+        events: apocTypes.TraceEvent[] = []
+        actor: Sprite = null
+        target: Sprite = null
+        fizzle: boolean = false
+        status: string = "continue"
+    }
     let begun = false
     let busy = false
     let invoking = false
     let generation = 0
     let playing = false
-    let lastTick = 0
-    let tracePos = 0
+    let forecast: apocTypes.BattleResult = null
+    let terminal: apocTypes.TrialSnapshot = null
+    let halves: HalfAction[] = []
+    let activeHalf: HalfAction = null
+    let halfIndex = 0
+    let halfStarted = 0
+    let halfDuration = HALF_MS
+    let halfEventPos = 0
+    let previewing = false
+    let previewReturn: apocTypes.TrialSnapshot = null
+    let previewReturnEvent: apocTypes.TraceEvent = null
+    let selectedRow = -1
+    let selectedSide = 0
+    let nearRow = -1
+    let nearSide = -1
+    let nearStation = -1
+    let hoverStarted = 0
+    let editStarted = -10000
+    let editRecord: apocTypes.StationRecord = null
+    let editForecastPending = false
     let selectedRoom = 1
     let selectedVariant = 1
     let progress: apocTypes.Progress = null
@@ -45,12 +84,105 @@ namespace apocWorld {
     let lastAction = ""
     let resultingVictory = false
     let eraseConfirm = false
-    let observerLockX = 70
+    let help = false
+    let observerLockX = 171
+    let observerLockY = 650
     let motionLocked = false
+    let direction = 0
 
     function copyStrings(a: string[]): string[] { let b: string[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
     function copyNumbers(a: number[]): number[] { let b: number[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
     function copySprites(a: Sprite[]): Sprite[] { let b: Sprite[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
+    function copyPower(p: apocTypes.PowerSource): apocTypes.PowerSource {
+        if (!p) return null
+        const q = new apocTypes.PowerSource()
+        q.side = p.side; q.index = p.index; q.isAll = p.isAll; q.bonus = copyPower(p.bonus)
+        return q
+    }
+    function applyTo(state: apocTypes.TrialSnapshot, e: apocTypes.TraceEvent): void {
+        if (!state || !e || !e.target) return
+        for (let i = 0; i < state.actors.length; i++) {
+            const a = state.actors[i]
+            if (a.sprite != e.target) continue
+            if (e.hp >= 0) a.hp = e.hp
+            if (e.kind == "ward-set") a.ward = copyPower(e.mark)
+            else if (e.kind == "ward-consumed") a.ward = null
+            else if (e.kind == "venom-set") a.venom = copyPower(e.mark)
+            else if (e.kind == "venom-cleared") a.venom = null
+            else if (e.kind == "empower-set") a.empower = copyPower(e.mark)
+            else if (e.kind == "empower-used") a.empower = null
+            return
+        }
+    }
+    function halfFor(side: number, row: number): HalfAction {
+        for (let i = 0; i < halves.length; i++) if (halves[i].side == side && halves[i].row == row) return halves[i]
+        return null
+    }
+    // This cache is derived only from the actual resolver trace. It never edits
+    // the authored trial, invokes a learner callback, draws randomness or awards.
+    function refreshForecast(): void {
+        forecast = trial ? apocCombat.resolve(trial, allTarget) : null
+        terminal = trial ? apocCombat.cloneTrial(trial) : null
+        halves = []
+        if (!trial || !forecast || forecast.status == "invalid") return
+        const state = apocCombat.cloneTrial(trial)
+        let half: HalfAction = null
+        for (let i = 0; i < forecast.trace.length; i++) {
+            const e = forecast.trace[i]
+            if (e.kind == "cursor" && (e.reason == "before ally half-turn" || e.reason == "before enemy half-turn")) {
+                if (half) half.after = apocCombat.cloneTrial(state)
+                half = new HalfAction()
+                half.side = e.side; half.row = e.index; half.before = apocCombat.cloneTrial(state)
+                const moves = e.side == apocTypes.Side.Ally ? state.lists.allyMoves : state.lists.enemyMoves
+                const move = e.index < moves.length ? moves[e.index] : ""
+                for (let j = 0; j < state.actors.length; j++) {
+                    const a = state.actors[j]
+                    if (a.side == e.side && a.ability == move) half.actor = a.sprite
+                }
+                const helpful = move == "Mend" || move == "Ward" || move == "Empower"
+                const targetSide = helpful ? e.side : e.side == apocTypes.Side.Ally ? apocTypes.Side.Enemy : apocTypes.Side.Ally
+                const targets = targetSide == apocTypes.Side.Ally ? state.lists.allyTargets : state.lists.enemyTargets
+                if (e.index < targets.length) half.target = targets[e.index]
+                halves.push(half)
+            }
+            if (half) {
+                half.events.push(e)
+                if (e.kind == "skip") half.fizzle = true
+                if (e.kind == "result") half.status = forecast.status
+            }
+            applyTo(state, e)
+        }
+        if (half) half.after = apocCombat.cloneTrial(state)
+        terminal = apocCombat.cloneTrial(state)
+    }
+    function animationActive(): boolean {
+        return playing || previewing || control.millis() < editStarted + EDIT_MS + RIPPLE_MS
+    }
+    function lockObserver(): void {
+        if (observer) { observerLockX = observer.x; observerLockY = observer.y }
+    }
+    function updateNear(): void {
+        let row = -1, side = -1, station = -1
+        if (observer) {
+            // The panda may stand on any move, portrait or target in the pad.
+            // Keep a small approach margin at both ends and a separate band
+            // for each row; the centre line determines which half is selected.
+            let distance = 24
+            if (observer.x >= 157 && observer.x <= 419) for (let r = 0; r < 10; r++) {
+                const d = Math.abs(observer.y - (114 + 54 * r))
+                if (d <= distance) { row = r; side = observer.x < 288 ? 0 : 1; distance = d }
+            }
+            distance = 36 * 36 + 1
+            for (let i = 0; i < STATION_X.length; i++) {
+                if (i == 1 && (!roomSpec || !roomSpec.twoStations)) continue
+                const dx = observer.x - STATION_X[i], dy = observer.y - STATION_Y[i]
+                const d = dx * dx + dy * dy
+                if (d < distance) { station = i; distance = d }
+            }
+        }
+        if (row != nearRow || side != nearSide) hoverStarted = control.millis()
+        nearRow = row; nearSide = side; nearStation = station
+    }
     function active(): boolean { return invoking && busy && draft != null }
     function indexFor(room: apocTypes.Room, station: apocTypes.Station): number {
         if (room < 1 || room > 27 || (station != 1 && station != 2)) return -1
@@ -217,7 +349,7 @@ namespace apocWorld {
         return !!roomSpec && (station == apocTypes.Station.Primary || (station == apocTypes.Station.Secondary && roomSpec.twoStations))
     }
     function interact(station: apocTypes.Station): void {
-        if (busy || playing || menu || !trial) return
+        if (busy || animationActive() || menu || help || !trial) return
         if (!canVisitStation(station)) { recent = "No secondary station in R" + roomLabel(); return }
         const slot = indexFor(selectedRoom, station)
         if (slot < 0 || slot >= handlers.length || !handlers[slot]) {
@@ -254,6 +386,10 @@ namespace apocWorld {
             result = null
             goal = null
             resultingVictory = false
+            editRecord = record
+            editStarted = control.millis()
+            editForecastPending = true
+            lockObserver()
             recent = selectedRoom == 24 && station == apocTypes.Station.Primary ? "The list shifted. Use Rewrite next, then Run." :
                 selectedRoom == 27 && station == apocTypes.Station.Primary ? "Hazards held. Use Clear Wards next, then Run." :
                 "Plan changed. Follow the glowing Run station to see the result."
@@ -274,13 +410,28 @@ namespace apocWorld {
         result = null
         goal = null
         records = []
+        forecast = null
+        terminal = null
+        halves = []
+        activeHalf = null
+        previewReturn = null
+        previewReturnEvent = null
+        previewing = false
+        editRecord = null
+        editStarted = -10000
+        editForecastPending = false
+        selectedRow = -1
+        selectedSide = apocTypes.Side.Ally
+        nearRow = -1
+        nearSide = -1
+        nearStation = -1
         effectDraft = []
         staged = []
         for (let i = 0; i < actors.length; i++) sprites.destroy(actors[i])
         actors = []
     }
     function build(room: number, variant: number): void {
-        if (busy || playing) return
+        if (busy || animationActive()) return
         generation++
         destroyActors()
         selectedRoom = room
@@ -319,25 +470,28 @@ namespace apocWorld {
         trial.sourceMoves = copyStrings(roomSpec.sourceMoves)
         trial.goal = battle.goal
         trial.requiredIDs = copyStrings(battle.requiredIDs)
-        if (props.length > 1) props[1].setFlag(SpriteFlag.Invisible, !roomSpec.twoStations)
-        for (let i = 0; i < props.length; i++) props[i].setImage(apocArt.operation(apocView.stationIcon(i)))
-        if (observer) observer.setPosition(TRACK_X[0], 353)
+        if (observer) observer.setPosition(171, 650)
+        direction = 0
         initial = apocCombat.cloneTrial(trial)
         display = apocCombat.cloneTrial(trial)
+        refreshForecast()
         lastAction = ""
         recent = "Open Recipe R" + roomLabel() + ". Use the glowing station, then Run. B opens the menu."
         menu = false
         roomPicker = false
         playing = false
+        previewing = false
         eraseConfirm = false
+        help = false
+        updateNear()
     }
     function roomLabel(): string { return selectedRoom < 10 ? "0" + selectedRoom : "" + selectedRoom }
-    function reset(): void { if (!busy && !playing) build(selectedRoom, selectedVariant) }
+    function reset(): void { if (!busy && !animationActive()) build(selectedRoom, selectedVariant) }
     function nextVariant(): void {
-        if (!busy && !playing) build(selectedRoom, selectedVariant % 3 + 1)
+        if (!busy && !animationActive()) build(selectedRoom, selectedVariant % 3 + 1)
     }
     function travel(to: number): void {
-        if (busy || playing || !progress || to < 1 || to > progress.highestUnlocked) return
+        if (busy || animationActive() || !progress || to < 1 || to > progress.highestUnlocked) return
         build(to, 1)
         progress.resumeRoom = to
         apocSave.store(progress)
@@ -361,59 +515,92 @@ namespace apocWorld {
         }
     }
     function applyTrace(e: apocTypes.TraceEvent): void {
-        if (!e || !display) return
+        if (!e) return
         recentEvent = e
-        if (e.target) {
-            for (let i = 0; i < display.actors.length; i++) {
-                const actor = display.actors[i]
-                if (actor.sprite != e.target) continue
-                if (e.hp >= 0) actor.hp = e.hp
-                if (e.kind == "ward-set") actor.ward = e.mark
-                else if (e.kind == "ward-consumed") actor.ward = null
-                else if (e.kind == "venom-set") actor.venom = e.mark
-                else if (e.kind == "venom-cleared") actor.venom = null
-                else if (e.kind == "empower-set") actor.empower = e.mark
-                else if (e.kind == "empower-used") actor.empower = null
-                break
-            }
+        applyTo(display, e)
+    }
+    function beginHalf(half: HalfAction, duration: number): void {
+        activeHalf = half
+        halfDuration = duration
+        halfStarted = control.millis()
+        halfEventPos = 0
+        recentEvent = null
+        display = apocCombat.cloneTrial(half.before)
+    }
+    function previewMoment(side: number, row: number): void {
+        if (busy || animationActive() || menu || help || !trial) return
+        const half = halfFor(side, row)
+        if (!half) {
+            recent = "The pass ends before this moment. Its cells stay in place."
+            return
+        }
+        previewReturn = apocCombat.cloneTrial(display || trial)
+        previewReturnEvent = recentEvent
+        previewing = true
+        lockObserver()
+        beginHalf(half, PREVIEW_MS)
+        recent = "Preview only: " + (side == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + row
+    }
+    function tickAnimation(): void {
+        // Keep the old scene through the opening fizzle. Resolve exactly once
+        // while the edit pieces are isolated, before the room is revealed.
+        if (editForecastPending && control.millis() >= editStarted + EDIT_FIZZLE_MS) {
+            editForecastPending = false
+            refreshForecast()
+        }
+        if ((!playing && !previewing) || !activeHalf) return
+        const elapsed = control.millis() - halfStarted
+        const phase = Math.min(1, elapsed / halfDuration)
+        // Preview holds its exact before/after states around a single action.
+        // Full playback approaches, applies events, and returns within 900 ms.
+        const eventPhase = previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) :
+            Math.max(0, Math.min(1, (phase - 0.25) / 0.5))
+        const count = Math.min(activeHalf.events.length, Math.floor(eventPhase * activeHalf.events.length))
+        while (halfEventPos < count) applyTrace(activeHalf.events[halfEventPos++])
+        if (phase < 1) return
+        while (halfEventPos < activeHalf.events.length) applyTrace(activeHalf.events[halfEventPos++])
+        display = apocCombat.cloneTrial(activeHalf.after)
+        if (previewing) {
+            previewing = false
+            display = previewReturn
+            recentEvent = previewReturnEvent
+            previewReturn = null
+            previewReturnEvent = null
+            activeHalf = null
+            recent = "Preview finished. The plan and saved progress are unchanged."
+        } else {
+            halfIndex++
+            if (halfIndex < halves.length) beginHalf(halves[halfIndex], HALF_MS)
+            else { activeHalf = null; doneWithTrace() }
         }
     }
-    function skipTrace(): void {
-        if (!playing || !result) return
-        while (tracePos < result.trace.length) applyTrace(result.trace[tracePos++])
-        doneWithTrace()
-    }
     function run(): void {
-        if (busy || playing || menu || !trial || !roomSpec) return
+        if (busy || animationActive() || menu || help || !trial || !roomSpec) return
         busy = true
         // Do not leave an old cursor/mark on screen if validation rejects this run.
         recentEvent = null
         const frozen = apocCombat.cloneTrial(trial)
-        const messages = apocCombat.validate(frozen, allTarget)
         goal = apocGoals.assess(roomSpec, apocCombat.cloneTrial(initial), apocCombat.cloneTrial(frozen), records.slice())
-        if (messages.length > 0) {
-            result = new apocTypes.BattleResult()
-            result.status = "invalid"
-            result.errors = messages.slice()
-            recent = "Invalid combat: " + messages[0]
+        result = forecast
+        if (!result || result.status == "invalid") {
+            recent = "Invalid combat: " + (result && result.errors.length ? result.errors[0] : "no forecast")
             display = apocCombat.cloneTrial(trial)
             busy = false
             return
         }
-        result = apocCombat.resolve(frozen, allTarget) // exactly once; no learner handler
         resultingVictory = result.status == "victory" && goal.met
-        tracePos = 0
         display = apocCombat.cloneTrial(frozen)
         recentEvent = null
         playing = true
-        observerLockX = observer ? observer.x : TRACK_X[0]
-        lastTick = control.millis()
-        recent = "Watch your plan play once. A finishes the preview."
+        lockObserver()
+        halfIndex = 0
+        recent = "The frozen plan plays once, one half-action at a time."
         busy = false
-        if (!result.trace || result.trace.length == 0) doneWithTrace()
+        if (halves.length) beginHalf(halves[0], HALF_MS)
+        else doneWithTrace()
     }
     function useAction(n: number): void {
-        if (busy || playing || eraseConfirm) return
+        if (busy || animationActive() || eraseConfirm || help) return
         if (n == 0) interact(apocTypes.Station.Primary)
         else if (n == 1) interact(apocTypes.Station.Secondary)
         else if (n == 2) run()
@@ -423,26 +610,26 @@ namespace apocWorld {
             const completed = progress && (progress.completedMask & (1 << (selectedRoom - 1))) != 0
             if (completed && selectedRoom < 27) travel(selectedRoom + 1)
             else recent = selectedRoom == 27 && completed ? "The End - replay any earned room from B" : "EXIT locked: finish task AND win"
-        } else if (n == 7) { roomPicker = true; pickerRoom = selectedRoom; observerLockX = observer ? observer.x : TRACK_X[0] }
-        else if (n == 8) recent = "Open R" + roomLabel() + " Recipe in the SAME project; edit current handler"
+        } else if (n == 7) { roomPicker = true; pickerRoom = selectedRoom; lockObserver() }
+        else if (n == 8) { help = true; lockObserver(); recent = "Room instructions and advice. B returns to the room." }
         else if (n == 9) {
             eraseConfirm = true
-            observerLockX = observer ? observer.x : TRACK_X[0]
+            lockObserver()
             recent = "ERASE game progress? A confirm, B cancel"
         }
     }
     function stationAction(): void {
         if (!observer) return
-        let nearest = 0
-        let distance = 999
-        for (let i = 0; i < TRACK_X.length; i++) {
-            const delta = Math.abs(observer.x - TRACK_X[i])
-            if (delta < distance) { nearest = i; distance = delta }
-        }
-        if (distance > 28) { recent = "Move near a labeled object (or press B)"; return }
-        useAction(nearest == 0 ? 0 : nearest == 1 ? 1 : nearest == 2 ? 2 : nearest == 3 ? 3 : 6)
+        updateNear()
+        if (nearStation >= 0) { useAction(nearStation == 4 ? 6 : nearStation); return }
+        if (nearRow >= 0) {
+            selectedRow = nearRow
+            selectedSide = nearSide
+            recent = "Selected " + (selectedSide == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + selectedRow + ". B previews this half-action."
+        } else recent = "Walk beside a moment to select it, or approach a room object. B opens the menu."
     }
     function menuUp(delta: number): void {
+        if (animationActive() || help || eraseConfirm) return
         if (roomPicker) { pickerRoom += delta; if (pickerRoom < 1) pickerRoom = 1; if (pickerRoom > progress.highestUnlocked) pickerRoom = progress.highestUnlocked }
         else if (menu) { menuIndex += delta; if (menuIndex < 0) menuIndex = 9; if (menuIndex > 9) menuIndex = 0 }
     }
@@ -454,18 +641,21 @@ namespace apocWorld {
         allTarget.setFlag(SpriteFlag.Invisible, true)
         allTarget.setFlag(SpriteFlag.Ghost, true)
         observer = sprites.create(apocArt.observer(), SpriteKind.ApocObserver)
-        observer.setPosition(TRACK_X[0], 353)
-        controller.moveSprite(observer, 105, 0)
-        for (let i = 0; i < TRACK_X.length; i++) {
-            let station = sprites.create(apocArt.station(i == 1 ? apocTypes.Station.Secondary : apocTypes.Station.Primary), SpriteKind.ApocStation)
-            station.setPosition(TRACK_X[i], 341)
+        observer.setFlag(SpriteFlag.Invisible, true)
+        observer.setFlag(SpriteFlag.Ghost, true)
+        observer.setPosition(171, 650)
+        controller.moveSprite(observer, WALK_SPEED, WALK_SPEED)
+        for (let i = 0; i < STATION_X.length; i++) {
+            let station = sprites.create(image.create(1, 1), SpriteKind.ApocStation)
+            station.setPosition(STATION_X[i], STATION_Y[i])
             station.setFlag(SpriteFlag.Ghost, true)
+            station.setFlag(SpriteFlag.Invisible, true)
             props.push(station)
         }
         build(progress.resumeRoom, 1)
         if (apocSave.notice()) recent = apocSave.notice()
         controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-            if (busy) return
+            if (busy || animationActive() || help) return
             if (eraseConfirm) {
                 eraseConfirm = false
                 apocSave.clear()
@@ -474,7 +664,6 @@ namespace apocWorld {
                 recent = "Only Apocalyptic Lists progress was erased"
                 return
             }
-            if (playing) { skipTrace(); return }
             if (roomPicker) { roomPicker = false; menu = false; travel(pickerRoom); return }
             if (menu) {
                 const selected = menuIndex
@@ -485,12 +674,14 @@ namespace apocWorld {
             stationAction()
         })
         controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-            if (busy) return
+            if (busy || animationActive()) return
+            if (help) { help = false; recent = "Back in the room. A selects a nearby moment; B previews it."; return }
             if (eraseConfirm) { eraseConfirm = false; recent = "Progress erase canceled"; return }
-            if (playing) { skipTrace(); return }
             if (roomPicker) { roomPicker = false; return }
+            updateNear()
+            if (!menu && nearRow >= 0) { previewMoment(nearSide, nearRow); return }
             menu = !menu
-            if (menu) { menuIndex = 0; observerLockX = observer ? observer.x : TRACK_X[0] }
+            if (menu) { menuIndex = 0; lockObserver() }
         })
         controller.up.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(-1) })
         controller.down.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(1) })
@@ -498,25 +689,30 @@ namespace apocWorld {
         controller.right.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker) menuUp(1) })
         game.onUpdate(function () {
             if (observer) {
-                const lock = menu || roomPicker || playing || busy || eraseConfirm
+                const lock = menu || roomPicker || animationActive() || busy || eraseConfirm || help
                 if (lock != motionLocked) {
                     motionLocked = lock
-                    controller.moveSprite(observer, lock ? 0 : 105, 0)
+                    controller.moveSprite(observer, lock ? 0 : WALK_SPEED, lock ? 0 : WALK_SPEED)
                 }
-                if (observer.x < 45) observer.x = 45
-                if (observer.x > 435) observer.x = 435
-                observer.y = 353
-                observer.vy = 0
-                if (menu || roomPicker || playing || busy || eraseConfirm) {
+                if (observer.x < 36) observer.x = 36
+                if (observer.x > 540) observer.x = 540
+                if (observer.y < 86) observer.y = 86
+                if (observer.y > 674) observer.y = 674
+                if (lock) {
                     observer.vx = 0
+                    observer.vy = 0
                     observer.x = observerLockX
+                    observer.y = observerLockY
+                } else if (Math.abs(observer.vx) > Math.abs(observer.vy)) {
+                    if (observer.vx < 0) direction = 1
+                    else if (observer.vx > 0) direction = 2
+                } else {
+                    if (observer.vy < 0) direction = 3
+                    else if (observer.vy > 0) direction = 0
                 }
             }
-            if (playing && result && control.millis() - lastTick >= 180) {
-                lastTick = control.millis()
-                if (tracePos < result.trace.length) applyTrace(result.trace[tracePos++])
-                if (tracePos >= result.trace.length) doneWithTrace()
-            }
+            updateNear()
+            tickAnimation()
         })
         game.onPaint(function () { apocView.draw() })
     }
@@ -540,11 +736,74 @@ namespace apocWorld {
     export function uiRoom(): number { return selectedRoom }
     export function uiVariant(): number { return selectedVariant }
     export function uiSentinel(): Sprite { return allTarget }
-    export function uiObserverX(): number { return observer ? observer.x : 70 }
+    export function uiObserverX(): number { return observer ? observer.x : 171 }
+    export function uiObserverY(): number { return observer ? observer.y : 650 }
+    export function uiDirection(): number { return direction }
+    export function uiStep(): number {
+        return observer && !motionLocked && (Math.abs(observer.vx) > 4 || Math.abs(observer.vy) > 4) ? Math.idiv(control.millis(), 140) % 2 : -1
+    }
+    export function uiSelectedRow(): number { return selectedRow }
+    export function uiSelectedSide(): number { return selectedSide }
+    export function uiNearRow(): number { return nearRow }
+    export function uiNearSide(): number { return nearSide }
+    export function uiNearStation(): number { return nearStation }
+    export function uiHoverStarted(): number { return hoverStarted }
+    export function uiStationX(index: number): number { return index >= 0 && index < STATION_X.length ? STATION_X[index] : -1 }
+    export function uiStationY(index: number): number { return index >= 0 && index < STATION_Y.length ? STATION_Y[index] : -1 }
+    export function uiMomentX(side: number): number { return side == apocTypes.Side.Ally ? 171 : 405 }
+    export function uiMomentY(row: number): number { return 114 + 54 * row }
+    export function uiForecast(): apocTypes.BattleResult { return forecast }
+    export function uiTerminal(): apocTypes.TrialSnapshot { return terminal }
+    export function uiBefore(side: number, row: number): apocTypes.TrialSnapshot {
+        const h = halfFor(side, row); return h ? h.before : null
+    }
+    export function uiAfter(side: number, row: number): apocTypes.TrialSnapshot {
+        const h = halfFor(side, row); return h ? h.after : null
+    }
+    export function uiActionEvents(side: number, row: number): apocTypes.TraceEvent[] {
+        const h = halfFor(side, row); return h ? h.events : NO_EVENTS
+    }
+    export function uiReached(side: number, row: number): boolean { return !!halfFor(side, row) }
+    export function uiActionActor(side: number, row: number): Sprite {
+        const h = halfFor(side, row); return h ? h.actor : null
+    }
+    export function uiActionTarget(side: number, row: number): Sprite {
+        const h = halfFor(side, row); return h ? h.target : null
+    }
+    export function uiActionStatus(side: number, row: number): string {
+        const h = halfFor(side, row); return h ? h.status : "not-reached"
+    }
+    export function uiSkipReason(side: number, row: number): string {
+        const h = halfFor(side, row)
+        if (h) for (let i = 0; i < h.events.length; i++) if (h.events[i].kind == "skip") return h.events[i].reason
+        return ""
+    }
+    export function uiActiveRow(): number { return activeHalf ? activeHalf.row : selectedRow }
+    export function uiActiveSide(): number { return activeHalf ? activeHalf.side : selectedSide }
+    export function uiPhase(): number {
+        if (!activeHalf) return 0
+        const elapsed = control.millis() - halfStarted
+        return previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) : Math.max(0, Math.min(1, elapsed / halfDuration))
+    }
+    export function uiPreview(): boolean { return previewing }
+    export function uiFizzle(): boolean {
+        if (!activeHalf) return false
+        const elapsed = control.millis() - halfStarted
+        if (previewing) return elapsed < 200 || elapsed >= 2100 || (activeHalf.fizzle && elapsed >= 960 && elapsed < 1120)
+        return activeHalf.fizzle && elapsed >= 315 && elapsed < 525
+    }
+    export function uiEditStarted(): number { return editStarted }
+    export function uiEditDuration(): number { return EDIT_MS }
+    export function uiEditFizzleDuration(): number { return EDIT_FIZZLE_MS }
+    export function uiEditRevealDuration(): number { return EDIT_REVEAL_MS }
+    export function uiRippleDuration(): number { return RIPPLE_MS }
+    export function uiEditRecord(): apocTypes.StationRecord { return editRecord }
+    export function uiAnimating(): boolean { return animationActive() }
+    export function uiHelp(): boolean { return help }
     export function uiLastAction(): string { return lastAction }
     // Guide the physical interaction, without doing or grading the learner's edit.
     export function uiSuggestedStation(): number {
-        if (playing) return -1
+        if (animationActive()) return -1
         if (result) return resultingVictory ? 4 : 3
         if (records.length == 0) return 0
         if (roomSpec && roomSpec.twoStations && records.length == 1 && records[0].station == apocTypes.Station.Primary) return 1

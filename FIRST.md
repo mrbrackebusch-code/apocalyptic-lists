@@ -1,0 +1,11860 @@
+# R01 — Build your first move list
+
+### @explicitHints true
+
+<!-- AP_RECIPE id=R01 same_project=true -->
+
+## Build your first move list
+
+Expand the simulator with **Fullscreen** so you can read the portrait room. Move with the arrow keys. Press **A** at an altar; press **B** to open the expedition menu. The room begins with an empty allied move list. Your Blocks provide its first plan.
+
+A move list keeps a team's script in one place. Your first job is to build the allied script, then give it to the room.
+
+![Actual menu blocks used in R01](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-menu.png)
+
+*Find these native blocks in the toolbox.* [Open the menu picture at full size](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-menu.png)
+
+![R01 native editable Arcade Blocks showing create string array; prefix loop; append, inside Primary onInteract handler; submit `allyMoves`.](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-blocks.png)
+
+[Open the assembled Blocks at full size](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-blocks.png)
+
+*Native MakeCode Blocks.*
+
+In ``||variables(noclick):Variables||``, choose **Make a Variable** and name it `allyMoves`. Open **Advanced →** ``||arrays(noclick):Arrays||`` and use ``||arrays(noclick):empty array||`` as its starting value. The move names you add below are text, so this becomes a list of strings.
+
+From ``||apocalypse(noclick):Apocalyptic Lists||``, add ``||apocalypse(noclick):on room R01 station Primary||``. Inside it, set ``||variables(noclick):allyMoves||`` to that empty list. The ``||apocalypse(noclick):shown leading Wait count||`` tells you how many `Wait` moves come first. Use ``||loops(noclick):for index from 0 to||`` with **shown leading Wait count − 1** as its final index, adding one `Wait` to the end each time. When the count is 0, this loop adds no moves. Then add `Ward`, `Mend`, `Strike`, `Strike` in order. Finish with ``||apocalypse(noclick):use allyMoves as Ally move list||``. Put the `allyMoves` reporter into that block's list input.
+
+A room event runs when you press **A** at its station. Use the room and station dropdowns shown in the example. Your list work belongs inside that event, so it starts with the current attempt.
+
+**Try your code.** Walk to **Write plan** (the Primary station) and press **A** once. Watch the plan change. Then press **B**, choose **Release time**, and press **A**.
+
+The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.
+
+If the result differs, choose **Retry this setup** from the B menu, revise your code, and try the station again. After a code edit or restart the room returns to its starting lists; run your current station code again.
+
+After success, use the **Exit** gate to enter the next room, then follow [Open R02](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r02). This link keeps your current project.
+
+[Recipe directory](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/directory)
+
+```ghost
+apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
+    let allyMoves: string[] = []
+    allyMoves = []
+    for (let i = 0; i <= apocalypse.numberHint() - 1; i++) {
+        allyMoves.push("Wait")
+    }
+    allyMoves.push("Ward")
+    allyMoves.push("Mend")
+    allyMoves.push("Strike")
+    allyMoves.push("Strike")
+    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
+})
+```
+
+#### ~ tutorialhint
+
+```blocks
+// CUMULATIVE INSTRUCTIONAL REFERENCE ONLY; never automatically install as learner code.
+// World progress belongs to supplied world settings; behavior belongs to the currently edited program.
+
+apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
+    let allyMoves: string[] = []
+    allyMoves = []
+    for (let i = 0; i <= apocalypse.numberHint() - 1; i++) {
+        allyMoves.push("Wait")
+    }
+    allyMoves.push("Ward")
+    allyMoves.push("Mend")
+    allyMoves.push("Strike")
+    allyMoves.push("Strike")
+    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
+})
+```
+
+```template
+// Add your room events here.
+```
+
+```customts
+// SUPPLIED SOURCE contracts.ts
+// AL-IMPLEMENTATION-1.0 — frozen lead-owned runtime types, 2026-10-12.
+// Conserve usage. PXT Static TypeScript, no modules, no startup or learner solution.
+namespace apocTypes {
+    export enum Side { Ally = 0, Enemy = 1 }
+    export enum Station { Primary = 1, Secondary = 2 }
+    export enum Room {
+        R01 = 1, R02 = 2, R03 = 3, R04 = 4, R05 = 5, R06 = 6, R07 = 7,
+        R08 = 8, R09 = 9, R10 = 10, R11 = 11, R12 = 12, R13 = 13, R14 = 14,
+        R15 = 15, R16 = 16, R17 = 17, R18 = 18, R19 = 19, R20 = 20, R21 = 21,
+        R22 = 22, R23 = 23, R24 = 24, R25 = 25, R26 = 26, R27 = 27
+    }
+    export class PowerSource {
+        constructor() {}
+        side: Side = Side.Ally
+        index: number = 0
+        isAll: boolean = false
+        bonus: PowerSource = null
+    }
+    export class ActorSpec {
+        constructor() {}
+        id: string = ""
+        artKey: string = ""
+        side: Side = Side.Ally
+        hp: number = 1
+        maxHP: number = 1
+        ability: string = "Strike"
+        trait: string = "Plain"
+        present: boolean = true
+        held: boolean = false
+        ward: PowerSource = null
+        venom: PowerSource = null
+        empower: PowerSource = null
+    }
+    export class ActorState {
+        constructor() {}
+        id: string = ""
+        sprite: Sprite = null
+        side: Side = Side.Ally
+        hp: number = 1
+        maxHP: number = 1
+        ability: string = "Strike"
+        trait: string = "Plain"
+        present: boolean = true
+        held: boolean = false
+        ward: PowerSource = null
+        venom: PowerSource = null
+        empower: PowerSource = null
+    }
+    export class CombatLists {
+        constructor() {}
+        allyMoves: string[] = []
+        allyValues: number[] = []
+        allyTargets: Sprite[] = []
+        enemyMoves: string[] = []
+        enemyValues: number[] = []
+        enemyTargets: Sprite[] = []
+    }
+    // Build-time actor-ID transport; never substitute these strings for Sprite identity in combat.
+    export class BattleSpec {
+        constructor() {}
+        actors: ActorSpec[] = []
+        allyMoves: string[] = []
+        allyValues: number[] = []
+        allyTargetIDs: string[] = []
+        enemyMoves: string[] = []
+        enemyValues: number[] = []
+        enemyTargetIDs: string[] = []
+        goal: string = "defeat_all"
+        requiredIDs: string[] = []
+    }
+    export class RoomSpec {
+        constructor() {}
+        room: Room = Room.R01
+        variant: number = 1 // public variant is 1..3
+        instruction: string = ""
+        battle: BattleSpec = null
+        rosterIDs: string[] = []
+        sourceMoves: string[] = []
+        editableLists: string[] = [] // six constant names plus roster/sourceMoves
+        allowHold: boolean = false
+        allowBanish: boolean = false
+        twoStations: boolean = false
+        primaryIndex: number = -1
+        secondaryIndex: number = -1
+        numberHint: number = 0 // R01 disclosed count of leading Wait cells
+    }
+    export class TrialSnapshot {
+        constructor() {}
+        lists: CombatLists = null
+        actors: ActorState[] = []
+        roster: Sprite[] = []
+        sourceMoves: string[] = []
+        goal: string = "defeat_all"
+        requiredIDs: string[] = []
+    }
+    export class EffectEvent {
+        constructor() {}
+        kind: string = "" // hold | banish; actual accepted world call
+        actor: Sprite = null
+    }
+    export class StationRecord {
+        constructor() {}
+        station: Station = Station.Primary
+        before: TrialSnapshot = null
+        after: TrialSnapshot = null
+        effects: EffectEvent[] = []
+        error: string = "" // empty for committed callback
+    }
+    export class TraceEvent {
+        constructor() {}
+        kind: string = ""
+        side: Side = Side.Ally
+        index: number = -1
+        actor: Sprite = null // source/caster, null if none
+        target: Sprite = null // affected actor, null if none
+        amount: number = 0
+        hp: number = -1 // target HP after this event, -1 if unchanged
+        mark: PowerSource = null
+        move: string = ""
+        reason: string = ""
+    }
+    export class BattleResult {
+        constructor() {}
+        status: string = "incomplete" // victory | defeat | incomplete | invalid
+        finalActors: ActorState[] = []
+        trace: TraceEvent[] = []
+        errors: string[] = []
+    }
+    export class GoalResult {
+        constructor() {}
+        met: boolean = false
+        messages: string[] = []
+    }
+    export class Progress {
+        constructor() {}
+        schemaVersion: number = 1
+        highestUnlocked: number = 1
+        resumeRoom: number = 1
+        completedMask: number = 0
+    }
+}
+
+// SUPPLIED SOURCE config.ts
+// Package02 is the sole screen-size owner.
+namespace userconfig {
+    export const ARCADE_SCREEN_WIDTH = 576
+    export const ARCADE_SCREEN_HEIGHT = 720
+}
+// Tutorial customts does not inherit pxt.json's palette. Apply the same native
+// palette explicitly so first launch, Recipes and project builds match.
+image.setPalette(hex`000000f4e7cfbb5149d98c86d58b4be0c06d3d756a7a9c54415b9182c4c0a174ac676a732429419d7556674533151321`)
+
+// SUPPLIED SOURCE supplied-world/rooms.ts
+// AUTO-GENERATED by tools/generate-room-data.mjs from implementation/encounters.json
+// DO NOT HAND EDIT. Native MakeCode Arcade TypeScript, no runtime parsing/imports.
+// Actor preset keys are private; every call constructs a fresh mutable ActorSpec.
+namespace apocRooms {
+    function mark(side: apocTypes.Side, index: number, all: boolean, bonus: apocTypes.PowerSource): apocTypes.PowerSource {
+        const v = new apocTypes.PowerSource(); v.side = side; v.index = index; v.isAll = all; v.bonus = bonus; return v;
+    }
+    function actor(id: string, side: apocTypes.Side, hp: number, maxHP: number, ability: string, trait: string): apocTypes.ActorSpec {
+        const a = new apocTypes.ActorSpec();
+        a.id = id; a.artKey = id; a.side = side; a.hp = hp; a.maxHP = maxHP;
+        a.ability = ability; a.trait = trait; return a;
+    }
+    function actorPreset(key: number): apocTypes.ActorSpec {
+        switch (key) {
+            case 1: return actor("A-Blade", apocTypes.Side.Ally, 5, 5, "Strike", "Leech"); // A-Blade
+            case 2: return actor("A-Guardian", apocTypes.Side.Ally, 5, 5, "Ward", "Steadfast"); // A-Guardian
+            case 3: return actor("A-Medic", apocTypes.Side.Ally, 3, 6, "Mend", "Cleanser"); // A-Medic
+            case 4: return actor("E-Raider", apocTypes.Side.Enemy, 8, 8, "Strike", "Plain"); // E-Raider
+            case 5: return actor("E-Decoy", apocTypes.Side.Enemy, 2, 2, "Venom", "Plain"); // E-Decoy
+            case 6: return actor("A-Medic", apocTypes.Side.Ally, 4, 6, "Mend", "Cleanser"); // A-Medic
+            case 7: return actor("E-Raider", apocTypes.Side.Enemy, 10, 10, "Strike", "Plain"); // E-Raider
+            case 8: return actor("A-Medic", apocTypes.Side.Ally, 2, 6, "Mend", "Cleanser"); // A-Medic
+            case 9: return actor("E-Raider", apocTypes.Side.Enemy, 12, 12, "Strike", "Plain"); // E-Raider
+            case 10: return actor("E-Wisp", apocTypes.Side.Enemy, 5, 5, "Flurry", "Plain"); // E-Wisp
+            case 11: return actor("E-Shaman", apocTypes.Side.Enemy, 4, 4, "Ward", "Plain"); // E-Shaman
+            case 12: return actor("E-Raider", apocTypes.Side.Enemy, 9, 9, "Strike", "Plain"); // E-Raider
+            case 13: return actor("E-Wisp", apocTypes.Side.Enemy, 3, 3, "Venom", "Plain"); // E-Wisp
+            case 14: return actor("A-Medic", apocTypes.Side.Ally, 3, 3, "Mend", "Cleanser"); // A-Medic
+            case 15: return actor("E-Boss", apocTypes.Side.Enemy, 8, 8, "Strike", "Plain"); // E-Boss
+            case 16: return actor("E-Decoy", apocTypes.Side.Enemy, 1, 1, "Venom", "Plain"); // E-Decoy
+            case 17: return actor("A-Medic", apocTypes.Side.Ally, 3, 5, "Mend", "Cleanser"); // A-Medic
+            case 18: return actor("E-Boss", apocTypes.Side.Enemy, 5, 5, "Strike", "Plain"); // E-Boss
+            case 19: return actor("E-Boss", apocTypes.Side.Enemy, 6, 6, "Strike", "Plain"); // E-Boss
+            case 20: return actor("A-Medic", apocTypes.Side.Ally, 5, 5, "Mend", "Cleanser"); // A-Medic
+            case 21: return actor("E-Wisp", apocTypes.Side.Enemy, 4, 4, "Flurry", "Plain"); // E-Wisp
+            case 22: return actor("E-Shaman", apocTypes.Side.Enemy, 5, 5, "Ward", "Plain"); // E-Shaman
+            case 23: return actor("A-Ranger", apocTypes.Side.Ally, 5, 5, "Flurry", "Steadfast"); // A-Ranger
+            case 24: return actor("A-Harvester", apocTypes.Side.Ally, 3, 5, "Reap", "Leech"); // A-Harvester
+            case 25: return actor("E-Plague", apocTypes.Side.Enemy, 5, 5, "Venom", "Plain"); // E-Plague
+            case 26: return actor("A-Blade", apocTypes.Side.Ally, 2, 5, "Strike", "Leech"); // A-Blade
+            case 27: return actor("E-Small", apocTypes.Side.Enemy, 2, 2, "Flurry", "Plain"); // E-Small
+            case 28: return actor("E-Boss", apocTypes.Side.Enemy, 10, 10, "Strike", "Plain"); // E-Boss
+            case 29: return actor("E-Boss", apocTypes.Side.Enemy, 12, 12, "Strike", "Plain"); // E-Boss
+            case 30: return actor("A-Venomist", apocTypes.Side.Ally, 5, 5, "Venom", "Steadfast"); // A-Venomist
+            case 31: return actor("A-Medic", apocTypes.Side.Ally, 2, 5, "Mend", "Cleanser"); // A-Medic
+            case 32: return actor("E-Raider", apocTypes.Side.Enemy, 5, 5, "Strike", "Plain"); // E-Raider
+            case 33: return actor("E-Wisp", apocTypes.Side.Enemy, 6, 6, "Flurry", "Plain"); // E-Wisp
+            case 34: return actor("E-Raider", apocTypes.Side.Enemy, 6, 6, "Strike", "Plain"); // E-Raider
+            case 35: return actor("E-Shaman", apocTypes.Side.Enemy, 6, 6, "Ward", "Plain"); // E-Shaman
+            case 36: return actor("A-Medic", apocTypes.Side.Ally, 4, 4, "Mend", "Cleanser"); // A-Medic
+            case 37: return actor("E-Raider", apocTypes.Side.Enemy, 18, 18, "Strike", "Plain"); // E-Raider
+            case 38: return actor("E-Raider", apocTypes.Side.Enemy, 24, 24, "Strike", "Plain"); // E-Raider
+            case 39: return actor("A-Reaper", apocTypes.Side.Ally, 5, 5, "Reap", "Piercer"); // A-Reaper
+            case 40: return actor("E-Raider", apocTypes.Side.Enemy, 14, 14, "Strike", "Plain"); // E-Raider
+            case 41: return actor("E-Raider", apocTypes.Side.Enemy, 16, 16, "Strike", "Plain"); // E-Raider
+            case 42: return actor("E-Raider", apocTypes.Side.Enemy, 32, 32, "Strike", "Plain"); // E-Raider
+            case 43: return actor("A-Medic", apocTypes.Side.Ally, 2, 4, "Mend", "Cleanser"); // A-Medic
+            case 44: return actor("E-Plague", apocTypes.Side.Enemy, 4, 4, "Venom", "Plain"); // E-Plague
+            case 45: return actor("A-Executioner", apocTypes.Side.Ally, 5, 5, "Reap", "Steadfast"); // A-Executioner
+            case 46: return actor("A-Ranger", apocTypes.Side.Ally, 4, 4, "Flurry", "Leech"); // A-Ranger
+            case 47: return actor("E-Wisp", apocTypes.Side.Enemy, 2, 2, "Flurry", "Plain"); // E-Wisp
+            case 48: return actor("A-Enchanter", apocTypes.Side.Ally, 5, 5, "Empower", "Steadfast"); // A-Enchanter
+            case 49: return actor("E-Wisp", apocTypes.Side.Enemy, 7, 7, "Flurry", "Plain"); // E-Wisp
+            case 50: return actor("A-Medic", apocTypes.Side.Ally, 4, 5, "Mend", "Cleanser"); // A-Medic
+            case 51: return actor("E-Raider", apocTypes.Side.Enemy, 11, 11, "Strike", "Plain"); // E-Raider
+            case 52: return actor("E-King", apocTypes.Side.Enemy, 20, 20, "Ward", "Plain"); // E-King
+            case 53: { const a = actor("E-Raider", apocTypes.Side.Enemy, 6, 6, "Strike", "Plain"); // E-Raider
+                a.ward = mark(apocTypes.Side.Enemy, 0, false, null);
+                return a; }
+        }
+        return null;
+    }
+    function roomGroup0(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 1: { // R01-V1
+                s.instruction = "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order.";
+                b.allyMoves = [];
+                b.allyValues = [4, 3, 4, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Decoy", "E-Decoy", "E-Raider", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(5)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 2: { // R01-V2
+                s.instruction = "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order.";
+                b.allyMoves = [];
+                b.allyValues = [1, 3, 3, 5, 1];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Decoy", "E-Decoy", "E-Raider", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                b.actors.push(actorPreset(5)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 1;
+                return s;
+            }
+            case 3: { // R01-V3
+                s.instruction = "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order.";
+                b.allyMoves = [];
+                b.allyValues = [1, 1, 5, 3, 6, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Decoy", "E-Decoy", "E-Raider", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(8)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                b.actors.push(actorPreset(5)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 2;
+                return s;
+            }
+            case 4: { // R02-V1
+                s.instruction = "Hold the marked attacking Sprite at roster index 0.";
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Shaman", "E-Raider", "E-Wisp"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = ["E-Raider", "E-Shaman", "E-Wisp"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 0; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 5: { // R02-V2
+                s.instruction = "Hold the marked attacking Sprite at roster index 1.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Flurry", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Shaman", "E-Raider", "E-Wisp"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = ["E-Shaman", "E-Wisp", "E-Raider"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 6: { // R02-V3
+                s.instruction = "Hold the marked attacking Sprite at roster index 1.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = ["E-Wisp", "E-Raider", "E-Shaman"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 7: { // R03-V1
+                s.instruction = "Target selector highlights enemy move index 0; replace Strike with Wait.";
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Wisp", "E-Raider", "E-Wisp"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(8)); // A-Medic
+                b.actors.push(actorPreset(12)); // E-Raider
+                b.actors.push(actorPreset(13)); // E-Wisp
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 0; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 8: { // R03-V2
+                s.instruction = "Target selector highlights enemy move index 1; replace Strike with Wait.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Wisp", "E-Raider", "E-Wisp"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(8)); // A-Medic
+                b.actors.push(actorPreset(12)); // E-Raider
+                b.actors.push(actorPreset(13)); // E-Wisp
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 9: { // R03-V3
+                s.instruction = "Target selector highlights enemy move index 2; replace Strike with Wait.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Wisp", "E-Raider", "E-Wisp"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(8)); // A-Medic
+                b.actors.push(actorPreset(12)); // E-Raider
+                b.actors.push(actorPreset(13)); // E-Wisp
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 2; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup1(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 10: { // R04-V1
+                s.instruction = "Append supplied Strike to complete the last damage row; preset final power is 3.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait"];
+                b.allyValues = [1, 3, 1, 1, 3];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 11: { // R04-V2
+                s.instruction = "Append supplied Strike to complete the last damage row; preset final power is 4.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Wait"];
+                b.allyValues = [1, 1, 3, 1, 1, 4];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 12: { // R04-V3
+                s.instruction = "Append supplied Strike to complete the last damage row; preset final power is 5.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Wait"];
+                b.allyValues = [1, 1, 1, 3, 1, 1, 5];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 13: { // R05-V1
+                s.instruction = "Insert the supplied Ward at index 1 just before the second incoming hit.";
+                b.allyMoves = ["Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [2, 6, 2, 2, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Decoy", "E-Decoy", "E-Boss", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(14)); // A-Medic
+                b.actors.push(actorPreset(15)); // E-Boss
+                b.actors.push(actorPreset(16)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 14: { // R05-V2
+                s.instruction = "Insert the supplied Ward at index 2 just before the second incoming hit.";
+                b.allyMoves = ["Wait", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Decoy", "E-Decoy", "E-Boss", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(14)); // A-Medic
+                b.actors.push(actorPreset(15)); // E-Boss
+                b.actors.push(actorPreset(16)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 2; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 15: { // R05-V3
+                s.instruction = "Insert the supplied Ward at index 3 just before the second incoming hit.";
+                b.allyMoves = ["Wait", "Wait", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Decoy", "E-Decoy", "E-Boss", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(14)); // A-Medic
+                b.actors.push(actorPreset(15)); // E-Boss
+                b.actors.push(actorPreset(16)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 3; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 16: { // R06-V1
+                s.instruction = "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 6, 1, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 17: { // R06-V2
+                s.instruction = "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row.";
+                b.allyMoves = ["Wait", "Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [1, 6, 2, 1, 3];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 18: { // R06-V3
+                s.instruction = "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row.";
+                b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Mend", "Strike"];
+                b.allyValues = [1, 6, 1, 2, 1, 3];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup2(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 19: { // R07-V1
+                s.instruction = "Remove marked enemy Ward at index 0 and discard the returned string.";
+                b.allyMoves = ["Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [2, 3, 3, 2];
+                b.enemyMoves = ["Ward", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(17)); // A-Medic
+                b.actors.push(actorPreset(18)); // E-Boss
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 0; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 20: { // R07-V2
+                s.instruction = "Remove marked enemy Ward at index 1 and discard the returned string.";
+                b.allyMoves = ["Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Ward", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(17)); // A-Medic
+                b.actors.push(actorPreset(19)); // E-Boss
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 21: { // R07-V3
+                s.instruction = "Remove marked enemy Ward at index 2 and discard the returned string.";
+                b.allyMoves = ["Wait", "Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 6, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(17)); // A-Medic
+                b.actors.push(actorPreset(19)); // E-Boss
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 2; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 22: { // R08-V1
+                s.instruction = "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Wait"];
+                b.allyValues = [1, 3, 1, 1, 3];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 23: { // R08-V2
+                s.instruction = "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Wait", "Wait"];
+                b.allyValues = [1, 1, 3, 1, 1, 4];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 24: { // R08-V3
+                s.instruction = "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 3, 1, 1, 5];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 25: { // R09-V1
+                s.instruction = "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [4, 1, 3, 2, 2];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 26: { // R09-V2
+                s.instruction = "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike", "Wait"];
+                b.allyValues = [6, 1, 3, 3, 2, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 27: { // R09-V3
+                s.instruction = "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike", "Wait", "Wait"];
+                b.allyValues = [4, 1, 3, 4, 2, 1, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(3)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup3(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 28: { // R10-V1
+                s.instruction = "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass.";
+                b.allyMoves = ["Ward", "Mend", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Strike"];
+                b.enemyValues = [1, 1, 5, 3];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 29: { // R10-V2
+                s.instruction = "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass.";
+                b.allyMoves = ["Ward", "Mend", "Wait", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait", "Strike"];
+                b.enemyValues = [1, 1, 1, 5, 4];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 30: { // R10-V3
+                s.instruction = "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass.";
+                b.allyMoves = ["Ward", "Mend", "Wait", "Wait", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 1, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait", "Wait", "Strike"];
+                b.enemyValues = [1, 1, 1, 1, 5, 5];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 31: { // R11-V1
+                s.instruction = "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station.";
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 8];
+                b.enemyMoves = ["Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Wisp", "ALL"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(21)); // E-Wisp
+                b.actors.push(actorPreset(22)); // E-Shaman
+                s.rosterIDs = ["E-Raider", "E-Wisp", "E-Shaman"];
+                s.sourceMoves = [];
+                s.editableLists = ["roster"];
+                s.allowHold = false; s.allowBanish = true;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 32: { // R11-V2
+                s.instruction = "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station.";
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 8];
+                b.enemyMoves = ["Flurry", "Wait", "Wait"];
+                b.enemyValues = [6, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Wisp", "ALL"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(21)); // E-Wisp
+                b.actors.push(actorPreset(22)); // E-Shaman
+                s.rosterIDs = ["E-Wisp", "E-Raider", "E-Shaman"];
+                s.sourceMoves = [];
+                s.editableLists = ["roster"];
+                s.allowHold = false; s.allowBanish = true;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 33: { // R11-V3
+                s.instruction = "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 8];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Wisp", "ALL"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(21)); // E-Wisp
+                b.actors.push(actorPreset(22)); // E-Shaman
+                s.rosterIDs = ["E-Raider", "E-Shaman", "E-Wisp"];
+                s.sourceMoves = [];
+                s.editableLists = ["roster"];
+                s.allowHold = false; s.allowBanish = true;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 34: { // R12-V1
+                s.instruction = "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait.";
+                b.allyMoves = ["Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [2, 3, 3, 2];
+                b.enemyMoves = ["Ward", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(17)); // A-Medic
+                b.actors.push(actorPreset(18)); // E-Boss
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 35: { // R12-V2
+                s.instruction = "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait.";
+                b.allyMoves = ["Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Ward", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(17)); // A-Medic
+                b.actors.push(actorPreset(19)); // E-Boss
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 36: { // R12-V3
+                s.instruction = "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait.";
+                b.allyMoves = ["Wait", "Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 6, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(17)); // A-Medic
+                b.actors.push(actorPreset(19)); // E-Boss
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup4(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 37: { // R13-V1
+                s.instruction = "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act.";
+                b.allyMoves = ["Strike", "Reap", "Strike", "Flurry", "Reap", "Strike"];
+                b.allyValues = [2, 1, 2, 9, 2, 2];
+                b.enemyMoves = ["Strike", "Flurry", "Venom", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 4, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Plague", "ALL", "E-Plague", "E-Wisp"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Harvester"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(23)); // A-Ranger
+                b.actors.push(actorPreset(24)); // A-Harvester
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(25)); // E-Plague
+                s.rosterIDs = ["E-Raider", "E-Wisp", "E-Plague"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 38: { // R13-V2
+                s.instruction = "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act.";
+                b.allyMoves = ["Strike", "Reap", "Strike", "Flurry", "Reap", "Strike"];
+                b.allyValues = [2, 1, 2, 9, 2, 2];
+                b.enemyMoves = ["Venom", "Strike", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 2, 4, 1, 1, 1];
+                b.allyTargetIDs = ["A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Plague", "ALL", "E-Plague", "E-Wisp"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Harvester"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(23)); // A-Ranger
+                b.actors.push(actorPreset(24)); // A-Harvester
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(25)); // E-Plague
+                s.rosterIDs = ["E-Plague", "E-Raider", "E-Wisp"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 39: { // R13-V3
+                s.instruction = "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act.";
+                b.allyMoves = ["Strike", "Reap", "Strike", "Flurry", "Reap", "Strike"];
+                b.allyValues = [2, 1, 2, 9, 2, 2];
+                b.enemyMoves = ["Flurry", "Venom", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 3, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Plague", "ALL", "E-Plague", "E-Wisp"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Harvester"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(23)); // A-Ranger
+                b.actors.push(actorPreset(24)); // A-Harvester
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(25)); // E-Plague
+                s.rosterIDs = ["E-Wisp", "E-Plague", "E-Raider"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 40: { // R14-V1
+                s.instruction = "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values.";
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike"];
+                b.allyValues = [4, 1, 2, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Blade", "A-Medic", "A-Blade", "A-Blade"];
+                b.enemyTargetIDs = ["E-Small", "E-Boss", "E-Boss", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Blade"];
+                b.actors.push(actorPreset(26)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(27)); // E-Small
+                b.actors.push(actorPreset(15)); // E-Boss
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyValues"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 0; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 41: { // R14-V2
+                s.instruction = "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values.";
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike"];
+                b.allyValues = [5, 1, 2, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Blade", "A-Medic", "A-Blade", "A-Blade"];
+                b.enemyTargetIDs = ["E-Small", "E-Boss", "E-Boss", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Blade"];
+                b.actors.push(actorPreset(26)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(27)); // E-Small
+                b.actors.push(actorPreset(28)); // E-Boss
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyValues"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 0; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 42: { // R14-V3
+                s.instruction = "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values.";
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike"];
+                b.allyValues = [6, 1, 2, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Blade", "A-Medic", "A-Blade", "A-Blade"];
+                b.enemyTargetIDs = ["E-Small", "E-Boss", "E-Boss", "E-Boss"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Blade"];
+                b.actors.push(actorPreset(26)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(27)); // E-Small
+                b.actors.push(actorPreset(29)); // E-Boss
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyValues"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 0; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 43: { // R15-V1
+                s.instruction = "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched.";
+                b.allyMoves = ["Venom", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [2, 2, 1, 3, 2];
+                b.enemyMoves = ["Ward", "Strike", "Ward", "Flurry", "Wait"];
+                b.enemyValues = [9, 1, 9, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Wisp", "E-Wisp", "E-Shaman"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(30)); // A-Venomist
+                b.actors.push(actorPreset(31)); // A-Medic
+                b.actors.push(actorPreset(32)); // E-Raider
+                b.actors.push(actorPreset(33)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 44: { // R15-V2
+                s.instruction = "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched.";
+                b.allyMoves = ["Venom", "Wait", "Mend", "Wait", "Strike", "Strike"];
+                b.allyValues = [2, 1, 3, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Ward", "Strike", "Ward", "Flurry", "Wait"];
+                b.enemyValues = [1, 9, 1, 9, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Wisp", "E-Wisp", "E-Shaman"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(30)); // A-Venomist
+                b.actors.push(actorPreset(31)); // A-Medic
+                b.actors.push(actorPreset(34)); // E-Raider
+                b.actors.push(actorPreset(21)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 45: { // R15-V3
+                s.instruction = "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched.";
+                b.allyMoves = ["Venom", "Wait", "Mend", "Strike", "Wait", "Strike", "Strike"];
+                b.allyValues = [2, 1, 1, 2, 1, 3, 3];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Strike", "Ward", "Flurry", "Wait"];
+                b.enemyValues = [1, 1, 9, 1, 9, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Wisp", "E-Wisp", "E-Shaman"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(30)); // A-Venomist
+                b.actors.push(actorPreset(31)); // A-Medic
+                b.actors.push(actorPreset(32)); // E-Raider
+                b.actors.push(actorPreset(33)); // E-Wisp
+                b.actors.push(actorPreset(35)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup5(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 46: { // R16-V1
+                s.instruction = "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order.";
+                b.allyMoves = [];
+                b.allyValues = [3, 3, 3, 3, 3];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(36)); // A-Medic
+                b.actors.push(actorPreset(37)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 47: { // R16-V2
+                s.instruction = "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order.";
+                b.allyMoves = [];
+                b.allyValues = [3, 3, 3, 3, 3, 3];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(36)); // A-Medic
+                b.actors.push(actorPreset(38)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 48: { // R16-V3
+                s.instruction = "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order.";
+                b.allyMoves = [];
+                b.allyValues = [3, 3, 3, 3, 3, 3];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(36)); // A-Medic
+                b.actors.push(actorPreset(38)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 49: { // R17-V1
+                s.instruction = "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait"];
+                b.allyValues = [2, 2, 2, 1, 5];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(39)); // A-Reaper
+                b.actors.push(actorPreset(40)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Wait", "Strike"];
+                s.editableLists = ["allyMoves", "sourceMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 50: { // R17-V2
+                s.instruction = "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait"];
+                b.allyValues = [2, 2, 2, 1, 6];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(39)); // A-Reaper
+                b.actors.push(actorPreset(41)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Mend", "Wait", "Strike"];
+                s.editableLists = ["allyMoves", "sourceMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 51: { // R17-V3
+                s.instruction = "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait"];
+                b.allyValues = [2, 2, 2, 1, 7];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(39)); // A-Reaper
+                b.actors.push(actorPreset(42)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Ward", "Mend", "Wait", "Reap"];
+                s.editableLists = ["allyMoves", "sourceMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 52: { // R18-V1
+                s.instruction = "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [2, 2, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 5, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyValues", "allyValues"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 2; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 53: { // R18-V2
+                s.instruction = "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 2, 2, 1, 1];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 6, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(40)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyValues", "allyValues"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 3; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 54: { // R18-V3
+                s.instruction = "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 1, 2, 2, 1, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 7, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(41)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyValues", "allyValues"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 4; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup6(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 55: { // R19-V1
+                s.instruction = "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive.";
+                b.allyMoves = ["Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [5, 2, 3, 2];
+                b.enemyMoves = ["Strike", "Flurry", "Venom", "Wait"];
+                b.enemyValues = [2, 2, 3, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(43)); // A-Medic
+                b.actors.push(actorPreset(32)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(44)); // E-Plague
+                s.rosterIDs = ["E-Raider", "E-Wisp"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 56: { // R19-V2
+                s.instruction = "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive.";
+                b.allyMoves = ["Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [5, 2, 3, 2];
+                b.enemyMoves = ["Flurry", "Strike", "Venom", "Wait"];
+                b.enemyValues = [2, 2, 3, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(43)); // A-Medic
+                b.actors.push(actorPreset(32)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(44)); // E-Plague
+                s.rosterIDs = ["E-Wisp", "E-Raider"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 57: { // R19-V3
+                s.instruction = "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive.";
+                b.allyMoves = ["Wait", "Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [1, 5, 2, 3, 2];
+                b.enemyMoves = ["Wait", "Strike", "Flurry", "Venom", "Wait"];
+                b.enemyValues = [1, 2, 2, 3, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "survive_pass"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(43)); // A-Medic
+                b.actors.push(actorPreset(32)); // E-Raider
+                b.actors.push(actorPreset(10)); // E-Wisp
+                b.actors.push(actorPreset(44)); // E-Plague
+                s.rosterIDs = ["E-Wisp", "E-Raider"];
+                s.sourceMoves = [];
+                s.editableLists = [];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 58: { // R20-V1
+                s.instruction = "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged.";
+                b.allyMoves = ["Wait", "Strike", "Flurry", "Reap", "Strike", "Reap"];
+                b.allyValues = [1, 2, 2, 2, 1, 9];
+                b.enemyMoves = ["Strike", "Flurry", "Wait", "Ward", "Wait", "Wait"];
+                b.enemyValues = [4, 4, 2, 3, 3, 3];
+                b.allyTargetIDs = ["A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp", "ALL"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Ranger"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(45)); // A-Executioner
+                b.actors.push(actorPreset(46)); // A-Ranger
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(47)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 59: { // R20-V2
+                s.instruction = "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged.";
+                b.allyMoves = ["Wait", "Strike", "Flurry", "Reap", "Strike", "Reap"];
+                b.allyValues = [1, 2, 2, 2, 1, 9];
+                b.enemyMoves = ["Flurry", "Strike", "Wait", "Ward", "Wait", "Wait"];
+                b.enemyValues = [4, 4, 4, 3, 3, 3];
+                b.allyTargetIDs = ["A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp", "ALL"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Ranger"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(45)); // A-Executioner
+                b.actors.push(actorPreset(46)); // A-Ranger
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(47)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 60: { // R20-V3
+                s.instruction = "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged.";
+                b.allyMoves = ["Wait", "Strike", "Flurry", "Reap", "Strike", "Reap"];
+                b.allyValues = [1, 3, 2, 2, 1, 9];
+                b.enemyMoves = ["Strike", "Flurry", "Wait", "Ward", "Wait", "Wait"];
+                b.enemyValues = [4, 4, 2, 3, 3, 3];
+                b.allyTargetIDs = ["A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp", "ALL"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Ranger"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(45)); // A-Executioner
+                b.actors.push(actorPreset(46)); // A-Ranger
+                b.actors.push(actorPreset(7)); // E-Raider
+                b.actors.push(actorPreset(47)); // E-Wisp
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 61: { // R21-V1
+                s.instruction = "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index.";
+                b.allyMoves = ["Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Decoy", "E-Raider", "E-Raider", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(14)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(5)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 62: { // R21-V2
+                s.instruction = "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index.";
+                b.allyMoves = ["Wait", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Decoy", "E-Raider", "E-Raider", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(14)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(5)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 63: { // R21-V3
+                s.instruction = "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index.";
+                b.allyMoves = ["Wait", "Wait", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Decoy", "E-Raider", "E-Raider", "E-Decoy"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(14)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(5)); // E-Decoy
+                s.rosterIDs = [];
+                s.sourceMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup7(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 64: { // R22-V1
+                s.instruction = "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move.";
+                b.allyMoves = ["Strike", "Empower", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [4, 2, 2, 2, 2, 3];
+                b.enemyMoves = ["Strike", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Blade", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Shaman", "E-Raider", "E-Wisp", "E-Shaman", "E-Shaman", "E-Shaman"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(48)); // A-Enchanter
+                b.actors.push(actorPreset(31)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(22)); // E-Shaman
+                b.actors.push(actorPreset(49)); // E-Wisp
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyTargets"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 65: { // R22-V2
+                s.instruction = "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move.";
+                b.allyMoves = ["Strike", "Empower", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [5, 2, 2, 2, 2, 3];
+                b.enemyMoves = ["Strike", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 2, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Blade", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Shaman", "E-Wisp", "E-Raider", "E-Shaman", "E-Shaman", "E-Shaman"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(48)); // A-Enchanter
+                b.actors.push(actorPreset(31)); // A-Medic
+                b.actors.push(actorPreset(12)); // E-Raider
+                b.actors.push(actorPreset(22)); // E-Shaman
+                b.actors.push(actorPreset(49)); // E-Wisp
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyTargets"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 2; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 66: { // R22-V3
+                s.instruction = "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move.";
+                b.allyMoves = ["Strike", "Empower", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [5, 2, 2, 2, 2, 3];
+                b.enemyMoves = ["Strike", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 3, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Blade", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Shaman", "E-Wisp", "E-Shaman", "E-Raider", "E-Shaman", "E-Shaman"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(48)); // A-Enchanter
+                b.actors.push(actorPreset(31)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                b.actors.push(actorPreset(22)); // E-Shaman
+                b.actors.push(actorPreset(49)); // E-Wisp
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyTargets"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = 3; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 67: { // R23-V1
+                s.instruction = "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list.";
+                b.allyMoves = ["Ward", "Mend", "Strike", "Strike", "Strike"];
+                b.allyValues = [3, 2, 2, 2, 2];
+                b.enemyMoves = ["Ward", "Strike", "Wait", "Strike", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Shaman", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(50)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(11)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 68: { // R23-V2
+                s.instruction = "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list.";
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 5, 2, 2, 3, 2];
+                b.enemyMoves = ["Wait", "Ward", "Strike", "Wait", "Strike", "Wait"];
+                b.enemyValues = [1, 4, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Shaman", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(50)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(22)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 69: { // R23-V3
+                s.instruction = "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 1, 7, 2, 2, 4, 2];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Strike", "Wait", "Strike", "Wait"];
+                b.enemyValues = [1, 1, 5, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Shaman", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(50)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                b.actors.push(actorPreset(35)); // E-Shaman
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 70: { // R24-V1
+                s.instruction = "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail.";
+                b.allyMoves = ["Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 2, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(12)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = true;
+                s.primaryIndex = -1; s.secondaryIndex = 1; s.numberHint = 0;
+                return s;
+            }
+            case 71: { // R24-V2
+                s.instruction = "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail.";
+                b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 5, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(7)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = true;
+                s.primaryIndex = -1; s.secondaryIndex = 2; s.numberHint = 0;
+                return s;
+            }
+            case 72: { // R24-V3
+                s.instruction = "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail.";
+                b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 1, 1, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 6, 6, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(51)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = true;
+                s.primaryIndex = -1; s.secondaryIndex = 3; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    function roomGroup8(s: apocTypes.RoomSpec, key: number): apocTypes.RoomSpec {
+        const b = s.battle;
+        switch (key) {
+            case 73: { // R25-V1
+                s.instruction = "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged.";
+                b.allyMoves = ["Wait", "Strike", "Wait", "Mend", "Wait", "Strike", "Strike"];
+                b.allyValues = [6, 4, 6, 4, 6, 4, 4];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 4, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(38)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 74: { // R25-V2
+                s.instruction = "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged.";
+                b.allyMoves = ["Wait", "Wait", "Strike", "Wait", "Mend", "Wait", "Strike", "Strike"];
+                b.allyValues = [1, 6, 4, 6, 4, 6, 4, 4];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 4, 1, 4, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(38)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 75: { // R25-V3
+                s.instruction = "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged.";
+                b.allyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Mend", "Wait", "Strike", "Strike"];
+                b.allyValues = [1, 1, 6, 4, 6, 4, 6, 4, 4];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 4, 1, 4, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(20)); // A-Medic
+                b.actors.push(actorPreset(38)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = [];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 76: { // R26-V1
+                s.instruction = "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings.";
+                b.allyMoves = [];
+                b.allyValues = [2, 2, 2, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(4)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 77: { // R26-V2
+                s.instruction = "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings.";
+                b.allyMoves = [];
+                b.allyValues = [2, 2, 2, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(9)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 78: { // R26-V3
+                s.instruction = "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings.";
+                b.allyMoves = [];
+                b.allyValues = [2, 2, 2, 2, 2, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(2)); // A-Guardian
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(41)); // E-Raider
+                s.rosterIDs = [];
+                s.sourceMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                s.editableLists = ["allyMoves"];
+                s.allowHold = false; s.allowBanish = false;
+                s.twoStations = false;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 79: { // R27-V1
+                s.instruction = "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks.";
+                b.allyMoves = ["Mend", "Strike", "Strike", "Strike", "Strike", "Strike", "Flurry", "Strike"];
+                b.allyValues = [1, 2, 2, 2, 2, 2, 8, 3];
+                b.enemyMoves = ["Ward", "Strike", "Wait", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 3, 1, 2, 6, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-King", "E-King", "E-King", "E-King", "E-King", "E-King", "E-Raider", "E-Wisp"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(23)); // A-Ranger
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(52)); // E-King
+                b.actors.push(actorPreset(53)); // E-Raider
+                b.actors.push(actorPreset(33)); // E-Wisp
+                s.rosterIDs = ["E-Raider", "E-Wisp"];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = true;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 80: { // R27-V2
+                s.instruction = "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks.";
+                b.allyMoves = ["Mend", "Strike", "Strike", "Strike", "Strike", "Strike", "Flurry", "Strike"];
+                b.allyValues = [1, 2, 2, 2, 2, 2, 8, 3];
+                b.enemyMoves = ["Strike", "Ward", "Wait", "Flurry", "Ward", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 2, 1, 6, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-King", "E-King", "E-King", "E-King", "E-King", "E-King", "E-Raider", "E-Wisp"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(23)); // A-Ranger
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(52)); // E-King
+                b.actors.push(actorPreset(53)); // E-Raider
+                b.actors.push(actorPreset(33)); // E-Wisp
+                s.rosterIDs = ["E-Wisp", "E-Raider"];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = true;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+            case 81: { // R27-V3
+                s.instruction = "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks.";
+                b.allyMoves = ["Mend", "Strike", "Strike", "Strike", "Strike", "Strike", "Flurry", "Strike"];
+                b.allyValues = [1, 2, 2, 2, 2, 2, 8, 3];
+                b.enemyMoves = ["Ward", "Strike", "Wait", "Flurry", "Ward", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 3, 1, 6, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-King", "E-King", "E-King", "E-King", "E-King", "E-King", "E-Raider", "E-Wisp"];
+                b.goal = "defeat_all"; b.requiredIDs = ["A-Medic"];
+                b.actors.push(actorPreset(1)); // A-Blade
+                b.actors.push(actorPreset(23)); // A-Ranger
+                b.actors.push(actorPreset(6)); // A-Medic
+                b.actors.push(actorPreset(52)); // E-King
+                b.actors.push(actorPreset(53)); // E-Raider
+                b.actors.push(actorPreset(33)); // E-Wisp
+                s.rosterIDs = ["E-Raider", "E-Wisp"];
+                s.sourceMoves = [];
+                s.editableLists = ["enemyMoves"];
+                s.allowHold = true; s.allowBanish = false;
+                s.twoStations = true;
+                s.primaryIndex = -1; s.secondaryIndex = -1; s.numberHint = 0;
+                return s;
+            }
+        }
+        return null;
+    }
+    export function spec(room: apocTypes.Room, variant: number): apocTypes.RoomSpec {
+        if (room < 1 || room > 27 || variant < 1 || variant > 3 ||
+            room !== Math.floor(room) || variant !== Math.floor(variant)) return null;
+        const s = new apocTypes.RoomSpec();
+        s.battle = new apocTypes.BattleSpec(); s.battle.actors = [];
+        s.room = room; s.variant = variant;
+        const key = (room - 1) * 3 + variant;
+        if (room <= 3) return roomGroup0(s, key);
+        if (room <= 6) return roomGroup1(s, key);
+        if (room <= 9) return roomGroup2(s, key);
+        if (room <= 12) return roomGroup3(s, key);
+        if (room <= 15) return roomGroup4(s, key);
+        if (room <= 18) return roomGroup5(s, key);
+        if (room <= 21) return roomGroup6(s, key);
+        if (room <= 24) return roomGroup7(s, key);
+        if (room <= 27) return roomGroup8(s, key);
+        return null;
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/combat.ts
+// AL-IMPLEMENTATION-1.0. No Sprite construction, mutation, side effects or frame scheduling.
+namespace apocCombat {
+    function copyStrings(a: string[]): string[] { return a ? a.slice() : []; }
+    function copyNumbers(a: number[]): number[] { return a ? a.slice() : []; }
+    function copySprites(a: Sprite[]): Sprite[] { return a ? a.slice() : []; }
+    function copyPower(p: apocTypes.PowerSource): apocTypes.PowerSource {
+        if (!p) return null;
+        const q = new apocTypes.PowerSource();
+        q.side = p.side; q.index = p.index; q.isAll = p.isAll;
+        q.bonus = copyPower(p.bonus);
+        return q;
+    }
+    function copyActor(a: apocTypes.ActorState): apocTypes.ActorState {
+        const b = new apocTypes.ActorState();
+        b.id = a.id; b.sprite = a.sprite; b.side = a.side;
+        b.hp = a.hp; b.maxHP = a.maxHP; b.ability = a.ability;
+        b.trait = a.trait; b.present = a.present; b.held = a.held;
+        b.ward = copyPower(a.ward); b.venom = copyPower(a.venom);
+        b.empower = copyPower(a.empower);
+        return b;
+    }
+    function copyLists(a: apocTypes.CombatLists): apocTypes.CombatLists {
+        const b = new apocTypes.CombatLists();
+        b.allyMoves = copyStrings(a.allyMoves);
+        b.allyValues = copyNumbers(a.allyValues);
+        b.allyTargets = copySprites(a.allyTargets);
+        b.enemyMoves = copyStrings(a.enemyMoves);
+        b.enemyValues = copyNumbers(a.enemyValues);
+        b.enemyTargets = copySprites(a.enemyTargets);
+        return b;
+    }
+    export function cloneTrial(value: apocTypes.TrialSnapshot): apocTypes.TrialSnapshot {
+        if (!value) return null;
+        const t = new apocTypes.TrialSnapshot();
+        t.lists = value.lists ? copyLists(value.lists) : null;
+        t.actors = [];
+        if (value.actors) for (let i = 0; i < value.actors.length; i++) {
+            if (value.actors[i]) t.actors.push(copyActor(value.actors[i]));
+            else t.actors.push(null);
+        }
+        t.roster = copySprites(value.roster); t.sourceMoves = copyStrings(value.sourceMoves);
+        t.goal = value.goal; t.requiredIDs = copyStrings(value.requiredIDs);
+        return t;
+    }
+    function validMove(m: string): boolean {
+        return m === "Strike" || m === "Flurry" || m === "Mend" ||
+            m === "Ward" || m === "Venom" || m === "Reap" || m === "Empower";
+    }
+    function validTrait(m: string): boolean {
+        return m === "Plain" || m === "Piercer" || m === "Cleanser" || m === "Steadfast" || m === "Leech";
+    }
+    // Disallow NaN and infinities as invalid authored numbers (Infinity - Infinity is NaN).
+    function integer(v: number): boolean {
+        return typeof v === "number" && v - v === 0 && v === Math.floor(v) && v >= 0;
+    }
+    function validPower(p: apocTypes.PowerSource, t: apocTypes.TrialSnapshot, depth: number): boolean {
+        if (!p) return true;
+        if (depth > 12 || (p.side !== apocTypes.Side.Ally && p.side !== apocTypes.Side.Enemy)) return false;
+        const values = p.side === apocTypes.Side.Ally ? t.lists.allyValues : t.lists.enemyValues;
+        return integer(p.index) && p.index < values.length && typeof p.isAll === "boolean" &&
+            validPower(p.bonus, t, depth + 1);
+    }
+    function markHasOwner(t: apocTypes.TrialSnapshot, p: apocTypes.PowerSource, move: string): boolean {
+        if (!p) return true;
+        let found = false;
+        for (let i = 0; i < t.actors.length; i++) {
+            const a = t.actors[i];
+            if (a && a.side === p.side && a.ability === move) found = true;
+        }
+        return found && (!p.bonus || markHasOwner(t, p.bonus, "Empower"));
+    }
+    // Keep every list statically typed. Reading .length through an `any` cell
+    // emits a PXT interface lookup, but native Array objects are not interfaces.
+    function validateStrings(a: string[], name: string, e: string[]): void {
+        if (!a || !Array.isArray(a)) { e.push(name + " must be an array"); return; }
+        if (a.length > 10) e.push(name + " capacity");
+        for (let i = 0; i < a.length; i++) if (typeof a[i] !== "string") e.push(name + " invalid move type at " + i);
+    }
+    function validateNumbers(a: number[], name: string, e: string[]): void {
+        if (!a || !Array.isArray(a)) { e.push(name + " must be an array"); return; }
+        if (a.length > 10) e.push(name + " capacity");
+        for (let i = 0; i < a.length; i++) if (!integer(a[i]) || a[i] > 9) e.push(name + " invalid number at " + i);
+    }
+    function validateTargets(a: Sprite[], name: string, e: string[]): void {
+        if (!a || !Array.isArray(a)) { e.push(name + " must be an array"); return; }
+        if (a.length > 10) e.push(name + " capacity");
+    }
+    export function validate(value: apocTypes.TrialSnapshot, allTarget: Sprite): string[] {
+        const e: string[] = [];
+        if (!value || !value.lists || !value.actors || !value.roster || !value.sourceMoves || !value.requiredIDs) {
+            e.push("missing trial fields"); return e;
+        }
+        if (!Array.isArray(value.actors) || !Array.isArray(value.roster) ||
+            !Array.isArray(value.sourceMoves) || !Array.isArray(value.requiredIDs)) {
+            e.push("invalid snapshot collection type"); return e;
+        }
+        const l = value.lists;
+        validateStrings(l.allyMoves, "allyMoves", e);
+        validateNumbers(l.allyValues, "allyValues", e);
+        validateTargets(l.allyTargets, "allyTargets", e);
+        validateStrings(l.enemyMoves, "enemyMoves", e);
+        validateNumbers(l.enemyValues, "enemyValues", e);
+        validateTargets(l.enemyTargets, "enemyTargets", e);
+        if (e.length) return e;
+        if (value.actors.length < 4 || value.actors.length > 8) e.push("invalid actor count");
+        if (value.roster.length > 10 || value.sourceMoves.length > 10) e.push("teaching list capacity");
+        for (let i = 0; i < value.sourceMoves.length; i++) if (typeof value.sourceMoves[i] !== "string") e.push("source move type");
+        if (!allTarget || typeof allTarget !== "object") e.push("missing or invalid ALL_TARGET identity");
+        let allies = 0; let enemies = 0;
+        for (let i = 0; i < value.actors.length; i++) {
+            const a = value.actors[i];
+            if (!a || typeof a.id !== "string" || a.id.length === 0 ||
+                !a.sprite || typeof a.sprite !== "object" || a.sprite === allTarget) {
+                e.push("invalid actor/identity at " + i); continue;
+            }
+            if (a.side === apocTypes.Side.Ally) allies++;
+            else if (a.side === apocTypes.Side.Enemy) enemies++;
+            else e.push("invalid side: " + a.id);
+            if (!integer(a.hp) || !integer(a.maxHP) || a.maxHP < 1 || a.hp > a.maxHP) e.push("invalid HP: " + a.id);
+            if (!validMove(a.ability)) e.push("invalid ability: " + a.id);
+            if (!validTrait(a.trait) || (a.side === apocTypes.Side.Ally && a.trait === "Plain")) e.push("invalid trait: " + a.id);
+            if (typeof a.present !== "boolean" || typeof a.held !== "boolean") e.push("invalid actor flags: " + a.id);
+            if (!validPower(a.ward, value, 0) || !validPower(a.venom, value, 0) || !validPower(a.empower, value, 0) ||
+                !markHasOwner(value, a.ward, "Ward") || !markHasOwner(value, a.venom, "Venom") ||
+                !markHasOwner(value, a.empower, "Empower")) e.push("invalid mark: " + a.id);
+            for (let j = 0; j < i; j++) {
+                const b = value.actors[j];
+                if (b && (b.id === a.id || b.sprite === a.sprite)) e.push("duplicate actor identity: " + a.id);
+                if (b && b.side === a.side && b.ability === a.ability) e.push("duplicate side ability: " + a.ability);
+            }
+        }
+        if (allies < 3 || allies > 4 || enemies < 1 || enemies > 4) e.push("invalid team size");
+        if (value.goal !== "defeat_all" && value.goal !== "survive_pass") e.push("unknown battle goal");
+        for (let i = 0; i < value.requiredIDs.length; i++) {
+            let present = false;
+            for (let j = 0; j < value.actors.length; j++) if (value.actors[j] && value.actors[j].id === value.requiredIDs[i] && value.actors[j].side === apocTypes.Side.Ally) present = true;
+            if (!present) e.push("unknown required ally: " + value.requiredIDs[i]);
+        }
+        for (let k = 0; k < 2; k++) {
+            const targets = k === 0 ? l.allyTargets : l.enemyTargets;
+            for (let i = 0; i < targets.length; i++) {
+                let found = targets[i] === allTarget;
+                for (let j = 0; j < value.actors.length; j++) if (value.actors[j] && targets[i] === value.actors[j].sprite) found = true;
+                if (!found) e.push("foreign target at " + k + ":" + i);
+            }
+        }
+        for (let i = 0; i < value.roster.length; i++) {
+            let found = false;
+            for (let j = 0; j < value.actors.length; j++) if (value.actors[j] && value.roster[i] === value.actors[j].sprite) found = true;
+            if (!found) e.push("foreign roster actor at " + i);
+        }
+        return e;
+    }
+    function makeEvent(out: apocTypes.BattleResult, kind: string, side: apocTypes.Side, index: number,
+                       actor: Sprite, target: Sprite, amount: number, hp: number,
+                       mark: apocTypes.PowerSource, move: string, reason: string): void {
+        const x = new apocTypes.TraceEvent();
+        x.kind = kind; x.side = side; x.index = index; x.actor = actor; x.target = target;
+        x.amount = amount; x.hp = hp; x.mark = copyPower(mark); x.move = move; x.reason = reason;
+        out.trace.push(x);
+    }
+    function actorAt(t: apocTypes.TrialSnapshot, sprite: Sprite): apocTypes.ActorState {
+        for (let j = 0; j < t.actors.length; j++) if (t.actors[j].sprite === sprite) return t.actors[j];
+        return null;
+    }
+    function actorByID(t: apocTypes.TrialSnapshot, id: string): apocTypes.ActorState {
+        for (let j = 0; j < t.actors.length; j++) if (t.actors[j].id === id) return t.actors[j];
+        return null;
+    }
+    function power(t: apocTypes.TrialSnapshot, p: apocTypes.PowerSource): number {
+        if (!p) return 0;
+        const v = p.side === apocTypes.Side.Ally ? t.lists.allyValues[p.index] : t.lists.enemyValues[p.index];
+        return (p.isAll ? Math.idiv(v + 1, 2) : v) + power(t, p.bonus);
+    }
+    function source(side: apocTypes.Side, index: number, all: boolean,
+                    bonus: apocTypes.PowerSource): apocTypes.PowerSource {
+        const p = new apocTypes.PowerSource();
+        p.side = side; p.index = index; p.isAll = all; p.bonus = copyPower(bonus);
+        return p;
+    }
+    function outcome(t: apocTypes.TrialSnapshot): string {
+        let allies = 0; let enemies = 0;
+        for (let j = 0; j < t.actors.length; j++) {
+            const a = t.actors[j];
+            if (a.hp > 0 && a.present) {
+                if (a.side === apocTypes.Side.Ally) allies++; else enemies++;
+            }
+        }
+        if (!allies) return "defeat";
+        for (let i = 0; i < t.requiredIDs.length; i++) {
+            const a = actorByID(t, t.requiredIDs[i]);
+            if (!a || !a.present || a.hp <= 0) return "defeat";
+        }
+        if (t.goal === "defeat_all" && enemies === 0) return "victory";
+        return "";
+    }
+    function finish(out: apocTypes.BattleResult, status: string, side: apocTypes.Side, index: number, why: string): void {
+        out.status = status;
+        makeEvent(out, "result", side, index, null, null, 0, -1, null, "", status + ":" + why);
+    }
+    function boundary(t: apocTypes.TrialSnapshot, out: apocTypes.BattleResult,
+                      side: apocTypes.Side, index: number, phase: string): boolean {
+        makeEvent(out, "cursor", side, index, null, null, 0, -1, null, "", phase);
+        const status = outcome(t);
+        if (status) { finish(out, status, side, index, phase); return true; }
+        return false;
+    }
+    function hit(t: apocTypes.TrialSnapshot, out: apocTypes.BattleResult, target: apocTypes.ActorState,
+                 damage: number, caster: apocTypes.ActorState, side: apocTypes.Side,
+                 index: number, move: string, tick: boolean): void {
+        if (damage <= 0 || target.hp <= 0 || !target.present) return;
+        if (target.ward && (tick || caster.trait !== "Piercer")) {
+            const blocked = Math.min(damage, power(t, target.ward));
+            damage -= blocked;
+            makeEvent(out, "ward-consumed", side, index, caster.sprite, target.sprite,
+                      blocked, -1, target.ward, move, "one damage instance");
+            target.ward = null;
+        }
+        if (damage > 0) {
+            const actual = Math.min(damage, target.hp);
+            target.hp -= actual;
+            makeEvent(out, "damage", side, index, caster.sprite, target.sprite,
+                      actual, target.hp, null, move, tick ? "venom" : "direct");
+            if (!tick && caster.trait === "Leech" && caster.hp > 0 && caster.present && actual > 0) {
+                const before = caster.hp;
+                caster.hp = Math.min(caster.maxHP, caster.hp + 1);
+                makeEvent(out, "leech", side, index, caster.sprite, caster.sprite,
+                          caster.hp - before, caster.hp, null, move, "direct hit healed caster");
+            }
+        }
+    }
+    function venom(t: apocTypes.TrialSnapshot, out: apocTypes.BattleResult,
+                   side: apocTypes.Side, index: number): void {
+        for (let i = 0; i < t.actors.length; i++) {
+            const a = t.actors[i];
+            if (a.side !== side || !a.present || a.hp <= 0 || !a.venom || a.trait === "Steadfast") continue;
+            const p = a.venom;
+            const potency = power(t, p);
+            let caster: apocTypes.ActorState = null;
+            for (let j = 0; j < t.actors.length; j++) {
+                const c = t.actors[j];
+                if (c.side === p.side && c.ability === "Venom") { caster = c; break; }
+            }
+            // Mark provenance outlives its caster; validation guarantees the original unique owner.
+            if (!caster) continue;
+            makeEvent(out, "venom-tick", side, index, caster.sprite, a.sprite,
+                      potency, -1, p, "Venom", "start of afflicted half-turn");
+            hit(t, out, a, potency, caster, side, index, "Venom", true);
+        }
+    }
+    function action(t: apocTypes.TrialSnapshot, out: apocTypes.BattleResult,
+                    side: apocTypes.Side, index: number, allTarget: Sprite): void {
+        const moves = side === apocTypes.Side.Ally ? t.lists.allyMoves : t.lists.enemyMoves;
+        const values = side === apocTypes.Side.Ally ? t.lists.allyValues : t.lists.enemyValues;
+        let reason = "";
+        if (index >= moves.length) reason = "no move entry";
+        else if (moves[index] === "Wait") reason = "Wait";
+        else if (!validMove(moves[index])) reason = "unknown move";
+        else if (index >= values.length) reason = "no numeric entry";
+        else if (values[index] === 0) reason = "zero power";
+        let caster: apocTypes.ActorState = null;
+        const move = index < moves.length ? moves[index] : "";
+        if (!reason) {
+            for (let i = 0; i < t.actors.length; i++) {
+                const a = t.actors[i];
+                if (a.side === side && a.ability === move) { caster = a; break; }
+            }
+            if (!caster) reason = "move lacks unique owner";
+            else if (!caster.present || caster.hp <= 0 || caster.held) reason = "owner inactive";
+        }
+        const helpful = move === "Mend" || move === "Ward" || move === "Empower";
+        const targetSide = helpful ? side : (side === apocTypes.Side.Ally ? apocTypes.Side.Enemy : apocTypes.Side.Ally);
+        const targetList = targetSide === apocTypes.Side.Ally ? t.lists.allyTargets : t.lists.enemyTargets;
+        let targetSprite: Sprite = null;
+        let isAll = false;
+        const chosen: apocTypes.ActorState[] = [];
+        if (!reason) {
+            if (index >= targetList.length) reason = "missing target entry";
+            else {
+                targetSprite = targetList[index]; isAll = targetSprite === allTarget;
+                if (isAll) {
+                    for (let i = 0; i < t.actors.length; i++) {
+                        const a = t.actors[i];
+                        if (a.side === targetSide && a.present && a.hp > 0) chosen.push(a);
+                    }
+                } else {
+                    const a = actorAt(t, targetSprite);
+                    if (!a) reason = "unknown Sprite reference";
+                    else if (a.side !== targetSide) reason = "wrong side Sprite reference";
+                    else if (a.present && a.hp > 0) chosen.push(a);
+                }
+                if (!reason && chosen.length === 0) reason = "no living eligible target";
+            }
+        }
+        if (reason) {
+            // Retain a known attempted target identity for the world's fizzle animation.
+            makeEvent(out, "skip", side, index, caster ? caster.sprite : null,
+                      targetSprite, 0, -1, null, move, reason);
+            return;
+        }
+        let potency = isAll ? Math.idiv(values[index] + 1, 2) : values[index];
+        let bonus: apocTypes.PowerSource = null;
+        if (caster.empower && move !== "Empower") {
+            bonus = copyPower(caster.empower);
+            potency += power(t, bonus);
+            makeEvent(out, "empower-used", side, index, caster.sprite, caster.sprite,
+                      power(t, bonus), -1, bonus, move, "next eligible cast");
+            caster.empower = null;
+        }
+        const mark = source(side, index, isAll, bonus);
+        for (let j = 0; j < chosen.length; j++) {
+            const target = chosen[j];
+            makeEvent(out, "action", side, index, caster.sprite, target.sprite,
+                      potency, -1, null, move, isAll ? "ALL recipient" : "exact target");
+            if (!target.present || target.hp <= 0) continue;
+            if (move === "Strike") hit(t, out, target, 2 * potency, caster, side, index, move, false);
+            else if (move === "Flurry") {
+                for (let k = 0; k < potency && target.hp > 0; k++) hit(t, out, target, 1, caster, side, index, move, false);
+            } else if (move === "Reap") {
+                hit(t, out, target, potency * (target.maxHP - target.hp), caster, side, index, move, false);
+            } else if (move === "Mend") {
+                const before = target.hp;
+                target.hp = Math.min(target.maxHP, target.hp + potency);
+                makeEvent(out, "heal", side, index, caster.sprite, target.sprite,
+                          target.hp - before, target.hp, null, move, "no resurrection");
+                if (caster.trait === "Cleanser" && target.venom) {
+                    makeEvent(out, "venom-cleared", side, index, caster.sprite, target.sprite,
+                              0, -1, target.venom, move, "Cleanser Mend");
+                    target.venom = null;
+                }
+            } else if (move === "Ward") {
+                target.ward = copyPower(mark);
+                makeEvent(out, "ward-set", side, index, caster.sprite, target.sprite,
+                          power(t, mark), -1, mark, move, "mark replaced");
+            } else if (move === "Venom") {
+                target.venom = copyPower(mark);
+                makeEvent(out, "venom-set", side, index, caster.sprite, target.sprite,
+                          power(t, mark), -1, mark, move, "mark replaced");
+            } else if (move === "Empower") {
+                target.empower = source(side, index, isAll, null);
+                makeEvent(out, "empower-set", side, index, caster.sprite, target.sprite,
+                          power(t, target.empower), -1, target.empower, move, "mark replaced");
+            }
+        }
+    }
+    export function resolve(value: apocTypes.TrialSnapshot, allTarget: Sprite): apocTypes.BattleResult {
+        const out = new apocTypes.BattleResult();
+        out.trace = [];
+        out.errors = validate(value, allTarget);
+        if (out.errors.length > 0) {
+            out.finalActors = [];
+            finish(out, "invalid", apocTypes.Side.Ally, -1, "validation"); return out;
+        }
+        const t = cloneTrial(value);
+        out.finalActors = t.actors;
+        const l = t.lists;
+        // MakeCode Math.max takes exactly two arguments (unlike JavaScript varargs).
+        // Keep independent lengths: short/missing companion cells deliberately fizzle.
+        let count = Math.max(l.allyMoves.length, l.allyValues.length);
+        count = Math.max(count, l.allyTargets.length);
+        count = Math.max(count, l.enemyMoves.length);
+        count = Math.max(count, l.enemyValues.length);
+        count = Math.max(count, l.enemyTargets.length);
+        if (boundary(t, out, apocTypes.Side.Ally, 0, "pass entry")) return out;
+        for (let i = 0; i < count; i++) {
+            if (boundary(t, out, apocTypes.Side.Ally, i, "before ally half-turn")) return out;
+            venom(t, out, apocTypes.Side.Ally, i);
+            if (boundary(t, out, apocTypes.Side.Ally, i, "after ally venom")) return out;
+            action(t, out, apocTypes.Side.Ally, i, allTarget);
+            if (boundary(t, out, apocTypes.Side.Ally, i, "after ally action")) return out;
+            if (boundary(t, out, apocTypes.Side.Enemy, i, "before enemy half-turn")) return out;
+            venom(t, out, apocTypes.Side.Enemy, i);
+            if (boundary(t, out, apocTypes.Side.Enemy, i, "after enemy venom")) return out;
+            action(t, out, apocTypes.Side.Enemy, i, allTarget);
+            if (boundary(t, out, apocTypes.Side.Enemy, i, "after enemy action")) return out;
+        }
+        if (boundary(t, out, apocTypes.Side.Ally, count, "pass exit")) return out;
+        finish(out, t.goal === "survive_pass" ? "victory" : "incomplete", apocTypes.Side.Ally, count, "pass finished");
+        return out;
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/goals.ts
+// Generated expected() below is literal puzzle data, never executed as learner code.
+// The checker judges real arrays, actor identities and station snapshots only.
+namespace apocGoals {
+    class Expect {
+        constructor() {}
+        lists: apocTypes.BattleSpec = null;
+        rosterIDs: string[] = [];
+        sourceMoves: string[] = [];
+        heldChoices: string[][] = [];
+        banishedChoices: string[][] = [];
+        histBefore: apocTypes.BattleSpec[] = [];
+        histAfter: apocTypes.BattleSpec[] = [];
+    }
+    function sameStrings(a: string[], b: string[]): boolean {
+        if (!a || !b || a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+        return true;
+    }
+    function sameNumbers(a: number[], b: number[]): boolean {
+        if (!a || !b || a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+        return true;
+    }
+    function samePower(a: apocTypes.PowerSource, b: apocTypes.PowerSource, depth: number): boolean {
+        if (!a || !b) return a === b;
+        if (depth > 12) return false;
+        return a.side === b.side && a.index === b.index && a.isAll === b.isAll &&
+            samePower(a.bonus, b.bonus, depth + 1);
+    }
+    function stateFor(t: apocTypes.TrialSnapshot, id: string): apocTypes.ActorState {
+        if (!t || !t.actors) return null;
+        for (let i = 0; i < t.actors.length; i++) if (t.actors[i] && t.actors[i].id === id) return t.actors[i];
+        return null;
+    }
+    function specFor(s: apocTypes.RoomSpec, id: string): apocTypes.ActorSpec {
+        if (!s || !s.battle || !s.battle.actors) return null;
+        for (let i = 0; i < s.battle.actors.length; i++) if (s.battle.actors[i] && s.battle.actors[i].id === id) return s.battle.actors[i];
+        return null;
+    }
+    function isReal(t: apocTypes.TrialSnapshot, s: Sprite): boolean {
+        if (!t || !t.actors) return false;
+        for (let i = 0; i < t.actors.length; i++) if (t.actors[i] && t.actors[i].sprite === s) return true;
+        return false;
+    }
+    function sentinel(t: apocTypes.TrialSnapshot, known: apocTypes.BattleSpec): Sprite {
+        if (!t || !t.lists || !known) return null;
+        const actual: Sprite[][] = [t.lists.allyTargets, t.lists.enemyTargets];
+        const ids: string[][] = [known.allyTargetIDs, known.enemyTargetIDs];
+        for (let k = 0; k < 2; k++) {
+            if (!actual[k] || !Array.isArray(actual[k]) || !ids[k]) return null;
+            for (let i = 0; i < ids[k].length && i < actual[k].length; i++) {
+            if (ids[k][i] === "ALL" && !isReal(t, actual[k][i])) return actual[k][i];
+            }
+        }
+        return null;
+    }
+    function matchingTarget(t: apocTypes.TrialSnapshot, sprite: Sprite, id: string,
+                            allTarget: Sprite): boolean {
+        if (id === "ALL") return !!allTarget && sprite === allTarget;
+        const actor = stateFor(t, id);
+        return !!actor && sprite === actor.sprite;
+    }
+    function matchingTargets(t: apocTypes.TrialSnapshot, a: Sprite[], ids: string[],
+                             allTarget: Sprite): boolean {
+        if (!a || !ids || a.length !== ids.length) return false;
+        for (let i = 0; i < a.length; i++) if (!matchingTarget(t, a[i], ids[i], allTarget)) return false;
+        return true;
+    }
+    function matchingLists(t: apocTypes.TrialSnapshot, expected: apocTypes.BattleSpec,
+                           allTarget: Sprite): boolean {
+        if (!t || !t.lists || !expected) return false;
+        const l = t.lists;
+        return sameStrings(l.allyMoves, expected.allyMoves) &&
+            sameNumbers(l.allyValues, expected.allyValues) &&
+            matchingTargets(t, l.allyTargets, expected.allyTargetIDs, allTarget) &&
+            sameStrings(l.enemyMoves, expected.enemyMoves) &&
+            sameNumbers(l.enemyValues, expected.enemyValues) &&
+            matchingTargets(t, l.enemyTargets, expected.enemyTargetIDs, allTarget);
+    }
+    function matchingRoster(t: apocTypes.TrialSnapshot, ids: string[]): boolean {
+        if (!t || !t.roster || !ids || t.roster.length !== ids.length) return false;
+        for (let i = 0; i < ids.length; i++) if (!matchingTarget(t, t.roster[i], ids[i], null)) return false;
+        return true;
+    }
+    function contains(a: string[], item: string): boolean {
+        for (let i = 0; i < a.length; i++) if (a[i] === item) return true;
+        return false;
+    }
+    function matchingActors(s: apocTypes.RoomSpec, before: apocTypes.TrialSnapshot,
+                            after: apocTypes.TrialSnapshot, held: string[], banished: string[]): boolean {
+        if (!s.battle || !before.actors || !after.actors ||
+            before.actors.length !== s.battle.actors.length || after.actors.length !== before.actors.length) return false;
+        for (let i = 0; i < before.actors.length; i++) {
+            const b = before.actors[i];
+            if (!b) return false;
+            const a = stateFor(after, b.id);
+            const base = specFor(s, b.id);
+            // Actor order is the room's stable display/iteration order, not a learner list.
+            if (!a || !base || !b.sprite || a.sprite !== b.sprite ||
+                b.id !== s.battle.actors[i].id || after.actors[i] !== a) return false;
+            if (b.side !== base.side || b.ability !== base.ability || b.trait !== base.trait ||
+                b.maxHP !== base.maxHP || b.hp !== base.hp || b.present !== base.present ||
+                b.held !== base.held || !samePower(b.ward, base.ward, 0) ||
+                !samePower(b.venom, base.venom, 0) || !samePower(b.empower, base.empower, 0)) return false;
+            if (a.side !== b.side || a.ability !== b.ability || a.trait !== b.trait ||
+                a.hp !== b.hp || a.maxHP !== b.maxHP ||
+                !samePower(a.ward, b.ward, 0) || !samePower(a.venom, b.venom, 0) ||
+                !samePower(a.empower, b.empower, 0)) return false;
+            // Hold and Banish may only turn flags on/off in their intended direction.
+            if (a.held !== (b.held || contains(held, b.id))) return false;
+            if (a.present !== (b.present && !contains(banished, b.id))) return false;
+        }
+        // No extra or duplicated actor references by id/sprite.
+        for (let i = 0; i < after.actors.length; i++) {
+            const a = after.actors[i];
+            if (!a || !stateFor(before, a.id)) return false;
+            for (let j = 0; j < i; j++) if (after.actors[j].id === a.id || after.actors[j].sprite === a.sprite) return false;
+        }
+        return true;
+    }
+    function snapshotAncillary(a: apocTypes.TrialSnapshot, b: apocTypes.TrialSnapshot): boolean {
+        if (!a || !b || !a.actors || !b.actors || !a.roster || !b.roster ||
+            a.goal !== b.goal || !sameStrings(a.requiredIDs, b.requiredIDs) ||
+            a.actors.length !== b.actors.length || a.roster.length !== b.roster.length ||
+            !sameStrings(a.sourceMoves, b.sourceMoves)) return false;
+        for (let i = 0; i < a.roster.length; i++) if (a.roster[i] !== b.roster[i]) return false;
+        for (let i = 0; i < a.actors.length; i++) {
+            const x = a.actors[i], y = b.actors[i];
+            if (!x || !y || x.id !== y.id || x.sprite !== y.sprite ||
+                x.hp !== y.hp || x.maxHP !== y.maxHP || x.ability !== y.ability ||
+                x.trait !== y.trait || x.side !== y.side || x.held !== y.held || x.present !== y.present ||
+                !samePower(x.ward, y.ward, 0) || !samePower(x.venom, y.venom, 0) ||
+                !samePower(x.empower, y.empower, 0)) return false;
+        }
+        return true;
+    }
+    function historyR24(records: apocTypes.StationRecord[], before: apocTypes.TrialSnapshot,
+                        after: apocTypes.TrialSnapshot, e: Expect, allTarget: Sprite): boolean {
+        if (!records || records.length !== 2 || e.histBefore.length !== 2 || e.histAfter.length !== 2) return false;
+        for (let i = 0; i < 2; i++) {
+            const r = records[i];
+            if (!r || r.station !== i + 1 || r.error || !r.before || !r.after ||
+                (r.effects && r.effects.length > 0)) return false;
+            if (!matchingLists(r.before, e.histBefore[i], allTarget) ||
+                !matchingLists(r.after, e.histAfter[i], allTarget) ||
+                !snapshotAncillary(r.before, r.after)) return false;
+            if (i === 0) {
+                if (!matchingLists(before, e.histBefore[0], allTarget) || !snapshotAncillary(before, r.before)) return false;
+            } else {
+                if (!matchingLists(records[0].after, e.histBefore[1], allTarget) ||
+                    !snapshotAncillary(records[0].after, r.before)) return false;
+            }
+        }
+        return matchingLists(after, e.histAfter[1], allTarget) && snapshotAncillary(records[1].after, after);
+    }
+    export function assess(spec: apocTypes.RoomSpec, before: apocTypes.TrialSnapshot,
+                           after: apocTypes.TrialSnapshot, records: apocTypes.StationRecord[]): apocTypes.GoalResult {
+        const out = new apocTypes.GoalResult(); out.met = false; out.messages = [];
+        if (!spec || !spec.battle || !before || !after || !before.lists || !after.lists) {
+            out.messages.push("Missing room or snapshots"); return out;
+        }
+        const e = expected(spec.room, spec.variant);
+        if (!e) { out.messages.push("Unknown room/variant goal"); return out; }
+        const target = sentinel(before, spec.battle);
+        if (!matchingLists(before, spec.battle, target) ||
+            !matchingRoster(before, spec.rosterIDs) || !sameStrings(before.sourceMoves, spec.sourceMoves) ||
+            before.goal !== spec.battle.goal || !sameStrings(before.requiredIDs, spec.battle.requiredIDs)) {
+            out.messages.push("Initial snapshot does not match authored room"); return out;
+        }
+        if (!matchingLists(after, e.lists, target) || !matchingRoster(after, e.rosterIDs) ||
+            !sameStrings(after.sourceMoves, e.sourceMoves) ||
+            after.goal !== before.goal || !sameStrings(after.requiredIDs, before.requiredIDs)) {
+            out.messages.push("Visible lists or sources do not match the task"); return out;
+        }
+        let goodEffects = false;
+        for (let i = 0; i < e.heldChoices.length; i++) {
+            if (matchingActors(spec, before, after, e.heldChoices[i], e.banishedChoices[i])) goodEffects = true;
+        }
+        if (!goodEffects) { out.messages.push("Actor effects or protected properties differ"); return out; }
+        if (spec.room === apocTypes.Room.R24 && !historyR24(records, before, after, e, target)) {
+            out.messages.push("Required Primary then Secondary station states not observed"); return out;
+        }
+        out.met = true; out.messages.push("Visible objective met"); return out;
+    }
+    // BEGIN DETERMINISTIC GENERATED GOALS
+    function expectedGroup0(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 1: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [4, 3, 4, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Decoy", "E-Decoy", "E-Raider", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 2: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 3, 3, 5, 1];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Decoy", "E-Decoy", "E-Raider", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 3: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 1, 5, 3, 6, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Decoy", "E-Decoy", "E-Raider", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 4: {
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Shaman", "E-Raider", "E-Wisp"];
+                e.rosterIDs = ["E-Raider", "E-Shaman", "E-Wisp"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Raider"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 5: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Flurry", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Shaman", "E-Raider", "E-Wisp"];
+                e.rosterIDs = ["E-Shaman", "E-Wisp", "E-Raider"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 6: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp"];
+                e.rosterIDs = ["E-Wisp", "E-Raider", "E-Shaman"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Raider"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 7: {
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Wisp", "E-Raider", "E-Wisp"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 8: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Wisp", "E-Raider", "E-Wisp"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 9: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Wisp", "E-Raider", "E-Wisp"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup1(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 10: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 3, 1, 1, 3];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 11: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 1, 3, 1, 1, 4];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 12: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 1, 1, 3, 1, 1, 5];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 13: {
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [2, 6, 2, 2, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Decoy", "E-Decoy", "E-Boss", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 14: {
+                b.allyMoves = ["Wait", "Strike", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Decoy", "E-Decoy", "E-Boss", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 15: {
+                b.allyMoves = ["Wait", "Wait", "Strike", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Decoy", "E-Decoy", "E-Boss", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 16: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 6, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 17: {
+                b.allyMoves = ["Wait", "Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [1, 6, 2, 1, 3];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 18: {
+                b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Mend", "Strike"];
+                b.allyValues = [1, 6, 1, 2, 1, 3];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup2(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 19: {
+                b.allyMoves = ["Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 20: {
+                b.allyMoves = ["Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 21: {
+                b.allyMoves = ["Wait", "Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 6, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 22: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 3, 1, 1, 3];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 23: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 1, 3, 1, 1, 4];
+                b.enemyMoves = ["Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 24: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 1, 1, 3, 1, 1, 5];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 25: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [4, 1, 3, 2, 2];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 26: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Strike", "Wait"];
+                b.allyValues = [6, 1, 3, 3, 2, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 27: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Strike", "Wait", "Wait"];
+                b.allyValues = [4, 1, 3, 4, 2, 1, 1];
+                b.enemyMoves = ["Strike", "Strike", "Wait", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup3(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 28: {
+                b.allyMoves = ["Ward", "Mend", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 5, 3];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 29: {
+                b.allyMoves = ["Ward", "Mend", "Wait", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 5, 4];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 30: {
+                b.allyMoves = ["Ward", "Mend", "Wait", "Wait", "Wait", "Wait"];
+                b.allyValues = [1, 1, 1, 1, 1, 1];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 5, 5];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 31: {
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 8];
+                b.enemyMoves = ["Strike", "Wait", "Wait"];
+                b.enemyValues = [3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Wisp", "ALL"];
+                e.rosterIDs = ["E-Wisp", "E-Shaman"]; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push(["E-Raider"]);
+                return e;
+            }
+            case 32: {
+                b.allyMoves = ["Ward", "Mend", "Strike"];
+                b.allyValues = [1, 2, 8];
+                b.enemyMoves = ["Flurry", "Wait", "Wait"];
+                b.enemyValues = [6, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Wisp", "ALL"];
+                e.rosterIDs = ["E-Raider", "E-Shaman"]; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push(["E-Wisp"]);
+                return e;
+            }
+            case 33: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 8];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Wisp", "ALL"];
+                e.rosterIDs = ["E-Shaman", "E-Wisp"]; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push(["E-Raider"]);
+                return e;
+            }
+            case 34: {
+                b.allyMoves = ["Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 35: {
+                b.allyMoves = ["Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 36: {
+                b.allyMoves = ["Wait", "Wait", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 3, 3, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 6, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Boss", "E-Shaman", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup4(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 37: {
+                b.allyMoves = ["Strike", "Reap", "Strike", "Flurry", "Reap", "Strike"];
+                b.allyValues = [2, 1, 2, 9, 2, 2];
+                b.enemyMoves = ["Strike", "Flurry", "Venom", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 4, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Plague", "ALL", "E-Plague", "E-Wisp"];
+                e.rosterIDs = ["E-Raider", "E-Wisp", "E-Plague"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Plague", "E-Raider", "E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 38: {
+                b.allyMoves = ["Strike", "Reap", "Strike", "Flurry", "Reap", "Strike"];
+                b.allyValues = [2, 1, 2, 9, 2, 2];
+                b.enemyMoves = ["Venom", "Strike", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 2, 4, 1, 1, 1];
+                b.allyTargetIDs = ["A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Plague", "ALL", "E-Plague", "E-Wisp"];
+                e.rosterIDs = ["E-Plague", "E-Raider", "E-Wisp"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Plague", "E-Raider", "E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 39: {
+                b.allyMoves = ["Strike", "Reap", "Strike", "Flurry", "Reap", "Strike"];
+                b.allyValues = [2, 1, 2, 9, 2, 2];
+                b.enemyMoves = ["Flurry", "Venom", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 3, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester", "A-Harvester"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Plague", "ALL", "E-Plague", "E-Wisp"];
+                e.rosterIDs = ["E-Wisp", "E-Plague", "E-Raider"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Plague", "E-Raider", "E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 40: {
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 4];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Blade", "A-Medic", "A-Blade", "A-Blade"];
+                b.enemyTargetIDs = ["E-Small", "E-Boss", "E-Boss", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 41: {
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 5];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Blade", "A-Medic", "A-Blade", "A-Blade"];
+                b.enemyTargetIDs = ["E-Small", "E-Boss", "E-Boss", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 42: {
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike"];
+                b.allyValues = [1, 1, 2, 6];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Blade", "A-Medic", "A-Blade", "A-Blade"];
+                b.enemyTargetIDs = ["E-Small", "E-Boss", "E-Boss", "E-Boss"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 43: {
+                b.allyMoves = ["Venom", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [2, 2, 1, 3, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Flurry", "Wait"];
+                b.enemyValues = [9, 1, 9, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Wisp", "E-Wisp", "E-Shaman"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 44: {
+                b.allyMoves = ["Venom", "Wait", "Mend", "Wait", "Strike", "Strike"];
+                b.allyValues = [2, 1, 3, 1, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Flurry", "Wait"];
+                b.enemyValues = [1, 9, 1, 9, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Wisp", "E-Wisp", "E-Shaman"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 45: {
+                b.allyMoves = ["Venom", "Wait", "Mend", "Strike", "Wait", "Strike", "Strike"];
+                b.allyValues = [2, 1, 1, 2, 1, 3, 3];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Flurry", "Wait"];
+                b.enemyValues = [1, 1, 9, 1, 9, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Wisp", "E-Wisp", "E-Shaman"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup5(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 46: {
+                b.allyMoves = ["Ward", "Strike", "Ward", "Strike", "Strike"];
+                b.allyValues = [3, 3, 3, 3, 3];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 47: {
+                b.allyMoves = ["Strike", "Ward", "Strike", "Ward", "Strike", "Strike"];
+                b.allyValues = [3, 3, 3, 3, 3, 3];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 48: {
+                b.allyMoves = ["Ward", "Strike", "Strike", "Ward", "Strike", "Strike"];
+                b.allyValues = [3, 3, 3, 3, 3, 3];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 49: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [2, 2, 2, 1, 5];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 50: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [2, 2, 2, 1, 6];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Mend", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 51: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Reap"];
+                b.allyValues = [2, 2, 2, 1, 7];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Ward", "Mend", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 52: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [2, 2, 1, 1, 5];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 53: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 2, 2, 1, 1, 6];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 54: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Wait", "Strike"];
+                b.allyValues = [1, 1, 2, 2, 1, 1, 7];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup6(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 55: {
+                b.allyMoves = ["Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [5, 2, 3, 2];
+                b.enemyMoves = ["Strike", "Flurry", "Venom", "Wait"];
+                b.enemyValues = [2, 2, 3, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = ["E-Raider", "E-Wisp"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Raider"]); e.banishedChoices.push([]);
+                e.heldChoices.push(["E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 56: {
+                b.allyMoves = ["Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [5, 2, 3, 2];
+                b.enemyMoves = ["Flurry", "Strike", "Venom", "Wait"];
+                b.enemyValues = [2, 2, 3, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = ["E-Wisp", "E-Raider"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Wisp"]); e.banishedChoices.push([]);
+                e.heldChoices.push(["E-Raider"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 57: {
+                b.allyMoves = ["Wait", "Ward", "Strike", "Mend", "Strike"];
+                b.allyValues = [1, 5, 2, 3, 2];
+                b.enemyMoves = ["Wait", "Strike", "Flurry", "Venom", "Wait"];
+                b.enemyValues = [1, 2, 2, 3, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = ["E-Wisp", "E-Raider"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Wisp"]); e.banishedChoices.push([]);
+                e.heldChoices.push(["E-Raider"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 58: {
+                b.allyMoves = ["Wait", "Strike", "Flurry", "Reap", "Strike", "Reap"];
+                b.allyValues = [1, 2, 2, 2, 1, 9];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Wait", "Flurry", "Strike"];
+                b.enemyValues = [4, 4, 2, 3, 3, 3];
+                b.allyTargetIDs = ["A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp", "ALL"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 59: {
+                b.allyMoves = ["Wait", "Strike", "Flurry", "Reap", "Strike", "Reap"];
+                b.allyValues = [1, 2, 2, 2, 1, 9];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Wait", "Strike", "Flurry"];
+                b.enemyValues = [4, 4, 4, 3, 3, 3];
+                b.allyTargetIDs = ["A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp", "ALL"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 60: {
+                b.allyMoves = ["Wait", "Strike", "Flurry", "Reap", "Strike", "Reap"];
+                b.allyValues = [1, 3, 2, 2, 1, 9];
+                b.enemyMoves = ["Wait", "Wait", "Ward", "Wait", "Flurry", "Strike"];
+                b.enemyValues = [4, 4, 2, 3, 3, 3];
+                b.allyTargetIDs = ["A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger", "A-Ranger"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Shaman", "E-Raider", "E-Wisp", "ALL"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 61: {
+                b.allyMoves = ["Strike", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Decoy", "E-Raider", "E-Raider", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 62: {
+                b.allyMoves = ["Wait", "Strike", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Decoy", "E-Raider", "E-Raider", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 63: {
+                b.allyMoves = ["Wait", "Wait", "Strike", "Ward", "Mend", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 6, 2, 2, 1];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 1, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Decoy", "E-Raider", "E-Raider", "E-Decoy"];
+                e.rosterIDs = []; e.sourceMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup7(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 64: {
+                b.allyMoves = ["Strike", "Empower", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [4, 2, 2, 2, 2, 3];
+                b.enemyMoves = ["Strike", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Blade", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Shaman", "E-Wisp", "E-Shaman", "E-Shaman", "E-Shaman"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 65: {
+                b.allyMoves = ["Strike", "Empower", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [5, 2, 2, 2, 2, 3];
+                b.enemyMoves = ["Strike", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 2, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Blade", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Shaman", "E-Wisp", "E-Shaman", "E-Shaman", "E-Shaman"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 66: {
+                b.allyMoves = ["Strike", "Empower", "Strike", "Mend", "Strike", "Strike"];
+                b.allyValues = [5, 2, 2, 2, 2, 3];
+                b.enemyMoves = ["Strike", "Ward", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 3, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Blade", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Shaman", "E-Wisp", "E-Shaman", "E-Shaman", "E-Shaman"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 67: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Strike", "Strike"];
+                b.allyValues = [3, 2, 2, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait"];
+                b.enemyValues = [3, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Shaman", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 68: {
+                b.allyMoves = ["Wait", "Ward", "Mend", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 5, 2, 2, 3, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait"];
+                b.enemyValues = [1, 4, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Shaman", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 69: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Mend", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 1, 7, 2, 2, 4, 2];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Strike", "Wait"];
+                b.enemyValues = [1, 1, 5, 3, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Shaman", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 70: {
+                b.allyMoves = ["Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [4, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 2, 2, 2];
+                  b.enemyMoves = ["Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [4, 4, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histBefore.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [4, 4, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histAfter.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [4, 4, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histBefore.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [4, 4, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histAfter.push(b); }
+                return e;
+            }
+            case 71: {
+                b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 1, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 5, 5, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 5, 5, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histBefore.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 5, 5, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histAfter.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 5, 5, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histBefore.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 5, 5, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histAfter.push(b); }
+                return e;
+            }
+            case 72: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [1, 1, 1, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 6, 6, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 1, 6, 6, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histBefore.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 1, 6, 6, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histAfter.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 1, 6, 6, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histBefore.push(b); }
+                { const b = new apocTypes.BattleSpec();
+                  b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Strike", "Strike"];
+                  b.allyValues = [1, 1, 1, 2, 2, 2];
+                  b.enemyMoves = ["Wait", "Wait", "Wait", "Wait", "Wait", "Wait", "Wait"];
+                  b.enemyValues = [1, 1, 6, 6, 1, 1];
+                  b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                  b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                  e.histAfter.push(b); }
+                return e;
+            }
+        }
+        return null;
+    }
+    function expectedGroup8(e: Expect, key: number): Expect {
+        const b = e.lists;
+        switch (key) {
+            case 73: {
+                b.allyMoves = ["Ward", "Strike", "Ward", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [6, 4, 6, 4, 6, 4, 4];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [4, 1, 4, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 74: {
+                b.allyMoves = ["Wait", "Ward", "Strike", "Ward", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 6, 4, 6, 4, 6, 4, 4];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 4, 1, 4, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 75: {
+                b.allyMoves = ["Wait", "Wait", "Ward", "Strike", "Ward", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [1, 1, 6, 4, 6, 4, 6, 4, 4];
+                b.enemyMoves = ["Wait", "Wait", "Strike", "Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 1, 4, 1, 4, 1, 4, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = [];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 76: {
+                b.allyMoves = ["Ward", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [2, 2, 2, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Strike", "Wait", "Strike", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 77: {
+                b.allyMoves = ["Strike", "Ward", "Mend", "Ward", "Strike", "Strike"];
+                b.allyValues = [2, 2, 2, 2, 2, 2];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                b.enemyValues = [1, 2, 1, 2, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Wait", "Strike", "Wait", "Strike", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 78: {
+                b.allyMoves = ["Ward", "Mend", "Strike", "Ward", "Strike", "Strike", "Strike"];
+                b.allyValues = [2, 2, 2, 2, 2, 2, 2];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 1, 1, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider", "E-Raider"];
+                e.rosterIDs = []; e.sourceMoves = ["Strike", "Wait", "Wait", "Strike", "Wait", "Wait", "Wait"];
+                e.heldChoices.push([]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 79: {
+                b.allyMoves = ["Mend", "Strike", "Strike", "Strike", "Strike", "Strike", "Flurry", "Strike"];
+                b.allyValues = [1, 2, 2, 2, 2, 2, 8, 3];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Wait", "Flurry", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 3, 1, 2, 6, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-King", "E-King", "E-King", "E-King", "E-King", "E-King", "E-Raider", "E-Wisp"];
+                e.rosterIDs = ["E-Raider", "E-Wisp"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Raider", "E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 80: {
+                b.allyMoves = ["Mend", "Strike", "Strike", "Strike", "Strike", "Strike", "Flurry", "Strike"];
+                b.allyValues = [1, 2, 2, 2, 2, 2, 8, 3];
+                b.enemyMoves = ["Strike", "Wait", "Wait", "Flurry", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [3, 2, 1, 6, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-King", "E-King", "E-King", "E-King", "E-King", "E-King", "E-Raider", "E-Wisp"];
+                e.rosterIDs = ["E-Wisp", "E-Raider"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Raider", "E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+            case 81: {
+                b.allyMoves = ["Mend", "Strike", "Strike", "Strike", "Strike", "Strike", "Flurry", "Strike"];
+                b.allyValues = [1, 2, 2, 2, 2, 2, 8, 3];
+                b.enemyMoves = ["Wait", "Strike", "Wait", "Flurry", "Wait", "Wait", "Wait", "Wait"];
+                b.enemyValues = [2, 3, 1, 6, 2, 1, 1, 1];
+                b.allyTargetIDs = ["A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic", "A-Medic"];
+                b.enemyTargetIDs = ["E-King", "E-King", "E-King", "E-King", "E-King", "E-King", "E-Raider", "E-Wisp"];
+                e.rosterIDs = ["E-Raider", "E-Wisp"]; e.sourceMoves = [];
+                e.heldChoices.push(["E-Raider", "E-Wisp"]); e.banishedChoices.push([]);
+                return e;
+            }
+        }
+        return null;
+    }
+    function expected(room: apocTypes.Room, variant: number): Expect {
+        if (room < 1 || room > 27 || variant < 1 || variant > 3 ||
+            room !== Math.floor(room) || variant !== Math.floor(variant)) return null;
+        const e = new Expect(); e.lists = new apocTypes.BattleSpec();
+        const key = (room - 1) * 3 + variant;
+        if (room <= 3) return expectedGroup0(e, key);
+        if (room <= 6) return expectedGroup1(e, key);
+        if (room <= 9) return expectedGroup2(e, key);
+        if (room <= 12) return expectedGroup3(e, key);
+        if (room <= 15) return expectedGroup4(e, key);
+        if (room <= 18) return expectedGroup5(e, key);
+        if (room <= 21) return expectedGroup6(e, key);
+        if (room <= 24) return expectedGroup7(e, key);
+        if (room <= 27) return expectedGroup8(e, key);
+        return null;
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/art.ts
+// GENERATED by tools/import-utumno.py build. Conserve usage.
+// Palette: implementation/palette.json. Factories return fresh mutable native Images.
+// Supplied art provenance + honest inspection scope: docs/ART_CATALOG.md.
+namespace apocArt {
+    export function actor(artKey: string, side: apocTypes.Side): Image {
+        if (artKey == "E-Raider") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f . . . . . . . . . . .
+        . . . . . . . . f d 3 3 3 f . . . . . . . . . .
+        . . . . . . f f e d 3 3 3 d f f f . . . . . . .
+        . . . . . . f d d f 3 f f d e d f . . . . . . .
+        . . . . . . . f d 3 1 3 3 d e f . . . . . . . .
+        . . . . . . . . f d 3 d 2 e f . . . . . . . . .
+        . . . . . . . . b e d e e e b . . . . . . . . .
+        . . . . . . . f f b e e e b f f . . . . . . . .
+        . . . . . . f d f b f f f b f d d . . . . . . .
+        . . . . . . f d b f b b b f b d e f . . . . . .
+        . . . . . f e e f f b b b f f e e b f . . . . .
+        . . . f f b e e e e f f f e e f e b f . . . . .
+        . . f d e d f . f b 2 2 e b b . f d e f . . . .
+        . . f e e f . f f f b b b f f f f e e f . . . .
+        . . . . . . . f f f b b b f f f . f . . . . . .
+        . . . . . . . f f f f f f b f f f f f f . . . .
+        . . . . . . . f d b b b b f e f f f f f f . . .
+        . . . . . . . f 3 e f f f e 3 e f f f f f . . .
+        . . . . . . f e e e f f f e e e f f f f . . . .
+        . . . . . . f e e f f f f e e e f f . . . . . .
+        . . . . . . 2 2 e f f f . f e 2 2 . . . . . . .
+        . . . . . . f f f f . . . . f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Decoy") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f . . . . . . . . . . .
+        . . . . . . . . . f e e c f . . . . . . . . . .
+        . . . . . . f . . e d e e e . . f . . . . . . .
+        . . . . . f 2 2 c e e e e 2 c 2 2 f . . . . . .
+        . . . . . f 2 2 2 2 e c 2 2 2 e 2 f . . . . . .
+        . . . . . . f 2 e e e c e 5 e e f . . . . . . .
+        . . . . . . . f 2 2 2 2 2 e f f . . . . . . . .
+        . . . . . . . f f e 2 2 e 2 f e f f . . . . . .
+        . . . . . f e f c b 1 b b 2 c e e e e . . . . .
+        . . . . . f e e f f 2 2 2 f f e c e 2 f . . . .
+        . . . . f e 2 c e c f f f e e b 2 e 2 f . . . .
+        . . f f e 2 2 e f f e f e f f e f f e e f . . .
+        . f b 1 2 2 e f f e f e f e e f . f e e f . . .
+        . f 2 e e e f . f 2 c f c f 2 f . . f e 2 f . .
+        . . f f . . . f f b b b b b b c f . f 2 1 f . .
+        . . . . . . . f b b c b c b c f f . . f f . . .
+        . . . . . . . f c c f b f f f e f f f . . . . .
+        . . . . . . . f e 2 e f f 2 2 e f f f f f . . .
+        . . . . . . . f 2 2 e f f f 2 e f f f f f f . .
+        . . . . . . . f 2 2 f f f f e e f f f f f . . .
+        . . . . . . f 1 2 e f . . f b e 1 f f . . . . .
+        . . . . . . f f f f . . . . f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Plague") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . f f f . . . . .
+        . . . . . . . . . . . . . . f d e e e e f . . .
+        . . . . . . . . . . . . . f 5 e e f e e 5 f . .
+        . . . . . . . . . . . . . . f e f . . f e d . .
+        . . . . . . . . . . . . . . . 5 d f . . e e . .
+        . . . . . . . . . . . . . . . 5 f . . . 5 d f .
+        . . . . . . . . . . . . . . . f . . . . 5 d f .
+        . . . . . . . . . . . . . . . . . . . . d e f .
+        . . . . . . . f 7 f . e e . . . . . . f e e . .
+        . . . . . f . f f e f f f f . . . . f 5 e f . .
+        . . . . . f e f 7 f e . f f . . . f d e f f . .
+        . . . f f . f f f f f f f f . f f 4 f e f . . .
+        . . d 5 d e . . f f f f 5 d 5 5 e e f f f f f .
+        . . d 5 e e f f f 5 5 d 5 e d e e e f f f f f .
+        . f f e e d d d 5 d d e e e e e f f f 7 f . . .
+        . f f e d f 7 d 4 e e e e f f 7 f f f 7 . . . .
+        . f f f e d d e e e e e e e f 7 f f f 5 . . . .
+        . . . . f f e e e f f f . 4 f f e f f 7 . . . .
+        . . . f e d d e f d f . . e f f 7 f f 7 . . . .
+        . . . f e e e e 4 e f . . 7 f f 7 f . f . . . .
+        . . f e f f e e e f . . . e f f e 7 . . . . . .
+        . . . . f f f f f . . . . . f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Boss") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . 6 . . . . . . . . . . . . . . . 6 6 6 6 6 . .
+        . . 2 2 6 6 6 6 6 6 . . . . 6 2 2 2 2 2 2 . . .
+        . . . 2 2 2 2 2 6 2 . . . 6 6 6 6 2 2 2 . . . .
+        . . . 2 2 6 2 2 7 7 6 . . 6 2 2 2 2 6 2 . . . .
+        . . 2 2 6 2 7 7 7 7 6 . . 6 2 2 2 2 2 2 . . . .
+        . . 6 2 2 2 7 6 6 6 7 6 7 6 2 2 2 2 2 2 6 . . .
+        . . . 2 2 7 7 6 7 7 6 6 7 . 6 2 2 2 2 . . . . .
+        . . . . 2 7 7 6 2 7 7 6 6 7 6 2 2 2 . . . . . .
+        . . . . 1 1 7 1 . 2 7 7 7 6 7 7 7 . . . . . . .
+        . . . . b 7 7 7 6 7 6 7 7 6 6 7 7 7 . . . . . .
+        . . . . . 7 7 7 2 6 6 7 7 6 6 6 6 6 7 7 . . . .
+        . . . . . 6 2 7 7 7 6 7 7 6 6 6 6 6 6 7 . . . .
+        . . . . 6 6 7 7 7 7 6 7 7 7 6 6 6 . 1 7 7 . . .
+        . . 6 6 6 6 1 6 7 7 6 7 7 7 6 6 7 f f 1 7 . . .
+        . . . 6 1 . . . 6 . 6 6 7 7 6 7 6 7 6 f 6 . . .
+        . 1 . 1 1 . . . . 6 6 6 7 7 6 7 6 6 6 6 6 f . .
+        . . . 1 . . . . 6 7 6 6 7 7 7 6 7 6 6 6 f f . .
+        . . . . . . . 6 6 6 6 6 f 7 7 6 6 7 6 f f . . .
+        . . . . . . . 6 6 6 6 f f f f 6 6 6 7 f f . . .
+        . . . . . . 6 6 6 6 f f f f f f 6 6 6 6 f f . .
+        . . . . . 6 6 6 6 6 f f f . . f f 6 6 6 6 f . .
+        . . . . f f f f f f f . . . . f f f f f f . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-King") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . d 3 3 3 3 . . . . . . . . . . .
+        . . . . . . . . 3 3 3 3 d d . . . . . . . . . .
+        . . . . 3 3 3 3 2 3 3 d 2 d d 3 3 . . . . . . .
+        . . . . . . e 1 3 3 1 3 3 d e . . . . . . . . .
+        . . . 2 . . . . 2 2 2 1 d d e . . . . 2 . . . .
+        . . . . . . 2 2 e e e e e 2 e 2 2 . . . . . . .
+        . . . 2 2 2 2 2 2 2 2 2 2 2 2 e 2 e . . . . . .
+        . . . . 2 2 e f 2 2 2 2 2 2 e e 2 2 2 2 . . . .
+        . . . e 2 2 e e 2 e 2 2 e 2 2 e e e 2 . . . . .
+        . . . 2 e 2 e . 2 2 2 2 2 2 e . e 2 2 2 . . . .
+        . . . b b b e . 2 e 2 e 2 2 . . f b b f . . . .
+        . . . b b b . . 2 2 2 2 2 e 2 . f f b d . . . .
+        . . 3 b f f . 2 2 d 4 d e 2 2 e f d 3 d f . . .
+        . . d d f . 2 e 2 e 2 2 2 e e 2 f e d f f . . .
+        . . . e . 2 e 2 e 2 e 2 2 e e 2 2 f f f f . . .
+        . . . . . 2 2 e e f 2 2 f e e 2 2 f f f f . . .
+        . . . . . 2 3 3 e f 2 f f f e 3 2 f f f f . . .
+        . . . . . . 2 2 f f f f f f f 2 2 f f f f . . .
+        . . . . . . 2 2 f f f f f f f 2 2 f f f f . . .
+        . . . . . . 2 2 f f f f f f f 2 2 f f f . . . .
+        . . . . . 2 2 2 f f f f f f f 2 2 2 f f . . . .
+        . . . . . . f f . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Wisp") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 9 9 9 . . . . . . . .
+        . . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 . . .
+        . . 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 . .
+        . . . . . 9 9 9 9 9 9 9 9 9 9 . . . . . . . . .
+        . . . . . . 9 9 9 9 9 9 9 . . . . . . . . . . .
+        . . . . . . . . . . 9 9 9 9 . . . . . 9 9 9 9 .
+        . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . .
+        . . . . . . . . 9 9 9 9 . . . . . . . . . . . .
+        . . . . . . . . . . . 9 9 9 9 9 . . . . . . . .
+        . . . . . . . . . . . . 9 9 9 9 9 9 9 . . . . .
+        . . 9 9 9 9 . . . . . . 9 9 9 9 . . . . . . . .
+        . . . . . . . . . . . 9 9 . . . . . . . . . . .
+        . . . . . . . . 9 9 9 9 9 . . . . . . . . . . .
+        . . . . . . . . c c c c c . 9 9 9 9 9 9 9 9 . .
+        . . . . . . . . . . . c c . . . . . . . . . . .
+        . . . . . . . . . . . . c . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . c . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Small") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . e e e e . . . . . . . . . .
+        . . . . . . . . . e e e e e e e e 3 3 3 . . . .
+        . . . . . . . e e e 2 e e e e e e e f f e f . .
+        . . . . . . . e e e e 2 2 e e e e f f f e f . .
+        . . . . . . . e 2 e e e e e e e e f f f f d f .
+        . . . 2 . e e e e e e e e e e e e f f f f e f .
+        . . . 2 2 e e 2 e 2 e e e e e e e f f f f e f .
+        . . . d 2 e 2 2 e e e e e e e e e f f f 3 f f .
+        . . . e 2 e 3 2 e e e e e e e e f f f . 3 f . .
+        . . e e e e e e e e e f f e e e f . . . d f . .
+        . . e e e 1 e f f e f e f f d f f . . 3 e f . .
+        . f e e e e f f f f f f f f f f . . . 3 d . . .
+        . f f 1 f e f 3 3 f f . . . . . 3 d e f f . . .
+        . . f f f f f f f f . . . . . . f f f f . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Shaman") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f . . . . . . . . . . . .
+        . . . . . . . . . . f f . f f . . . . . . . . .
+        . . . . . . . . . . f f f f f . . . . . . . . .
+        . . . . . . . . . . f 8 8 8 f c . . . . . . . .
+        . . . . . . . . . . c c c f 8 c c . . . . . . .
+        . . . . . . . . . f f f f b c f f . . . . . . .
+        . . . . . . . . f 4 b b b b e 8 4 f . . . . . .
+        . . . . . . . . f e b b 2 f 8 c e 4 f . . . . .
+        . . . . . . . f e 8 f f 4 e 4 e f e 4 . . . . .
+        . . . . . . . 4 e e e e e e e f . e e f . . . .
+        . . . . . f f e e e e e e e e f . f e f . . . .
+        . . . . f e 8 e e f e 4 e e 4 f . f 8 f . . . .
+        . . . . f e f . . . 5 5 5 5 4 4 f 4 4 . . . . .
+        . . . . . f . . . f 5 5 5 5 4 4 f e e . . . . .
+        . . . . . . . . f 1 5 4 4 5 4 4 f . . . . . . .
+        . . . . . . . . f 1 1 5 4 4 4 4 f . . . . . . .
+        . . . . . . . . f 1 1 1 4 4 4 4 f . . . . . . .
+        . . . . . . . . f 4 9 9 9 4 4 4 e f f f . . . .
+        . . . . . . . . f e e f f f e e e f f f . . . .
+        . . . . . . . . f f c f f f f 8 c f f . . . . .
+        . . . . . . . f e 4 e f f . f e 4 f f . . . . .
+        . . . . . . . f f f f f . . f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "bat") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . f f . . . . . . . . . . . . . . . . f f . .
+        . . d d e f . . . . . . . . . . . . f e d d . .
+        . . f b d e . . . . . . . . . . . . e d b f . .
+        . . . f d d e f . . . . . . . . f e d d f . . .
+        . . . f d d e f . . . . f . . . f e d d f . . .
+        . . . f d d e f f f b . f f . f f d d d f . . .
+        . . . f b b d e f f d f f f . f e d b b f . . .
+        . . . . d d b b f b d b d b f e b b d d . . . .
+        . . . f d f d d e b f 8 b b f b d d f d f . . .
+        . . f f e d d d b b f f 1 b f d d d b e f f . .
+        . . . . f b b b e b b f c b f e b d f f . . . .
+        . . . . f b e f f e b f f e f e e b . . . . . .
+        . . . . . f f f f e b b f e f f e f . . . . . .
+        . . . . . f f f f e b d d e f f e f . . . . . .
+        . . . . . . . . . f f f f f . . f . . . . . . .
+        . . . . . . . . . f e f f f . . . . . . . . . .
+        . . . . . . . . . . . f . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . f f f f f f f f f f f f . . . . . .
+        . . . . . . f f f f f f f f f f f f . . . . . .
+        . . . . . . . . . . . f f f . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "wolf") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . b . . . . . . .
+        . . . . . . . . . . . . . b b b b b b . . . . .
+        . . . . . . . . . . . . b b . b b b b b . . . .
+        . . . . . . . . . . . . . . . . . b b b b . . .
+        . . . . . . . . . . . . . . . . . . . b b f f .
+        . . . . . . . . . . . . . . . b b . b b b f f .
+        . . . . . . . . . . . . . b b b b b b f f f f .
+        . . . . . . . . . . . . b b b b b b b f f f f .
+        . . . . . . . . . . . b b b b b b b b f f f f .
+        . . . . . . . b b b b b b b b b b b b b f f f .
+        . . . . . . b b b b b b b b b b b b b b f f f .
+        . . . . b . b b b b b b b b b f b b b b f f . .
+        . . . . b b b b b b b b b b f f f b b b b f . .
+        . . . b b b b b b b b b f f f f f f f b b f . .
+        . . . b b b b b 1 b b b f f f f f f b b f f . .
+        . . 1 f b b b 1 b b b b f f f . f f b f f . . .
+        . . 1 1 1 1 b 1 b f b b f f . . . . . . . . . .
+        . . 1 1 1 b b b f f b b f f . . . . . . . . . .
+        . b 1 b 2 b b f f f b b f . . . . . . . . . . .
+        . b 2 2 b b f f f b b f f . . . . . . . . . . .
+        . . b b b f f f b b b f . . . . . . . . . . . .
+        . . . . . . . . f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "jelly") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . f f f f f . . . . . . . . . .
+        . . . . . . . f 2 4 4 4 2 2 e f . . . . . . . .
+        . . . . . . f 2 2 4 5 4 4 2 2 e f . . . . . . .
+        . . . . . f 2 2 4 2 2 4 4 2 4 2 2 e . . . . . .
+        . . . . f e 2 4 2 2 4 2 2 2 2 2 2 e f . . . . .
+        . . . . 2 2 2 2 2 2 2 2 2 2 4 2 2 2 2 f . . . .
+        . . . . 2 2 2 2 2 2 2 e e 2 2 4 2 2 2 e . . . .
+        . . . f 2 2 2 2 2 e 2 2 2 2 2 e 2 2 2 2 f . . .
+        . . . f 2 2 2 e e f e e e 2 e 2 e 2 2 4 e f . .
+        . . f e 2 f e e f e e f 2 e f e 2 2 2 2 5 e . .
+        . . 2 2 2 2 f 2 f f f 2 e e 2 2 f f e 4 e 2 f .
+        . f 2 2 2 f 2 2 2 2 f 2 2 4 4 2 2 2 f f 2 f . .
+        . . f f . . f e 2 2 2 f . 2 2 f e 2 2 f . . . .
+        . . . . . . . f e 2 2 f . f f . f f 2 2 . . . .
+        . . . . . . . . . . f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "skeleton") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . f f f . . . . . . . . . . . . .
+        . . . . . . . . 1 b b f . . . . . . . . . . . .
+        . . . . . . . f 1 9 b f . . . . . . . . . . . .
+        . . . . . . . f 1 1 9 9 f . . . . . . . . . . .
+        . . . . . . . f 1 1 b . f . . . . . . . . . . .
+        . . . . . . . . 1 b f 1 9 f . . . . . . . . . .
+        . . . . . . . . f f 1 b 1 1 f . . . . . . . . .
+        . . . . . . . . . f c c c c b f f . . . . . . .
+        . . . . . . . . f b 1 c 1 1 9 1 b f . . . . . .
+        . . . . . . . f 1 b c c f c b b b f . . . . . .
+        . . . . . . f 9 b f 1 c 1 1 b f 9 1 f . . . . .
+        . . . . . f 1 b . . f 1 1 1 b . f 1 f . . . . .
+        . . . . f 1 1 f . f 1 1 b b f . f 1 f . . . . .
+        . . . . . f f . f 1 b b b b f f 1 f . . . . . .
+        . . . . . . . . f 1 b f 1 b f f 1 f . . . . . .
+        . . . . . . . . f 1 b f 1 9 f . f . . . . . . .
+        . . . . . . . . 1 1 f . f 1 9 . . . . . . . . .
+        . . . . . . . . 1 1 f . f 1 9 f f . . . . . . .
+        . . . . . . . . f 1 b f f f 1 f f f . . . . . .
+        . . . . . . . . f 1 f f f f f f f f . . . . . .
+        . . . . . . . f 1 f f f f 1 1 f . . . . . . . .
+        . . . . . . . . f . f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "lich") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f . . . . . . . . . .
+        . . f 1 1 f . . . . . f b f f . . . . . . . . .
+        . . . 1 f f . . . . f b 1 1 f . . . . . . . . .
+        . . f b 1 f . . . . f b 1 b f f . . . . . . . .
+        . . f 1 b . . . . . f 1 1 1 f f . . . . . . . .
+        . . . f b . . . . f b f f f b f b f . . . . . .
+        . . . f b . . . f f b f f f b f f f f . . . . .
+        . . . f b . . . b f f b b b f f f f f . . . . .
+        . . . f 1 f f b b f f b b b b f f b b f f . . .
+        . . . b b f b b b f b f f f f b f b f f f . . .
+        . . . f 1 f b b f f f f b f f f f f f b f . . .
+        . . . f 1 f b b f f f f b f f f f f f b f f . .
+        . . . f 1 f b f f f f b b f b f . f f f f . . .
+        . . . f 1 f f f f . f b b f b f . f f f f . . .
+        . . . . f f f f f . f b b b b f . . f . . . . .
+        . . . . f f f f f . f f f b b f . . . . . . . .
+        . . . . f f f f . . f f f b b b f . . . . . . .
+        . . . . f f . . . . f f f b f b f f f f f . . .
+        . . . . f f . . . f f b f b f b f f f f f . . .
+        . . . . . b f . f . f f f f f f f f f f f . . .
+        . . . . . b f f . . b b f f f b f f f f . . . .
+        . . . . . f . . . f f f f . f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "zombie") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . d . . . . . . . . . .
+        . . . . . . . b b d d d b . . . . . . . . . . .
+        . . . . . . . . b d d 2 d b . . . . . . . . . .
+        . . . . . . . . d d d d d b . . . . . . . . . .
+        . . . . . . . . d f f d f b . 1 . . . . . . . .
+        . . . . . . . . d d d 1 1 b 1 1 . . . . . . . .
+        . . . . . . . . d 2 2 1 2 1 1 . . . . . . . . .
+        . . . . . . . . d 4 d d 4 d e . . . . . . . . .
+        . . . . . . . e 7 d d b b e . . . . . . . . . .
+        . . . . . . 7 7 d 7 7 e e d . . . . . . . . . .
+        . . . . . 7 7 e 4 d 7 e e 4 d 4 . . . . . . . .
+        . . . . . 7 e b 4 b b 7 f b d b . . . . . . . .
+        . . . . . 7 e e d 4 b e f . f 2 2 . . . . . . .
+        . . . . . e 7 e d b b e f f f b 2 f f . . . . .
+        . . . . . e 7 e d d b 7 e f f f f f f f . . . .
+        . . . . 7 d b e 7 e e 7 e f f f f f f . . . . .
+        . . . . . d b e f e b b f f f f f f f . . . . .
+        . . . . . d d e f f d d f f f f f . . . . . . .
+        . . . . . d d f f f f d d f f . . . . . . . . .
+        . . . . f d e d f f f b b f . . . . . . . . . .
+        . . . . f d b d f . f d b f . . . . . . . . . .
+        . . . . . f f f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "ogre") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f . . . . . . . . . . .
+        . . . . . . . . . f 3 1 3 3 . . . . . . . . . .
+        . . . . . . . . . f 3 3 3 3 . . . . . . . . . .
+        . . . . . . . . f 3 3 3 3 3 f . . . . . . . . .
+        . . . . . . . . 3 3 2 2 3 3 d f . . . . . . . .
+        . . . . . f 3 3 3 2 2 2 2 d d 3 f f . . . . . .
+        . . . . f 3 3 3 e 3 3 3 3 e 3 3 3 3 f . . . . .
+        . . . f 3 3 3 d 3 e e e e d e d 3 3 3 f . . . .
+        . . f 3 3 3 e e 3 3 3 3 3 3 3 d d 3 3 3 3 . . .
+        . . f d d e f f e 3 3 3 3 3 3 e f d d d 3 f . .
+        . . f 3 3 f f e d 3 3 3 3 3 d d f . f 3 3 f . .
+        . . . 3 3 e f e 3 3 3 3 3 3 3 d f . f 3 3 f . .
+        . . . . f 3 3 d d d 3 3 3 3 d d f f d d f . . .
+        . . . . f d d d e e d d d d e e f d 3 e f . . .
+        . . . . . f e 4 4 e 2 2 2 2 e 4 4 f e f f . . .
+        . . . . . f 4 4 d 5 4 2 2 2 4 4 4 f f f f . . .
+        . . . . . e 4 d 4 4 4 5 5 4 4 d e f f f f . . .
+        . . . . . 4 e 4 5 4 4 5 4 5 d 4 f f f f f . . .
+        . . . . . f e 3 4 d e 4 5 e 3 4 3 f f f . . . .
+        . . . . . e d 3 d e f f f e 3 d f f f . . . . .
+        . . . . . d 3 3 d f . . . f d d 3 3 f . . . . .
+        . . . . . f f f f f . . . f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "troll") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . 7 . 7 7 2 . . . . . . . . . . . . .
+        . . . . 2 7 2 7 2 2 e e 2 7 . . . . . . . . . .
+        . . . . . 7 7 7 2 2 7 2 e 7 7 7 . . . . . . . .
+        . . . . e 7 2 2 2 7 7 e e e 7 7 7 7 7 . . . . .
+        . . . . 7 7 7 7 7 7 e 7 e 2 7 7 7 7 7 . . . . .
+        . . . . e 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . .
+        . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . 7 7 . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . 7 7 . . 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . 7 7 . . . 7 7 7 7 7 7 7 . . 7 7 . . .
+        . . . . . 7 7 7 . . 7 7 7 7 7 7 7 . . 7 7 f . .
+        . . . . . . 7 7 . . 7 7 7 7 7 7 7 . . 7 7 f . .
+        . . . . . 7 7 7 . . 7 7 7 . 7 7 7 f f 7 7 f . .
+        . . . . 7 7 7 7 . . 7 7 7 . 7 7 7 f f 7 7 f . .
+        . . . 7 7 7 . . . 7 7 7 7 f 7 7 7 f f 7 7 7 . .
+        . . 7 7 7 . . . 7 7 7 7 7 f f 7 7 f f f 5 5 . .
+        . . 7 7 7 . . . 7 7 7 7 7 f f 7 7 7 f f 5 5 . .
+        . 7 7 7 . . . . 7 7 7 f f f f 7 7 7 f f 5 5 . .
+        . 5 5 . . . . . 7 7 f f f f f 7 7 7 f f 5 5 . .
+        . 5 5 . . . f f 7 7 f f f f f 7 7 7 7 . 5 5 . .
+        . . 5 . . . f 7 7 7 f f f f f 7 7 7 7 . 5 . . .
+        . . . . . . f f f f f . . . f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "stone-golem") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . b 1 . . . . . . . . . . . .
+        . . . . . . . . . b 1 2 b . . . . . . . . . . .
+        . . . . b . . . . b 1 b b . . . b b b . . . . .
+        . . . b b b b . b b b b b b . b 9 b b . . . . .
+        . . b b b b b b b b b b b b b b b b b . . . . .
+        . . b b 1 9 b f b b b b b 1 b b b b b b . . . .
+        . . b b f b b b f b b 1 b b b b b 9 b f . . . .
+        . . . b b f b b b b 9 f b b b b b f f b . . . .
+        . . . b 1 b f f b b b f b f b . b 1 9 b . . . .
+        . . b 9 b . . . . b f b b b . . . b 9 b b . . .
+        . . b 1 b . . . . f b b f f . . . b b b b . . .
+        . b 1 1 f . . . . . b f b b b . . b f b b b . .
+        . b 1 f b b . . . b b b f b b b f f b b b b . .
+        . b b 1 b b b f b 9 b b f f b b b b b b b b f .
+        . b b b b b b b b b b b f f b b 1 b b b b b f .
+        . b 1 1 b b b b 1 9 b b f f f b f b 9 b b b . .
+        . b b 9 b b b b 1 b b b f f f b b b 1 b b b . .
+        . b 1 b b b b b 9 b b b f f f b b b 1 b b b . .
+        . . f f b f f b b b b b f . f f b b 1 b b b . .
+        . . . . f f f b f b b b . . . f b b 9 b b b . .
+        . . . . . . f b b f b b . . . . f b b f . . . .
+        . . . . . . . f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "iron-golem") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . b b . . . . . . . . . . . .
+        . . . . . . . . . b 1 2 b . . . . . . . . . . .
+        . . . . b . . . . b 1 b b . . . b b b . . . . .
+        . . . b b b f . b b b b b b . b b b b . . . . .
+        . . b b 1 b f b b b b b b b b b b b b . . . . .
+        . . b b 1 b b b b 1 b b b b b b b b b b . . . .
+        . . b b f b b b b b b b b b b b b b b f . . . .
+        . . . b b f f b b b b b b b b f b f f b . . . .
+        . . . f f b f b b b b b b b b . f b b . . . . .
+        . . f f f . . . . f f b b f . . . b b f . . . .
+        . . b 1 b . . . . b b f f b . . . f f b b . . .
+        . b 1 b f . . . . . b f f b b . . f f b b b . .
+        . b 1 b b f . . . b 9 b f b b b f f b b b b . .
+        . b 1 b b f f f b 1 b b f f b 1 b f b b b b f .
+        . b 1 b b f f b b 1 b f f f f b 1 b b b b b f .
+        . b 1 b b b f b b b b f f f f b f b 1 b b e f .
+        . b 1 b b b f b 1 b b f f f f f b b 1 b d b f .
+        . b 1 b b b f b 1 b b f f f f f f b 1 b b b f .
+        . . b b b f f b 1 b b f f f f f f b 1 b b b f .
+        . . f f f f f b 1 b b f f f f f f b b b e b . .
+        . . . . . . f b 1 b b f f f f f f f f f f . . .
+        . . . . . . . f f f f f . . . f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "naga") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . f f f . . . . . . . . . . . . .
+        . . . . . . . f b f f f . . . . . . . . . . . .
+        . . . . . . . b 1 3 b f . . . . . . . . . . . .
+        . . . . . . . f 3 3 3 b f . . . . . . . . . . .
+        . . . . . . . f 3 3 d b f . . . . . . . . . . .
+        . . . . . . f 3 3 3 3 3 3 f . . . . . . . . . .
+        . . . . . f 1 d 3 3 3 3 3 3 . . . . . . . . . .
+        . . . . . f 1 1 3 1 1 1 3 3 . . . . . . . . . .
+        . . . . . 1 3 3 3 3 3 3 3 1 f . f 7 f . . . . .
+        . . . . . 1 3 3 d 3 3 d 3 1 f . . f 7 f . . . .
+        . . . f 1 3 e 3 e 3 3 3 e 3 d f . . 7 7 . . . .
+        . . . f 3 d f 1 d 3 3 e f d 3 f . . 7 6 . . . .
+        . . f 3 e . . 1 3 3 3 6 f e 3 f f f 7 f . . . .
+        . . f 3 f . . 7 3 7 7 6 f 3 e f 7 7 6 f . . . .
+        . . . . . . f 7 7 7 7 6 f 3 f f 7 7 . . . . . .
+        . . . . . . f 7 7 7 7 6 . f f f 7 7 . . . . . .
+        . . . . . f 7 7 7 7 7 6 . . f 7 7 6 f . . . . .
+        . . . . . f 7 7 7 7 7 6 . . f 7 7 6 f f f . . .
+        . . . . . f 7 7 7 7 7 7 f f 7 7 7 6 f f f . . .
+        . . . . . . f 7 7 7 7 7 7 7 7 7 7 f f f f . . .
+        . . . . . . f 7 7 7 7 7 7 7 6 6 f f f f f . . .
+        . . . . . . . . f f f f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "minotaur") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . 1 1 1 . . e 2 2 2 2 . . . . . . . . .
+        . . . . 1 1 b b 1 e 5 2 2 2 2 2 1 1 . . . . . .
+        . . . 3 1 3 3 3 b e 5 5 2 2 2 1 1 1 1 1 . . . .
+        . . 3 3 3 1 3 3 e 2 2 2 2 2 e e b b 1 1 . . . .
+        . . 3 3 3 3 3 d e f 2 2 2 e e e 3 3 b 1 . . . .
+        . . 3 3 3 3 3 3 3 e 2 2 e e 3 3 3 3 1 b . . . .
+        . . 3 3 3 3 3 3 3 3 e e 3 3 3 3 3 3 3 3 . . . .
+        . . . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . . .
+        . . . d 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . . .
+        . . . . . 3 3 3 3 3 3 3 3 3 3 d 3 3 3 3 . . . .
+        . . . . . . . d d d d d 3 3 3 3 3 3 3 3 f . . .
+        . . . . . . . e e 2 d d 3 3 3 3 3 3 3 d f . . .
+        . . . . . . . 2 2 2 e e e d 3 3 3 3 d f f . . .
+        . . . . . . . 2 2 e 2 e e 2 d d d d d f . . . .
+        . . . . . . e 2 e e e e 2 2 2 2 e f f f . . . .
+        . . . . . . e 2 e e f f e 2 2 2 2 f f f . . . .
+        . . . . . . e e e f f f e e 2 2 f f f f . . . .
+        . . . . . . . e e f f f f e e e f f . . . . . .
+        . . . . . . . b e f f f f e e e f f . . . . . .
+        . . . . . . . 1 9 f f f f f e f f f . . . . . .
+        . . . . . . . f f f f f f f 1 f f f . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "orb-spider") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . .
+        . . . . . . . . . . . f f a 6 a 6 6 a a . . . .
+        . . . . . . . . . . . f a a 6 6 6 a 6 6 f . . .
+        . . . . f . . f 6 f f 6 a 9 9 9 9 6 a a f f . .
+        . . . . 6 f f f f 6 f 6 6 9 a a 9 9 6 b a f . .
+        . . . . f b b 6 f f f a 6 a a a 2 a 6 b f f . .
+        . f f f b b . f 6 f f 6 6 9 9 9 a 6 6 a f f . .
+        . . b 6 f f f f f f f 6 6 a 9 9 6 a 6 6 a f . .
+        . . . . . . f 6 f f f a a 6 6 a 6 6 a 6 f f . .
+        . . . . . . f b 6 f f f 6 6 6 6 a 6 a a f f . .
+        . . . f 6 6 b f 6 b b f 6 f 6 6 a 6 f f f f f .
+        . . f 6 f f f f a 1 b f 6 f f f f f f f f f f .
+        . . 6 f . . f 6 f b c 6 f f f f c f f f f f f .
+        . . b f . . 6 f f b f b f f f f f f f 6 f f . .
+        . . f 6 . . f f f b f f f f f 6 f f f 6 . . . .
+        . . . . . . . . f . f f . 6 f 6 f f . f f . . .
+        . . . . . . . . . . f f . 6 f f b f . f f . . .
+        . . . . . . f . . f b . . b f f 6 f . f f . . .
+        . . . . . . f b 6 f f . . 6 f f 6 f . . f . . .
+        . . . . . . . f f . . . . 6 f f 6 6 . . . . . .
+        . . . . . . . . . . . . . . f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "earth-elemental") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . e e d . . . . . . . . . . . . . . . . . . .
+        . . d d d . . . . e d d . . . . . . . b b b b .
+        . . b d d . . . b d d d d . . . . . . b b b b .
+        . e b . . . . . b d b d b . . . . . . d d b . .
+        . e b . . . . . . b e b d . . . . . . d d d . .
+        . . b b b . 6 6 . . e e d d . . 6 6 6 e d d . .
+        . . e d d b 6 6 b b e b b b b b d b b e e e . .
+        . . . e e e 6 b b b e b 6 6 d d d b d b d d . .
+        . . . . . d d e b b e b 6 6 b d d d d . e . . .
+        . . . . . . . e e e e e 6 6 b b b . . . e . . .
+        . . . . . . . d b b b b 6 b . . . . . . . . . .
+        . . . . . . b e b b b e 6 b . . . . . . . . . .
+        . . . . . . b b e d d d 6 b . . . . . . . . . .
+        . . . . . d b d . . . . b b . . . f f . . . . .
+        . . . . . e b d . . . . d e d d f f f . . . . .
+        . . . . . d e . . . . . f d b b b f f . . . . .
+        . . . . . b d e . . . f f e b b b f f . . . . .
+        . . . . . . b e . . f f f f b b b f f . . . . .
+        . . . . . . . d . f f f f f d d d f . . . . . .
+        . . . . . . . e e f f f f f b e d . . . . . . .
+        . . . . . f f f f f . . . f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-knight") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f f . . . . . . . . . .
+        . . . . . . . . . f 1 3 3 1 1 . . . . . . . . .
+        . . . . . . . . f f 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . f f 1 1 3 1 1 . . . . . . . . .
+        . . . . . . . . . f 1 3 3 1 1 . . . . . . . . .
+        . . . . . . f f 1 1 1 f f 1 1 1 1 f . . . . . .
+        . . . . . . 1 1 b b b b f 1 b b 9 1 f . . . . .
+        . . . . . f 9 b b b b b b b f b b 9 1 f . . . .
+        . . . . . . f b b b b f b b b f b f f . . . . .
+        . . . . . . b 1 f f f b b f f b b b f . . . . .
+        . . . . . f b b f f b b f b f f f b b b . . . .
+        . . . f f b b f . f f b b f b . f b b f . . . .
+        . . f b b b f . f b b b f b f b b b f f . . . .
+        . . f b b f . . f b f b b f 1 b f f f . . . . .
+        . . . f f . . . f b b b f b 1 f f f f f . . . .
+        . . . . . . . . f b b b f b 1 f f f f f f . . .
+        . . . . . . . . b b b f f b b b f f f f f . . .
+        . . . . . . . . b 1 b f f b b b f f f f . . . .
+        . . . . . . . . b 1 b f f b b b f f f f . . . .
+        . . . . . . . f b b f f f f b b 1 f f . . . . .
+        . . . . . . f 1 b b f f f f b b b f . . . . . .
+        . . . . . . . f f f f . . . f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "dwarf") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 f f . . . . . . . . .
+        . . . . . . . . . . . 1 b b b f f . . . . . . .
+        . . . . . . . . . . f 1 b b b 1 f . . . . . . .
+        . . . . . . . . . f 1 b b 1 b f . . . . . . . .
+        . . . . . . . . . . f e e b b b . . . . . . . .
+        . . . . . . . . . f 1 3 3 b b b f . . . . . . .
+        . . . . . . . . f b 4 4 4 b b 1 b b b . . . . .
+        . . . . . . . . 1 f 4 4 b b 1 b b b b f . . . .
+        . . . . . . . . 1 b 4 4 f b b b 1 b b b f . . .
+        . . . . . 1 1 f 1 b 1 1 b b b b b b b b b f . .
+        . . . . f 2 b b b b 1 b b b b b b b 1 b b f . .
+        . . . f b f b b b b b b 1 b b b 1 b b f f f . .
+        . . . f 1 f b b f 4 4 f b b b 1 b b b f f f . .
+        . . . . f 2 b f b 4 5 b 5 4 b 1 1 b b f f f . .
+        . . . f 2 2 f . b b f b b b b f b f f f f f f .
+        . . . f 2 f . . b b b b b b b b f f f f f f f .
+        . . . f 2 f . f 1 b 1 f b b b b f f f f f f . .
+        . f 1 2 2 f . f 5 4 2 f f 2 5 4 f f f f f . . .
+        . f 1 1 1 b f 2 4 2 2 f f 2 2 5 f f f . . . . .
+        . f b 1 1 b 2 2 2 2 2 f f 2 2 2 2 f f . . . . .
+        . . f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "angel") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f f . . . . . . . . . . .
+        . . . . f 1 1 f . . f 5 5 5 5 . f 1 1 f . . . .
+        . . . . 1 9 1 9 f f 5 3 3 5 5 f 9 1 9 1 . . . .
+        . . . f 1 1 1 1 1 f 5 3 3 5 4 1 1 1 1 1 1 f . .
+        . . f 1 b b b b b b 4 3 3 4 b b b b b b 9 f . .
+        . . f 9 1 1 1 b b 1 1 2 2 1 1 b b 1 1 1 9 1 . .
+        . . 1 1 9 1 b 9 b 1 1 2 2 1 1 b 9 b 1 9 9 1 f .
+        . . 1 1 9 1 9 b b 1 1 2 2 1 1 b b 9 1 9 1 1 f .
+        . . 1 9 1 1 b b b b 2 2 2 2 b b b b 1 1 9 1 f .
+        . . 1 1 1 b b b f b 1 2 2 1 b f b b b 1 1 9 f .
+        . . 9 1 d 5 b f f c 4 5 5 4 b f f b b b 1 9 f .
+        . . 9 1 d 5 5 f f b 1 5 5 1 b f f f b b 1 1 f .
+        . f 9 1 f f f f 9 b 1 2 2 1 b b 9 f 5 5 1 1 f .
+        . f 1 1 f . . f b b 1 2 2 1 b b 9 f 5 d 1 1 f .
+        . f 1 f . . . f f 1 1 2 2 1 c b b f f 9 1 1 f .
+        . f 1 f . . . f b 1 1 2 1 1 b b b f f 1 9 1 . .
+        . . f . . . . f 9 1 1 2 1 1 b 9 f . . f 1 1 . .
+        . . . . . . . f b b c 2 1 1 b b f . f f 1 1 f .
+        . . . . . . f 9 9 c c f f c b b f f f f 1 f f .
+        . . . . . . f f f . . . . c b b f f f f f . . .
+        . . . . . . . . . . . . . b b 9 b f f f . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-archer") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 7 . 1 . . . . . . . . . .
+        . . . . . . . . 7 . 7 7 7 7 . . . . . . . . . .
+        . . . . . . . . . 7 7 7 7 1 . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 . . . . . . . . . .
+        . . . . . . . . . 1 1 3 1 1 . e . . . . . . . .
+        . . . . . . . . . 1 3 3 1 1 4 . e . . . . . . .
+        . . . . . . . . 7 1 f f 1 1 e . . . . . . . . .
+        . . . . . . . 7 f 1 f f 1 7 7 . . . . . . . . .
+        . . . . . . . 7 6 f f 7 7 f 7 . . . . . . . . .
+        . . . . . . . c . 6 7 7 f 6 8 7 . . . . . . . .
+        . . . . . . 8 c . . f f 6 . c c . . . . . . . .
+        . . . . 3 6 6 . . f 6 6 6 3 6 . . . . . . . . .
+        . . . . 3 . . . . 6 f f f 3 . . . . . . . . . .
+        . . . . . . . . 6 6 f 6 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 6 6 6 6 . . . . . . . . . .
+        . . . . . . . . f f . . e f . . . . . . . . . .
+        . . . . . . . e f f . . . e f f f f f f . . . .
+        . . . . . . . e f f . . . f f f f f f f . . . .
+        . . . . . . . e e f . f f f e f f f f . . . . .
+        . . . . . . . e e f f f f f e e f f f . . . . .
+        . . . . . . e e f f f f f f e e e f f . . . . .
+        . . . . . . f f f f f f f f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "mummy") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f . . . . . . . . . . .
+        . . . . . . . . . f f 3 f . . . . . . . . . . .
+        . . . . . . . . . b 3 f . . . . . . . . . . . .
+        . . . . . . . . . d b d f . f . . . . . . . . .
+        . . . . . . . . f d 3 3 f 3 f . . . . . . . . .
+        . . . . . . . f f b e f . f . . . . . . . . . .
+        . . . . . . f 3 b 3 3 3 f . . . . . . . . . . .
+        . . . . . f b d b b b 3 e f 3 f . . . . . . . .
+        . . . . . f d b b 3 3 3 3 3 f . . . . . . . . .
+        . . . . . f 3 d b 3 d d d f . . . . . . . . . .
+        . . . . . 3 d b b 3 d b d f . . . . . . . . . .
+        . . . . . 3 d b 3 d b f 3 3 . . . . . . . . . .
+        . . . . . d d b 3 d b f 3 d . . . . . . . . . .
+        . . . . f b f d d b d f 3 b . . . . . . . . . .
+        . . . . f d f b d b 3 f b 3 f . . . . . . . . .
+        . . . . f f f d 3 f b f f b f f f f f . . . . .
+        . . . . . 3 f 3 3 3 3 f f f f f f f f . . . . .
+        . . . . . f f d 3 d d f f 3 f f f f . . . . . .
+        . . . . . . f 3 d f f d f f f f f . . . . . . .
+        . . . . . . f d 3 f f d b f f f . . . . . . . .
+        . . . . . f b b d f f b d f f . . . . . . . . .
+        . . . . . f f f f . f f f f . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "scythe-reaper") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f . . . . . . . . . . . . .
+        . . . . . . . . . f c b b c f . . . . . . . . .
+        . . . . . . . . . f c b b c c . . . . . . . . .
+        . f f . . . . . f f 9 f 9 c f . . . . . . . . .
+        . f 2 f . . . . f f b 9 b c c . . . . . . . . .
+        . . f 2 9 f . . f b f 1 f c b f . . . . . . . .
+        . . . f 1 1 . . f b c f c c c f f . . . . . . .
+        . . . f 9 2 f . f c c c c c c c c f . . . . . .
+        . . . . f b 2 2 2 f b f b b f f c c c c f . . .
+        . . . . f 9 f 2 2 f f f f b b f f f f f c f . .
+        . . . . . f b b f 2 2 f b b f f f b b f f f . .
+        . . . . . f b f f f f 2 2 f f f f 9 f f f . . .
+        . . f f c c f f f f f f b 2 f 1 b c c f f f . .
+        . . f c f f f f f f f b b 2 9 b f c c f . . . .
+        . . f f f f f f . f b f f f f 2 2 2 c c f f . .
+        . . f . f . f . f f 1 f f f b f 2 2 f f f f . .
+        . . . . . . . . f 9 1 f f f f f f f 2 f f f f .
+        . . . . . . . . f b 1 f . f f 1 9 f f 2 2 3 . .
+        . . . . . . . . . f 9 f f f f f b b 3 3 2 2 . .
+        . . . . . f 3 1 1 1 1 1 1 1 1 1 3 3 b f . . . .
+        . . . . f f f f 3 3 3 3 1 1 1 3 f f b 9 f f f .
+        . . . . . . . f f f f f f f f f f f f f . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "executioner") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f . . . . f f f f . . . . . .
+        . . . . . f e b b b e . . 3 f 1 1 3 3 3 . . . .
+        . . . . f e b d d f f f f f f f f 1 3 3 f . . .
+        . . . f b d f . . b 1 b b b b f b e 1 3 3 f . .
+        . . f e d f . . f 1 b b b b b f f d e 1 3 f . .
+        . . e f f f . f f 2 f f f f b f . . d e 3 3 . .
+        . f f . 1 1 f f f f b b f 1 b f . . f d 3 3 . .
+        . . . . 1 1 1 f f 1 1 b 1 b b f f f . f 1 3 . .
+        . . . f 1 f b b f b f f b b b f f f f 1 d e f .
+        . . . f 1 f f f b b b b b b b f f f 1 1 f d f .
+        . . . f b f . . . f f e f b f f f f 1 f f f f .
+        . . f 1 f f . . . f b f f b f 1 f 1 b f f f . .
+        . f f 1 f f . . . f 1 f f f . b 1 b . . f e . .
+        . f f 1 f . . . . f 1 f f f . f b f . . b e . .
+        . . 1 1 b b d d f 1 1 f f f . . f 3 f d f . . .
+        . . 3 3 e e b b d 1 b d b e f . . f 3 e . . . .
+        . . 3 3 f f e e e 1 b e e f . . f f 3 3 . . . .
+        . . f 3 3 1 f f f b f f f f b d e e 3 f . . . .
+        . . . f 3 1 f f 1 b f f f e e e f 1 3 f . . . .
+        . . . f f 3 1 f f 1 3 1 f f 1 1 3 3 f f f f . .
+        . . f f f f 3 3 3 3 1 1 1 3 3 3 3 f f f f . . .
+        . . . . f f f f f f f f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "wizard") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . a a a . . . . . . . . . . . .
+        . . . . . . . . 8 a a . . . . . . . . . . . . .
+        . . . . . . a a a a a a a a a . . . . . . . . .
+        . . . . . . . 8 a a a 8 c . . . . . . . . . . .
+        . . . . . . . . . 3 1 e . . . . . . . . . . . .
+        . . . . . . . . . 1 3 3 . . . . . . . . . . . .
+        . . . . . . . . . a a a 8 8 . . . . . . . . . .
+        . . . . . . . . a a a a a a a . . . . . . . . .
+        . . . . . . . . a a a a 8 a a . . . . . . . . .
+        . . . . . . a a 8 a 8 a 1 1 a 8 . . . . . . . .
+        . . . . 3 d a 8 . a c c 2 2 2 8 . . . . . . . .
+        . . . . 3 d 8 . . a c c 2 3 d . . . . . . . . .
+        . . . . . . . . . 8 8 c 2 3 d . . . . . . . . .
+        . . . . . . . . . a a a 8 8 . . . . . . . . . .
+        . . . . . . . . 8 a a a 8 8 f f f f . . . . . .
+        . . . . . . . . 8 8 a a a a a f f f f . . . . .
+        . . . . . . . . 8 c a a a 8 a f f f f f . . . .
+        . . . . . . . . 8 c a a a 8 a f f f f . . . . .
+        . . . . . . . . 8 8 8 a a 8 8 f f f . . . . . .
+        . . . . . . . 8 c a c a a a c a f f . . . . . .
+        . . . . . . . . 2 8 c 8 c 2 2 . . . . . . . . .
+        . . . . . . . 2 2 . . . . 2 2 . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-mage") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 1 . . . . . . . . . .
+        . . . . . . . . . 1 1 1 3 1 1 . . . . . . . . .
+        . . . . . . . . 1 1 2 1 2 1 1 . . . . . 3 . . .
+        . . . . . . . . . 1 1 1 d 1 1 . . . . . 3 . . .
+        . . . . . . . . . 1 1 3 b 1 1 . 2 2 2 e e . . .
+        . . . . . . . 2 2 1 1 2 2 1 1 2 2 2 2 e e . . .
+        . . . . . . 2 2 2 1 2 2 2 1 2 2 2 2 2 e e . . .
+        . . . . 2 2 2 2 e e 2 2 2 2 2 2 2 2 e e e . . .
+        . . 3 2 2 2 2 2 e e 2 2 2 2 2 2 2 2 e e . . . .
+        . . d 2 2 2 2 e e 2 2 2 2 e e e 2 2 e e f . . .
+        . . . . 2 2 2 e . 2 2 2 2 e 2 f e 2 e e f f . .
+        . . . . 2 e e . . e 2 2 e e e f f 2 e f f f . .
+        . . . . . e . . . 2 e e e 2 2 f f f e f f . . .
+        . . . . . e . . . 2 e 2 2 2 e f f f f f f . . .
+        . . . . . . . . . 2 e 2 2 2 e f f f f f . . . .
+        . . . . . . . . 2 2 2 2 2 2 2 e f f f f . . . .
+        . . . . . . . . 2 2 2 2 2 2 2 e f f f . . . . .
+        . . . . . . . 2 2 2 2 2 2 2 2 e f f f . . . . .
+        . . . . . . . 2 2 2 2 2 2 2 e e e f . . . . . .
+        . . . . . . f 2 2 2 2 2 2 2 e e e f . . . . . .
+        . . . . . . f f 2 2 2 2 2 2 e f f . . . . . . .
+        . . . . . . . . . f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Blade") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Guardian") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Medic") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Ranger") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Harvester") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Reaper") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Executioner") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Enchanter") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Venomist") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero01") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero02") return img`
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero03") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero04") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero05") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero06") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero07") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero08") return img`
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero09") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero10") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero11") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero12") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function portrait(artKey: string, side: apocTypes.Side): Image {
+        if (artKey == "E-Raider") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . f 3 3 . . . . . . .
+        . . . . . f d 3 3 d f f . . . .
+        . . . . . d f 3 f d d f . . . .
+        . . . . . . 2 2 d e . . . . . .
+        . . . . . f b e e b f . . . . .
+        . . . . . d b f f b d f . . . .
+        . . . . f e b f f b e e . . . .
+        . . d d b f e 1 2 e . b e . . .
+        . . d e f f f b b f f e e . . .
+        . . . . . f f b b f f . . . . .
+        . . . . . f b b b f f f f f . .
+        . . . . . e e f f e e f f f . .
+        . . . . . e f f f e e f . . . .
+        . . . . f e f . . f e f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Decoy") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . f . . . . . . . .
+        . . . . f . e e e . f . . . . .
+        . . . . 2 c e e 2 c 2 . . . . .
+        . . . . f e e c 5 e f . . . . .
+        . . . . . f e 2 2 f f . . . . .
+        . . . . e c b b 2 c e e . . . .
+        . . . f 2 e c f e e 2 2 f . . .
+        . . f e 2 f f f f f f e e . . .
+        . f e e f f 2 f f 2 . f e f . .
+        . . f . . f b b b b f f 2 f . .
+        . . . . . c c b f f f f . . . .
+        . . . . . 2 2 f f 2 f f f f . .
+        . . . . . 2 2 f f e f f f . . .
+        . . . . f f f . . f f . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Plague") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f d f . . .
+        . . . . . . . . . 5 e f e 5 . .
+        . . . . . . . . . f e . f e f .
+        . . . . . . . . . . f f . 4 e .
+        . . . . . . . f . . . . . d f .
+        . . . . . 7 f f f . . . f e f .
+        . . . f f 7 f f 7 . . . 5 f . .
+        . . d 5 . f f 7 d f 5 e f f f .
+        . f 5 e e f 5 e 5 d e e f f f .
+        . 4 e e 5 5 d d e e e f 7 f . .
+        . e f e f e e e e f 7 f 5 . . .
+        . . f e d f d . f f f f 7 . . .
+        . . f e e 4 e . f f f f f . . .
+        . . f e e e . . . 7 . f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Boss") return img`
+        . . . . . . . . . . . . . . . .
+        . 6 6 . . . . 1 . 1 6 6 2 2 2 .
+        . . 2 2 2 2 2 . . 6 6 2 2 2 . .
+        . . 2 2 2 2 7 6 . 6 2 2 6 2 . .
+        . . 6 2 7 7 7 7 . 6 2 2 2 6 . .
+        . . . 2 7 6 7 7 6 7 2 2 . . . .
+        . . . 1 7 1 2 7 7 6 7 2 . . . .
+        . . . . 7 7 6 6 7 6 6 6 7 . . .
+        . . . 6 7 7 7 6 7 7 6 6 . 7 . .
+        . . 6 6 6 6 7 6 7 7 6 f f 1 1 .
+        . 1 6 1 . . . 6 7 7 7 6 6 f 6 .
+        . . 1 . . . 7 6 7 7 6 6 6 6 f .
+        . . . . . 6 6 6 f f 6 6 7 f . .
+        . . . . . 6 6 f f f f 6 6 6 f .
+        . . . 9 f 6 6 f . . f 6 6 f 9 .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-King") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . 3 3 3 . . . . . . .
+        . . . 3 3 3 3 3 2 d 3 3 . . . .
+        . . . . . 1 3 1 3 d . . . . . .
+        . . . 2 . 2 d d 2 e 2 . 2 . . .
+        . . . 2 2 f 2 2 2 2 e e 2 . . .
+        . . 2 2 e e e 2 e 2 e 2 2 2 . .
+        . . . 3 e . 2 e e e . f b . . .
+        . . b b f 2 2 2 d 2 f f d f . .
+        . . 3 f 2 e e 2 2 e 2 e d f . .
+        . . e . 2 2 2 e 2 e 2 f f f . .
+        . . . . 2 3 f 2 f f 3 f f f . .
+        . . . . 2 2 f f f f 2 2 f f . .
+        . . . . 2 2 f f f f 2 2 f f . .
+        . . . . 2 2 f f f f 2 2 f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Wisp") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 9 9 9 9 9 . . . .
+        . . 9 9 9 9 9 9 9 9 9 9 9 9 9 .
+        . . . . 9 9 9 9 . . . . . . . .
+        . . . . . . . 9 9 . . . 9 9 9 .
+        . . . 9 9 9 9 9 . . . . . . . .
+        . . . . . . . . 9 9 . . . . . .
+        . 9 9 9 . . . . 9 9 9 . . . . .
+        . . . . . . 9 9 . . . . . . . .
+        . . . . . c c c . 9 9 9 9 9 . .
+        . . . . . . . . c . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Small") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . e e e e e 3 3 . . .
+        . . . . . e e e e e e e f 3 . .
+        . . . . e 2 e e e e e f f 3 f .
+        . . 2 e e e e e e e e f f d f .
+        . . d e 3 e e e e e e f f d f .
+        . . e e e e e e e e f f . e . .
+        . e e 1 e f f e f d f . 3 f . .
+        . e e f f d f f . . . 3 e f . .
+        . f f f . f . . . . f f f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Shaman") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . f . f . . . . . .
+        . . . . . . . f f f . . . . . .
+        . . . . . . f 8 8 f . . . . . .
+        . . . . . . f c f f c . . . . .
+        . . . . . . f b 2 f e 4 . . . .
+        . . . . . f e f 4 4 f e f . . .
+        . . . . . 4 f 4 4 e . f e . . .
+        . . . e 8 f f e 5 4 f 4 8 . . .
+        . . . f . . 5 5 5 5 f e f . . .
+        . . . . . . 1 4 4 4 f . . . . .
+        . . . . . . 1 1 4 4 f . . . . .
+        . . . . . . e f f e e f f . . .
+        . . . . . . 8 f f f c f f . . .
+        . . . . . 4 e f . f e f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "bat") return img`
+        . . . . . . . . . . . . . . . .
+        . d d f . . . . . . . . f d d .
+        . . b d f . . . . . . . d b . .
+        . . f d d . . . . . . e d f . .
+        . . f f f . . f f . . f f f . .
+        . . f b d f f f d . f d b f . .
+        . . f d b e b b f f b d d f . .
+        . . f e d b b b f f d d e f . .
+        . . . f b f e f b f e b . . . .
+        . . . . e f e f b f f f . . . .
+        . . . . f . f f f . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . f f f f f f f f . . . .
+        . . . . . . f f f f . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "wolf") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . b b b . . . .
+        . . . . . . . . b . b b b . . .
+        . . . . . . . . . . . . b b . .
+        . . . . . . . . . . b . b b f .
+        . . . . . . . . . b b b b f f .
+        . . . . . . b b b b b b b f f .
+        . . . . b b b b b b b b b f f .
+        . . . b b b b b b b b b b f f .
+        . . . b b b b b b f f f b b f .
+        . . f b b 1 b b f f f f b f . .
+        . . 1 1 b 1 f b f . . . . . . .
+        . 1 1 b b f b b f . . . . . . .
+        . 2 2 b f f b f f . . . . . . .
+        . f f f . f b f . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "jelly") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . f 2 2 2 f . . . . . .
+        . . . . . 2 4 4 2 2 e . . . . .
+        . . . . 2 4 2 2 2 4 2 e . . . .
+        . . . f 2 2 2 4 2 2 2 2 f . . .
+        . . . 2 2 2 2 e 2 2 4 2 e . . .
+        . . f 2 e e f f 2 e 2 2 4 e . .
+        . . 2 2 2 f e e f f f 2 2 2 e .
+        . 2 2 2 f 2 2 f 2 4 2 2 f 2 f .
+        . f f . . 2 2 e f 2 f 2 f . . .
+        . . . . . f f e . . . . f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "skeleton") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . f f . . . . . . . .
+        . . . . . 1 1 b . . . . . . . .
+        . . . . . b b 1 f . . . . . . .
+        . . . . . f 1 f 9 . . . . . . .
+        . . . . . . . c c b b f . . . .
+        . . . . . f f 1 1 9 b b . . . .
+        . . . . f b b 1 1 b f 9 f . . .
+        . . . . 1 f . f 1 b f f f . . .
+        . . . . f . f b b f . 1 . . . .
+        . . . . . . f b 1 f . 1 . . . .
+        . . . . . f 1 f f 9 f . . . . .
+        . . . . . f 1 f f 1 f f . . . .
+        . . . . . f f f f f 1 f . . . .
+        . . . . . f f f f f . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "lich") return img`
+        . . . . . . . . . . . . . . . .
+        . f f . . . . b b f . . . . . .
+        . f f f . . f 1 1 f . . . . . .
+        . 1 1 f . . f f b f . . . . . .
+        . f f . . . f 1 b f f . . . . .
+        . . b . . f f f b f f f . . . .
+        . . 1 f b f f f b b f b f . . .
+        . f 1 f b f f b b b f f f f . .
+        . . 1 f f f f f f f . f f f . .
+        . . 1 f f . f f f b . f f . . .
+        . . f f f . f f b b . f . . . .
+        . . f f f . f b b b f . . . . .
+        . . f f . f f f b f f f f f . .
+        . . . b . . f f f f f f f . . .
+        . . . b f f b f f f b f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "zombie") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . d d . . d . . . . . . .
+        . . . . . d d d b . . . . . . .
+        . . . . . 2 d d f . . . . . . .
+        . . . . . d d d d 1 . . . . . .
+        . . . . . . d d b b . . . . . .
+        . . . . . 7 d d e . . . . . . .
+        . . . . 7 2 b 7 2 d . . . . . .
+        . . . . e 2 d e f b d . . . . .
+        . . . 7 7 e b e f f b f f . . .
+        . . . 7 e e 2 e f f f f f . . .
+        . . . d b f e d f f f f . . . .
+        . . . d d f f 2 f f f . . . . .
+        . . . d e f f d b . . . . . . .
+        . . . f 2 f . f f . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "ogre") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . 3 1 f . . . . . . .
+        . . . . . f 3 3 3 . . . . . . .
+        . . . . . 3 3 3 3 f . . . . . .
+        . . . . f 2 2 2 3 e . . . . . .
+        . . 3 3 d e e e d e 3 3 f . . .
+        . 3 3 3 e 3 3 3 3 3 d 3 3 f . .
+        . 3 3 f e d d 3 d d f f 3 d . .
+        . . d 3 e 3 3 3 3 3 f e 3 f . .
+        . . f d d e d f d e f 3 e . . .
+        . . . f 4 e 2 2 2 e 4 e f . . .
+        . . . e d 4 4 4 4 4 e f f f . .
+        . . . f 3 d e f e 3 3 f f . . .
+        . . . e 3 e f f e 3 f f . . . .
+        . . . d d f . . f e d f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "troll") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . 7 7 7 e e . . . . . . .
+        . . . . 2 7 2 7 e 7 7 . . . . .
+        . . . e 7 2 7 7 e e 7 7 7 . . .
+        . . . 7 e 7 7 e e 7 7 7 7 7 . .
+        . . . . 7 . 7 7 7 7 7 7 7 7 . .
+        . . . . 7 . 7 7 7 7 7 . 7 7 . .
+        . . . . 7 . . 7 7 7 7 . . 7 7 .
+        . . . . 7 7 . 7 7 7 7 . f 7 7 .
+        . . . 7 7 7 . 7 7 . 7 f f 7 7 .
+        . . 7 7 . . 7 7 7 f 7 7 f 7 7 .
+        . 7 7 7 . . 7 7 7 f 7 7 f f f .
+        . . . . . . 7 f f f 7 7 f f . .
+        . . . . . f 7 f f f 7 7 7 . . .
+        . . . . f 7 7 f . f 7 7 f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "stone-golem") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . b b b . . . . . . .
+        . . . b . . b b b . b b . . . .
+        . . b b b b b f b b b b b . . .
+        . . b b b f b b b b b b b . . .
+        . . b f b b b 1 b b b 9 b . . .
+        . . 9 b . . b b b b . b b . . .
+        . f 1 b . . f b f b . b b b . .
+        . b 1 f . . f f b b . b 1 b . .
+        . b b b b . b b f b b b 1 b f .
+        . b 1 b b b b b f f f b b b f .
+        . 9 9 b b b b b f f b b 1 b b .
+        . 1 b b f b b b f f b b b b b .
+        . . . f f b b b . . b b b b . .
+        . . . . . b b f . . . f f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "iron-golem") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . b b b . . . . . . .
+        . . . b . . b b b . b b . . . .
+        . . b b f b f f b b b b b . . .
+        . . b b b b b b b b b b b . . .
+        . . b f b b 1 b b b b b f . . .
+        . . b f . . 1 b b b . f b . . .
+        . b 1 f . . b f f b . f b b . .
+        . b b f . . b f f b . f 1 b . .
+        . b b b f . 1 b f b b f 1 b f .
+        . b b b f b b f f f f b b b b .
+        . b b b f b b f f f b b b d b .
+        . b b b f b b f f f f b b b b .
+        . . f f f b b f f f f b b e f .
+        . . . . . b b f . . f f f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "naga") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . f b b . . . . . . . .
+        . . . . . b 3 b . . . . . . . .
+        . . . . . f 1 3 f . . . . . . .
+        . . . . . f 3 e f . . . . . . .
+        . . . . f 1 3 1 3 f . . . . . .
+        . . . . 1 3 d 3 3 3 . 7 f . . .
+        . . . f 3 1 1 3 3 3 f . 7 f . .
+        . . 1 3 f 3 3 3 f d f . 7 f . .
+        . . 3 f . 7 3 7 f 3 f 7 6 . . .
+        . . . . . 7 7 7 f 3 f 7 . . . .
+        . . . . f 7 7 7 . . 7 6 f . . .
+        . . . . f 7 7 7 f f 7 6 f f . .
+        . . . . . 7 7 7 7 7 7 f f f . .
+        . . . . . f 7 6 7 6 f f f f . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "minotaur") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . 1 1 1 2 2 2 . . . . . .
+        . . . 1 3 3 b 5 2 5 1 1 1 . . .
+        . . 3 3 1 3 2 2 2 e e b 1 1 . .
+        . . 3 3 3 3 2 2 e e 3 3 3 b . .
+        . . 3 3 3 3 3 3 3 3 3 3 3 3 . .
+        . . . 3 3 3 3 3 3 3 3 3 3 3 . .
+        . . . . . 3 3 3 d d 3 3 3 d . .
+        . . . . . e 2 2 d 3 3 3 d f . .
+        . . . . . 2 2 2 e 2 d d d f . .
+        . . . . . 2 e e 2 2 2 f f . . .
+        . . . . . e e f e 2 2 f f . . .
+        . . . . . b f f f e e f . . . .
+        . . . . . 1 f f f e f f . . . .
+        . . . . . . . . . 9 9 f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "orb-spider") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . f a f f f . . .
+        . . . . . . . f 6 6 6 a 6 f . .
+        . . . f . 6 f a 6 9 9 6 a f . .
+        . f . f f 6 f 6 a a 2 9 6 f f .
+        . f 6 f 6 f f 6 6 9 9 a 6 a f .
+        . . . . . f f f 6 6 a 6 6 f f .
+        . . . f f b f f 6 6 6 6 a f f .
+        . f f . . f b f 6 f f f f f f .
+        . f f . f f b f f f f f 6 f . .
+        . . f . . 6 f f f f 6 f 6 . . .
+        . . . . . . f f f f f f f f . .
+        . . . . . 6 f . f f f f . f . .
+        . . . . . . . . . 6 . f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "earth-elemental") return img`
+        . . . . . . . . . . . . . . . .
+        . b b d . . e d . . . . . b b .
+        . d d . . . d d d . . . d b b .
+        . b . . . . d d b . . . . d b .
+        . e b . 6 6 . e d . 6 6 . d . .
+        . e d d 6 6 b b b b d b e e d .
+        . . e d 6 b b b 6 e d b d b . .
+        . . . e . e e e 6 . b . . e . .
+        . . . . b e b e 6 b . . . . . .
+        . . . . b b d d 6 b . . . . . .
+        . . . . b d . . d b f f f . . .
+        . . . . e . . . f b b f f . . .
+        . . . . b e f f f d b f . . . .
+        . . . . . d f f f e d f . . . .
+        . . . e d b f . f e d . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-knight") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 1 1 1 . . . . . .
+        . . . . . . f 1 1 1 . . . . . .
+        . . . . . . f 1 3 1 . . . . . .
+        . . . . . . f 1 d 1 f f . . . .
+        . . . . 1 b b b b b b b 1 . . .
+        . . . . f b b b b b f b f . . .
+        . . . . f 1 b b b b f b b . . .
+        . . f b b f f b b b f b b f . .
+        . . b b f . b f b f b b f . . .
+        . . . f . . b b f b f f f f . .
+        . . . . . . b b f b b f f f . .
+        . . . . . . 1 b f b b f f f . .
+        . . . . . f b f f f b f f . . .
+        . . . . . b b f . f b b . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "dwarf") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . 1 . . . . . . .
+        . . . . . . . f b b 1 . . . . .
+        . . . . . . . 5 5 4 f . . . . .
+        . . . . . . . 3 1 b f . . . . .
+        . . . . . . f 4 b b 1 f . . . .
+        . . . . . f f 4 f 1 1 b b . . .
+        . . . . f b 1 4 1 b b 1 b b . .
+        . . f 1 b b 1 b b b b b b f . .
+        . . f b b f 4 4 b b b b f f . .
+        . . . 2 f f 4 4 b f b b f f f .
+        . . f 2 . f b f b b f f f f f .
+        . f 2 2 . b b f b b b f f f . .
+        . 1 1 1 f 5 2 2 2 2 4 f f . . .
+        . f 1 b 2 e e f f e e f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "angel") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . f . . f 5 f . f . . . .
+        . . . 1 1 f f 5 5 5 f 1 1 . . .
+        . . f 1 1 1 f 3 3 4 1 1 1 1 . .
+        . . 1 1 b 9 b b b b 9 b 1 1 f .
+        . f 1 9 b b 1 1 1 1 b 9 9 1 1 .
+        . f 9 1 b b b 2 2 b b b 1 9 1 .
+        . f 1 1 b f b 1 1 b f b 1 1 1 .
+        . 1 1 1 5 b b 1 1 b b f 5 1 1 .
+        . 9 1 f . b b 1 1 b b f d 1 9 .
+        . 1 f . . f 1 2 1 c b f 9 1 1 .
+        . f . . . 9 1 2 1 b 9 . f 1 f .
+        . . . . . 9 c f f b b f f 1 f .
+        . . . . . f . . f b b f f f . .
+        . . . . . . . . . c b f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-archer") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 7 1 7 . . . . . .
+        . . . . . . 7 7 7 . . . . . . .
+        . . . . . 1 2 2 1 1 e . . . . .
+        . . . . . . 1 3 1 . e . . . . .
+        . . . . . . 1 f 1 7 . . . . . .
+        . . . . . 6 7 7 7 7 . . . . . .
+        . . . . 8 c 6 f 6 c . . . . . .
+        . . . 3 6 . 6 6 6 3 . . . . . .
+        . . . . . . 6 f 6 . . . . . . .
+        . . . . . . f . e f . . . . . .
+        . . . . . e . . . f f f f . . .
+        . . . . . e . . . e f f f . . .
+        . . . . . e f f f e f f f . . .
+        . . . . e e f f f f e f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "mummy") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . b f . . . . . . . .
+        . . . . . f 3 3 f 3 . . . . . .
+        . . . . . f b f f . . . . . . .
+        . . . . f 3 d e . f . . . . . .
+        . . . . d b 3 3 3 f . . . . . .
+        . . . . d b b d f . . . . . . .
+        . . . f 3 d 3 f e . . . . . . .
+        . . . d f d b f b . . . . . . .
+        . . . 3 f b f f d f f f . . . .
+        . . . f f 3 3 f f f f f . . . .
+        . . . . f d f 3 f f f . . . . .
+        . . . . f 3 f d f f . . . . . .
+        . . . f d f f d f . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "scythe-reaper") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . f c f . . . . . . .
+        . . . . . . f c b c . . . . . .
+        . f . . . f f f c f . . . . . .
+        . f 2 f . . c 9 f c f . . . . .
+        . . f 9 2 f c c c c c f . . . .
+        . . . f f 2 f f b f f c c f . .
+        . . . f 1 b 2 f 1 b f b f f . .
+        . . f f b f f f 2 f f b c c . .
+        . f c f f f f b b 9 b c f . . .
+        . . f f f . f b f f 2 2 c f f .
+        . . . . . f 9 f f f f f f f f .
+        . . . . . . f f f f f b 3 2 f .
+        . . . . 3 1 1 1 1 1 1 3 f . . .
+        . . . f f f b b f f f 1 b f f .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "executioner") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . f e e . . 3 3 3 f . . .
+        . . . f b d f f f f f 1 3 f . .
+        . . f b f . b b b b f e 3 3 . .
+        . f b f . f f 1 f b f f e 3 . .
+        . f . 1 1 f 1 b 1 b f f f 1 f .
+        . . f 1 f f b b b b f f 1 d e .
+        . . f b f f f f f b f f b f e .
+        . f 1 f f . . b b f 1 1 . . . .
+        . e 1 f . . f b f . f f . b f .
+        . f 1 b d f 1 f f . . 3 d f . .
+        . f 3 f e e 1 e f . . f 3 . . .
+        . . f 3 f 1 b f f e e 1 f . . .
+        . . f f 3 f 1 1 f 1 1 3 f f f .
+        . . f f f 3 f f 1 3 f f f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "wizard") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . 8 a . . . . . . . . .
+        . . . . a a a a a a . . . . . .
+        . . . . . . 3 e . . . . . . . .
+        . . . . . . a 8 . . . . . . . .
+        . . . . . a a a a a . . . . . .
+        . . . . . a a a 8 a 8 . . . . .
+        . . . d a . a c 2 2 8 . . . . .
+        . . . . . . 8 c 2 d . . . . . .
+        . . . . . . a a 8 . . . . . . .
+        . . . . . 8 8 a a a f f f . . .
+        . . . . . 8 c a a a f f f . . .
+        . . . . . 8 8 a a 8 f f . . . .
+        . . . . . c 8 8 8 c 8 . . . . .
+        . . . . . 2 . . . 2 . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-mage") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . 1 3 1 . . . . . . .
+        . . . . . 1 2 2 1 1 . . . . . .
+        . . . . . . 1 3 1 . . 2 2 d . .
+        . . . . 2 2 1 2 1 2 2 2 e . . .
+        . . . 2 2 2 2 2 2 2 2 2 e . . .
+        . 3 2 2 2 2 2 2 2 e 2 2 e . . .
+        . . 2 2 e e 2 2 e e 2 2 e f . .
+        . . . e . 2 e 2 e e f e f f . .
+        . . . . . 2 e e 2 e f f f . . .
+        . . . . . 2 e e 2 e f f f . . .
+        . . . . . 2 2 e 2 e f f . . . .
+        . . . . 2 2 2 2 2 2 e f . . . .
+        . . . . 2 2 2 2 2 2 e . . . . .
+        . . . . f f 2 2 2 f . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Blade") return img`
+        . 4 . . . 4 4 4 4 4 . . . . . .
+        . 4 5 4 4 5 5 5 5 5 4 . . . . .
+        . . 4 5 5 5 5 5 5 5 5 4 . . . .
+        . . . 4 5 5 5 4 5 5 5 4 . . . .
+        . . 4 4 5 4 5 4 5 4 5 4 . . . .
+        . 4 . 4 5 e e 1 e e 5 4 . . . .
+        . . . . 5 1 c 1 c 1 5 . . . . .
+        . . . . 4 e 4 1 4 e 4 . . . . .
+        . . c 1 9 c 9 1 9 c 9 1 c . . .
+        . . c 9 9 c c 9 c c 9 9 c . . .
+        . . e 4 e c 1 c 1 c e 4 e . . .
+        . e 1 4 e 9 c 9 c 9 e 4 1 e . .
+        . e 1 1 9 c 1 c 1 c 9 1 1 e . .
+        . . e e c d 1 1 1 d c e e . . .
+        . . . . . c 9 9 9 c . . . . . .
+        . . . . c 1 9 c 9 1 c . . . . .
+    `;
+        if (artKey == "A-Guardian") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 5 1 1 1 5 5 e e . . .
+        . . . 4 4 4 4 5 4 4 4 4 . . . .
+        . . e e e e 4 1 4 e e a . . . .
+        . e . a e 1 a 1 a 1 e a . . . .
+        . . . . a e 4 1 4 e a 3 a . . .
+        . . a c 8 4 c b c 4 8 c a . . .
+        . . . c 8 8 4 5 4 8 8 c . . . .
+        . . c 8 8 8 c b c 8 8 8 c . . .
+        . e 1 4 c 8 c b c 8 c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e 8 c c b c c 8 e e . . .
+        . . . c 8 c c e c c 8 c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "A-Medic") return img`
+        . . . . 6 9 1 1 1 9 6 . . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 6 1 6 6 6 9 6 . . . .
+        . . . 6 6 6 4 1 4 6 6 6 . . . .
+        . . . 6 6 e e 1 e e 6 6 . . . .
+        . . 6 1 6 1 6 1 6 1 6 1 6 . . .
+        . . 6 1 6 e 4 1 4 e 6 1 6 . . .
+        . . 6 6 6 9 1 9 1 9 6 6 6 . . .
+        . . . 6 9 6 1 1 1 6 9 6 . . . .
+        . . 6 6 9 6 9 9 9 6 9 6 6 . . .
+        . e 1 4 6 9 9 9 9 9 6 4 1 e . .
+        . e 1 1 4 9 9 1 9 9 4 1 1 e . .
+        . . e e 6 9 9 1 9 9 6 e e . . .
+        . . . . 6 6 9 9 9 6 6 . . . . .
+        . . . 6 e 3 4 e 4 3 e 6 . . . .
+    `;
+        if (artKey == "A-Ranger") return img`
+        . . . . . 6 7 7 7 6 . . . . . .
+        . . . . 6 7 7 7 7 7 6 e 5 e . .
+        . . . . 6 6 6 6 7 7 6 5 e . . .
+        . . . 6 7 2 2 2 2 2 7 e . . . .
+        . . . 6 2 2 3 2 3 2 2 6 . . . .
+        . . . 6 2 e e 4 e e 2 6 . . . .
+        . . . 2 e 1 6 1 6 1 e 2 . . . .
+        . . 2 2 2 e 4 1 4 e 2 2 2 . . .
+        . . . 6 7 4 5 7 5 4 7 6 . . . .
+        . . . 6 7 6 5 7 5 6 7 6 . . . .
+        . . e 4 6 6 4 7 4 6 6 4 e . . .
+        . e 1 4 e . e 4 e . e 4 1 e . .
+        . e 1 1 4 e 4 5 4 e 4 1 1 e . .
+        . . e e . e 5 5 5 e . e e . . .
+        . . . . . e 1 4 1 e . . . . . .
+        . . . . e 5 4 e 4 5 e . . . . .
+    `;
+        if (artKey == "A-Harvester") return img`
+        . . . . . c b b b b c . . . . .
+        . . . . c b b b b b b c . . . .
+        . . . . b b b b b b b b . . . .
+        . . . c b b b 4 b b b b c . . .
+        . . . c b e e 1 b e e b c . . .
+        . . . b b 1 c 1 1 c 1 b b . . .
+        . . c b b e 4 1 1 4 e b b c . .
+        . . c b e 1 e 4 4 e 1 e b c . .
+        . . c b e 1 1 2 2 1 1 e b c . .
+        . . . e 3 2 1 1 1 1 2 3 e . . .
+        . . e 4 e 2 1 1 1 1 2 e 4 e . .
+        . e 1 4 e 2 b 1 1 b 2 e 4 1 e .
+        . e 1 1 4 b 1 1 1 1 b 4 1 1 e .
+        . . e e e b 1 1 1 1 b e e e . .
+        . . . e b 1 1 1 1 1 1 b e . . .
+        . . e e e e 2 2 2 2 e e e e . .
+    `;
+        if (artKey == "A-Reaper") return img`
+        . . . . . c b b b c . . . . . .
+        . . . . c b b b b b c . . . . .
+        . . . . b b b b b b b . . . . .
+        . . . c b b 1 b 1 b b c . . . .
+        . . . c b b 1 1 1 b b c . . . .
+        . . . c b e e 4 e e b c . . . .
+        . . . . c 1 c 1 c 1 c . . . . .
+        . . . . . c b b b c . . . . . .
+        . . . c b b b 1 b b b c . . . .
+        . . . c b c b b b c b c . . . .
+        . . e 1 c c b b b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c b b b c . e e . . .
+        . . . . . f b c b f . . . . . .
+        . . . . f b c f c b f . . . . .
+    `;
+        if (artKey == "A-Executioner") return img`
+        . . . . . 4 4 4 4 4 . . . . . .
+        . . . . 4 4 4 5 4 4 4 . . . . .
+        . . . . 4 4 5 5 4 5 4 . . . . .
+        . . . 4 4 5 5 4 5 5 5 4 . . . .
+        . . . 4 5 4 5 4 5 4 5 4 . . . .
+        . . . 4 5 e e 1 e e 5 4 . . . .
+        . . . 5 4 1 4 1 4 1 4 5 . . . .
+        . . 4 5 5 e 4 1 4 e 5 5 4 . . .
+        . . 4 a 1 a 3 1 3 a 1 a 4 . . .
+        . . . a 3 a a 3 a a 3 a . . . .
+        . . e 4 e a 1 a 1 a e 4 e . . .
+        . e 1 4 e 3 a 3 a 3 e 4 1 e . .
+        . e 1 1 3 a 4 a 4 a 3 1 1 e . .
+        . . e e a e 1 4 1 e a e e . . .
+        . . . . . a 3 3 3 a . . . . . .
+        . . . . a 1 3 a 3 1 a . . . . .
+    `;
+        if (artKey == "A-Enchanter") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 7 7 7 7 7 5 e e . . .
+        . . . 4 7 7 7 7 7 7 7 4 . . . .
+        . . e e 7 e e 1 e 7 7 e . . . .
+        . e . 7 7 1 c 1 c 1 7 7 . . . .
+        . . . 7 7 e 4 1 4 e 7 7 . . . .
+        . . . c a 7 a c a 7 a c . . . .
+        . . . c a a 4 5 4 a a c . . . .
+        . . c a a a c c c a a a c . . .
+        . e 1 4 c a c b c a c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e a c c b c c a e e . . .
+        . . . c a c c e c c a c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "A-Venomist") return img`
+        . . . . . c b 1 b c . . . . . .
+        . . . . c 1 1 1 1 1 c . . . . .
+        . . . . b 1 1 1 1 1 b . . . . .
+        . . . c 1 b 1 b 1 b 1 c . . . .
+        . . . c b b 3 2 4 2 b c . . . .
+        . . . c b 2 3 2 e e b c . . . .
+        . . . . c 3 3 1 c 1 c . . . . .
+        . . . . . c 2 1 1 c . . . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c b c 1 1 1 c b c . . . .
+        . . e 1 c c b 1 b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c 1 b 1 c . e e . . .
+        . . . . . f 1 c 1 f . . . . . .
+        . . . . f 1 c f c 1 f . . . . .
+    `;
+        if (artKey == "hero01") return img`
+        . . . . 6 9 1 1 1 9 6 . . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 9 9 1 9 9 9 6 . . . .
+        . . . 6 9 6 1 6 6 6 9 6 . . . .
+        . . . 6 6 6 4 1 4 6 6 6 . . . .
+        . . . 6 6 e e 1 e e 6 6 . . . .
+        . . 6 1 6 1 6 1 6 1 6 1 6 . . .
+        . . 6 1 6 e 4 1 4 e 6 1 6 . . .
+        . . 6 6 6 9 1 9 1 9 6 6 6 . . .
+        . . . 6 9 6 1 1 1 6 9 6 . . . .
+        . . 6 6 9 6 9 9 9 6 9 6 6 . . .
+        . e 1 4 6 9 9 9 9 9 6 4 1 e . .
+        . e 1 1 4 9 9 1 9 9 4 1 1 e . .
+        . . e e 6 9 9 1 9 9 6 e e . . .
+        . . . . 6 6 9 9 9 6 6 . . . . .
+        . . . 6 e 3 4 e 4 3 e 6 . . . .
+    `;
+        if (artKey == "hero02") return img`
+        . . . . c 1 1 1 1 1 c . . . . .
+        . . . c b b b 1 b b b c . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c 1 1 1 1 1 1 1 c . . . .
+        . . . c 1 b 4 1 4 1 1 c . . . .
+        . . . 1 1 e e 1 e e 1 b . . . .
+        . . b 1 1 1 c 1 c 1 1 b . . . .
+        . b b 1 b e 4 1 4 e 1 1 . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c b c 1 1 1 c b c . . . .
+        . . c b b c b 1 b c b b c . . .
+        . e 1 4 c b 1 b 1 b c 4 1 e . .
+        . e 1 1 4 b 1 1 1 b 4 1 1 e . .
+        . . e e b b 1 1 1 b b e e . . .
+        . . . c b c 1 b 1 c b c . . . .
+        . . c c e 3 4 e 4 3 e c c . . .
+    `;
+        if (artKey == "hero03") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 7 7 7 7 7 5 e e . . .
+        . . . 4 7 7 7 7 7 7 7 4 . . . .
+        . . e e 7 e e 1 e 7 7 e . . . .
+        . e . 7 7 1 c 1 c 1 7 7 . . . .
+        . . . 7 7 e 4 1 4 e 7 7 . . . .
+        . . . c a 7 a c a 7 a c . . . .
+        . . . c a a 4 5 4 a a c . . . .
+        . . c a a a c c c a a a c . . .
+        . e 1 4 c a c b c a c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e a c c b c c a e e . . .
+        . . . c a c c e c c a c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "hero04") return img`
+        . . . . . e 5 5 5 e . . . . . .
+        . . . . e 4 5 5 5 5 e . . . . .
+        . . . . e 5 4 4 5 5 e . . e . .
+        . . . e 5 5 1 1 1 5 5 e e . . .
+        . . . 4 4 4 4 5 4 4 4 4 . . . .
+        . . e e e e 4 1 4 e e a . . . .
+        . e . a e 1 a 1 a 1 e a . . . .
+        . . . . a e 4 1 4 e a 3 a . . .
+        . . a c 8 4 c b c 4 8 c a . . .
+        . . . c 8 8 4 5 4 8 8 c . . . .
+        . . c 8 8 8 c b c 8 8 8 c . . .
+        . e 1 4 c 8 c b c 8 c 4 1 e . .
+        . e 1 1 4 c c b c c 4 1 1 e . .
+        . . e e 8 c c b c c 8 e e . . .
+        . . . c 8 c c e c c 8 c . . . .
+        . . c c e 5 5 e 5 5 e c c . . .
+    `;
+        if (artKey == "hero05") return img`
+        . . . . . c b 1 b c . . . . . .
+        . . . . c 1 1 1 1 1 c . . . . .
+        . . . . b 1 1 1 1 1 b . . . . .
+        . . . c 1 b 1 b 1 b 1 c . . . .
+        . . . c b b 3 2 4 2 b c . . . .
+        . . . c b 2 3 2 e e b c . . . .
+        . . . . c 3 3 1 c 1 c . . . . .
+        . . . . . c 2 1 1 c . . . . . .
+        . . . c b 1 1 1 1 1 b c . . . .
+        . . . c b c 1 1 1 c b c . . . .
+        . . e 1 c c b 1 b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c 1 b 1 c . e e . . .
+        . . . . . f 1 c 1 f . . . . . .
+        . . . . f 1 c f c 1 f . . . . .
+    `;
+        if (artKey == "hero06") return img`
+        . . . . . c b b b c . . . . . .
+        . . . . c b b b b b c . . . . .
+        . . . . b b b b b b b . . . . .
+        . . . c b b 1 b 1 b b c . . . .
+        . . . c b b 1 1 1 b b c . . . .
+        . . . c b e e 4 e e b c . . . .
+        . . . . c 1 c 1 c 1 c . . . . .
+        . . . . . c b b b c . . . . . .
+        . . . c b b b 1 b b b c . . . .
+        . . . c b c b b b c b c . . . .
+        . . e 1 c c b b b c c 1 c . . .
+        . e 1 4 e . c c c . e 4 1 e . .
+        . e 1 1 4 c b b b c 4 1 1 e . .
+        . . e e . c b b b c . e e . . .
+        . . . . . f b c b f . . . . . .
+        . . . . f b c f c b f . . . . .
+    `;
+        if (artKey == "hero07") return img`
+        . . . . . 6 7 7 7 6 . . . . . .
+        . . . . 6 7 7 7 7 7 6 e 5 e . .
+        . . . . 6 6 6 6 7 7 6 5 e . . .
+        . . . 6 7 2 2 2 2 2 7 e . . . .
+        . . . 6 2 2 3 2 3 2 2 6 . . . .
+        . . . 6 2 e e 4 e e 2 6 . . . .
+        . . . 2 e 1 6 1 6 1 e 2 . . . .
+        . . 2 2 2 e 4 1 4 e 2 2 2 . . .
+        . . . 6 7 4 5 7 5 4 7 6 . . . .
+        . . . 6 7 6 5 7 5 6 7 6 . . . .
+        . . e 4 6 6 4 7 4 6 6 4 e . . .
+        . e 1 4 e . e 4 e . e 4 1 e . .
+        . e 1 1 4 e 4 5 4 e 4 1 1 e . .
+        . . e e . e 5 5 5 e . e e . . .
+        . . . . . e 1 4 1 e . . . . . .
+        . . . . e 5 4 e 4 5 e . . . . .
+    `;
+        if (artKey == "hero08") return img`
+        . . . . . 7 7 7 7 7 . . . . . .
+        . . . . 7 7 7 7 7 7 7 e 5 e . .
+        . . . . 7 7 7 7 7 7 7 5 e . . .
+        . . . 7 7 7 7 7 7 7 7 e . . . .
+        . . . 7 7 4 5 4 5 5 7 7 . . . .
+        . . . 7 7 e e 4 e e 7 7 . . . .
+        . . . . e 1 7 1 7 1 e . . . . .
+        . . . . . e 4 1 4 e . . . . . .
+        . . . 7 7 4 5 7 5 4 7 7 . . . .
+        . . . 7 7 7 5 7 5 7 7 7 . . . .
+        . . e 4 7 7 4 7 4 7 7 4 e . . .
+        . e 1 4 e . 7 7 7 . e 4 1 e . .
+        . e 1 1 4 e 4 5 4 e 4 1 1 e . .
+        . . e e . e 5 5 5 e . e e . . .
+        . . . . . e 5 4 5 e . . . . . .
+        . . . . e 5 5 e 5 5 e . . . . .
+    `;
+        if (artKey == "hero09") return img`
+        . . . . . c b b b b c . . . . .
+        . . . . c b b b b b b c . . . .
+        . . . . b b b b b b b b . . . .
+        . . . c b b b 4 b b b b c . . .
+        . . . c b e e 1 b e e b c . . .
+        . . . b b 1 c 1 1 c 1 b b . . .
+        . . c b b e 4 1 1 4 e b b c . .
+        . . c b e 1 e 4 4 e 1 e b c . .
+        . . c b e 1 1 2 2 1 1 e b c . .
+        . . . e 3 2 1 1 1 1 2 3 e . . .
+        . . e 4 e 2 1 1 1 1 2 e 4 e . .
+        . e 1 4 e 2 b 1 1 b 2 e 4 1 e .
+        . e 1 1 4 b 1 1 1 1 b 4 1 1 e .
+        . . e e e b 1 1 1 1 b e e e . .
+        . . . e b 1 1 1 1 1 1 b e . . .
+        . . e e e e 2 2 2 2 e e e e . .
+    `;
+        if (artKey == "hero10") return img`
+        . . . . . . e e e e . . . . . .
+        . . . . . e 4 1 1 4 e . . . . .
+        . . . . e 4 1 1 1 1 4 e . . . .
+        . . . . 9 4 1 1 1 1 4 9 . . . .
+        . . . b 9 e e 1 1 e e 9 b . . .
+        . . . 9 e 1 b 1 1 b 1 e 9 . . .
+        . . . . b e 4 1 1 4 e b . . . .
+        . . . . e 1 e 4 4 e 1 e . . . .
+        . . . e 4 1 1 1 1 1 1 4 e . . .
+        . . . e 4 b 1 1 1 1 b 4 e . . .
+        . . e 4 e b b 1 1 b b e 4 e . .
+        . e 1 4 e . b b b b . e 4 1 e .
+        . e 1 1 4 e 2 3 3 2 e 4 1 1 e .
+        . . e e . e 3 3 3 3 e . e e . .
+        . . . . . e 3 2 2 3 e . . . . .
+        . . . . e 5 5 e e 5 5 e . . . .
+    `;
+        if (artKey == "hero11") return img`
+        . . . . . 4 4 4 4 4 . . . . . .
+        . . . . 4 4 4 5 4 4 4 . . . . .
+        . . . . 4 4 5 5 4 5 4 . . . . .
+        . . . 4 4 5 5 4 5 5 5 4 . . . .
+        . . . 4 5 4 5 4 5 4 5 4 . . . .
+        . . . 4 5 e e 1 e e 5 4 . . . .
+        . . . 5 4 1 4 1 4 1 4 5 . . . .
+        . . 4 5 5 e 4 1 4 e 5 5 4 . . .
+        . . 4 a 1 a 3 1 3 a 1 a 4 . . .
+        . . . a 3 a a 3 a a 3 a . . . .
+        . . e 4 e a 1 a 1 a e 4 e . . .
+        . e 1 4 e 3 a 3 a 3 e 4 1 e . .
+        . e 1 1 3 a 4 a 4 a 3 1 1 e . .
+        . . e e a e 1 4 1 e a e e . . .
+        . . . . . a 3 3 3 a . . . . . .
+        . . . . a 1 3 a 3 1 a . . . . .
+    `;
+        if (artKey == "hero12") return img`
+        . 4 . . . 4 4 4 4 4 . . . . . .
+        . 4 5 4 4 5 5 5 5 5 4 . . . . .
+        . . 4 5 5 5 5 5 5 5 5 4 . . . .
+        . . . 4 5 5 5 4 5 5 5 4 . . . .
+        . . 4 4 5 4 5 4 5 4 5 4 . . . .
+        . 4 . 4 5 e e 1 e e 5 4 . . . .
+        . . . . 5 1 c 1 c 1 5 . . . . .
+        . . . . 4 e 4 1 4 e 4 . . . . .
+        . . c 1 9 c 9 1 9 c 9 1 c . . .
+        . . c 9 9 c c 9 c c 9 9 c . . .
+        . . e 4 e c 1 c 1 c e 4 e . . .
+        . e 1 4 e 9 c 9 c 9 e 4 1 e . .
+        . e 1 1 9 c 1 c 1 c 9 1 1 e . .
+        . . e e c d 1 1 1 d c e e . . .
+        . . . . . c 9 9 9 c . . . . . .
+        . . . . c 1 9 c 9 1 c . . . . .
+    `;
+        return img`
+        . 4 . . . 4 4 4 4 4 . . . . . .
+        . 4 5 4 4 5 5 5 5 5 4 . . . . .
+        . . 4 5 5 5 5 5 5 5 5 4 . . . .
+        . . . 4 5 5 5 4 5 5 5 4 . . . .
+        . . 4 4 5 4 5 4 5 4 5 4 . . . .
+        . 4 . 4 5 e e 1 e e 5 4 . . . .
+        . . . . 5 1 c 1 c 1 5 . . . . .
+        . . . . 4 e 4 1 4 e 4 . . . . .
+        . . c 1 9 c 9 1 9 c 9 1 c . . .
+        . . c 9 9 c c 9 c c 9 9 c . . .
+        . . e 4 e c 1 c 1 c e 4 e . . .
+        . e 1 4 e 9 c 9 c 9 e 4 1 e . .
+        . e 1 1 9 c 1 c 1 c 9 1 1 e . .
+        . . e e c d 1 1 1 d c e e . . .
+        . . . . . c 9 9 9 c . . . . . .
+        . . . . c 1 9 c 9 1 c . . . . .
+    `;
+    }
+    export function largePortrait(artKey: string, side: apocTypes.Side): Image {
+        if (artKey == "E-Raider") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f d 3 3 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . f d 3 3 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . . f f f e d 3 3 3 3 3 d f f f f f . . . . . . . .
+        . . . . . . . f 3 3 3 f 2 3 3 3 2 f d d 3 3 3 3 f . . . . . . .
+        . . . . . . . . f d e d f 3 3 f f d d e e d f f . . . . . . . .
+        . . . . . . . . . f 1 d 3 3 1 3 3 d d e e f . . . . . . . . . .
+        . . . . . . . . . . f 1 2 2 2 1 d d e f f . . . . . . . . . . .
+        . . . . . . . . . . . f d 3 3 d 2 e e f . . . . . . . . . . . .
+        . . . . . . . . . . f b e d d e e e e b f . . . . . . . . . . .
+        . . . . . . . . . f b f b e e e e b b f b f . . . . . . . . . .
+        . . . . . . . . f e e b f b b b b f f b e 3 f . . . . . . . . .
+        . . . . . . . . f d b f b f f f f b b f 3 d d f . . . . . . . .
+        . . . . . . . . f d f b f b b b b f f b e d e e f . . . . . . .
+        . . . . . . . f d e f f b f f f f b b f e e e e f . . . . . . .
+        . . . . . . f e e e f f f b b b b f f f f e e e b f . . . . . .
+        . . . f f f b 1 e e f e e f f f f b e e f f e 1 b f . . . . . .
+        . . f d 3 d e b b f f e e 2 1 2 2 e e e f . f b 3 e f . . . . .
+        . . f 3 d e d b f . f f b e 2 2 e e b b f . f 3 d e f . . . . .
+        . . f d e e f f . f f f f b b b b b f f f f f e e e f . . . . .
+        . . . f f f . . . f f b f f f f f f b b f f . f e f . . . . . .
+        . . . . . . . . . f f f f b b b b b f f f f . . f . . . . . . .
+        . . . . . . . . . f e f f f f f f f b f e f f f f f f f . . . .
+        . . . . . . . . . f e d b f b b b b f e e f f f f f f f f . . .
+        . . . . . . . . . f e d e f f f f f e d e f f f f f f f f . . .
+        . . . . . . . . . f e 3 e f f f f f e 3 e e f f f f f f f . . .
+        . . . . . . . . f e e e e f f f f f e e e e f f f f f f . . . .
+        . . . . . . . . f e e e f f f f f f e e e e f f f f . . . . . .
+        . . . . . . . . f e e e f f f f f f e e e e f f f . . . . . . .
+        . . . . . . . f 2 2 e e f f f f . . f e e 2 2 f . . . . . . . .
+        . . . . . . . f e e e e f f . . . . f e e e e f . . . . . . . .
+        . . . . . . . . f f f f f . . . . . . f f f f . . . . . . . . .
+    `;
+        if (artKey == "E-Decoy") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f e e c f . . . . . . . . . . . . . .
+        . . . . . . . . . f . . f e d e e e f . . f . . . . . . . . . .
+        . . . . . . . . f 2 f f c e d e e e c f f 2 f . . . . . . . . .
+        . . . . . . . . f 2 2 c e e e e e 2 e c 2 2 f . . . . . . . . .
+        . . . . . . . . f 2 2 2 2 2 e c 2 2 2 2 e 2 f . . . . . . . . .
+        . . . . . . . . . f 2 e 5 e e c e 5 e e e f . . . . . . . . . .
+        . . . . . . . . . . f 2 e 2 2 2 2 e e f f . . . . . . . . . . .
+        . . . . . . . . . . f f 2 e 2 2 e 2 2 f e f f . . . . . . . . .
+        . . . . . . . . . f f f e 1 f f 9 2 f e f e f f . . . . . . . .
+        . . . . . . . . f e f c f b 1 b b 2 f c e e e e f . . . . . . .
+        . . . . . . . . f e e f c f 2 2 2 f e f e c e 2 e f . . . . . .
+        . . . . . . . f e 2 c e f c f f f e f e b 2 e 2 2 f . . . . . .
+        . . . . f f f e 2 2 e f e f e f e f e f e f f e 2 e f . . . . .
+        . . . f b 1 2 2 2 e f f 2 e f e f e f e f . f e 2 e f . . . . .
+        . . . f 2 e 2 e e f . f 2 2 c f c f 2 2 f . . f 2 e 2 f . . . .
+        . . . f 1 e 2 f f . . f b 2 2 2 2 2 2 b b f . f 1 2 e f . . . .
+        . . . . f f f . . . f f b b b b b b b b c f . f b 2 1 f . . . .
+        . . . . . . . . . . f b e b c b c b c c f f . . f f f . . . . .
+        . . . . . . . . . . f c c c f b f f e f e f f f . . . . . . . .
+        . . . . . . . . . . f e c 2 e f f 2 e 2 e f f f f f f . . . . .
+        . . . . . . . . . . f 2 2 2 e f f f 2 2 e f f f f f f f . . . .
+        . . . . . . . . . . . f 2 e f f f f 2 2 f f f f f f f f . . . .
+        . . . . . . . . . . f 2 2 2 f f f f 2 e e f f f f f f . . . . .
+        . . . . . . . . . f 1 2 b e f . . f e b e 1 f f f . . . . . . .
+        . . . . . . . . . f f f f f . . . . f f f f f . . . . . . . . .
+    `;
+        if (artKey == "E-Plague") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . f f e d d 4 f f . . . .
+        . . . . . . . . . . . . . . . . . . . f 5 d e e e e e 4 f . . .
+        . . . . . . . . . . . . . . . . . . f 5 4 e e f f e e d 5 f . .
+        . . . . . . . . . . . . . . . . . . f 5 d e f . . f f e d d f .
+        . . . . . . . . . . . . . . . . . . . f 4 e f . . . f e e d f .
+        . . . . . . . . . . . . . . . . . . . . f 5 d f . . . f e e f .
+        . . . . . . . . . . . . . . . . . . . . . f 5 f . . . f 4 e e f
+        . . . . . . . . . . . . . . . . . . . . f 5 f . . . . f 5 d e f
+        . . . . . . . . . . . . . . . . . . . . . f . . . . . f 5 d e f
+        . . . . . . . . . . . . . . f . . . . . . . . . . . . f d e f f
+        . . . . . . . . . . f . . f 7 f f . . . . . . . . . . f f f f .
+        . . . . . . . . . f 7 f f . f e e f . . . . . . . . f 4 e e f .
+        . . . . . . f . . f f e e f . f f 5 f . . . . . . f 5 d e f f .
+        . . . . . f 7 f f e 7 f f 5 f . f 7 f . . . . . f 5 5 e f f . .
+        . . . . . . f e e f 7 f f e f . f 7 f . . . . f f d e e f f . .
+        . . . f f f . f f f f e f f 5 f f 7 f . . f f 4 e f e f f . . .
+        . . f d 5 5 f . . . f 5 f f 7 f f d f f f 5 d e e e f f f f f .
+        . f d 5 d d e f . . f 7 f f e f 5 e d 5 d 5 e e f f f f f f f f
+        . f d 5 d e e e f f f f 5 5 e d 5 5 e d 5 e e e f f f f f f f f
+        f 4 d d e f f d 4 5 d d d 5 5 e d e e e e e e e e e 7 f f f f .
+        f 4 f e f e d 5 d d 5 e d d d e e e e e e e f f f f 7 f f . . .
+        f 4 f e f d f d 7 d 4 e e e e e e f f f f 7 f f f f 7 f . . . .
+        f e f f f e d f d e e e e e e e e e e f f 7 f f f f 5 f . . . .
+        . f . . . f e d e e e e e e e e f f 7 f f 5 f . . f e f . . . .
+        . . . . . f f e e e e d f f f f . f 4 f . f e f . f 7 f . . . .
+        . . . f f e d d d e f e d f . . . f e f . f 7 f . f 7 f . . . .
+        . . f e e 5 5 5 5 5 e e e f . . . f 5 f . f 7 f . f e 7 f . . .
+        . . . f f e e e e e 4 e e f . . . f 7 f . f 7 f . . f f . . . .
+        . . f e e f f f e e e e f . . . . f e f . f e 7 f . . . . . . .
+        . . . f e e e e e e e f . . . . . . f 7 f . f f . . . . . . . .
+        . . . . f f f f f f f . . . . . . . . f . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Boss") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        6 6 . . . . . . . . . . . . . . . . . . . . . 6 6 6 6 6 6 6 6 .
+        . 6 6 6 6 . . . . . . . . . 1 . . . 1 1 6 6 6 6 2 2 2 2 2 2 . .
+        . . 2 2 6 6 6 6 6 6 6 6 6 1 . . . . . 6 6 2 2 2 2 2 2 2 2 . . .
+        . . . 2 2 2 2 2 2 2 6 6 2 6 . . . . 6 6 6 6 6 2 2 2 2 2 . . . .
+        . . . 2 2 2 2 6 6 6 2 2 2 6 . . . . 6 2 2 2 2 6 6 2 2 2 . . . .
+        . . . 2 2 2 6 2 2 2 7 7 7 2 6 . . . 6 2 2 2 2 2 2 6 2 2 . . . .
+        . . 2 2 2 6 2 2 7 7 6 7 7 7 6 . . . 6 2 2 2 2 2 2 2 6 2 . . . .
+        . . 2 6 6 2 2 7 6 7 7 6 7 6 7 7 . . 6 2 2 2 2 2 2 2 2 6 . . . .
+        . . 6 2 2 2 2 7 7 6 6 6 6 6 7 6 7 . 6 2 2 2 2 2 2 2 2 2 6 . . .
+        . . . 2 2 2 7 7 7 6 1 7 7 6 6 6 7 6 . 6 2 2 2 2 2 2 . . . . . .
+        . . . . 1 2 7 7 7 6 1 2 7 7 7 6 6 7 7 6 2 2 2 2 2 . . . . . . .
+        . . . . b 1 7 7 7 1 1 2 2 6 7 7 6 6 7 6 2 2 2 2 . . . . . . . .
+        . . . . . 1 1 7 7 1 7 . 2 6 7 7 7 6 6 7 7 7 7 2 . . . . . . . .
+        . . . . . b 7 7 7 7 7 6 7 6 6 7 7 6 6 6 6 7 7 7 7 . . . . . . .
+        . . . . . . 7 7 7 7 7 2 6 6 6 7 7 7 6 6 6 6 6 6 7 7 7 . . . . .
+        . . . . . . 7 2 7 7 7 2 6 6 6 7 7 7 6 6 6 6 6 6 6 7 7 7 . . . .
+        . . . . . . 6 7 2 7 7 7 7 6 6 7 7 7 6 6 7 6 6 6 6 6 6 7 . . . .
+        . . . . . 6 6 7 7 7 7 7 7 6 6 7 7 7 7 6 6 6 6 6 . . 6 7 7 . . .
+        . . . . 6 6 6 6 7 7 7 7 7 6 6 7 7 7 7 6 6 6 6 . . 1 6 7 7 7 . .
+        . . 6 6 6 6 6 6 1 6 7 7 7 6 6 7 7 7 7 6 6 6 7 f f f f 1 7 1 . .
+        . 6 6 6 6 6 6 . . . 6 7 7 6 6 7 7 7 7 6 6 6 6 6 f f f 1 f f 1 .
+        . 1 . 6 6 1 . . . . . 6 . 6 6 6 7 7 7 6 6 7 6 6 7 6 f f 6 6 . .
+        1 . . 1 . 1 . . . . . . 6 6 6 6 7 7 7 6 6 7 6 7 6 6 6 6 6 f f .
+        . . . 1 . . . . . . 6 6 7 6 6 6 7 7 7 7 6 6 7 6 6 6 6 6 f f f .
+        . . . . . . . . . . 6 7 7 6 6 6 6 7 7 7 6 6 6 7 6 7 f f f f . .
+        . . . . . . . . . 6 7 6 6 6 6 6 f f 7 7 6 6 6 7 7 6 f f f . . .
+        . . . . . . . . . 6 7 6 6 6 6 f f f f f f 6 6 6 6 7 6 f f . . .
+        . . . . . . . . . 7 7 6 6 6 6 f f f f f f f 6 6 7 7 6 f f f . .
+        . . . . . . . . 6 6 6 6 6 6 f f f f f f f f 6 6 6 6 6 6 f f f .
+        . . . . . . 6 6 6 6 6 6 6 f f f f f . . f f f 6 6 6 7 6 6 f f .
+        . . . . . 9 6 f 9 6 f 6 6 9 f f . . . f f f 9 6 f 6 9 f 6 9 f .
+        . . . . . f f f f f f f f f f . . . . . . f f f f f f f f f . .
+    `;
+        if (artKey == "E-King") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . d 3 3 3 3 3 . . . . . . . . . . . . . . .
+        . . . . . . . . . . 3 3 3 3 3 3 3 3 . . . . . . . . . . . . . .
+        . . . . . . . . . . d 3 3 3 3 3 d d d . . . . . . . . . . . . .
+        . . . . . 3 3 3 3 3 f 2 3 3 3 d 2 f d d 3 3 3 3 . . . . . . . .
+        . . . . . . . d e e d f 3 3 d f f d d e e d . . . . . . . . . .
+        . . . . . . . . e 1 d 3 3 3 1 3 3 d d e e . . . . . . . . . . .
+        . . . . 2 . . . . . 1 2 2 2 2 1 d d d e . . . . . . 2 . . . . .
+        . . . . . 2 2 . 2 2 e d d d d d 2 d e 2 e 2 2 . 2 2 . . . . . .
+        . . . 2 . . . 2 2 2 2 e e e e e e 2 2 e 2 2 2 2 . . . . . . . .
+        . . . . 2 2 2 e 2 2 e 2 2 2 2 2 2 2 2 2 2 e 2 2 e . . 2 . . . .
+        . . . . . 2 2 2 e f 2 2 2 2 2 2 2 2 2 e e e 2 e 2 2 2 . . . . .
+        . . 2 . 2 e e 2 2 e e e 2 e e e 2 e e 2 e e e 2 2 e . . . . . .
+        . . . 2 e 2 2 e e e 2 2 e 2 2 2 e 2 2 2 . e e 2 e 2 . 2 . . . .
+        . . . 2 2 e 2 e e . 2 2 2 2 2 2 2 2 2 e . . e e 2 2 2 . . . . .
+        . . . . e 3 d e e . . e 2 e e 2 e e e . . . f f b b . . . . . .
+        . . . . b b b e e . . 2 e 2 2 e 2 2 2 . . . f f b b f . . . . .
+        . . . . b b b f . . e 2 2 2 2 2 2 2 e 2 . . f f f b d f . . . .
+        . . . b b b f f . 2 2 d 2 e 2 e d e 2 2 2 f f f e d e f f . . .
+        . . 3 d b f f . . 2 2 2 d 4 4 d e 2 2 2 e e f e d 3 d f f . . .
+        . . d 3 d f . 2 2 e 2 2 e 2 2 2 2 e e e 2 2 f e e d f f f . . .
+        . . d d e e . e 2 2 e e e 2 2 e e e 2 2 2 e f f e e f f f . . .
+        . . . e e . 2 2 e 2 2 e 2 e e 2 2 f e e e 2 2 f f f f f f . . .
+        . . . . . . 2 2 2 e e e f 2 2 2 f f e e 2 2 2 f f f f f f . . .
+        . . . . . . 2 2 3 3 e e f 2 2 f f f f e e 3 2 f f f f f f . . .
+        . . . . . . . . d d 2 f f f f f f f f e e 3 d f f f f f f . . .
+        . . . . . . . . 2 2 2 f f f f f f f f f e 2 2 2 f f f f f . . .
+        . . . . . . . 2 2 2 2 f f f f f f f f f 2 2 2 2 f f f f f . . .
+        . . . . . . . 2 2 2 f f f f f f f f f f 2 2 2 2 f f f f f . . .
+        . . . . . . . 2 2 2 f f f f f f f f f f 2 2 2 2 f f f f . . . .
+        . . . . . . 2 2 2 2 f f f f f f f f f f f 2 2 2 2 f f . . . . .
+        . . . . . . 2 2 2 2 f f f f f f f f f f f 2 2 2 2 f . . . . . .
+        . . . . . . . f f f f . . . . . f f f f f f f f f . . . . . . .
+    `;
+        if (artKey == "E-Wisp") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . 9 9 9 9 . . . . . . . . . . .
+        . . . . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 . . . . . . .
+        . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 . . . .
+        . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 . .
+        . . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 . . . . . . . . . . . .
+        . . . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 9 9 9 9 . . . . . . 9 9 9 9 9 9 9 . . .
+        . . . . . . . . . . . . . 9 9 9 9 9 9 . . . . . . 9 9 9 9 9 9 .
+        . . . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . 9 9 9 9 9 9 9 9 9 9 9 . . . . . . . . . . . . . . .
+        . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . .
+        . 9 9 9 9 9 9 9 9 9 9 . . . . . . 9 9 9 9 9 9 9 9 9 9 9 9 9 . .
+        . . 9 9 9 9 9 9 . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . 9 9 9 9 . . . . . . . . . . . . . .
+        . . . . . . . . . . . 9 9 9 9 9 9 . . . . . . . . . . . . . . .
+        . . . . . . 9 9 9 9 9 9 9 9 9 . . . . . . 9 9 9 9 9 9 . . . . .
+        . . . . . . . . . . c c c c c c c . . 9 9 9 9 9 9 9 9 9 9 . . .
+        . . . . . . . . . . . . . . c c c . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . c c . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . c . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . c . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . c . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "E-Small") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . e e e e e . . . . . . . . . . . . .
+        . . . . . . . . . . . . e e e e e e e e e e 3 3 3 3 . . . . . .
+        . . . . . . . . . . . e e e e e e e e e e 2 e e e d 3 . . . . .
+        . . . . . . . . . . e e e e 2 e e e e e e e e e f f e 3 f . . .
+        . . . . . . . . . e e e e e e 2 2 e 2 e e e e f f f e 3 f . . .
+        . . . . . . . . . e e 2 e e e e e e e e e e e f f f f 3 d f . .
+        . . . . . . . . e e e 2 e 2 e e e e e e e e e f e f f d d f . .
+        . . . . 2 2 . e e e e e e e e e e e e e e e f f f f f d e f . .
+        . . . . 3 2 2 e e 2 2 e 2 e e e e e e e e e e f f f f 3 e f . .
+        . . . . d d 2 e 2 3 2 e e e e e e e e e e e f f f f 3 d f f . .
+        . . . . . e 2 e 3 d 2 e e e e e e e e e e f f f f . 3 d f . . .
+        . . . . e e e e e e e e e e e e e e f e f f f f . . 3 e f . . .
+        . . . e 1 e e e e e e e e f e f f e f e e f f . . . d e f . . .
+        . . . e e e e 1 e e f f e f f e f f 3 d f f . . . 3 e f f . . .
+        . . f e e e e e f e f f f f f f f f f f f . . . . 3 d f . . . .
+        . . f e 1 e e f f f e d f f f f f . . . . . . 3 d e f f . . . .
+        . . f f 1 1 f e f f 3 3 f f f . . . . . . 3 d d e f f . . . . .
+        . . . f f f f f f . f f f . . . . . . . . f f f f f . . . . . .
+    `;
+        if (artKey == "E-Shaman") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f . . . f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f . f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f . f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . f c f f c f 8 8 f . . . . . . . . . . .
+        . . . . . . . . . . . . f f 8 8 8 8 f f c . . . . . . . . . . .
+        . . . . . . . . . . . . f c c c c f f 8 c c . . . . . . . . . .
+        . . . . . . . . . . . . f f c c f f f c f c c . . . . . . . . .
+        . . . . . . . . . . . f f f f f f b b c f f c . . . . . . . . .
+        . . . . . . . . . . f 4 f b b b b b f e 8 4 f f . . . . . . . .
+        . . . . . . . . . . f e f b b b 2 f f 8 c e 8 4 f . . . . . . .
+        . . . . . . . . . f 8 e e f f 2 f f 4 c c e 8 4 4 f . . . . . .
+        . . . . . . . . . f e 8 e f f f 4 e 4 4 e f e e 4 f . . . . . .
+        . . . . . . . . f 4 e e f e e e e e e e f . f e e 4 f . . . . .
+        . . . . . . . . f 4 e e f e 4 e 4 e e e f . . f e e f . . . . .
+        . . . . . f f f 4 e e e f e e e e e e e f . . f e e f . . . . .
+        . . . . f e e 8 e e e f f e 4 e e e e 4 f . . f 8 e f . . . . .
+        . . . . f e e 8 e f f . f e e e 5 5 4 4 4 f f 4 4 8 f . . . . .
+        . . . . f e e f f . . . f 5 5 4 5 5 5 4 4 f f 4 4 f . . . . . .
+        . . . . . f f . . . . f 5 5 5 5 5 5 5 4 4 f f e e f . . . . . .
+        . . . . . . . . . . . f 1 5 5 5 5 4 4 4 4 f . f f . . . . . . .
+        . . . . . . . . . . f 1 1 5 4 5 4 5 4 4 4 f . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 5 4 4 4 4 4 4 f . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 1 5 4 4 4 4 4 f . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 1 9 9 4 4 4 4 f . f f f . . . . . .
+        . . . . . . . . . . f 4 e 9 9 9 9 4 4 4 4 e f f f f f . . . . .
+        . . . . . . . . . . f e e e f f f f e e e e f f f f f . . . . .
+        . . . . . . . . . . . f e e f f f f f e e e f f f f f . . . . .
+        . . . . . . . . . . f f 8 c f f f f f f 8 c f f f f . . . . . .
+        . . . . . . . . . f e 4 e e f f f . f f e 4 e f f . . . . . . .
+        . . . . . . . . f 4 4 e e e f f . . f 4 e e e f . . . . . . . .
+        . . . . . . . . . f f f f f f . . . . f f f f . . . . . . . . .
+    `;
+        if (artKey == "bat") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . f f f f . . . . . . . . . . . . . . . . . . . . . . f f f f .
+        f d d d e f . . . . . . . . . . . . . . . . . . . . f e d d d f
+        . f d d d e f . . . . . . . . . . . . . . . . . . f e d d d f .
+        . . f b d d e f . . . . . . . . . . . . . . . . f e d d b f . .
+        . . . f b b d e f . . . . . . . . . . . . . . f e d b b f . . .
+        . . . f b d d d e f . . . . . . . . . . . . f e d d d b f . . .
+        . . . f d d d d e f . . . . f . f . . . . . f e d d d d f . . .
+        . . f f f f f f f f . . . f f . f f . . . . f f f f f f f f . .
+        . . . f d d d d e f f . f b f . f b f . . f f d d d d d f . . .
+        . . . f b b b d d e f . f d f f f d f . . f e d d b b b f . . .
+        . . . . f b d d f e f . f d b b b d f . f e e f d d b f . . . .
+        . . . . f d d f b b f f b d d b d d b f f e b b f d d f . . . .
+        . . . f e d f b d d e f b f b 8 b f b f e b d d b f d e f . . .
+        . . . f e f b d d d f f d b f b f b d f f d d d d b f e f . . .
+        . . f f f e d d d d b f b f b f 1 f b f b d d d d b e f f f . .
+        . . . . f f b d b b e f b b c f c b b f e e b d b f f . . . . .
+        . . . . . f b b e f f e e b f f f b e f f e e b f . . . . . . .
+        . . . . . f e e f f f e b b b 8 b b b f f f e e f . . . . . . .
+        . . . . . . f e f f f f e b f b f b e f f f e f . . . . . . . .
+        . . . . . . f e f f f f e b d d d b e f f f e f . . . . . . . .
+        . . . . . . . f f . . f e f e b e f e f . f f . . . . . . . . .
+        . . . . . . . f . . . . f f f f f f f . . . f . . . . . . . . .
+        . . . . . . . . . . . . f e f f f e f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f . . . . . . . . . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . . . f f f f f f f f f f f f f f f f . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "wolf") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . b b . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . b b b b b b b . . . . . . .
+        . . . . . . . . . . . . . . . . . b b b b b b b b b . . . . . .
+        . . . . . . . . . . . . . . . b b b . . b b b b b b b . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . b b b b b . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . b b b . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . b b b f f f .
+        . . . . . . . . . . . . . . . . . . . . b b b . b b b b f f f .
+        . . . . . . . . . . . . . . . . . . . b b b b b b b b f f f f .
+        . . . . . . . . . . . . . . . . . b b b b b b b b b f f f f f .
+        . . . . . . . . . . . . . . . . b b b b b b b b b b f f f f f .
+        . . . . . . . . . . . . . . b b b b b b b b b b b b f f f f f .
+        . . . . . . . . . . b b b b b b b b b b b b b b b b f f f f f .
+        . . . . . . . . b b b b b b b b b b b b b b b b b b b f f f f .
+        . . . . . . . b b b b b b b b b b b b b b b b b b b b f f f f .
+        . . . . b . . b b b b b b b b b b b b b b b b b b b b f f f . .
+        . . . . b b . b b b b b b b b b b b b b f b b b b b b f f f . .
+        . . . . b b b b b b b b b b b b b b b f f f b b b b b b f f . .
+        . . . . b b b b b b b b b b b b b f f f f f f f b b b b f f . .
+        . . . b b b b b b b b b b b b b f f f f f f f f f b b b f f . .
+        . 1 . b b b b b b b 1 b b b b b f f f f f f f f b b b f f . . .
+        . . 1 f b b b b 1 1 b b b b b b f f f f . f f f b b f f . . . .
+        . 1 b b 1 b f b b b 1 b b b b b f f f . . . . f f f f . . . . .
+        . . 1 1 1 1 1 b b 1 b f f b b b f f . . . . . . . . . . . . . .
+        . b 1 1 1 1 b b b b f f f b b f f f . . . . . . . . . . . . . .
+        b 1 1 1 1 b 2 b b f f f b b b f f . . . . . . . . . . . . . . .
+        b f 1 b 2 2 b b f f f f b b b f f . . . . . . . . . . . . . . .
+        b 2 2 2 b b b f f f f b b b f f f . . . . . . . . . . . . . . .
+        . b b b b f f f . f b b b b f f . . . . . . . . . . . . . . . .
+        . f f f f f f . . f b b b f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f f . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "jelly") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . f f 2 2 2 2 2 2 e f f . . . . . . . . . . .
+        . . . . . . . . . f 2 2 4 4 4 4 2 2 2 e e f . . . . . . . . . .
+        . . . . . . . . f 2 2 4 4 5 4 4 4 2 2 2 2 e f . . . . . . . . .
+        . . . . . . . f 2 2 4 4 4 4 4 4 4 2 4 2 2 2 e f . . . . . . . .
+        . . . . . . f 2 2 2 4 4 2 2 2 4 4 2 2 4 4 2 2 e f . . . . . . .
+        . . . . . f e 2 2 4 2 2 2 4 4 2 2 2 2 2 2 2 2 e f f . . . . . .
+        . . . . . f 2 2 2 2 2 2 2 2 4 4 2 2 2 2 2 2 2 2 2 f f . . . . .
+        . . . . f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4 2 2 2 2 2 2 f . . . . .
+        . . . . f 2 2 2 2 2 2 2 2 2 e e e 2 2 2 4 4 2 2 2 2 e f . . . .
+        . . . f f 2 2 2 2 2 2 2 2 2 2 e 2 e e 2 2 2 2 2 2 2 f e f . . .
+        . . . f e 2 2 2 2 2 2 e e 2 2 2 2 2 2 2 2 e 2 2 2 2 2 f f . . .
+        . . . f 2 2 2 e 2 e e f f e f e e 2 2 e f 2 e 2 2 2 4 2 e f . .
+        . . f e 2 2 f 2 e e f f e e f f 2 f e f f e 2 2 2 2 2 2 5 e f .
+        . . f 2 2 2 2 2 2 e f e e 2 e e f f f f f f e 2 2 4 2 e 2 4 e f
+        . f 2 2 2 2 2 2 f 2 f 2 f f 2 2 e 2 e 2 e 2 f f f e 4 2 e 2 4 f
+        f 2 2 2 2 2 f f 2 2 2 2 2 f f 2 2 2 4 4 2 2 2 2 f f f e 2 f f .
+        f 2 2 2 f f . f f 2 2 2 f f f f f e 2 2 2 2 4 4 2 f f f f . . .
+        . f f f . . . . f e 2 2 2 2 e f . f 2 2 f f e 2 2 2 f f . . . .
+        . . . . . . . . . f e 2 2 2 2 f . . f f . . f f e 2 2 f . . . .
+        . . . . . . . . . . f f f 2 e f . . . . . . . . f f f . . . . .
+        . . . . . . . . . . . . . f f . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "skeleton") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 b b f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 9 b f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 9 9 f . . . . . . . . . . . . . . .
+        . . . . . . . . . . f b b b 1 9 f . . . . . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 b . f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 b f 1 9 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f f 1 b 1 1 f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f c c c c b b f f . . . . . . . . . .
+        . . . . . . . . . . . f f b 1 c 1 1 9 b 1 b f . . . . . . . . .
+        . . . . . . . . . . f b 1 b c c f c b f b b f . . . . . . . . .
+        . . . . . . . . . f 9 b b f 1 c 1 1 b f f 9 1 f . . . . . . . .
+        . . . . . . . . . f 9 f f . f c c c 1 f f 9 1 f . . . . . . . .
+        . . . . . . . . f 1 b f . . f 1 1 1 b f . f 1 f . . . . . . . .
+        . . . . . . . f 1 1 f . . f 1 1 b b f f . f 1 f . . . . . . . .
+        . . . . . . . . f f . . f 1 b b b b f . f 1 f . . . . . . . . .
+        . . . . . . . . . . . . f 1 b f 1 b f . f 1 f . . . . . . . . .
+        . . . . . . . . . . . . f 1 b f 1 9 f . . f . . . . . . . . . .
+        . . . . . . . . . . . f 1 1 f . f 1 9 f . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 1 f . f 1 9 f f f . . . . . . . . . .
+        . . . . . . . . . . . f 1 1 f f f f 1 f f f f . . . . . . . . .
+        . . . . . . . . . . . . f 1 b f f f 1 1 f f f . . . . . . . . .
+        . . . . . . . . . . . f f 1 f f f f f 1 f f f . . . . . . . . .
+        . . . . . . . . . . f 1 1 f f f f 1 1 f f . . . . . . . . . . .
+        . . . . . . . . . . . f f . f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "lich") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . .
+        . . f f f f . . . . . . . . f b b b f f . . . . . . . . . . . .
+        . f 1 1 1 b f . . . . . . . f b b f b f . . . . . . . . . . . .
+        . . f 1 f 9 f . . . . . . f b 1 1 1 f f . . . . . . . . . . . .
+        . f 1 f 9 b f . . . . . . f f 1 f f b f . . . . . . . . . . . .
+        . f 1 b 1 b f . . . . . . f b f 1 b f f f . . . . . . . . . . .
+        . f b 1 b f . . . . . . . f 1 b 1 1 f f f . . . . . . . . . . .
+        . . f b f f . . . . . . f f f 1 b b f f f f f . . . . . . . . .
+        . . . f b f . . . . . f f b f f f f f b f f b f . . . . . . . .
+        . . . f b f . . . . f f f b f f f f f b f b f f f . . . . . . .
+        . . . f b f . . . f b f f f b f b b b f f b f f f f . . . . . .
+        . . . f 1 f . . f f b f f b b f b f f f b f f f b b f . . . . .
+        . . . f 1 f f f b f b f f f b f b b b b f f f b b f f f . . . .
+        . . f b b f f b b f b f f b f b f f f f b f f b f f f f f . . .
+        . . f b 1 f f b b f b f f f b b b b b b f . f b f b f f f . . .
+        . . . f 1 f f b b f f f f f f b b f b f f . f f f b b f f . . .
+        . . . f 1 f f b b f f f f f f b b f b f f . f f f b b f f f . .
+        . . . f 1 f f b f f f f f f b f b f b f f f . f f f f f f f . .
+        . . . f 1 f f b f f f f f f b f b f b b f f . f f f f f f . . .
+        . . . f 1 f f f f f f . f f b f b f b b f f . f f f f f . . . .
+        . . . . f 1 f f f f f . f f b f b b f b f f . f f f f f . . . .
+        . . . . f 9 f f f f f . f f b f b b f b f f . . f f . . . . . .
+        . . . . f 9 f f f f f . f f f b f b f b f f . . . . . . . . . .
+        . . . . f 9 f f f f . . f f f b f b f b b f f . . . . . . . . .
+        . . . . f 9 f . . . . . f f f b f b b f b f f f f f f f . . . .
+        . . . . f 9 f . . . . . f f f b f b b f b b f f f f f f f . . .
+        . . . . f b f . . . . f f f b f f b b f b b f f f f f f f . . .
+        . . . . . f b f . . f f f f b f f b b f f b f f f f f f . . . .
+        . . . . . f b f . f f . f f f f f f f f f f f f f f f f . . . .
+        . . . . . f b f f f . . f b b f f f f f b f f f f f f . . . . .
+        . . . . . f b f f . . f b b f f f f f f b b b f f f . . . . . .
+        . . . . . . f . . . . f f f f f f . . f f f f f f . . . . . . .
+    `;
+        if (artKey == "zombie") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . d d . . . . . . . . . . . . .
+        . . . . . . . . d d d d . . . . d d . . . . . . . . . . . . . .
+        . . . . . . . . . b b b d d d d b b . . . . . . . . . . . . . .
+        . . . . . . . . . . d b d d d 2 d b b . . . . . . . . . . . . .
+        . . . . . . . . . . d d d d d d d d b . . . . . . . . . . . . .
+        . . . . . . . . . . 2 d d f d d f f d . . . . . . . . . . . . .
+        . . . . . . . . . . d d f f d d f f b . 1 . . . . . . . . . . .
+        . . . . . . . . . . d d d d d 1 1 d b 1 1 . . . . . . . . . . .
+        . . . . . . . . . . d d 2 2 1 1 2 2 1 1 . . . . . . . . . . . .
+        . . . . . . . . . . . d d d d b d b b b . . . . . . . . . . . .
+        . . . . . . . . . . 7 d 4 d d d 4 b d e . . . . . . . . . . . .
+        . . . . . . . . . e 7 7 d d d b b e e . . . . . . . . . . . . .
+        . . . . . . . . 7 7 d d 7 7 e e e e d . . . . . . . . . . . . .
+        . . . . . . . 7 7 d 2 d b e 7 e e 2 d d d . . . . . . . . . . .
+        . . . . . . . 7 7 e d 4 d 7 e e e b 4 d 4 d . . . . . . . . . .
+        . . . . . . . 7 e b d 4 b b e 7 f e b d b d . . . . . . . . . .
+        . . . . . . . e e 7 2 d d b e e f f . b d d d . . . . . . . . .
+        . . . . . . 7 7 e e 7 d 4 b 7 e f f . f 2 d 2 . . . . . . . . .
+        . . . . . . 7 e 7 e e d b b e e f f f f b b 2 f f f . . . . . .
+        . . . . . . 7 e 7 e 7 d d b e 7 e f f f f b f f f f f . . . . .
+        . . . . . . 7 7 e 7 e 7 2 d e 7 e f f f f f f f f f f . . . . .
+        . . . . . 7 7 d b e e 7 e e b 7 e f f f f f f f f f . . . . . .
+        . . . . . . d d b e f f e b d b f f f f f f f f f . . . . . . .
+        . . . . . . b d d e f f f d e d f f f f f f f . . . . . . . . .
+        . . . . . . d e d f f f f b 2 d f f f f f f . . . . . . . . . .
+        . . . . . . 2 d d f f f f f b d d f f f . . . . . . . . . . . .
+        . . . . . f d d e d f f f f d b b b f . . . . . . . . . . . . .
+        . . . . . f b d b d f f . f f d b f f . . . . . . . . . . . . .
+        . . . . . . f b 2 b f . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "ogre") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f 3 3 1 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 3 3 1 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . . . . . f 3 3 3 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . . . . f 3 2 e 3 e 2 3 3 f . . . . . . . . . . . .
+        . . . . . . . . . . f 3 3 3 3 3 3 3 d f . . . . . . . . . . . .
+        . . . . . . . . . f 3 3 2 2 2 2 3 3 d d f . . . . . . . . . . .
+        . . . . . . . f f d 3 2 2 2 2 2 2 3 e e d f . . . . . . . . . .
+        . . . . . f f 3 3 d 3 2 1 2 2 1 2 d e d 3 d f f . . . . . . . .
+        . . . . f 3 3 3 3 d e 3 3 3 3 3 3 e d 3 3 d 3 3 f f . . . . . .
+        . . . f 3 3 3 3 d d 3 e e e e e e d 3 e d 3 3 3 3 3 f . . . . .
+        . . f 3 3 3 3 d e d 3 3 3 d d d d 3 3 d e d 3 3 3 3 3 f . . . .
+        . f 3 3 3 3 3 e e e 3 3 3 3 3 3 3 3 3 3 d e d 3 3 3 3 3 f . . .
+        . f 3 d d d e f f d e 3 3 3 3 d 3 3 3 3 e e f d d d d 3 d f . .
+        . f 3 3 3 f f f e e d d d d d 3 3 d d d e e f f f e 3 3 d f . .
+        . f 3 3 3 e f f e d d 3 3 3 3 3 3 3 3 d d e f . f d 3 3 d f . .
+        . . f 3 3 d e f e d 3 3 3 3 3 3 3 3 3 3 d d f . f 3 3 3 e f . .
+        . . . f d e 3 3 e d 3 3 3 3 3 3 3 3 3 3 3 d f f e d 3 e f . . .
+        . . . . f 3 3 3 d e d d 3 3 3 3 3 3 3 d d e f f d 3 d f . . . .
+        . . . . f e d d d e e e d d d f d d d e e e f d 3 3 e f . . . .
+        . . . . . f f f 4 4 e 2 2 e e e e e e e e 4 f e 3 e f f . . . .
+        . . . . . . f e 4 d 4 e 2 2 2 2 2 2 2 e 4 e 4 f e f f f . . . .
+        . . . . . . f 4 4 4 d 5 4 4 2 2 2 2 4 4 4 4 4 f f f f f f . . .
+        . . . . . f e 4 d e 4 4 5 4 5 4 5 4 5 4 d 4 e f f f f f f . . .
+        . . . . f 4 4 4 4 e 4 5 e 5 5 5 5 5 e 4 4 e 4 f f f f f . . . .
+        . . . . . f 4 e 4 4 5 4 e 4 5 e 4 5 e d 4 d f f f f f f . . . .
+        . . . . . . f e 3 d 4 d e e 4 f 5 e d 3 4 3 3 f f f f . . . . .
+        . . . . . . f e 3 3 5 d e f f f 5 e d 3 3 3 d f f f f . . . . .
+        . . . . . f e d 3 3 d e f f f f f e d 3 d d f f f f . . . . . .
+        . . . . . f d 3 3 3 d f f . . . . f e d d 3 3 3 f . . . . . . .
+        . . . . . f d d d e e f . . . . . f e e d d d d f . . . . . . .
+        . . . . . f f f f f f f . . . . . f f f f f f f . . . . . . . .
+    `;
+        if (artKey == "troll") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . 7 7 . . 7 7 7 2 . . . . . . . . . . . . . . . . .
+        . . . . . . . 7 7 7 7 7 7 e e 2 e 2 . . . . . . . . . . . . . .
+        . . . . . 2 7 2 2 7 7 2 2 7 e e 2 7 7 . . . . . . . . . . . . .
+        . . . . 2 . 7 2 7 7 7 2 2 7 7 2 e 2 7 7 7 7 . . . . . . . . . .
+        . . . . . e 7 7 7 7 7 7 7 7 e e 2 e e 7 7 7 7 7 7 . . . . . . .
+        . . . . 2 e 7 7 2 2 2 2 7 7 7 e e 2 e 7 7 7 7 7 7 7 . . . . . .
+        . . . . . 7 7 7 7 7 7 7 7 7 e 7 e 7 2 7 7 7 7 7 7 7 7 . . . . .
+        . . . . . 7 7 e 7 7 7 7 7 7 e 7 e 7 7 7 7 7 7 7 7 7 7 7 . . . .
+        . . . . . e 7 e 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . .
+        . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 7 . 7 7 7 7 7 . . .
+        . . . . . . 7 7 7 . . . . 7 7 7 7 7 7 7 7 7 7 . . . 7 7 7 7 . .
+        . . . . . . 7 7 7 . . . . 7 7 7 7 7 7 7 7 7 7 . . . 7 7 7 7 7 .
+        . . . . . . 7 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 . . . 7 7 7 7 f .
+        . . . . . . . 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 . . . f 7 7 7 f .
+        . . . . . . 7 7 7 7 . . . 7 7 7 7 7 7 7 7 7 7 . . f f 7 7 7 f .
+        . . . . . . 7 7 7 7 . . . 7 7 7 7 7 . 7 7 7 7 . f f f 7 7 7 f .
+        . . . . . 7 7 7 7 7 7 . . 7 7 7 7 7 . 7 7 7 7 f f f 7 7 7 7 f .
+        . . . . 7 7 7 7 7 7 . . 7 7 7 7 7 7 . 7 7 7 7 7 f f 7 7 7 7 f .
+        . . . 7 7 7 7 . . . . . 7 7 7 7 7 7 f 7 7 7 7 7 f f 5 7 7 7 7 .
+        . . 7 7 7 7 . . . . . 7 7 7 7 7 7 f f f 7 7 7 7 f f 5 f 5 f 5 .
+        . 7 7 7 7 7 . . . . 7 7 7 7 7 7 7 f f f 7 7 7 7 7 f 5 f 5 f 5 .
+        7 7 7 7 7 7 . . . . 7 7 7 7 7 7 f f f f f 7 7 7 7 f 5 f 5 f 5 .
+        7 . 7 7 7 . . . . . 7 7 7 7 7 f f f f f f 7 7 7 7 f 5 f 5 . 5 .
+        5 . 5 . 5 . . . . . 7 7 7 7 f f f f f f f 7 7 7 7 f f f 5 . 5 .
+        5 . 5 . 5 . . . f f 7 7 7 7 f f f f f f f 7 7 7 7 7 f . 5 . 5 .
+        5 . 5 . 5 . . . f f 7 7 7 7 f f f f f f f 7 7 7 7 7 f . 5 . 5 .
+        . . 5 . 5 . . f f 7 7 7 7 7 f f f f f f 7 7 7 7 7 7 f . 5 . . .
+        . . 5 . . . . f f 7 7 7 7 7 f . . . f f 7 7 7 7 7 f f . . . . .
+        . . . . . . . f f f f f f f f . . . . f f f f f f f . . . . . .
+    `;
+        if (artKey == "stone-golem") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b 1 b . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 1 b b b b b . . . . . . . . . . . . . . .
+        . . . . . . . . . . . b 2 1 2 2 b . . . . . . . . . . . . . . .
+        . . . . b b . . . . . b b 1 b b b . . . . b 1 b b . . . . . . .
+        . . . b b b b b . . b b b b b b b b b . b 9 b b b b . . . . . .
+        . . b b b b b b b b b b b b f b b b b b b b b b b b . . . . . .
+        . . b b b 1 b b b b b b b b b b b b b b b b 9 b b b . . . . . .
+        . . b b 1 b 9 b b f b b b b b b b 1 b b b b b b b b b . . . . .
+        . . b b 9 1 b b b b f 1 b 1 b b b b b b b b 1 1 b b f . . . . .
+        . . b b f f b b b b f b b b 1 b b b b b b b 1 9 b b f . . . . .
+        . . . b b b f b b b b b b 9 f b b b b b b b 9 f f f b . . . . .
+        . . . b 1 b b f f f b b b b f b b f b b . b f 1 9 b b . . . . .
+        . . b 9 1 b b . . . b b b f b b b f b b . . b b 9 b b . . . . .
+        . . b 9 b b . . . . . b b f b f b b f . . . b b 9 b b b . . . .
+        . f b 1 b b . . . . . f f b b b f f b . . . . b b b b b . . . .
+        . b f f b b . . . . . . b f b f b b . . . . . b b f f f b . . .
+        b b 1 1 f f . . . . . . f b f b b b b b . . . b f 1 b b b . . .
+        b b 1 f b b b . . . . b b b b b f b b b b f f f b 1 b b b f . .
+        b b 1 b b b b b . . b b b b b f f f b b b b f b b 1 1 b b f f .
+        b b b 1 b b b b . f b 9 b b b f f f f b b b b b b 1 b b b b f .
+        b b b b b b b b . b b b b b b f f f f b b 1 b b b b b b b b f .
+        b b 1 1 b b b b b b 1 9 b b b f f f f f b f b b 9 b b b b f . .
+        b b 1 9 b 9 b b b b 9 b b b f f f f f f b b b b 1 1 1 b b b . .
+        b 9 b 9 b b b b b b 1 b b b b f f f f f b b b b 1 1 b b b b . .
+        b 1 1 b b b b b b b 9 b b b b f f f f f b b b b 1 b b b b b . .
+        . 1 1 b b b b f b b b b b b b f f f f f b b b b 9 b b b f b . .
+        . f f f b b f f b b b b b b b f f . f f f b b b 1 1 b b b . . .
+        . . . . f f f f b b f b b b b f . . . . f b b b 9 b b b b . . .
+        . . . . . . . f b b b f b b b . . . . . . f b b b b f . . . . .
+        . . . . . . . . . b b f b f f . . . . . . . f f f f . . . . . .
+        . . . . . . . . . f f f f f f . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "iron-golem") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b b b . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . b b b b b b . . . . . . . . . . . . . . .
+        . . . . . . . . . . . b 2 1 2 2 b . . . . . . . . . . . . . . .
+        . . . . b b . . . . . b b 1 b b b . . . . b 1 b b . . . . . . .
+        . . . b b b b f . . b b b b b b b b b . b b 1 b b b . . . . . .
+        . . b b 1 b b f f b b b f f f f b b b b b b 1 b b b . . . . . .
+        . . b b 1 b b f f b b b b b b b b b b b b b 1 b b b . . . . . .
+        . . b b 1 b b b b b b 1 b b b b b b b b b b 1 b b b b . . . . .
+        . . b b 1 b b b b b b 1 b b b b b b b b b b 1 b b b b . . . . .
+        . . b b f f b b f b b b 1 b b b b b b b b b 1 b b f f . . . . .
+        . . . b b b f f f b b b 1 b b b b b b b f b b f f b b . . . . .
+        . . . f f b b f f b b b 1 b b b b b b b . f f b b f . . . . . .
+        . . b b 1 f f . . . b b 1 b b b b b b f . . f f f b b . . . . .
+        . . f f f . . . . . . f f f b b b f f . . . f b b f f . . . . .
+        . b b 1 b f . . . . . b b b f f f b b . . . . f f b b b . . . .
+        . b f f b f . . . . . . f f b b b f . . . . . f b f f f b . . .
+        b b 1 b f f . . . . . . b b f f f b b b . . f f f 1 b b b . . .
+        b b 1 b b f f . . . . b b 9 b b f b b b b f f f b 1 b b b f . .
+        b b 1 b b b f f . . b b 1 b b b f f b 1 b b f f b 1 b b b f f .
+        b b 1 b b b f f . f b 1 b b b f f f f b 1 b b f b 1 b b b b f .
+        b b 1 b b e f f . b b 1 b b f f f f f f b 1 f b b 1 b b b b f .
+        b b 1 b b b b f b b b b b b f f f f f f b f f b 1 b b b e b f .
+        b b 1 b b b f f b b 1 b b b f f f f f f f b f b 1 b b b b b f .
+        b b 1 b b b b f b b 1 b b b f f f f f f f b f b 1 b b d b b f .
+        b b 1 b b e b f b b 1 b b b f f f f f f f f f b 1 b b b b b f .
+        . b 1 b b b b f b b 1 b b b f f f f f f f f b b 1 b b b b b f .
+        . b b b b b f f b b 1 b b b f f f f f f f f f b 1 b b b b f f .
+        . . f f f f f f b b 1 b b b f f f f f f f f f b b b b e b f . .
+        . . . . . . . f b b 1 b b b f f f f f f f f f f f f f f . . . .
+        . . . . . . . . f b 1 b b b f f . . . . f f f f f f . . . . . .
+        . . . . . . . . . f f f f f f . . . . . f f f f f f . . . . . .
+    `;
+        if (artKey == "naga") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f f f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f b b b b f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . f b f f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . f b 1 3 3 b f f . . . . . . . . . . . . . . .
+        . . . . . . . . . f b d 3 d 3 b f f . . . . . . . . . . . . . .
+        . . . . . . . . . f f 3 1 3 3 b f f . . . . . . . . . . . . . .
+        . . . . . . . . . . f 3 1 3 d b f f . . . . . . . . . . . . . .
+        . . . . . . . . . f f f 3 d e f f f . . . . . . . . . . . . . .
+        . . . . . . . . f d 3 3 3 3 3 3 3 3 f . . . . . . . . . . . . .
+        . . . . . . . f 1 3 d 3 3 3 3 3 3 3 3 f . . . . . . . . . . . .
+        . . . . . . . f 1 1 1 3 3 1 1 1 3 3 3 f . . . . . . . . . . . .
+        . . . . . . . f 1 3 3 3 3 3 3 3 3 1 3 3 f . . . f . . . . . . .
+        . . . . . . f 1 3 3 3 3 d 3 3 3 d 3 1 3 f . . f 7 f f . . . . .
+        . . . . . . f 1 3 e 3 d e 3 3 d e 3 1 3 f . . . f 7 7 f . . . .
+        . . . . . f 1 3 3 e 1 3 1 3 3 3 f 3 1 3 e f . . . f 7 6 f . . .
+        . . . . f 1 3 3 e f 3 e 3 3 3 3 f e 3 3 d f . . . f 7 7 f . . .
+        . . . f f 3 3 d f f 1 d 1 3 3 e f f d 3 3 f . . . f 7 6 f . . .
+        . . f 1 1 3 e f . f 3 e 3 3 3 e f f e d 3 f . . . f 7 6 f . . .
+        . . f 3 3 e f . . f 1 3 1 3 3 6 f f e 3 3 f . f f 7 7 f . . . .
+        . . f 3 3 f . . . f 7 3 3 7 7 6 f f 3 3 e f f 7 7 7 6 f . . . .
+        . . . f f . . . . f 7 7 7 7 7 6 f f 1 3 f f 6 7 7 6 f . . . . .
+        . . . . . . . . f 7 7 7 7 7 7 6 f f 3 3 f f 7 7 7 f . . . . . .
+        . . . . . . . . f 7 7 7 7 7 7 6 f . f f f f 7 7 7 f . . . . . .
+        . . . . . . . f 7 7 7 7 7 7 7 6 f . . . f 7 7 7 6 f f . . . . .
+        . . . . . . . f 7 7 7 7 7 7 7 f . . . . f 7 7 7 7 f f f f . . .
+        . . . . . . . f 7 7 7 7 7 7 7 6 f . . . f 7 7 7 6 f f f f f . .
+        . . . . . . . f 7 7 7 7 7 7 7 7 6 f f f 7 7 7 7 6 f f f f f . .
+        . . . . . . . f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 f f f f f f . .
+        . . . . . . . . f 7 7 7 7 7 7 7 7 7 7 7 7 7 6 7 f f f f f f . .
+        . . . . . . . . f 7 7 7 7 7 7 7 7 7 7 7 6 6 f f f f f f f f . .
+        . . . . . . . . . f f 6 7 6 6 7 6 7 6 6 f f f f f f f f f . . .
+        . . . . . . . . . . . f f f f f f f f f f f f f f f f . . . . .
+    `;
+        if (artKey == "minotaur") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . b 1 1 1 1 . . . e 2 2 2 2 2 2 . . . . . . . . . . .
+        . . . . . . 1 1 1 1 1 1 1 e 2 2 2 2 2 2 2 . . . . . . . . . . .
+        . . . . . 1 1 1 b b b 1 1 e 5 2 2 2 2 2 2 2 1 1 1 . . . . . . .
+        . . . . 3 1 b 3 3 3 3 b b e 5 5 2 2 2 5 2 1 1 1 1 1 1 1 . . . .
+        . . . 3 3 3 1 b 3 3 3 3 e 2 2 2 2 2 5 5 2 1 1 1 1 1 1 1 1 . . .
+        . . 3 3 3 3 3 1 3 3 3 e 2 2 2 2 2 2 2 e e e b b b b 1 1 1 . . .
+        . . 3 3 3 3 3 3 3 3 d e 2 f 2 2 2 2 e e e e 3 3 3 3 b 1 b . . .
+        . . 3 3 3 3 3 3 3 3 3 e 2 2 2 f 2 e e e 3 3 3 3 3 3 3 1 b . . .
+        . . 3 3 3 3 3 3 3 3 3 3 e e 2 2 e e e 3 3 3 3 3 3 3 1 b . . . .
+        . . 3 3 3 3 3 3 3 3 3 3 3 3 e e e 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . . d 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . . .
+        . . . . . . d 3 3 3 3 3 3 3 3 3 3 3 3 3 3 d 3 3 3 3 3 3 3 . . .
+        . . . . . . . . d 3 3 3 3 3 3 3 3 d d d d 3 3 3 3 3 3 3 d f . .
+        . . . . . . . . . d d d d d d d d 3 3 3 3 3 3 3 3 3 3 3 d f . .
+        . . . . . . . . . . e e 2 2 d d 3 3 3 3 3 3 3 3 3 3 3 d f f . .
+        . . . . . . . . . . e 2 2 2 2 e d d 3 3 3 3 3 3 3 3 d d f f . .
+        . . . . . . . . . e 2 2 2 2 e e 2 e d d 3 3 3 3 3 3 d f f f . .
+        . . . . . . . . . e 2 2 2 e 2 e e e 2 2 d d d d d d d f f . . .
+        . . . . . . . . e 2 2 2 2 2 e e e e 2 2 2 2 d d d d f f f . . .
+        . . . . . . . . e e 2 e e e e e e 2 2 2 2 2 e e f f f f . . . .
+        . . . . . . . . e e 2 e e e f f f e 2 2 2 2 e 2 f f f f . . . .
+        . . . . . . . . e e e e e f f f f e e 2 2 2 e f f f f f . . . .
+        . . . . . . . . . e e e e f f f f e e e 2 e e e f f f . . . . .
+        . . . . . . . . . e e e f f f f f f e 2 e e e f f f . . . . . .
+        . . . . . . . . . . b e f f f f f f e e e e f f f f . . . . . .
+        . . . . . . . . . 9 1 b f f f f f f f e e e f f f f . . . . . .
+        . . . . . . . . . 9 1 9 f f f f f f f e e f f f f f . . . . . .
+        . . . . . . . . . f f f f f f f f f f b 1 f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . f 9 1 9 f f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . f f f f f f . . . . . . .
+    `;
+        if (artKey == "orb-spider") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . f f f f f f f . . . . . . .
+        . . . . . . . . . . . . . . . . f f f a f f a f f f f . . . . .
+        . . . . . . . . . . . . . . . f f f a 6 6 a 6 6 6 a a f . . . .
+        . . . . . . . . . . . . . . f f a 6 a 6 a 6 6 a a 6 6 f f . . .
+        . . . . . . . . . . f . . f f 6 a 6 a 9 a 9 a 6 6 b 6 f f f . .
+        . . . . . f . . . f 6 f f f a 6 a 6 9 9 a 9 9 6 a a a a f f . .
+        . . . . f 6 f f f f f 6 6 f a 6 6 a 9 a a a 9 9 6 6 b 6 a f f .
+        . . . . . f b b b 6 f f f f 6 a 6 9 a a 1 a 2 a a 6 b 6 f f f .
+        . f f . f f f f f f 6 f f f 6 6 a a 9 a a 2 9 9 6 a 6 6 f f f .
+        f 6 f f b b b f . f 6 f f f 6 6 6 6 9 9 2 9 a 6 6 6 a a f f f .
+        . f b 6 f f f 6 f f f 6 f f 6 6 6 6 a 9 a 9 6 a 6 6 6 a a f f .
+        . . f f . . . f 6 f f 6 f f a 6 6 a 6 6 6 a 6 6 a 6 6 f a f f .
+        . . . . . . . . f 6 f 6 f f f a a 6 6 6 6 a 6 6 6 a 6 f f f f .
+        . . . . . . . . f b 6 6 f f f f 6 6 6 6 6 6 a 6 6 a a f f f . .
+        . . . . . f f f f f b f f f f f f 6 6 6 6 6 a 6 6 f a f f f f .
+        . . . f f 6 6 b b f 6 6 b b f f 6 f f 6 6 6 a 6 f f f f f f f f
+        . . f 6 b f f f f f a b 1 b b f 6 6 f f f f f f f f f f f f f f
+        . f 6 f f . . . f 6 f c b c f 6 f 6 f f f f c f f f f f f f f f
+        . f b f . . . f 6 6 f f f a f b f f f f f f 6 b b b 6 f f f f .
+        . f b f . . . f 6 f f 6 b f f b f f f f f f f f f f 6 f f f . .
+        . . f 6 f . . . f f f 6 b f f f f b f f f 6 f f f f 6 f . . . .
+        . . . f . . . . . f 6 b f . f f f f b f f 6 f f f f 6 f . . . .
+        . . . . . . . . . . f f . f b f . f 6 f f 6 f f . . f 6 f . . .
+        . . . . . . . . . . . . . f b f . f 6 f . f b f . . f 6 f . . .
+        . . . . . . . . f . . . f b f . . f b f . f 6 f . . f 6 f . . .
+        . . . . . . . f 6 f f f 6 b f . . f 6 f . f 6 f . . f 6 6 f . .
+        . . . . . . . . f b 6 6 f f . . . f 6 f . f 6 f . . . f f . . .
+        . . . . . . . . . f f f . . . . . f 6 f . f 6 6 f . . . . . . .
+        . . . . . . . . . . . . . . . . . . f 6 f . f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . f . . . . . . . . . . . .
+    `;
+        if (artKey == "earth-elemental") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . e e d . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . b b b b d . . . . . . e d d d . . . . . . . . . . b b b b . .
+        . d d d d . . . . . . e e d d d . . . . . . . . . d b b b b b .
+        . d b d d . . . . . b d d d d d d . . . . . . . . d b b b b b .
+        . d b d d . . . . . b d d d d e b . . . . . . . . d b b b b b .
+        e b b . . . . . . . b d d b d d b . . . . . . . . . d d b b . .
+        e b b . . . . . 6 . . b b e b d d . . . . . 6 . . . d d d d . .
+        . e b b b . . 6 6 6 . . . e e e d d . . . 6 6 6 6 . e d d . . .
+        . e d b b b 6 6 b 6 b e e e d d d d d d d b 6 b 6 . e d d d . .
+        . e e d d d b 6 e 6 b b b e b b b b b b b d 6 b b e e e e d . .
+        . . . e e d e 6 b b b b b e b 6 6 6 e d d d d b d d b d d . . .
+        . . . e e d e 6 b b b b b e b 6 6 6 e d d d d b d d b b . . . .
+        . . . . . e d d d e b b b e b 6 6 6 b b d d b d d b . e . . . .
+        . . . . . e . . d e e e e e e e 6 6 . b b b b . . . . e . . . .
+        . . . . . e . . . . e d d b e e 6 d . . . . . . . . . . . . . .
+        . . . . . . . . d d b b b b b e 6 b . . . . . . . . . . . . . .
+        . . . . . . . b b e b b b b e e 6 b b . . . . . . . . . . . . .
+        . . . . . . . b b b e d d d d e 6 b b . . . . . . . . . . . . .
+        . . . . . . . b b b e d d d d e 6 b b . . . . . . . . . . . . .
+        . . . . . . d b b d . . . . . d b b b . . . . f f . . . . . . .
+        . . . . . . e b b d . . . . . d d e b d d f f f f f . . . . . .
+        . . . . . . e b e . . . . . . e e d b b b d f f f f . . . . . .
+        . . . . . . d e e . . . . . . e f d b b b b f f f f . . . . . .
+        . . . . . . b d e e . . . . f e f e d b b b f f f f . . . . . .
+        . . . . . . . b e e . . f f f f f f d b b b f f f . . . . . . .
+        . . . . . . . b e d . f f f f f f f d b b b f f . . . . . . . .
+        . . . . . . . . d d . f f f f f f f e d d d f f . . . . . . . .
+        . . . . . . . . d e e f f f f f f f f b e d f . . . . . . . . .
+        . . . . . e d d d b e f f . . . f f e e e d d . . . . . . . . .
+        . . . . . . f f f f f f . . . . . f f f f f . . . . . . . . . .
+    `;
+        if (artKey == "elf-knight") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f 1 1 1 1 1 f . . . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 3 3 1 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . . f f 1 1 1 1 3 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 1 2 1 2 2 1 1 1 f . . . . . . . . . .
+        . . . . . . . . . . . f f 1 1 1 3 d 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 3 3 d 1 1 f . . . . . . . . . . .
+        . . . . . . . . . . f f f 1 1 3 d b 1 1 f f f f . . . . . . . .
+        . . . . . . . . f f 1 1 1 1 1 f f f 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . . f 1 1 9 b b 1 b b f 1 1 b b b 9 1 1 f . . . . . .
+        . . . . . . f 1 9 b b b b f b b b 1 b f b b b b 9 1 f . . . . .
+        . . . . . . f b b b b b b b f b b 1 f b b b b b b b f . . . . .
+        . . . . . . . f f b b b b b b f b f b b b f b b f f . . . . . .
+        . . . . . . . f b 1 b f f f f b b 1 f f f b b b b f . . . . . .
+        . . . . . . . f b 1 f f b b b f b f b b b f f b b b f . . . . .
+        . . . . . . f b b b f f f f b b f 1 b f f f f f b b b f . . . .
+        . . . . f f b 1 b f f . f b f b b 1 f b f . f b b b f f . . . .
+        . . . f 1 b 1 b f f . f f b b f b f b b f f b b b b f f . . . .
+        . . f b b b b f f . . f b f b b f 1 b f b b b b b f f . . . . .
+        . . f b b b f f . . . f b 1 f b b 1 f 1 b b f b f f . . . . . .
+        . . . f b f f . . . . f b 1 1 f b f 1 1 b f b f f f f . . . . .
+        . . . . f f . . . . . f b 1 b b f b b 1 b f f f f f f f . . . .
+        . . . . . . . . . . . f b 1 b b f b b 1 b f f f f f f f f . . .
+        . . . . . . . . . . f b b b b f f f b b b b f f f f f f f . . .
+        . . . . . . . . . . f b 1 b b f f f b b 1 b f f f f f f f . . .
+        . . . . . . . . . . f b 1 b b f f f b b 1 b f f f f f f . . . .
+        . . . . . . . . . . f b 1 b b f f f b b 1 b f f f f f f . . . .
+        . . . . . . . . . . f b b b f f f f f b b b f f f f f . . . . .
+        . . . . . . . . . f 1 b b b f f f f f b b b 1 f f f . . . . . .
+        . . . . . . . . f 1 b b b b f f f f f b b b b 1 f . . . . . . .
+        . . . . . . . . f b b b b b f . . . f b b b b b f . . . . . . .
+        . . . . . . . . . f f f f f f . . . . f f f f f . . . . . . . .
+    `;
+        if (artKey == "dwarf") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . f 1 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f 1 1 f f . f . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 b b b b f 1 f . . . . . . . . .
+        . . . . . . . . . . . . . f 1 1 b b b b 1 1 f . . . . . . . . .
+        . . . . . . . . . . . . . f 5 4 b 5 b 4 1 f . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 b b 1 1 b f . . . . . . . . . . .
+        . . . . . . . . . . . . . f 3 e e 1 b b b f . . . . . . . . . .
+        . . . . . . . . . . . . f 1 1 3 3 1 b b b f f . . . . . . . . .
+        . . . . . . . . . . . . f b 4 4 4 b b b b 1 b f f . . . . . . .
+        . . . . . . . . . . . f b 4 4 4 4 b b b 1 b b b b f . . . . . .
+        . . . . . . . . . . f 1 f 4 4 4 b f b 1 b 1 b b b b f . . . . .
+        . . . . . . . . . . f 1 b 4 4 4 f b b b b b 1 b b b b f . . . .
+        . . . . . . . f f f b b 1 b 4 b b 1 b b b b b 1 b b b b f . . .
+        . . . . . . f 1 1 f b 1 b 1 b 1 b b b b b b b b b b b b f . . .
+        . . . . . f f 2 b b b b b 1 1 b b b b b b b b b 1 b b b f . . .
+        . . . . f b 1 2 b b b b 1 b b 1 b b b b b b b b b b b f f . . .
+        . . . . f b b f b b b b b b b b 1 b b b b 1 1 b b b f f f . . .
+        . . . . f 1 b f b b f f 4 4 4 f b b b b 1 b b b b f f f f . . .
+        . . . . . f 2 2 b f f b 4 5 4 b 5 b 4 b 1 1 1 b b f f f f . . .
+        . . . . . f 2 2 f . f b 4 4 4 f f b b f b b 1 b f f f f f f . .
+        . . . . f 2 2 2 f . f b b f f b b 1 b b f b b f f f f f f f f .
+        . . . . f 2 2 f . . f b b b f b b b b b b f f f f f f f f f f .
+        . . . . f 2 2 f . f b 1 b 1 f f b 1 b b b b f f f f f f f f . .
+        . . f f 2 2 2 f . f b b b b f f b b b b b b f f f f f f f . . .
+        . f 1 1 2 2 b f . f f 5 4 2 2 f f 2 2 5 4 f f f f f f f . . . .
+        . f 1 1 1 1 1 b f 2 5 4 2 2 2 f f 2 2 2 5 4 f f f f . . . . . .
+        . f f b 1 1 b b 2 2 2 2 2 2 e f f e 2 2 2 2 2 f f . . . . . . .
+        . f f 1 1 b b b 2 2 e e e e f f f f e e e e e f . . . . . . . .
+        . . f f f f f f f f f f f f f f f f f f f f f . . . . . . . . .
+    `;
+        if (artKey == "angel") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . .
+        . . . . . . f f f . . . . . f 5 5 5 f f . . . f f f . . . . . .
+        . . . . . f 1 1 1 f . . . f 5 5 5 5 5 5 f . f 1 1 1 f . . . . .
+        . . . . f 1 9 1 1 9 f . f 5 5 3 3 5 5 5 4 f 9 1 1 9 1 f . . . .
+        . . . f 9 1 9 1 1 9 1 f f 5 9 3 9 3 5 5 f 1 9 1 1 9 1 1 f . . .
+        . . . f 1 1 1 1 1 1 1 1 f 5 3 3 3 3 5 4 1 1 1 1 1 1 1 9 1 f . .
+        . . f 1 1 b b b b b b 9 b 4 d 3 3 d 4 b 9 b b b b b b 1 9 f . .
+        . . f 1 1 1 b b b b 9 b b 1 b b b b 1 b b 9 b b b b 1 1 1 1 f .
+        . . f 9 1 1 1 9 1 b b b 1 1 1 2 2 1 1 1 b b b 1 9 1 1 1 9 1 f .
+        . f 1 1 1 9 1 9 b 9 b b 1 1 1 2 2 1 1 1 b b 9 b 9 1 9 1 9 1 1 f
+        . f 1 1 1 9 1 b 9 b b c 1 1 1 2 2 1 1 1 c b b 9 b 1 9 1 1 1 1 f
+        . f 1 9 1 1 9 b b b b b 2 2 2 2 2 2 2 2 b b b b b 9 1 1 9 1 1 f
+        . f 1 9 1 1 1 b b b b f b 2 2 2 2 2 2 b f b b b b 1 1 1 9 1 1 f
+        . f 1 1 9 1 b 9 b b f f b 1 1 2 2 1 1 b f f b b 9 b 1 9 1 9 1 f
+        . f 1 1 9 1 b b b b f f b 1 1 2 2 1 1 b f f b b b b 1 9 1 9 1 f
+        . f 9 1 1 d 5 4 b f f f c 4 4 5 5 4 4 b f f f b b b b 1 1 9 1 f
+        . f 9 1 9 d 5 5 5 f f b b 1 1 5 5 1 1 b b f f f b b b 1 1 1 1 f
+        f 1 1 1 9 1 d 5 d f b 9 b 1 1 2 2 1 1 b 9 b f f b 4 5 d 1 1 1 f
+        f 1 9 1 1 f f f f f 9 b b 1 1 2 2 1 1 b b b 9 f 5 5 5 d 1 1 1 f
+        f 9 1 1 1 f . . . f b b b 1 1 2 2 1 1 b b b 9 f d 5 d 9 1 1 9 f
+        f 9 1 9 f . . . . f b c 1 1 2 2 2 1 1 b b b 9 f f f f 9 1 1 1 f
+        f 1 1 f . . . . . f f b 1 1 2 2 2 1 1 c b b b f . f 9 1 1 1 1 f
+        f 1 1 f . . . . . f b b 1 1 2 2 1 1 1 b c b b f . f 1 9 9 1 f .
+        . f f . . . . . . f 9 c 1 1 2 2 1 1 1 b b 9 f . . . f 1 1 1 f .
+        . . . . . . . . . f 9 b 1 1 2 2 1 1 1 b 9 b f . . . f 1 1 1 f f
+        . . . . . . . . . f b b b c f 2 1 1 1 b b b f . f f f 1 1 1 f f
+        . . . . . . . . f 9 9 b c c f f f f c b b b f f f f f 1 1 f f f
+        . . . . . . . f b b b c f f . . . f c b b b f f f f f 1 1 f f .
+        . . . . . . . . f f f f . . . . . f c b 9 b f f f f f f f . . .
+        . . . . . . . . . . . . . . . . . f b b b 9 b f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . f c b b b f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . f f f f f . . . . . . . .
+    `;
+        if (artKey == "elf-archer") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . 7 7 . 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 7 7 7 1 . 7 . . . . . . . . . . . . .
+        . . . . . . . . . . 7 . 7 7 7 b 7 7 . . . . . . . . . . . . . .
+        . . . . . . . . . . . 7 7 7 7 7 7 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . 1 1 1 1 3 1 1 . . . . . . . . . . . . . .
+        . . . . . . . . . 1 1 1 2 1 2 2 1 1 1 . . e . . . . . . . . . .
+        . . . . . . . . . . . 1 1 1 3 d 1 1 . . e . e . . . . . . . . .
+        . . . . . . . . . . . 1 1 3 3 d 1 1 . 4 . e . . . . . . . . . .
+        . . . . . . . . . . . 1 1 3 d b 1 1 4 e e . . . . . . . . . . .
+        . . . . . . . . . . 7 1 1 f f f 1 1 7 e . . . . . . . . . . . .
+        . . . . . . . . . 7 f 1 7 f f f 1 7 f 7 . . . . . . . . . . . .
+        . . . . . . . . . 7 6 f 7 f 7 7 7 f 6 7 . . . . . . . . . . . .
+        . . . . . . . . 7 6 7 f 7 f 7 7 7 f 7 6 7 . . . . . . . . . . .
+        . . . . . . . . 6 c . 6 f 7 7 7 f 6 . 8 7 . . . . . . . . . . .
+        . . . . . . . 8 c c . . 6 f f f 6 . c c c . . . . . . . . . . .
+        . . . . 3 3 7 7 6 . . . 6 f f f 6 . 7 7 6 . . . . . . . . . . .
+        . . . . 3 3 6 6 . . . f 6 6 6 6 6 3 3 6 . . . . . . . . . . . .
+        . . . . 3 3 . . . . . 6 f f f f f 3 3 . . . . . . . . . . . . .
+        . . . . . . . . . . . 6 6 f f f 6 6 . . . . . . . . . . . . . .
+        . . . . . . . . . . 6 6 6 f 6 6 6 6 6 . . . . . . . . . . . . .
+        . . . . . . . . . . 6 6 6 6 6 6 6 6 6 . . . . . . . . . . . . .
+        . . . . . . . . . . f f f . . . e f f . . . . . . . . . . . . .
+        . . . . . . . . . . f f . . . . . e f . . . f f f f f . . . . .
+        . . . . . . . . . e f f . . . . . e f f f f f f f f f . . . . .
+        . . . . . . . . . e f f . . . . . f f f f f f f f f f . . . . .
+        . . . . . . . . . e e e . . . . . e e e f f f f f f f . . . . .
+        . . . . . . . . . e e f . . f f f f e e f f f f f f . . . . . .
+        . . . . . . . . e e e f f f f f f f e e e f f f f f . . . . . .
+        . . . . . . . e e e f f f f f f f f f e e e f f f . . . . . . .
+        . . . . . . . e e e f f f f f f f f f e e e f f . . . . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f . . . . . . . . .
+    `;
+        if (artKey == "mummy") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f 3 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f 3 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f b 3 d f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 3 d b b d f . . f . . . . . . . . . . .
+        . . . . . . . . . . . f d 3 3 3 3 3 f f 3 f . . . . . . . . . .
+        . . . . . . . . . . . f b d 3 d 3 f 3 3 f . . . . . . . . . . .
+        . . . . . . . . . . f f 3 b e d f . f f . . . . . . . . . . . .
+        . . . . . . . . . f 3 b d 3 3 3 3 f . . . . . . . . . . . . . .
+        . . . . . . . . . f 3 3 b d d 3 e f . f f . . . . . . . . . . .
+        . . . . . . . . f b d b 3 b b b 3 e f 3 3 f . . . . . . . . . .
+        . . . . . . . . f d b b d 3 3 b 3 3 3 f f . . . . . . . . . . .
+        . . . . . . . . f 3 d b b 3 d b d d f . . . . . . . . . . . . .
+        . . . . . . . . f d 3 b 3 b b b d b f . . . . . . . . . . . . .
+        . . . . . . . f 3 d b b d 3 d 3 b d f . . . . . . . . . . . . .
+        . . . . . . . f 3 d b 3 3 d b f f 3 3 f . . . . . . . . . . . .
+        . . . . . . . f 3 3 b d d 3 3 f f 3 e f . . . . . . . . . . . .
+        . . . . . . . f d d b 3 3 d b f f 3 d f . . . . . . . . . . . .
+        . . . . . . f d b f d d 3 b d e f 3 b f . . . . . . . . . . . .
+        . . . . . . f b d f b d 3 b 3 d f b 3 d f . . . . . . . . . . .
+        . . . . . . f 3 b f d b f f d b f f d b f f f f f . . . . . . .
+        . . . . . . f b f f d 3 f f b d f f b d f f f f f f . . . . . .
+        . . . . . . . f 3 f 3 3 f 3 3 3 f f f d f f f f f f . . . . . .
+        . . . . . . . . f f d 3 f d d b f f 3 f f f f f f . . . . . . .
+        . . . . . . . . . f d d f f b b 3 f f f f f f f . . . . . . . .
+        . . . . . . . . . f 3 d f f f 3 d f f f f f f . . . . . . . . .
+        . . . . . . . . . f d 3 b f f f d b f f f f . . . . . . . . . .
+        . . . . . . . . f b b d f f f 3 b d f f f . . . . . . . . . . .
+        . . . . . . . f 3 d d f f f 3 d d f f f . . . . . . . . . . . .
+        . . . . . . . . f f f f . . f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "scythe-reaper") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f c c f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . f c c b b c c f . . . . . . . . . . . .
+        . . . . . . . . . . . . f c c b b b c c f . . . . . . . . . . .
+        . . . . . . . . . . . f c f f f c c c c f . . . . . . . . . . .
+        f f f . . . . . . . f c f 9 f f 9 c c f . . . . . . . . . . . .
+        f 2 2 f . . . . . . f c f b b 9 b f c c f . . . . . . . . . . .
+        . f 2 2 f f f . . . . f c b 9 b b f c c b f . . . . . . . . . .
+        . . f 2 1 9 f . . . f c b f 1 1 f c c b c f . . . . . . . . . .
+        . . . f b 1 1 f . . f c b c f f c c c c c f f . . . . . . . . .
+        . . . f 1 9 2 2 f . f c c c c c c c c c c c c f . . . . . . . .
+        . . . f f b f 2 2 f f f f c c c c c c c b b c c f f f f . . . .
+        . . . . . f b f 2 2 2 f f b f f b b b f f f c c c c c c f . . .
+        . . . . . f 9 b f 2 2 2 f f f f f b b b f f f f f f f f c f . .
+        . . . . . f b 1 f f b 2 2 2 f f 9 1 1 b f f b b f f f f f f . .
+        . . . . . . f 1 b b f f 2 2 2 f b b b f f f f b b b f f f f . .
+        . . . . . . f 9 b f f f f f 2 2 2 b f f f f f 9 b f f c f . . .
+        . . . f f f f b f f f f f f f 2 2 2 f f f f 1 b f f c f c f . .
+        . f f f c c c f f f f f f f f f b 2 2 f f 1 b c c c f . f f . .
+        . f f c f f f f f f f f f f b b b b 2 9 1 b f c c c f f . . . .
+        . . f f f f f . f f f f f f b b b b f 9 9 2 f f c c c f . . f .
+        . . f f . f f f f f . f f b b f f f f f 9 2 2 2 f c c f f f f .
+        . . f . . f . f f . f f f 1 b f f f f b f f 2 2 2 f f f f f f .
+        . . . . . . . . . . f f 9 1 f f f f f f b f f f 2 2 f f f f f f
+        . . . . . . . . . f f f 1 9 f f . . f f b 9 f f f 2 2 2 f 3 3 f
+        . . . . . . . . . . f f b 1 f f . f f f f 1 9 f f f 2 2 2 3 f .
+        . . . . . . . . . . . f f 9 f f f f f f f f b b f 3 3 3 2 2 f .
+        . . . . . . f f f f f f f f f f f f f f 3 3 1 1 1 3 3 f f f f .
+        . . . . . . f 3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 b f f . . . .
+        . . . . f f f f f f 3 3 3 3 3 3 1 3 1 1 3 3 f f f b 9 f f f f f
+        . . . . . f f f f f f 1 b 1 b f f f f f f f f 1 9 1 b f f f f .
+        . . . . . . . . . f f f f f f f f f f f f f f f f f f . . . . .
+    `;
+        if (artKey == "executioner") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . f f f f . . . . . . f f f f f f . . . . . . .
+        . . . . . . . f f e e e e f . . . . f 3 3 3 3 3 3 f f . . . . .
+        . . . . . . f e e b b b b e f . . f 3 f f 1 1 3 3 3 3 f . . . .
+        . . . . . f e b b d d f f f f f f f f f f f f 1 3 3 3 3 f . . .
+        . . . . f e b d d f f f f b 1 1 b b f f f e f f 1 3 3 3 f . . .
+        . . . f e b d f f . . f b 1 b b b b b b f f b e e 1 3 3 3 f . .
+        . . f e b d f . . . f b 1 b b b b b b b f f f d b e 1 3 3 f . .
+        . f e b d f . . . . f f f b 1 b f f b b b f . f f b e 3 3 f . .
+        . f e f f f f . . f f f 2 f 1 f f 2 f b b f . . f d e 3 3 3 f .
+        f e f . f 1 1 f f f f f f b b b f f 1 b b f . . . f d 1 3 3 f .
+        . f . . f 1 1 1 1 f f b 1 1 b b 1 1 b b b f f f . . f 1 1 3 f .
+        . . . . f 1 b b 1 1 f b b b f f b b b b b f f f f f 1 1 b e f .
+        . . . f 1 1 f f b b f b b f b f b b b b b f f f f f 1 b d e e f
+        . . . f 1 1 f f f f b f b b b b b b b b f f f f f 1 1 f f d e f
+        . . . f 1 b f f f . f f f f f f f f f b f f f f f 1 b f f d e f
+        . . . f 1 b f f . . . . f f f e f f b f 1 f f f 1 1 f f f f e f
+        . . f 1 1 f f f . . . . f b f f f f b f 1 1 f 1 1 b f f f f f .
+        . f f 1 1 f f f . . . . . f b b b b f f f 1 1 1 b f . . . f . .
+        f f f 1 b f f . . . . . f 1 f f f f f . f b 1 b f . . . f e f .
+        f e f 1 b f . . . . . . f 1 b f f f f . . f b f . . . f b e f .
+        f e 1 1 e b f f f f . f 1 1 b f f f f . . . f f . . f d e f . .
+        . f 1 1 e b b d d d f f 1 1 f f f f f . . . f 3 f f d e f . . .
+        . f 3 3 1 e e b b b d d 1 b d d b e e f . . . f 3 3 e f . . . .
+        . f 3 3 1 f f e e e e 1 1 b e e e f f . . . f f 3 3 3 f . . . .
+        . . f 3 3 1 f f f f f 1 b f f f f f f f f f d d e 3 3 f . . . .
+        . . f 3 3 3 1 f f f f 1 b f f f f f f b d d e e 1 3 f . . . . .
+        . . . f 3 3 1 f f f 1 1 b f f f f f e e e e f 1 3 3 f . . . . .
+        . . . . f 3 3 1 f f 1 1 b f f f f f f f f f 1 3 3 f f f f . . .
+        . . . f f f 3 3 1 f f 1 1 3 1 1 f f f 1 1 1 3 3 f f f f f f f .
+        . . f f f f f 3 3 3 3 3 3 1 1 1 1 1 3 3 3 3 3 f f f f f f . . .
+        . . . f f f f f f 3 3 3 f f f f 1 1 3 3 3 f f f f f f f . . . .
+        . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . . .
+    `;
+        if (artKey == "wizard") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . a a a . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . 8 a a a . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . 8 a a a 8 8 . . . . . . . . . . . . . . . .
+        . . . . . . . a a a a a a a a a a a a . . . . . . . . . . . . .
+        . . . . . . . . . 8 a a a a 8 8 c . . . . . . . . . . . . . . .
+        . . . . . . . . . . . e 3 1 e 3 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 1 3 3 . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . a e 8 8 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . a a a a a 8 8 . . . . . . . . . . . . . .
+        . . . . . . . . . . a a a a a a a a a . . . . . . . . . . . . .
+        . . . . . . . . . . a a a a a a 8 a a 8 . . . . . . . . . . . .
+        . . . . . . . . . a a a a 8 a 8 8 8 a a 8 . . . . . . . . . . .
+        . . . . . . . a a a 8 a a 8 a 8 1 1 a a 8 . . . . . . . . . . .
+        . . . . . 3 d a a 8 . 8 a c c 1 2 2 2 a 8 . . . . . . . . . . .
+        . . . . . 3 d 8 8 . . 8 a c c 1 2 3 d 8 . . . . . . . . . . . .
+        . . . . . . . . . . . 8 8 8 c 1 2 3 d 8 . . . . . . . . . . . .
+        . . . . . . . . . . . 8 8 a 8 8 8 2 2 . . . . . . . . . . . . .
+        . . . . . . . . . . . 8 a a a 8 8 8 . . . . . . . . . . . . . .
+        . . . . . . . . . . 8 a a a a a 8 8 f f f f f . . . . . . . . .
+        . . . . . . . . . . 8 a 8 a a a a a a f f f f f f . . . . . . .
+        . . . . . . . . . . a a c a a 8 a a a f f f f f f f . . . . . .
+        . . . . . . . . . . 8 a c a a 8 a 8 a a f f f f f f . . . . . .
+        . . . . . . . . . . 8 a c a a 8 a 8 a a f f f f f . . . . . . .
+        . . . . . . . . . . 8 a 8 8 a 8 a 8 8 a f f f f . . . . . . . .
+        . . . . . . . . . 8 c a a c a 8 a a c a a f f . . . . . . . . .
+        . . . . . . . . . 8 c a 8 c 8 8 8 8 c 8 8 f . . . . . . . . . .
+        . . . . . . . . . . 2 2 8 c 8 8 c 2 2 . . . . . . . . . . . . .
+        . . . . . . . . . 2 2 2 . . . . . 2 2 . . . . . . . . . . . . .
+    `;
+        if (artKey == "elf-mage") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 1 1 1 1 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . . 1 1 3 3 1 1 1 . . . . . . . . . . . . .
+        . . . . . . . . . . . . 1 1 1 1 3 1 1 . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 2 1 2 2 1 1 1 . . . . . . 3 . . . . .
+        . . . . . . . . . . . . 1 1 1 3 d 1 1 . . . . . . . 3 3 . . . .
+        . . . . . . . . . . . . 1 1 3 3 d 1 1 . . . . 2 2 2 d d . . . .
+        . . . . . . . . . . . 2 1 1 3 d b 1 1 . . 2 2 2 2 e e . . . . .
+        . . . . . . . . . 2 2 2 1 1 2 2 2 1 1 2 2 2 2 2 2 e e . . . . .
+        . . . . . . . 2 2 2 2 2 1 2 2 2 2 1 2 2 2 2 2 2 2 e e . . . . .
+        . . . . . . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 e e . . . . .
+        . . . . . 2 2 2 2 2 e 2 e 2 2 2 2 2 2 2 2 2 2 2 e e e . . . . .
+        . . 3 3 2 2 2 2 2 2 e 2 e 2 2 2 2 2 2 e 2 2 2 2 e e . . . . . .
+        . . d d 2 2 2 2 2 e e e 2 2 2 2 2 e e e e 2 2 2 e e f f . . . .
+        . . . . 2 2 2 2 e e e e 2 2 2 2 2 e e e f 2 2 2 e e f f f . . .
+        . . . . . 2 2 e 2 e . e 2 2 2 2 2 e 2 e f e 2 2 e e f f f . . .
+        . . . . . 2 e e e . . 2 e 2 2 2 e e e e f f 2 e e f f f f . . .
+        . . . . . . e e . . . 2 2 e e 2 e e 2 e f f f e e f f f . . . .
+        . . . . . . e e . . . 2 2 e e e e 2 2 e f f f f e f f . . . . .
+        . . . . . . e . . . . 2 2 e 2 e 2 2 e e f f f f f f f . . . . .
+        . . . . . . . . . . . 2 2 e 2 e 2 2 e e f f f f f f . . . . . .
+        . . . . . . . . . . 2 2 2 e 2 e 2 2 e e f f f f f f . . . . . .
+        . . . . . . . . . . 2 2 2 2 2 e 2 2 2 e e f f f f f . . . . . .
+        . . . . . . . . . . 2 2 2 2 2 e 2 2 2 e e f f f f . . . . . . .
+        . . . . . . . . . 2 2 2 2 2 2 e 2 2 2 e e f f f f . . . . . . .
+        . . . . . . . . . 2 2 2 2 2 2 2 2 2 e 2 e e f f . . . . . . . .
+        . . . . . . . . . 2 2 2 2 2 2 2 2 2 e 2 e e f f . . . . . . . .
+        . . . . . . . . f 2 2 2 2 2 2 2 2 2 e 2 e e f . . . . . . . . .
+        . . . . . . . . f f 2 2 2 2 2 2 2 2 e 2 f f . . . . . . . . . .
+        . . . . . . . . . f f f f 2 2 2 2 2 f f f . . . . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Blade") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Guardian") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Medic") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Ranger") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Harvester") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Reaper") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Executioner") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Enchanter") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "A-Venomist") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero01") return img`
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . . . 6 6 9 9 1 1 1 1 1 1 1 1 9 9 6 6 . . . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 9 9 9 9 1 1 1 1 9 9 9 9 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 6 6 1 1 6 6 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 6 6 4 4 1 1 1 1 4 4 6 6 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . . . 6 6 6 6 e e e e 1 1 1 1 e e e e 6 6 6 6 . . . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 1 1 6 6 1 1 1 1 6 6 1 1 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . . . 6 6 1 1 6 6 e e 4 4 1 1 1 1 4 4 e e 6 6 1 1 6 6 . . . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . 6 6 1 1 6 6 6 6 9 9 e e 4 4 4 4 e e 9 9 6 6 6 6 1 1 6 6 . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . 6 6 6 6 6 6 9 9 1 1 9 9 9 9 1 1 9 9 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . . . 6 6 9 9 6 6 1 1 1 1 1 1 1 1 6 6 9 9 6 6 . . . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . . . 6 6 6 6 9 9 6 6 9 9 9 9 9 9 9 9 6 6 9 9 6 6 6 6 . . . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 4 4 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 9 9 9 9 1 1 1 1 9 9 9 9 4 4 1 1 1 1 e e . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . e e e e 6 6 9 9 9 9 1 1 1 1 9 9 9 9 6 6 e e e e . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . . . 6 6 6 6 9 9 9 9 9 9 9 9 6 6 6 6 . . . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . 6 6 e e 3 3 4 4 e e e e 4 4 3 3 e e 6 6 . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero02") return img`
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 4 4 1 1 1 1 4 4 1 1 1 1 c c . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . . . 1 1 1 1 e e e e 1 1 1 1 e e e e 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . . . b b 1 1 1 1 1 1 c c 1 1 1 1 c c 1 1 1 1 b b . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . b b b b 1 1 b b e e 4 4 1 1 1 1 4 4 e e 1 1 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . 1 1 c c 1 1 e e 4 4 4 4 e e 1 1 c c 1 1 . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . . . c c b b b b c c b b 1 1 1 1 b b c c b b b b c c . . . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c b b 1 1 b b b b 1 1 b b c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . e e e e b b b b 1 1 1 1 1 1 1 1 b b b b e e e e . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 b b b b 1 1 c c b b c c . . . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . c c c c e e 3 3 4 4 e e e e 4 4 3 3 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero03") return img`
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . e e 5 5 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e e e . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . . . 4 4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . . . e e e e 7 7 e e e e 1 1 7 7 e e 7 7 7 7 e e . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . e e . . 7 7 7 7 1 1 c c 1 1 1 1 c c 1 1 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . 7 7 7 7 e e 4 4 1 1 1 1 4 4 e e 7 7 7 7 . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . . . 7 7 7 7 e e 4 4 4 4 e e 7 7 7 7 . . . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a 7 7 a a c c c c a a 7 7 a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . . . c c a a a a 4 4 5 5 5 5 4 4 a a a a c c . . . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . . . c c a a a a a a c c c c c c c c a a a a a a c c . . . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 4 4 c c a a c c b b b b c c a a c c 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . e e e e a a c c c c b b b b c c c c a a e e e e . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . . . c c a a c c c c e e e e c c c c a a c c . . . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero04") return img`
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 5 5 5 5 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 4 4 5 5 5 5 5 5 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . . . e e 5 5 4 4 4 4 5 5 5 5 5 5 e e . . . . e e .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . e e 5 5 5 5 1 1 1 1 1 1 1 1 5 5 5 5 e e e e . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . . . 4 4 4 4 4 4 4 4 5 5 5 5 4 4 4 4 4 4 4 4 . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . . . e e e e e e e e 4 4 1 1 1 1 4 4 e e e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . e e . . a a e e 1 1 a a 1 1 1 1 a a 1 1 e e a a . . . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . . . . . a a e e 4 4 1 1 1 1 4 4 e e a a 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a a a c c 8 8 e e 4 4 4 4 e e 8 8 c c 3 3 a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . a a c c 8 8 4 4 c c b b b b c c 4 4 8 8 c c a a . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . . . c c 8 8 8 8 4 4 5 5 5 5 4 4 8 8 8 8 c c . . . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . . . c c 8 8 8 8 8 8 c c b b b b c c 8 8 8 8 8 8 c c . . .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 4 4 c c 8 8 c c b b b b c c 8 8 c c 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c c c b b b b c c c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . e e e e 8 8 c c c c b b b b c c c c 8 8 e e e e . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . . . c c 8 8 c c c c e e e e c c c c 8 8 c c . . . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . c c c c e e 5 5 5 5 e e e e 5 5 5 5 e e c c c c . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero05") return img`
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b 1 1 1 1 b b c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 1 1 1 1 1 1 1 1 1 1 c c . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c 1 1 b b 1 1 b b b b 1 1 b b 1 1 c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b b b 3 3 2 2 2 2 4 4 2 2 b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . c c b b 2 2 3 3 2 2 4 4 e e e e b b c c . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 3 3 3 3 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . . . c c 2 2 1 1 1 1 1 1 c c . . . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b 1 1 1 1 1 1 1 1 1 1 1 1 b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . . . c c b b c c 1 1 1 1 1 1 1 1 c c b b c c . . . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . . . e e 1 1 c c c c b b 1 1 1 1 b b c c c c 1 1 c c . . . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . e e e e . . c c 1 1 b b b b 1 1 c c . . e e e e . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . . . f f 1 1 c c c c 1 1 f f . . . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . f f 1 1 c c f f f f c c 1 1 f f . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero06") return img`
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 b b b b 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b b b 1 1 1 1 1 1 1 1 b b b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . c c b b e e e e 4 4 4 4 e e e e b b c c . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c 1 1 1 1 c c 1 1 c c . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 c c b b b b c c 1 1 c c . . . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b b b b b 1 1 1 1 b b b b b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . . . c c b b c c b b b b b b b b c c b b c c . . . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . . . e e 1 1 c c c c b b b b b b b b c c c c 1 1 c c . . .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . c c c c c c c c . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 c c b b b b b b b b c c 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . e e e e . . c c b b b b b b b b c c . . e e e e . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . . . f f b b c c c c b b f f . . . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . f f b b c c f f f f c c b b f f . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero07") return img`
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . . . 6 6 7 7 7 7 7 7 7 7 6 6 . . . . . . . . . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 7 7 7 7 7 7 7 7 7 7 7 7 6 6 e e 5 5 e e . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . . . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 6 6 5 5 e e . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 7 7 2 2 2 2 2 2 2 2 2 2 2 2 7 7 e e . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 2 2 3 3 2 2 2 2 3 3 2 2 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 6 6 2 2 e e e e 4 4 2 2 e e e e 2 2 6 6 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . . . 2 2 e e 1 1 6 6 1 1 1 1 6 6 1 1 e e 2 2 . . . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . 2 2 2 2 2 2 e e 4 4 1 1 1 1 4 4 e e 2 2 2 2 2 2 . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . . . 6 6 4 4 e e 4 4 4 4 e e 4 4 6 6 . . . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . . . 6 6 7 7 6 6 5 5 7 7 7 7 5 5 6 6 7 7 6 6 . . . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . . . e e 4 4 6 6 6 6 4 4 7 7 7 7 4 4 6 6 6 6 4 4 e e . . . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e . . e e 4 4 4 4 e e . . e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . . . e e 1 1 4 4 4 4 1 1 e e . . . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . e e 5 5 4 4 e e e e 4 4 5 5 e e . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero08") return img`
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e 5 5 e e .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 5 5 e e . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 e e . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 4 4 4 4 5 5 5 5 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 e e e e 4 4 4 4 e e e e 7 7 7 7 . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 7 7 1 1 1 1 7 7 1 1 e e . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . . . 7 7 4 4 e e 4 4 4 4 e e 4 4 7 7 . . . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 4 4 5 5 7 7 7 7 5 5 4 4 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . . . 7 7 7 7 7 7 5 5 7 7 7 7 5 5 7 7 7 7 7 7 . . . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . . . e e 4 4 7 7 7 7 4 4 7 7 7 7 4 4 7 7 7 7 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . 7 7 7 7 7 7 7 7 . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 4 4 5 5 5 5 4 4 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . e e e e . . e e 5 5 5 5 5 5 5 5 e e . . e e e e . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . . . e e 5 5 4 4 4 4 5 5 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero09") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . . . c c b b b b b b b b c c . . . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . c c b b b b b b b b b b b b c c . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . . . b b b b b b b b b b b b b b b b . . . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b b b b b 4 4 b b b b b b b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . c c b b e e e e 1 1 b b e e e e b b c c . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . . . b b b b 1 1 c c 1 1 1 1 c c 1 1 b b b b . . . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b b b e e 4 4 1 1 1 1 4 4 e e b b b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 e e 4 4 4 4 e e 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . c c b b e e 1 1 1 1 2 2 2 2 1 1 1 1 e e b b c c . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . . . e e 3 3 2 2 1 1 1 1 1 1 1 1 2 2 3 3 e e . . . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . . . e e 4 4 e e 2 2 1 1 1 1 1 1 1 1 2 2 e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 2 2 b b 1 1 1 1 b b 2 2 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . e e 1 1 1 1 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 1 1 1 1 e e . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . e e e e e e b b 1 1 1 1 1 1 1 1 b b e e e e e e . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . . . e e b b 1 1 1 1 1 1 1 1 1 1 1 1 b b e e . . . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . e e e e e e e e 2 2 2 2 2 2 2 2 e e e e e e e e . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero10") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . . . e e e e e e e e . . . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . . . e e 4 4 1 1 1 1 4 4 e e . . . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 4 4 e e . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . . . 9 9 4 4 1 1 1 1 1 1 1 1 4 4 9 9 . . . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . b b 9 9 e e e e 1 1 1 1 e e e e 9 9 b b . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . 9 9 e e 1 1 b b 1 1 1 1 b b 1 1 e e 9 9 . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . b b e e 4 4 1 1 1 1 4 4 e e b b . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . . . e e 1 1 e e 4 4 4 4 e e 1 1 e e . . . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 1 1 1 1 1 1 1 1 1 1 1 1 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . . . e e 4 4 b b 1 1 1 1 1 1 1 1 b b 4 4 e e . . . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . . . e e 4 4 e e b b b b 1 1 1 1 b b b b e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e . . b b b b b b b b . . e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . e e 1 1 1 1 4 4 e e 2 2 3 3 3 3 2 2 e e 4 4 1 1 1 1 e e .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . e e e e . . e e 3 3 3 3 3 3 3 3 e e . . e e e e . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . . . e e 3 3 2 2 2 2 3 3 e e . . . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . e e 5 5 5 5 e e e e 5 5 5 5 e e . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero11") return img`
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 4 4 5 5 4 4 4 4 4 4 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . . . 4 4 4 4 5 5 5 5 5 5 4 4 5 5 4 4 . . . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 4 4 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . . . 5 5 4 4 1 1 4 4 1 1 1 1 4 4 1 1 4 4 5 5 . . . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 5 5 e e 4 4 1 1 1 1 4 4 e e 5 5 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 5 5 a a 3 3 e e 4 4 4 4 e e 3 3 a a 5 5 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . 4 4 a a 1 1 a a 3 3 1 1 1 1 3 3 a a 1 1 a a 4 4 . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . . . a a 3 3 a a a a 3 3 3 3 a a a a 3 3 a a . . . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . . . e e 4 4 e e a a 1 1 a a a a 1 1 a a e e 4 4 e e . . . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 4 4 e e 3 3 a a 3 3 3 3 a a 3 3 e e 4 4 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . e e 1 1 1 1 3 3 a a 4 4 a a a a 4 4 a a 3 3 1 1 1 1 e e . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . e e e e a a e e 1 1 4 4 4 4 1 1 e e a a e e e e . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . . . a a 3 3 3 3 3 3 3 3 a a . . . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . a a 1 1 3 3 a a a a 3 3 1 1 a a . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (artKey == "hero12") return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 . . . . . . 4 4 4 4 4 4 4 4 4 4 4 4 . . . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . 4 4 5 5 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . . . 4 4 5 5 5 5 5 5 4 4 5 5 5 5 5 5 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . . . 4 4 4 4 5 5 4 4 5 5 4 4 4 4 5 5 4 4 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . 4 4 . . 4 4 5 5 e e e e 1 1 1 1 e e e e 5 5 4 4 . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 5 5 1 1 c c 1 1 1 1 c c 1 1 5 5 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . . . 4 4 e e 4 4 1 1 1 1 4 4 e e 4 4 . . . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . . . c c c c 9 9 e e 4 4 4 4 e e 9 9 c c c c . . . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 1 1 9 9 c c 9 9 1 1 1 1 9 9 c c 9 9 1 1 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . c c 9 9 9 9 c c c c 9 9 9 9 c c c c 9 9 9 9 c c . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . . . e e 4 4 e e c c 1 1 c c c c 1 1 c c e e 4 4 e e . . .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 4 4 e e 9 9 c c 9 9 9 9 c c 9 9 e e 4 4 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . e e 1 1 1 1 9 9 c c 1 1 c c c c 1 1 c c 9 9 1 1 1 1 e e .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . e e e e c c d d 1 1 1 1 1 1 1 1 d d c c e e e e . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . . . c c 9 9 9 9 9 9 9 9 c c . . . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . c c 1 1 9 9 c c c c 9 9 1 1 c c . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function observer(): Image {
+        return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function observerFrame(direction: number, step: number): Image {
+        let phase = step % 3; if (phase < 0) phase = 0;
+        if (direction == 1) {
+            if (step == -2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f f b b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f f f 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 f f f f b b 1 1 1 b . . . . . .
+        . . . . . . . . b 1 1 1 1 f f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . b b b f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . . 1 1 b b f f f f f f f f b 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 b f f f f f b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 b b b b b 1 1 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . 1 1 1 1 1 1 1 f f f f f 1 1 1 1 1 b b b . . . . . .
+        . . . . . . . 1 1 1 1 1 f f f f f f f 1 1 b b b b . . . . . . .
+        . . . . . . . b 1 1 1 f f f f f f f f f b b b b . . . . . . . .
+        . . . . . . . . b 1 1 f f f f f f f f f b b b . . . . . . . . .
+        . . . . . . . . . f f f f f f f f f f f b b . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f f b b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f f f 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 f f f f b b 1 1 1 b . . . . . .
+        . . . . . . . . b 1 1 1 1 f f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . b b b f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 b b f f f f f f f f b 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 b f f f f f b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 b b b b b b 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . . . 1 1 1 1 1 b b b b b 1 1 1 1 1 1 b b b . . . . . .
+        . . . . . . . b 1 1 1 1 1 f f f f f 1 1 1 b b b b . . . . . . .
+        . . . . . . . b b 1 1 1 f f f f f f f 1 b b b b . . . . . . . .
+        . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . . .
+        . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f f b b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f f f 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 f f f f b b 1 1 1 b . . . . . .
+        . . . . . . . . b 1 1 1 1 f f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . b b b f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . . 1 1 b b f f f f f f f f b 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 b f f f f f b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 b b b b b b 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . . . 1 1 1 1 1 b b b b b 1 1 1 1 1 1 b b b . . . . . .
+        . . . . . . . b 1 1 1 1 1 f f f f f 1 1 1 b b b b . . . . . . .
+        . . . . . . . b b 1 1 1 f f f f f f f 1 b b b b . . . . . . . .
+        . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . . .
+        . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . . .
+        . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f b b . . . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 f f f f f 1 1 b b . . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 f f 1 1 1 1 1 b . . . . . . . . .
+        . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . b 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . . b f f f f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . . f f f f f f f f f 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f b b 1 1 b . . . . .
+        . . . . . . . f f f f f f f f f f f f f b b 1 1 1 1 b . . . . .
+        . . . . . . . f f f f f f f f f f b b b b 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 f f f f f f f b b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 b f f f f b b b b b 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 b b b 1 b b b b b 1 1 1 1 b b . . . . . .
+        . . . . . . f 1 1 1 1 1 1 1 b f f f f f f f f b b . . . . . . .
+        . . . . . . f b 1 1 1 1 1 1 f f f f f f f f f f . . . . . . . .
+        . . . . . . f f b 1 1 1 1 f f f f f f f f f f f . . . . . . . .
+        . . . . . . f f f b b b b f f f f f f f f f f f . . . . . . . .
+        . . . . . . . f f f f f b f f f f f f f f f f . . . . . . . . .
+        . . . . . . . . f f f f . b f f f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . b f f f f f b b . . . . . . . . . . . .
+        . . . . . . . . . . . 1 1 f f f f f 1 1 b b . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 1 1 f f 1 1 1 1 1 b . . . . . . . . .
+        . . . . . . . . . 1 1 1 f f 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 1 f f f 1 1 1 1 1 1 1 1 1 b . . . . . . . .
+        . . . . . . . . 1 1 f 1 f f 1 1 1 1 1 1 1 1 1 1 . . . . . . . .
+        . . . . . . . 1 1 1 f f f f 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 f f f f f f f f f b b b . . . . . .
+        . . . . . . . . b b f f f f f f f f f f f f b 1 1 1 b . . . . .
+        . . . . . . . b 1 1 b f f f f f f f f f f b b 1 1 1 b . . . . .
+        . . . . . . . 1 1 1 1 1 b f f f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 b . . . . .
+        . . . . . . 1 1 1 1 1 1 1 b b b f f f f f b 1 1 b b . . . . . .
+        . . . . . . . 1 1 f f f f b b b b b b b 1 1 1 b f . . . . . . .
+        . . . . . . . . f f f f f f f b b b b b 1 b b f f . . . . . . .
+        . . . . . . . f f f f f f f f b b b b b b f f f f . . . . . . .
+        . . . . . . . f f f f f f f f f b b b b f f f f . . . . . . . .
+        . . . . . . . . f f f f f f f f f b b f f f f f . . . . . . . .
+        . . . . . . . . . f f f f f f f . f f f f f . . . . . . . . . .
+        . . . . . . . . . f f f f f f . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        if (direction == 2) {
+            if (step == -2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b b f f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 f f f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 b b f f f f 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f f 1 1 1 1 b . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f b b b . . . . . . .
+        . . . . . b 1 1 1 1 1 1 b f f f f f f f f b b 1 1 . . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b f f f f f b 1 1 1 1 . . . . . .
+        . . . . . . 1 1 1 1 1 1 1 1 1 b b b b b 1 1 1 1 1 1 . . . . . .
+        . . . . . . b b b 1 1 1 1 1 f f f f f 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . . b b b b 1 1 f f f f f f f 1 1 1 1 1 . . . . . . .
+        . . . . . . . . b b b b f f f f f f f f f 1 1 1 b . . . . . . .
+        . . . . . . . . . b b b f f f f f f f f f 1 1 b . . . . . . . .
+        . . . . . . . . . . b b f f f f f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b b f f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 f f f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 b b f f f f 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f f 1 1 1 1 b . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f b b b . . . . . . .
+        . . . . . b 1 1 1 1 1 1 b f f f f f f f f b b 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b f f f f f b 1 1 1 1 . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 b b b b b b 1 1 1 1 1 . . . . . .
+        . . . . . . b b b 1 1 1 1 1 1 b b b b b 1 1 1 1 1 . . . . . . .
+        . . . . . . . b b b b 1 1 1 f f f f f 1 1 1 1 1 b . . . . . . .
+        . . . . . . . . b b b b 1 f f f f f f f 1 1 1 b b . . . . . . .
+        . . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . .
+        . . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b b f f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 f f f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 b b f f f f 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f f 1 1 1 1 b . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f b b b . . . . . . .
+        . . . . . b 1 1 1 1 1 1 b f f f f f f f f b b 1 1 . . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b f f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 b b f f f f f f f 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b f f f f f b 1 1 1 1 . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 b b b b b b 1 1 1 1 1 . . . . . .
+        . . . . . . b b b 1 1 1 1 1 1 b b b b b 1 1 1 1 1 . . . . . . .
+        . . . . . . . b b b b 1 1 1 f f f f f 1 1 1 1 1 b . . . . . . .
+        . . . . . . . . b b b b 1 f f f f f f f 1 1 1 b b . . . . . . .
+        . . . . . . . . . b b b f f f f f f f f f b b b . . . . . . . .
+        . . . . . . . . . . b b f f f f f f f f f b b . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . f f f f f f f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . f f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b 1 1 f f f f f 1 1 1 . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 1 1 f f 1 1 1 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 b . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f f f f b . . . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 f f f f f f f f f . . . . . . . .
+        . . . . . b 1 1 b b f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . b 1 1 1 1 b b f f f f f f f f f f f f f . . . . . . .
+        . . . . . b 1 1 1 1 1 b b b b f f f f f f f f f f . . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b b f f f f f f f 1 1 . . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 b b b b b f f f f b 1 1 . . . . . .
+        . . . . . . b b 1 1 1 1 b b b b b 1 b b b 1 1 1 1 1 . . . . . .
+        . . . . . . . b b f f f f f f f f b 1 1 1 1 1 1 1 f . . . . . .
+        . . . . . . . . f f f f f f f f f f 1 1 1 1 1 1 b f . . . . . .
+        . . . . . . . . f f f f f f f f f f f 1 1 1 1 b f f . . . . . .
+        . . . . . . . . f f f f f f f f f f f b b b b f f f . . . . . .
+        . . . . . . . . . f f f f f f f f f f b f f f f f . . . . . . .
+        . . . . . . . . . f f f f f f f f f b . f f f f . . . . . . . .
+        . . . . . . . . . f f f f f f f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f f f f f . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . .
+        . . . . . . . . . . . . b b f f f f f b . . . . . . . . . . . .
+        . . . . . . . . . . b b 1 1 f f f f f 1 1 . . . . . . . . . . .
+        . . . . . . . . . b 1 1 1 1 1 f f 1 1 1 1 1 . . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 f f 1 1 1 . . . . . . . . .
+        . . . . . . . . b 1 1 1 1 1 1 1 1 1 f f f 1 1 1 . . . . . . . .
+        . . . . . . . . 1 1 1 1 1 1 1 1 1 1 f f 1 f 1 1 . . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 f f f f 1 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 . . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . . . . . . .
+        . . . . . . b b b f f f f f f f f f 1 1 1 1 1 1 . . . . . . . .
+        . . . . . b 1 1 1 b f f f f f f f f f f f f b b . . . . . . . .
+        . . . . . b 1 1 1 b b f f f f f f f f f f b 1 1 b . . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f f f b 1 1 1 1 1 . . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f f b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . b 1 1 1 1 f f f f f f f b b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . b b 1 1 b f f f f f b b b 1 1 1 1 1 1 1 . . . . . .
+        . . . . . . . f b 1 1 1 b b b b b b b f f f f 1 1 . . . . . . .
+        . . . . . . . f f b b 1 b b b b b f f f f f f f . . . . . . . .
+        . . . . . . . f f f f b b b b b b f f f f f f f f . . . . . . .
+        . . . . . . . . f f f f b b b b f f f f f f f f f . . . . . . .
+        . . . . . . . . f f f f f b b f f f f f f f f f . . . . . . . .
+        . . . . . . . . . . f f f f f . f f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . f f f f f f . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        if (direction == 3) {
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b f . . .
+        . . f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 b f f f f . . . .
+        . . . . . f f f f f b b b b b b b b b b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b f . . .
+        . . f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 1 b f f f f . . . .
+        . . . . . f f f f f b b b b b b b b b b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f f . . . . . .
+        . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . . . .
+        . . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . . . . . .
+        . . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f . . .
+        . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b f f . .
+        . . f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b 1 f f . .
+        . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . .
+        . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . . . .
+        . . . . . f f f b b b 1 1 1 1 1 1 1 1 b f f f f f f f f . . . .
+        . . . . . . f f f f b b b b b b b b b b f f f f f f f . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . 1 1 1 1 . . f f f f f f . . . . . .
+        . . . . . . f f f f f 1 1 1 1 1 1 1 1 1 1 1 f f f f . . . . . .
+        . . . . . . f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . .
+        . . . . . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . . .
+        . . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . . .
+        . . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f . . .
+        . . f f b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . .
+        . . f f 1 b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . .
+        . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . .
+        . . . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f f f f f 1 1 1 1 1 1 1 1 1 b b b f f f . . . . .
+        . . . . . f f f f f f f b b b b b b b b b b f f f f . . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . f f f f f f . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        if (direction == 0) {
+            if (step == -2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f 1 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f . . . .
+        . . . . f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f . . . .
+        . . . . f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . . f f f b 1 1 1 1 1 1 1 1 1 1 b b b b b f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (step < 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 0) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 1) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . . f f f f 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 1 f f f . . .
+        . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f . . .
+        . . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f . .
+        . . . f f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . . f f f f f f f f b b 1 1 1 1 1 1 1 b b b f f f f f f f . .
+        . . . f f f f f f f f b b b b b b b b b b b 1 f f f f f f . . .
+        . . . . f f f f f f f 1 1 1 b b b b b b 1 1 1 1 f f f f f . . .
+        . . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . . b 1 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f f . . . .
+        . . . . f f f f b b 1 1 1 1 1 1 1 1 1 f f f f f f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 f f f f f f f f . . . . .
+        . . . . . . . f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+            if (phase == 2) return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b b 1 1 1 1 f f f 1 1 f f f 1 1 1 1 1 b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 f f f f f f f 1 1 f f f f f f 1 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f 1 1 1 1 1 f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f 1 1 1 1 b . . . .
+        . . . . b 1 1 1 1 1 1 1 1 f f f f f 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . . .
+        . . f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f f . . .
+        . . f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . . .
+        . . . f f f f f f 1 b b b b b b b b b b b f f f f f f f f . . .
+        . . . f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f f . . . .
+        . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f b b . . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 1 b . . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . .
+        . . . . f f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f f f f f f f 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f f f f 1 1 1 1 1 1 1 b b f f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f . . . . . . .
+        . . . . . . f f f f f f . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        }
+        return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . f f f f . . . . . . . . . . f f f f . . . . . . .
+        . . . . . . f f f f f f . . b b b b . . f f f f f f . . . . . .
+        . . . . . . f f f f f f b b 1 1 1 1 b b f f f f f f . . . . . .
+        . . . . . . f f f f 1 1 1 1 1 1 1 1 1 1 f f f f f f . . . . . .
+        . . . . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f . . . . . . .
+        . . . . . . b 1 1 1 1 1 f f f 1 1 f f f 1 1 1 1 b b . . . . . .
+        . . . . . b b 1 1 1 1 f f f f 1 1 f f f f 1 1 1 1 b b . . . . .
+        . . . . . b 1 1 1 f f f 1 f f 1 1 f f 1 f f f 1 1 1 b . . . . .
+        . . . . b 1 1 1 1 f f f f f f 1 1 f f f f f f f 1 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 f f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 f f f f f f 1 1 1 1 1 f f f f f f 1 1 b . . . .
+        . . . . b 1 1 1 1 f f f f 1 1 1 1 1 1 1 f f f f b 1 1 b . . . .
+        . . . . b 1 1 1 1 1 f f 1 1 f f f f f 1 1 f f b 1 1 1 b . . . .
+        . . . f f f f 1 1 1 1 1 1 1 1 f f f 1 1 1 1 1 1 1 f f f f . . .
+        . . f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f . .
+        . . f f f f f f f f b 1 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f . .
+        . . f f f f f f f f b b b 1 1 1 1 1 1 1 b b f f f f f f f f . .
+        . . f f f f f f f f b b b b b b b b b b b b f f f f f f f f . .
+        . . . f f f f f f f 1 1 1 1 b b b b b b 1 1 1 f f f f f f . . .
+        . . . b b f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . .
+        . . . b b b 1 1 1 1 1 1 1 1 1 f f 1 1 1 1 1 1 1 1 1 b b b . . .
+        . . . . b b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b b . . . .
+        . . . . f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 b f f f . . . .
+        . . . . f f f b 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f f . . . .
+        . . . . f f f f b b b 1 1 1 1 1 1 1 1 1 1 1 b b f f f f . . . .
+        . . . . . f f f f f b b 1 1 1 1 1 1 1 b b b b f f f f . . . . .
+        . . . . . f f f f f f f f f f f f f f f f f f f f f f . . . . .
+        . . . . . . f f f f f f . . . . . . . . f f f f f f . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function prop(name: string): Image {
+        if (name == "altar-primary") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f a 8 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f a a 8 8 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . f a 8 8 8 a 8 f . . . . . . . . . . . .
+        . . . . . . . . . . . f a a a a a a 8 8 f . . . . . . . . . . .
+        . . . . . . . . . . f 8 a a a a a a 8 a 8 f . . . . . . . . . .
+        . . . . . . . . . f a 8 a a 8 8 8 a 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a a 8 a a a a 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a 8 8 a a 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 a 8 a a a a 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a a a a 8 a 8 8 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . .
+        . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . .
+        . . . . . . . f a a a a a a a a a 8 a a 8 a a a f . . . . . . .
+        . . . . . . . f a 8 a 8 8 8 a 8 8 8 a a 8 a a 8 f . . . . . . .
+        . . . . . . . f a 8 a 8 a 8 a 8 a a a a 8 8 8 8 f . . . . . . .
+        . . . . . . . f a 8 a a 8 8 a 8 a 8 8 a a a 8 8 f . . . . . . .
+        . . . . . . f 8 a 8 8 8 8 a a a a a 8 a 8 8 8 8 8 f . . . . . .
+        . . . . . f 8 8 a a a a a a a a 8 8 8 8 8 a 8 8 8 8 f . . . . .
+        . . . . f f 8 8 a 8 8 a a 8 8 8 8 8 8 8 a 8 8 8 8 8 f f . . . .
+        . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f . . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c c c c c c c c c c c c f . .
+        . . f f f f f f f f f f f f f f f f f f f f f f f f f f f f . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "altar-secondary") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f b b f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f . f b b f . f . . . . . . . . . . . .
+        . . . . . . . . . . . f 1 f f 1 1 f f 1 f . . . . . . . . . . .
+        . . . . . . . . . . f 1 1 b 1 b b 1 b 1 1 f . . . . . . . . . .
+        . . . . . . . . . . . f 1 f f 1 1 f f 1 f . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 1 1 f . . . . . . . . . . . . . .
+        . . . . . . . . . . f f f f f 1 1 f f f f f . . . . . . . . . .
+        . . . . . . . . . . 1 1 1 1 b 1 1 b b b b b f . . . . . . . . .
+        . . . . . . . . . f b b b b b 1 1 b b b b b b . . . . . . . . .
+        . . . . . . . . f 9 b b b 1 1 1 1 1 1 b b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b b b b b b 1 b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b b 9 9 b b 1 b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b 9 1 1 9 b 1 b b b f . . . . . . . .
+        . . . . . . . . f b b b 1 b 9 1 1 9 b 1 b b b f . . . . . . . .
+        . . . . . . . f b b b b 1 b 9 1 1 9 b 1 b b b b f . . . . . . .
+        . . . . . . f b b b b b 1 b b 9 9 b b 1 b b b b b f . . . . . .
+        . . . . f b 1 1 1 1 1 1 1 9 1 b b 1 b 9 9 1 1 1 9 1 b f . . . .
+        . . . f 1 b 1 1 1 1 1 1 1 1 9 1 1 b 9 1 1 1 9 9 9 1 b b f . . .
+        . . . f 1 b b b b b b b b b b b b b b b b b b b b b b b f . . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 9 9 b f . . .
+        . . . f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 9 9 9 9 9 9 9 b f . . .
+        . . . f 1 b b b b b b b b b b b b b b b b b b b b b b b f . . .
+        . . . f f f f f f f f f f f f f f f f f f f f f f f f f f . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "fountain-reset") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f . . . f . . . . . . . . . . . . . .
+        . . . . . . . . . f f . f b f f f b f . f f . . . . . . . . . .
+        . . . . . . . . f b b f f f b b b f f f b b f . . . . . . . . .
+        . . . . . . . . b b b b f b b b b b f b b b b . . . . . . . . .
+        . . . . . . . f b b b b f b b b b b f b b b b f . . . . . . . .
+        . . . . . . . f f b f b b f b b b f b b f b f f . . . . . . . .
+        . . . . . . . f f b f b b f f b f f b b f b f f . . . . . . . .
+        . . . . . . . f f f f b f f f f f f f b f f f f . . . . . . . .
+        . . . . . . . . . . . f f b b f b b f f . . . . . . . . . . . .
+        . . . . . . . . . . f b b b f 9 f b b b f . . . . . . . . . . .
+        . . . . . . . . . . f b b f f 9 f f b b f . . . . . . . . . . .
+        . . . . . . . . . . . f b b f f f b b f . . . . . . . . . . . .
+        . . . . . . . . . . f b f b f 9 f b f b f . . . . . . . . . . .
+        . . . . . . . . f f b b b b b 9 b b b b b f f . . . . . . . . .
+        . . . . . . f f b b b b b b b 9 b b b b b b 9 f f . . . . . . .
+        . . . . . f b 9 b b b b b b b 9 b b b b b b b b 1 f f . . . . .
+        . . . f f 9 b b b b 6 6 9 9 9 9 9 9 9 6 6 b b b b b b f . . . .
+        . . f b 9 1 b 6 9 9 9 9 9 9 9 9 9 1 9 9 9 9 9 6 b b b b f . . .
+        . f 1 b b b 6 9 9 9 9 9 1 9 9 9 1 9 1 9 9 9 9 9 9 b b b b f . .
+        . f b b 6 9 9 9 9 1 9 9 9 9 1 9 9 9 1 9 9 9 9 9 9 6 6 b 1 f . .
+        . f b 1 9 9 9 9 9 9 9 1 9 9 9 9 9 9 9 9 9 1 9 9 9 9 9 1 b f . .
+        . f b b 9 9 9 9 9 9 9 9 9 9 9 9 1 9 9 9 9 9 9 9 9 9 6 b b f . .
+        . f b b 6 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 6 6 9 6 6 6 b b f . .
+        . f b b b b b 6 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 6 b 9 b b b f . .
+        . f b b b 1 b 9 b b 6 6 6 9 9 6 6 6 6 6 6 b b 1 b b b b b f . .
+        . . f b b b b b 9 b b 9 b b b 9 b b b b 9 1 b b b b b b f . . .
+        . . . f b b b b b b b 9 1 b b 1 9 b b 1 b b b b b b b f . . . .
+        . . . . f f b b b b b b b b b b b b b b b b b b f f f . . . . .
+        . . . . . . f f f f b b b b b b b b b b b f f f . . . . . . . .
+        . . . . . . . . . . f f f f f f f f f f f . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "exit-gate") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f .
+        . f b b b b b b f b b b b f b b b b b f b b b b b f b b b b f .
+        . f b b b b b b f b b b b f b b b b b f b b b b b f b b b b f .
+        . f b b b f f f f f f f f f f f f f f b b b b b b f b b b b f .
+        . f f f f f b b b b f b b b b f b b f b b b f f f f f b b b f .
+        . f b b b f b b b b f b b b b f b b b f f f f b b b f b b b f .
+        . f b b b f f f f f f b b b b f b b b b b b f b b b f b b b f .
+        . f b b b b b b f b f f f f f f f b b b b b f b b b f f f f f .
+        . f f f f b b b f b b f b b b b b f b b b b b f f f b b b b f .
+        . f b b b f f f f b b f b b f f f f b b b b b f b b b b b b f .
+        . f b b b f b b f f b f f f f f f f f f b b f f f f f b b b f .
+        . f b b b f b b b f f f f f f 5 f f f f f f b b b b f b b b f .
+        . f b b b f b b b f f f f f e 5 e f f f f f f b b b f b b f f .
+        . f f f f f b b b f f f f f e 5 e f f f f f f f b f f f f f f .
+        . f b b b f f f f f f f f e 5 5 5 e f f f f f f b f b b b b f .
+        . f b b b b b f b f f f e 4 5 5 5 4 f f f f f f b f b b b b f .
+        . f b b b b b f b f f f e 4 5 5 5 4 e f f f f f b f b b b b f .
+        . f b b b b f b b f f e 4 4 5 5 5 4 4 e f f f f f f f b b b f .
+        . f f f f f f b b f e 4 4 4 5 1 5 4 4 4 e f f f b b f b b b f .
+        . f b b b f b b b e 5 5 5 5 5 1 5 5 5 5 5 e e f b b f b b b f .
+        . f b b b f f f f 5 5 5 5 1 1 1 1 1 5 5 5 5 5 5 b f f f f f f .
+        . f b b b b f b b e 5 5 5 5 5 1 5 5 5 5 5 e e f b f b b b b f .
+        . f b b b b f b b e e 4 4 4 5 5 5 4 4 4 e e f f b f b b b b f .
+        . f b b f b b b b f f e e 4 5 5 5 4 e e f f f f b f b b b b f .
+        . f b b f b b b b b b b e e 5 5 5 e e b b b b f f f f b b b f .
+        . f b b f f f f f b b b b e e 5 e e b b b b b f b b f b b b f .
+        . f b b b f b b b b b b b b e 5 e b b b b b b f b b f f f f f .
+        . f b b b f b b b b b b b b b 5 b b b b b b b f b b f b b b f .
+        . f b b b f b b b b b b b b b 5 b b b b b b b f b b f b b b f .
+        . f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+        if (name == "clock-crystal") return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 9 9 9 . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 9 9 . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . a a a a a a a . . 9 . . . . . . . . . . .
+        . . . . . . . . . 9 a 9 1 1 a a a a . . . 9 . . . . . . . . . .
+        . . . . . . . . 9 . a 1 1 1 a a a a . . . . . . . . . . . . . .
+        . . . . . . . . 9 . a 1 1 9 a 8 a a a . . . . . . . . . . . . .
+        . . . . . . . 9 . . 8 a a a a 8 a 8 a a a 8 9 . . . . . . . . .
+        . . . . . . . 9 . . 8 a 8 a 8 8 8 8 8 a 8 8 a . . . . . . . . .
+        . . . . . . . 1 . . 8 8 8 8 8 8 8 8 a a 8 8 a f . . . . . . . .
+        . . . . . . . . . . 8 8 8 8 8 8 8 8 8 8 8 8 9 f f . . . . . . .
+        . . . . . . . . . . 8 8 8 8 8 8 8 8 8 8 8 8 b . . f . . . . . .
+        . . . . . . . . . . 8 8 8 8 8 8 8 8 8 8 a a . . . f . . . . . .
+        . . . . . . . . . 9 . 8 8 8 8 8 8 8 8 9 9 1 . . f f . . . . . .
+        . . . . . . . . . . . . 8 8 8 8 8 8 9 9 1 b . f f . . . . . . .
+        . . . . . . . . . . 9 . . 8 8 8 8 8 9 1 9 c f . . . . . . . . .
+        . . . . . . . . . . . . . 9 9 1 1 1 . . . . . . . . . . . . . .
+        . . . . . . . . . . . . f b b b b b b . . . . . . . . . . . . .
+        . . . . . . . . . . . f b b b b b b b b . . . . . . . . . . . .
+        . . . . . . . . . . . f b b b b b b b b . . . . . . . . . . . .
+        . . . . . . . . . . . f b b b b b b b b . . . . . . . . . . . .
+        . . . . . . . . . . f b b b b b b b b b b . . . . . . . . . . .
+        . . . . . . . . . f 1 1 1 1 1 1 1 1 1 1 9 b . . . . . . . . . .
+        . . . . . . . . . 1 b b b b b b b b b b b b f . . . . . . . . .
+        . . . . . . . . . 1 1 1 1 1 1 1 1 1 9 9 9 9 f . . . . . . . . .
+        . . . . . . . . . f f f f f f f f f f f f f f . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . f f . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f a 8 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . f a a 8 8 f . . . . . . . . . . . . .
+        . . . . . . . . . . . . f a 8 8 8 a 8 f . . . . . . . . . . . .
+        . . . . . . . . . . . f a a a a a a 8 8 f . . . . . . . . . . .
+        . . . . . . . . . . f 8 a a a a a a 8 a 8 f . . . . . . . . . .
+        . . . . . . . . . f a 8 a a 8 8 8 a 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a a 8 a a a a 8 f . . . . . . . . .
+        . . . . . . . . . f a 8 a 8 a 8 8 a a 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 a 8 a a a a 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a a a a 8 a 8 8 8 8 8 a f . . . . . . . . .
+        . . . . . . . . . f a 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . . .
+        . . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . . .
+        . . . . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . . .
+        . . . . . . . f a a a a a a a a a 8 a a 8 a a a f . . . . . . .
+        . . . . . . . f a 8 a 8 8 8 a 8 8 8 a a 8 a a 8 f . . . . . . .
+        . . . . . . . f a 8 a 8 a 8 a 8 a a a a 8 8 8 8 f . . . . . . .
+        . . . . . . . f a 8 a a 8 8 a 8 a 8 8 a a a 8 8 f . . . . . . .
+        . . . . . . f 8 a 8 8 8 8 a a a a a 8 a 8 8 8 8 8 f . . . . . .
+        . . . . . f 8 8 a a a a a a a a 8 8 8 8 8 a 8 8 8 8 f . . . . .
+        . . . . f f 8 8 a 8 8 a a 8 8 8 8 8 8 8 a 8 8 8 8 8 f f . . . .
+        . . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f . . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c f . .
+        . . f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 c c c c c c c c c c c c f . .
+        . . f f f f f f f f f f f f f f f f f f f f f f f f f f f f . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function station(kind: apocTypes.Station): Image {
+        if (kind == apocTypes.Station.Secondary) return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . 1 f f 1 . . . . . .
+        . . . . . . 1 f f 1 . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . f f f f f f . . . . .
+        . . . . f b b 1 1 b b f . . . .
+        . . . . f b 1 b b 1 b f . . . .
+        . . . . f b 1 9 9 1 b f . . . .
+        . . . f b b 1 b b 1 b b f . . .
+        . . 1 1 1 1 1 9 b 1 1 9 1 b . .
+        . . 1 1 1 1 1 1 1 1 1 1 9 b . .
+        . . 1 b b b b b b b b b b b . .
+        . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . a f . . . . . . .
+        . . . . . . a 8 a f . . . . . .
+        . . . . . 8 a a a a f . . . . .
+        . . . . f 8 8 a a a 8 . . . . .
+        . . . . f 8 8 a a 8 a . . . . .
+        . . . . f 8 8 8 8 8 8 . . . . .
+        . . . . 8 8 8 8 8 8 8 f . . . .
+        . . . f a a a a 8 a a a . . . .
+        . . . f 8 8 8 8 a a 8 8 . . . .
+        . . . 8 8 8 a a a a 8 8 f . . .
+        . . f 8 8 a 8 8 8 8 8 8 8 f . .
+        . 8 8 8 8 8 8 8 8 8 8 8 8 f f .
+        . 8 8 8 8 8 8 8 8 8 8 8 8 8 f .
+        . 8 8 8 8 8 8 8 c c c c c c f .
+        . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function move(move: string): Image {
+        if (move == "Strike") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . 1 1 .
+        . . . . . . . . . . . . 1 . 1 .
+        . . . . . . . . . . . 1 . 1 . .
+        . . . . . . . . . . 1 . 1 . . .
+        . . . . . . . . . 1 . 1 . . . .
+        . . . . . . . . 1 . 1 . . . . .
+        . . . . . . . 1 . 1 . . . . . .
+        . . 1 . . . 1 . 1 . . . . . . .
+        . . 1 1 . 1 . 1 . . . . . . . .
+        . . . 1 1 . 1 . . . . . . . . .
+        . . . . 1 1 . . . . . . . . . .
+        . . . 1 . 1 1 . . . . . . . . .
+        . 1 1 . . . . 1 . . . . . . . .
+        . . 1 . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (move == "Flurry") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . 1 . . . . . .
+        . . . . . . 1 1 . . . . . . . .
+        . . . . . . 1 . 1 . . . . . . .
+        . . . . . 1 . 1 1 . . . . . . .
+        . 1 1 . 1 . 1 . . . . . . . . 1
+        . . 1 1 . 1 . . . . . . 1 1 . .
+        . . 1 1 1 . . . . . . . 1 . 1 .
+        . 1 1 1 1 1 . . . . . 1 . 1 1 .
+        . 1 1 . . 1 . 1 1 . 1 . 1 . . .
+        1 . . . . . . . 1 1 . 1 . . . .
+        . . . . . . . . 1 1 1 . . . . .
+        . . . . . . . 1 1 1 1 1 . . . .
+        . . . . . . . 1 1 . . 1 . . . .
+        . . . . . . 1 . . . . . . . . .
+    `;
+        if (move == "Mend") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . 6 6 6 6 6 6 . . . . .
+        . . . . . 6 1 1 1 1 6 . . . . .
+        . . . . . 6 7 7 7 7 6 . . . . .
+        . . 6 6 6 6 7 7 7 7 6 6 6 6 . .
+        . . 6 1 1 1 7 7 7 7 7 7 7 6 . .
+        . . 6 7 7 7 7 7 7 7 7 7 7 6 . .
+        . . 6 7 7 7 7 7 7 7 7 7 7 6 . .
+        . . 6 7 7 7 7 7 7 7 7 7 7 6 . .
+        . . 6 6 6 6 7 7 7 7 6 6 6 6 . .
+        . . . . . 6 7 7 7 7 6 . . . . .
+        . . . . . 6 7 7 7 7 6 . . . . .
+        . . . . . 6 6 6 6 6 6 . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (move == "Ward") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . 1 1 1 1 1 1 1 1 . . . .
+        . . . 1 . . . . . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . 1 . 1 1 1 . . . . 1 . . .
+        . . . . 1 1 1 1 . . 1 1 . . . .
+        . . . . 1 1 . 1 . . 1 1 . . . .
+        . . . . . 1 . 1 . . 1 . . . . .
+        . . . . . 1 1 . . 1 1 . . . . .
+        . . . . . . . 1 1 . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (move == "Venom") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . 6 . . . . . . .
+        . . . . . . . 6 6 6 . . . . . .
+        . . . . . . . 6 7 7 . . . . . .
+        . . . . . . 6 6 7 6 6 . . . . .
+        . . . . . 6 6 7 7 6 6 6 . . . .
+        . . . . . 6 6 7 6 6 6 6 . . . .
+        . . . . 6 6 7 7 6 6 6 6 6 . . .
+        . . . . 6 6 1 6 6 6 1 6 6 . . .
+        . . . . 6 6 6 6 6 6 6 6 6 . . .
+        . . . . 6 6 6 6 6 6 6 6 6 . . .
+        . . . . 6 6 6 6 6 6 6 6 6 . . .
+        . . . . 6 6 6 7 7 7 6 6 6 . . .
+        . . . . . 6 6 6 6 6 6 6 . . . .
+        . . . . . . 6 6 6 6 6 . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (move == "Reap") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . 1 1 1 1 1 . . . . . .
+        . . . 1 1 . 1 1 1 1 1 1 . . . .
+        . . . 1 . 1 1 1 1 1 1 1 . . . .
+        . . 1 1 . 1 1 1 1 1 1 1 1 . . .
+        . . 1 1 . . 1 1 1 . . 1 1 . . .
+        . . 1 1 . . 1 1 1 . . 1 1 . . .
+        . . 1 1 . . 1 1 1 . . 1 1 . . .
+        . . . 1 1 1 1 1 1 1 1 1 . . . .
+        . . . 1 1 1 . 1 . 1 1 1 . . . .
+        . . . 1 . 1 . . . 1 . 1 . . . .
+        . . . . . 1 1 1 1 1 . . . . . .
+        . . . . 1 . . 1 . . 1 . . . . .
+        . . . . . 1 . 1 . 1 . . . . . .
+        . . . . . . 1 1 1 . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (move == "Empower") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 5 . . . . . . . .
+        . . . . . . . 5 . . . . . . . .
+        . . . . . . 5 5 5 . . . . . . .
+        . . . . . . 5 1 5 . . . . . . .
+        . . . . . 5 1 1 1 5 . . . . . .
+        5 5 5 5 5 1 5 1 5 1 5 5 5 5 5 .
+        . 5 5 5 5 5 5 1 5 5 5 5 5 5 . .
+        . . . 5 5 5 5 1 5 5 5 5 . . . .
+        . . . . 5 5 5 1 5 5 5 . . . . .
+        . . . . 5 5 5 5 5 5 5 . . . . .
+        . . . . 5 5 5 5 5 5 5 . . . . .
+        . . . 5 5 5 5 . 5 5 5 5 . . . .
+        . . . 5 5 . . . . . 5 5 . . . .
+        . . . 5 . . . . . . . 5 . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (move == "Wait") return img`
+        . . . . . . . . . . . . . . . .
+        . . . 5 5 5 5 5 5 5 5 5 5 . . .
+        . . . 5 5 5 5 5 5 5 5 5 5 . . .
+        . . . . 9 . 1 1 1 1 . 9 . . . .
+        . . . . . 9 1 1 1 1 9 . . . . .
+        . . . . . . 9 . . 9 . . . . . .
+        . . . . . . . 9 9 . . . . . . .
+        . . . . . . . 9 9 . . . . . . .
+        . . . . . . 9 . . 9 . . . . . .
+        . . . . . 9 . . . . 9 . . . . .
+        . . . . 9 . 5 5 5 5 . 9 . . . .
+        . . . . 9 . 5 5 5 5 . 9 . . . .
+        . . . . 9 . 5 5 5 5 . 9 . . . .
+        . . . 5 5 5 5 5 5 5 5 5 5 . . .
+        . . . 5 5 5 5 5 5 5 5 5 5 . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 2 . . . . . . . .
+        . . . . . . 2 . 2 . . . . . . .
+        . . . . . 2 . . . 2 . . . . . .
+        . . . . 2 1 1 1 1 1 2 2 . . . .
+        . . . 2 . 1 . . . . 1 . 2 . . .
+        . . 2 . . . . . . . 1 . . 2 . .
+        . 2 . . . . . . 1 1 . . . . 2 .
+        . . 2 . . . . 1 . . . . . 2 . .
+        . . . 2 . . . 1 . . . . 2 . . .
+        . . . . 2 . . . . . . 2 . . . .
+        . . . . 2 . . 5 . . 2 . . . . .
+        . . . . . 2 . . . 2 . . . . . .
+        . . . . . . 2 . 2 . . . . . . .
+        . . . . . . . 2 . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function trait(trait: string): Image {
+        if (trait == "Plain") return img`
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . 1 b . . . . .
+        . . . . b b b b . . . .
+        . . . . b b b b . . . .
+        . . . . . b b . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+    `;
+        if (trait == "Leech") return img`
+        . . . . . . . . . . . .
+        . . . . . . 2 . . . . .
+        . . . . . 2 2 2 . . . .
+        . . . . . 2 2 2 . . . .
+        . . . . 2 3 2 1 1 1 1 .
+        . . . 2 2 3 2 1 1 1 . .
+        . . . 2 3 2 2 2 1 1 . .
+        . . 2 2 3 2 2 2 1 2 . .
+        . . 2 2 2 2 2 2 1 2 2 .
+        . . 2 2 2 2 2 2 2 2 . .
+        . . . 2 2 2 2 2 2 . . .
+        . . . . 2 2 2 2 . . . .
+    `;
+        if (trait == "Cleanser") return img`
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . 7 7 7 . . . . .
+        . . . . 7 7 7 . . . . .
+        . . 1 1 1 1 1 1 1 . . .
+        . . 1 1 1 1 1 1 1 . . .
+        . . 1 1 1 1 1 1 1 9 . .
+        . . . . 7 7 7 . . 9 9 .
+        . . . . 7 7 7 . 9 9 9 .
+        . . . . 7 7 7 . 9 9 9 9
+        . . . . . . . 9 9 9 9 .
+        . . . . . . . . 9 9 9 .
+    `;
+        if (trait == "Steadfast") return img`
+        . . . . . . . . . . . .
+        . 6 6 6 6 6 6 6 6 6 6 .
+        . 6 9 9 9 9 9 9 9 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 6 9 9 1 1 6 9 6 6 .
+        . . 6 6 6 1 1 9 6 6 . .
+        . . . . 6 6 9 6 6 . . .
+        . . . . . 6 6 6 . . . .
+        . . . . . . 6 . . . . .
+    `;
+        if (trait == "Piercer") return img`
+        . . . . . . . . . . . .
+        . . . . . . . . . . 5 5
+        . . . . . . 5 5 5 5 5 5
+        . . . . . . 5 1 1 1 5 .
+        . . . . . . 1 1 1 5 5 .
+        . . . . . 1 1 1 . 5 5 .
+        . . . . . 1 1 . . . . .
+        . 4 . . 1 1 . . . . . .
+        . . 4 1 1 1 . . . . . .
+        . . 1 4 1 . . . . . . .
+        . 1 1 1 4 . . . . . . .
+        . . 1 . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . 1 b . . . . .
+        . . . . b b b b . . . .
+        . . . . b b b b . . . .
+        . . . . . b b . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+    `;
+    }
+    export function targetAll(): Image {
+        return img`
+        . . . . . . . . . . . . . . . .
+        . . 1 1 1 . . . . . 1 1 1 . . .
+        . 1 1 1 1 1 . . . 1 1 1 1 1 . .
+        . 1 1 1 1 1 . . . 1 1 1 1 1 . .
+        . 1 1 1 1 1 . . . 1 1 1 1 1 . .
+        . . 1 1 1 . . . . . 1 1 1 . . .
+        9 9 9 9 9 9 9 . 9 9 9 9 9 9 9 .
+        9 9 9 9 9 9 5 5 5 9 9 9 9 9 9 .
+        9 9 9 9 5 5 1 1 1 5 5 9 9 9 9 .
+        . . . . . 1 1 1 1 1 . . . . . .
+        . . . . . 1 1 1 1 1 . . . . . .
+        . . . . . 1 1 1 1 1 . . . . . .
+        . . . . . . 1 1 1 . . . . . . .
+        . . . . 9 9 9 9 9 9 9 . . . . .
+        . . . . 9 9 9 9 9 9 9 . . . . .
+        . . . . 9 9 9 9 9 9 9 . . . . .
+    `;
+    }
+    export function digit(value: number): Image {
+        if (value == 0) return img`
+        . . . . . .
+        . 1 1 1 . .
+        5 5 e 5 5 .
+        5 5 e 5 5 e
+        5 5 e 5 5 e
+        5 5 e 5 5 e
+        5 5 e 5 5 e
+        . 5 5 5 e e
+        . . e e e .
+    `;
+        if (value == 1) return img`
+        . . . . . .
+        . . 1 . . .
+        . 5 5 e . .
+        . . 5 e . .
+        . . 5 e . .
+        . . 5 e . .
+        . . 5 e . .
+        . 5 5 5 . .
+        . . e e e .
+    `;
+        if (value == 2) return img`
+        . . . . . .
+        . 1 1 1 . .
+        5 5 e 5 5 .
+        . e e 5 5 e
+        . . 5 5 e e
+        . 5 5 e e .
+        5 5 e e . .
+        5 5 5 5 5 .
+        . e e e e e
+    `;
+        if (value == 3) return img`
+        . . . . . .
+        1 1 1 1 . .
+        . e e 5 5 .
+        . . . 5 5 e
+        . 5 5 5 e e
+        . . e 5 5 .
+        . . . 5 5 e
+        5 5 5 5 e e
+        . e e e e .
+    `;
+        if (value == 4) return img`
+        . . . . . .
+        . . . 1 . .
+        . . 5 5 e .
+        . 5 . 5 e .
+        5 5 e 5 e .
+        5 5 5 5 5 .
+        . e e 5 e e
+        . . . 5 e .
+        . . . . e .
+    `;
+        if (value == 5) return img`
+        . . . . . .
+        1 1 1 1 1 .
+        5 5 e e e e
+        5 5 e . . .
+        5 5 5 5 . .
+        . e e 5 5 .
+        . . . 5 5 e
+        5 5 5 5 e e
+        . e e e e .
+    `;
+        if (value == 6) return img`
+        . . . . . .
+        . 1 1 1 . .
+        5 5 e e e .
+        5 5 e . . .
+        5 5 5 5 . .
+        5 5 e 5 5 .
+        5 5 e 5 5 e
+        . 5 5 5 e e
+        . . e e e .
+    `;
+        if (value == 7) return img`
+        . . . . . .
+        1 1 1 1 1 .
+        . e e 5 5 e
+        . . 5 5 e e
+        . . 5 5 e .
+        . 5 5 e e .
+        . 5 5 e . .
+        . 5 5 e . .
+        . . e e . .
+    `;
+        if (value == 8) return img`
+        . . . . . .
+        . 1 1 1 . .
+        5 5 e 5 5 .
+        5 5 e 5 5 e
+        . 5 5 5 e e
+        5 5 e 5 5 .
+        5 5 e 5 5 e
+        . 5 5 5 e e
+        . . e e e .
+    `;
+        if (value == 9) return img`
+        . . . . . .
+        . 1 1 1 . .
+        5 5 e 5 5 .
+        5 5 e 5 5 e
+        . 5 5 5 5 e
+        . . e 5 5 e
+        . . . 5 5 e
+        . 5 5 5 e e
+        . . e e e .
+    `;
+        return img`
+        . . . . . .
+        . 1 1 1 . .
+        5 5 e 5 5 .
+        5 5 e 5 5 e
+        5 5 e 5 5 e
+        5 5 e 5 5 e
+        5 5 e 5 5 e
+        . 5 5 5 e e
+        . . e e e .
+    `;
+    }
+    export function terrain(theme: string): Image {
+        if (theme == "altar") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . f b b b b b b . . . . .
+        . . . f b b b b b b b b . . . .
+        . . . f b b b b b b b b . . . .
+        . . . f b b b b b b b b . . . .
+        . . f b b b b b b b b b b . . .
+        . f 1 1 1 1 1 1 1 1 1 1 9 b . .
+        . 1 b b b b b b b b b b b b f .
+        . 1 1 1 1 1 1 1 1 1 9 9 9 9 f .
+        . f f f f f f f f f f f f f f .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (theme == "blade-altar") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . 1 f f 1 . . . . . .
+        . . . . . . 1 f f 1 . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . . . f f . . . . . . .
+        . . . . . f f f f f f . . . . .
+        . . . . f b b 1 1 b b f . . . .
+        . . . . f b 1 b b 1 b f . . . .
+        . . . . f b 1 9 9 1 b f . . . .
+        . . . f b b 1 b b 1 b b f . . .
+        . . 1 1 1 1 1 9 b 1 1 9 1 b . .
+        . . 1 1 1 1 1 1 1 1 1 1 9 b . .
+        . . 1 b b b b b b b b b b b . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (theme == "arcane-altar") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . a f . . . . . . .
+        . . . . . . a 8 a f . . . . . .
+        . . . . . 8 a a a a f . . . . .
+        . . . . f 8 8 a a a 8 . . . . .
+        . . . . f 8 8 a a 8 a . . . . .
+        . . . . f 8 8 8 8 8 8 . . . . .
+        . . . . 8 8 8 8 8 8 8 f . . . .
+        . . . f a a a a 8 a a a . . . .
+        . . . f 8 8 8 8 a a 8 8 . . . .
+        . . . 8 8 8 a a a a 8 8 f . . .
+        . . f 8 8 a 8 8 8 8 8 8 8 f . .
+        . 8 8 8 8 8 8 8 8 8 8 8 8 f f .
+        . 8 8 8 8 8 8 8 8 8 8 8 8 8 f .
+        . 8 8 8 8 8 8 8 c c c c c c f .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (theme == "healing-altar") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . 1 1 1 1 1 1 1 f . . . .
+        . . . . . 1 1 1 1 1 f . . . . .
+        . . . . f f 1 1 1 f 1 . . . . .
+        . . . . . 1 f 1 1 1 f . . . . .
+        . . . . . . . 1 f . . . . . . .
+        . . . f 1 1 9 1 1 1 1 9 . . . .
+        . . f 1 1 1 1 1 1 1 1 1 9 . . .
+        . . f b 9 1 1 1 1 1 b 1 1 . . .
+        . . . f 1 1 1 b 9 b b 9 . . . .
+        . . f 9 1 1 1 b b 1 b b b . . .
+        . f 1 1 1 1 1 1 1 1 1 1 1 b . .
+        . 9 1 9 9 b b b b b b b b b f .
+        . 1 1 1 1 1 1 1 1 1 1 1 1 1 f .
+        . f f f f f f f f f f f f f f .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (theme == "fountain") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . f f f f f f . . . . .
+        . . . . f b f b b f b f . . . .
+        . . . . b b b b b b b b . . . .
+        . . . . b f f f f f f b . . . .
+        . . . . . . b f f b . . . . . .
+        . . . . . . b f f b . . . . . .
+        . . . . f f b b b b f f . . . .
+        . . f b b b 9 9 9 9 b b b b . .
+        . 1 b 6 9 9 1 9 1 1 9 9 9 b b .
+        . b 9 9 9 9 9 9 9 9 1 9 9 9 b .
+        . b 6 9 9 9 9 9 9 9 6 6 6 6 b .
+        . b b b 1 b 6 9 6 6 b 1 b b b .
+        . . b b b b 1 b 9 b b b b b . .
+        . . . f f f b b b b f f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (theme == "chest") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . 4 2 2 4 2 4 4 2 2 5 e 4 . .
+        . 5 e 4 4 2 5 e 2 2 2 4 e 4 . .
+        . 4 4 4 4 4 4 4 4 4 4 e 2 4 . .
+        . 4 2 4 2 2 4 2 2 4 5 e e 4 f .
+        . 4 5 5 5 4 4 4 5 5 4 e e 4 f .
+        . 4 2 2 4 4 4 4 2 4 5 e e e f .
+        . 4 2 2 2 2 4 2 2 2 5 e e f f .
+        . 4 4 4 4 4 4 4 4 4 4 e f f . .
+        . f f f f f f f f f f f f . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (theme == "stairs") return img`
+        . . . . . . . . . . . . . . . .
+        . b b b b b b b b b b b b b b .
+        . b b c b b b b b b b b b c b .
+        . b b b f b c b c c c b b c b .
+        . b b b f f b c c b c c c f b .
+        . b b b f f f f f f c b f f b .
+        . b b b b b b f f f f f f f b .
+        . b b b b b b c f f f f f f b .
+        . b b b b b b f c f c f f f b .
+        . b b b b b b b b c f f f f b .
+        . b b b b b b b b c f c f f b .
+        . b b b b b b b b b b b f f b .
+        . b b b b b b b b b b b f f b .
+        . b b b b b b b b b b b b b b .
+        . b b b b b b b b b b b b b b .
+        . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . f b b b b b b . . . . .
+        . . . f b b b b b b b b . . . .
+        . . . f b b b b b b b b . . . .
+        . . . f b b b b b b b b . . . .
+        . . f b b b b b b b b b b . . .
+        . f 1 1 1 1 1 1 1 1 1 1 9 b . .
+        . 1 b b b b b b b b b b b b f .
+        . 1 1 1 1 1 1 1 1 1 9 9 9 9 f .
+        . f f f f f f f f f f f f f f .
+        . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function status(status: string): Image {
+        if (status == "ward" || status == "Ward") return img`
+        . . . . . . . . . . . .
+        . 6 6 6 6 6 6 6 6 6 6 .
+        . 6 9 9 9 9 9 9 9 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 9 6 6 1 1 6 6 9 6 .
+        . 6 6 9 9 1 1 6 9 6 6 .
+        . . 6 6 6 1 1 9 6 6 . .
+        . . . . 6 6 9 6 6 . . .
+        . . . . . 6 6 6 . . . .
+        . . . . . . 6 . . . . .
+    `;
+        if (status == "venom" || status == "Venom") return img`
+        . . . . . . . . . . . .
+        . . . . . . 6 . . . . .
+        . . . . . 6 6 6 . . . .
+        . . . . . 6 7 7 . . . .
+        . . . . 6 6 7 6 6 . . .
+        . . . 6 6 7 7 6 6 6 . .
+        . . . 6 6 7 6 6 6 6 . .
+        . . 6 6 7 7 6 6 6 6 6 .
+        . . 6 6 1 7 7 7 1 6 6 .
+        . . . 6 6 6 6 6 6 6 . .
+        . . . . 6 6 6 6 6 . . .
+        . . . . . . . . . . . .
+    `;
+        if (status == "empower" || status == "Empower") return img`
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . 5 5 . . . . .
+        . . . . . 5 5 . . . . .
+        . 5 5 5 1 5 5 1 5 5 5 .
+        . . . 5 5 5 5 5 5 . . .
+        . . . . 5 5 5 5 . . . .
+        . . . . 5 5 5 5 . . . .
+        . . . 5 5 5 5 5 5 . . .
+        . . . 5 . . . . 5 . . .
+        . . . . . . . . . . . .
+    `;
+        if (status == "Hold" || status == "hold") return img`
+        . 1 1 1 1 1 1 1 1 1 . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . . 5 5 5 . 5 5 5 . . .
+        . e e e e e e e e e . .
+    `;
+        if (status == "Banish" || status == "banish") return img`
+        . . . . a a a a . . . .
+        . . . a a a a a . . . .
+        . . . a . . . . a . . .
+        . a a . . . . 1 1 a a .
+        . a a . . . 1 1 1 a a .
+        . a a . . 1 1 1 1 a a .
+        . a a . . 1 1 . 1 a a .
+        . a a . 1 1 . . . a a .
+        . a a 1 1 1 . . a a a .
+        . . 1 1 . . . . a . . .
+        . . . a a a a a . . . .
+        . . . . a a a a . . . .
+    `;
+        return img`
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . 1 b . . . . .
+        . . . . b b b b . . . .
+        . . . . b b b b . . . .
+        . . . . . b b . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+        . . . . . . . . . . . .
+    `;
+    }
+    export function operation(name: string): Image {
+        if (name == "Hold" || name == "hold") return img`
+        . . . . . . . . . . . . . . . .
+        . . . 1 1 1 1 1 1 1 1 1 1 . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . . 5 5 5 . . 5 5 5 . . . .
+        . . . e e e e e e e e e e . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "Banish" || name == "banish") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . a a a a . . . . . .
+        . . . . . a a a a a a . . . . .
+        . . . . a a . . . . a a . . . .
+        . . . a a . . 1 1 1 1 1 a . . .
+        . . a a a . . . . 1 1 1 a a . .
+        . . a a . . . . 1 1 1 1 a a . .
+        . . a a . . . 1 1 1 . 1 a a . .
+        . . a a . . . 1 1 . . 1 a a . .
+        . . a a . . 1 1 . . . . a a . .
+        . . a a a 1 1 1 . . . a a a . .
+        . . . a 1 1 1 . . . . a a . . .
+        . . . 1 1 1 . . . . a a . . . .
+        . . . . 1 a a a a a a . . . . .
+        . . . . . . a a a a . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "create") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "get") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . 1 . . . .
+        . 9 9 9 9 9 . . . . 1 1 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 1 .
+        . . . . . . . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "set") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . 1 . . . .
+        . 9 9 9 9 9 . . . . 1 1 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 1 .
+        . . . . . . . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "append") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . 5 5 5 5 5 5 5 5 .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "insert") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "prepend") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . 5 5 5 5 5 5 5 5 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "remove") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . 2 .
+        . . . . . . . . . 2 . . . 2 2 2
+        . . . . . . . . 2 2 2 . 2 2 2 .
+        . 9 9 9 9 9 . . . 2 2 2 2 2 . .
+        . 9 9 9 9 9 . . . . 2 2 2 . . .
+        . . . . . . . . . 2 2 2 2 2 . .
+        . . . . . . . . 2 2 2 . 2 2 2 .
+        . . . . . . . . . 2 . . . 2 2 2
+        . 9 9 9 9 9 . . . . . . . . 2 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "length") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . 5 5 . . . . .
+        . . . . . . . . 5 5 5 5 . . . .
+        . . . . . . . 5 5 . . 5 5 . . .
+        . . . . . . . 5 5 . . 5 5 . . .
+        . 9 9 9 9 9 . . 5 5 5 5 . . . .
+        . 9 9 9 9 9 . . . 5 5 . 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 . .
+        . . . . . . . . . . . . . 1 1 .
+        . 9 9 9 9 9 . . . . . . . 1 1 1
+        . 9 9 9 9 9 . . . . . . . . 1 .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "foreach") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . 5 5 5 5 5 5 5 .
+        . . . . . . . . 5 5 5 5 5 5 5 .
+        . . . . . . . . . . . . . 5 5 .
+        . . . . . . . . . . . . . 5 5 .
+        . 9 9 9 9 9 . . . . . . . 5 5 .
+        . 9 9 9 9 9 . . . . . . . 5 5 .
+        . . . . . . . . 1 . . . . 5 5 .
+        . . . . . . . . 1 . . . . 5 5 .
+        . . . . . . . . 1 5 5 5 5 5 5 .
+        . 9 9 9 9 9 . . 1 5 5 5 5 5 5 .
+        . 9 9 9 9 9 . . 1 . . . . . . .
+        . . . . . . . . 1 . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "swap") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . 1 . . . .
+        . 9 9 9 9 9 . . . . 1 1 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 1 .
+        . . . . . . . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 5 5 5 5 5 5 5 5 .
+        . . . . . . . 5 5 5 5 5 5 5 5 .
+        . 9 9 9 9 9 . 5 5 5 . . . . . .
+        . 9 9 9 9 9 . . 5 5 5 . . . . .
+        . . . . . . . . . 5 5 5 . . . .
+        . . . . . . . . . . 5 . . . . .
+    `;
+        if (name == "find") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . 5 5 . . . . .
+        . . . . . . . . 5 5 5 5 . . . .
+        . . . . . . . 5 5 . . 5 5 . . .
+        . . . . . . . 5 5 . . 5 5 . . .
+        . 9 9 9 9 9 . . 5 5 5 5 . . . .
+        . 9 9 9 9 9 . . . 5 5 . 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 . .
+        . . . . . . . . . . . . . 1 1 .
+        . 9 9 9 9 9 . . . . . . . 1 1 1
+        . 9 9 9 9 9 . . . . . . . . 1 .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "reverse") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . a a a a a a a a
+        . . . . . . . . a a a a a a a a
+        . . . . . . . . . . . . . . a a
+        . . . . . . . . . . . . . . a a
+        . 9 9 9 9 9 . . . . . . . . a a
+        . 9 9 9 9 9 . . . . . . . . a a
+        . . . . . . . . . . . . . . a a
+        . . . . . . . . a a a a a a a a
+        . . . . . . . . a a a a a a a a
+        . 9 9 9 9 9 . . a a a . . . . .
+        . 9 9 9 9 9 . . . a a a . . . .
+        . . . . . . . . . . a a a . . .
+        . . . . . . . . . . . a . . . .
+    `;
+        if (name == "transfer") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . 1 . . . .
+        . 9 9 9 9 9 . . . . 1 1 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 1 .
+        . . . . . . . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 5 5 5 5 5 5 5 5 .
+        . . . . . . . 5 5 5 5 5 5 5 5 .
+        . 9 9 9 9 9 . 5 5 5 . . . . . .
+        . 9 9 9 9 9 . . 5 5 5 . . . . .
+        . . . . . . . . . 5 5 5 . . . .
+        . . . . . . . . . . 5 . . . . .
+    `;
+        if (name == "build") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . 9 9 9 9 9 . . 7 7 7 7 7 7 7 .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . 7 7 7 . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "order") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . a a a a a a a a
+        . . . . . . . . a a a a a a a a
+        . . . . . . . . . . . . . . a a
+        . . . . . . . . . . . . . . a a
+        . 9 9 9 9 9 . . . . . . . . a a
+        . 9 9 9 9 9 . . . . . . . . a a
+        . . . . . . . . . . . . . . a a
+        . . . . . . . . a a a a a a a a
+        . . . . . . . . a a a a a a a a
+        . 9 9 9 9 9 . . a a a . . . . .
+        . 9 9 9 9 9 . . . a a a . . . .
+        . . . . . . . . . . a a a . . .
+        . . . . . . . . . . . a . . . .
+    `;
+        if (name == "run") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . 9 9 . . . . . . . . .
+        . . . . a a a a . . . . . . . .
+        . . . . 1 1 a a . . . . . . . .
+        . . 9 . a a a a a a 8 . . . . .
+        . . 1 . 8 8 8 8 a a 8 f . . . .
+        . . . . 8 8 8 8 8 8 8 f . . . .
+        . . . . 8 8 8 8 8 8 a . f . . .
+        . . . . . 8 8 8 9 9 b f . . . .
+        . . . . . 9 9 1 . . . . . . . .
+        . . . . . b b b b . . . . . . .
+        . . . . f b b b b b . . . . . .
+        . . . . b b b b b b . . . . . .
+        . . . 1 b b b b b b b . . . . .
+        . . . f f f f f f f f . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "reset") return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . f f f f f f . . . . .
+        . . . . b b f b b f b b . . . .
+        . . . . f f b b b b f f . . . .
+        . . . . f f f f f f f f . . . .
+        . . . . . f b f f b f . . . . .
+        . . . . . . b f f b . . . . . .
+        . . . . f b b b b b b f . . . .
+        . . f b b 6 9 9 9 9 6 b b b . .
+        . 1 b 6 9 9 1 9 1 1 9 9 9 b b .
+        . b 9 9 9 9 9 9 9 9 9 9 9 9 b .
+        . b 6 9 9 9 9 9 9 9 9 6 6 6 b .
+        . b b b b 6 6 9 6 6 6 b b b b .
+        . . b b b b 1 b 9 b b b b b . .
+        . . . f f b b b b b b f . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+        if (name == "exit") return img`
+        . . . . . . . . . . . . . . . .
+        . b b b f b b b b f b b f b b .
+        . b b f f f f f f b b b f b b .
+        . b b b b f b b b f f b b b b .
+        . b b b f f f f b b b b b f f .
+        . b b f f b b f f b b f b b b .
+        . b b b b f f f f f f b b b b .
+        . f f b b f f e f f f f f f f .
+        . b b b b f e 5 4 f f f f b b .
+        . f f f b e 4 5 4 4 f f b b b .
+        . b b f f 5 5 1 1 5 5 5 f f f .
+        . b b f b e 4 5 4 4 e f f b b .
+        . b f b b b e 5 e b b f f b b .
+        . b b b b b b e b b b f b f f .
+        . b b b b b b b b b b f b b b .
+        . . . . . . . . . . . . . . . .
+    `;
+        return img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . 1 . . . .
+        . 9 9 9 9 9 . . . . 1 1 1 . . .
+        . . . . . . . . . . . 1 1 1 . .
+        . . . . . . . . . . . . 1 1 1 .
+        . . . . . . . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . 1 1 1 1 1 1 1 1 .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . 9 9 9 9 9 . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+    }
+    export function creditCount(): number { return 4; }
+    export function creditLine(index: number): string {
+        if (index == 0) return "Panda: @danielmahon | CC-BY-SA 3.0";
+        if (index == 1) return "Panda: opengameart.org/content/panda-character-32x32";
+        if (index == 2) return "Heroes: Antifarea | CC-BY 3.0";
+        if (index == 3) return "Heroes: OpenGameArt.org | fixed set by Maxion";
+        return "";
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/advice.ts
+// Generated by tools/generate-room-advice.mjs. Read-only optional help.
+namespace apocAdvice {
+    export function text(room: number, variant: number): string {
+        if (room == 1 && variant == 1) return "Create allied moves: Ward, Mend, Strike, Strike. Guardian's Ward 4 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 8 and Decoy for 2."
+        if (room == 1 && variant == 2) return "Create allied moves: Wait, Ward, Mend, Strike, Strike. Guardian's Ward 3 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 10 and Decoy for 2. Keep the 1 leading Wait entry."
+        if (room == 1 && variant == 3) return "Create allied moves: Wait, Wait, Ward, Mend, Strike, Strike. Guardian's Ward 5 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 12 and Decoy for 2. Keep the 2 leading Wait entries."
+        if (room == 2 && variant == 1) return "Get roster index 0: Raider. Hold that Sprite so its Strike cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan."
+        if (room == 2 && variant == 2) return "Get roster index 1: Wisp. Hold that Sprite so its Flurry cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan."
+        if (room == 2 && variant == 3) return "Get roster index 1: Raider. Hold that Sprite so its Strike cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan."
+        if (room == 3 && variant == 1) return "Set enemy move index 0 from Strike to Wait. This cancels Raider's 6 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass."
+        if (room == 3 && variant == 2) return "Set enemy move index 1 from Strike to Wait. This cancels Raider's 8 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass."
+        if (room == 3 && variant == 3) return "Set enemy move index 2 from Strike to Wait. This cancels Raider's 8 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass."
+        if (room == 4 && variant == 1) return "Append Strike to allied moves. It lands at index 4, using the waiting power 3 to deal 6 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive."
+        if (room == 4 && variant == 2) return "Append Strike to allied moves. It lands at index 5, using the waiting power 4 to deal 8 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive."
+        if (room == 4 && variant == 3) return "Append Strike to allied moves. It lands at index 6, using the waiting power 5 to deal 10 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive."
+        if (room == 5 && variant == 1) return "Insert Ward at allied index 1, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put."
+        if (room == 5 && variant == 2) return "Insert Ward at allied index 2, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put."
+        if (room == 5 && variant == 3) return "Insert Ward at allied index 3, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put."
+        if (room == 6 && variant == 1) return "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider."
+        if (room == 6 && variant == 2) return "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider."
+        if (room == 6 && variant == 3) return "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider."
+        if (room == 7 && variant == 1) return "Remove the Ward at enemy index 0; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies."
+        if (room == 7 && variant == 2) return "Remove the Ward at enemy index 1; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies."
+        if (room == 7 && variant == 3) return "Remove the Ward at enemy index 2; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies."
+        if (room == 8 && variant == 1) return "Set the existing last allied move, index 4 (length minus 1), to Strike. Its power 3 deals 6 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row."
+        if (room == 8 && variant == 2) return "Set the existing last allied move, index 5 (length minus 1), to Strike. Its power 4 deals 8 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row."
+        if (room == 8 && variant == 3) return "Set the existing last allied move, index 6 (length minus 1), to Strike. Its power 5 deals 10 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row."
+        if (room == 9 && variant == 1) return "Remove just the first allied Wait. Ward moves to index 0 and uses power 4 to block Raider's 4 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers."
+        if (room == 9 && variant == 2) return "Remove just the first allied Wait. Ward moves to index 0 and uses power 6 to block Raider's 6 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers."
+        if (room == 9 && variant == 3) return "Remove just the first allied Wait. Ward moves to index 0 and uses power 4 to block Raider's 4 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers."
+        if (room == 10 && variant == 1) return "Remove the last enemy move at index 3. This deletes Raider's final Strike 3, which would deal 6 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins."
+        if (room == 10 && variant == 2) return "Remove the last enemy move at index 4. This deletes Raider's final Strike 4, which would deal 8 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins."
+        if (room == 10 && variant == 3) return "Remove the last enemy move at index 5. This deletes Raider's final Strike 5, which would deal 10 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins."
+        if (room == 11 && variant == 1) return "Get-and-remove the first roster Sprite: Raider. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy."
+        if (room == 11 && variant == 2) return "Get-and-remove the first roster Sprite: Wisp. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy."
+        if (room == 11 && variant == 3) return "Get-and-remove the first roster Sprite: Raider. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy."
+        if (room == 12 && variant == 1) return "Find Ward in enemy moves: index 0. Set that entry to Wait, keeping the list length. This prevents Shaman's power 4 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets."
+        if (room == 12 && variant == 2) return "Find Ward in enemy moves: index 1. Set that entry to Wait, keeping the list length. This prevents Shaman's power 5 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets."
+        if (room == 12 && variant == 3) return "Find Ward in enemy moves: index 2. Set that entry to Wait, keeping the list length. This prevents Shaman's power 6 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets."
+        if (room == 13 && variant == 1) return "Hold every roster Sprite, in this setup: Raider, Wisp, Plague. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies."
+        if (room == 13 && variant == 2) return "Hold every roster Sprite, in this setup: Plague, Raider, Wisp. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies."
+        if (room == 13 && variant == 3) return "Hold every roster Sprite, in this setup: Wisp, Plague, Raider. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies."
+        if (room == 14 && variant == 1) return "Swap allied powers at indices 0 and 3 using a saved number: 4 and 1 become 1 and 4. Blade's first Strike now deals 2 to Small (2 HP); the last deals 8 to Boss (8 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small."
+        if (room == 14 && variant == 2) return "Swap allied powers at indices 0 and 3 using a saved number: 5 and 1 become 1 and 5. Blade's first Strike now deals 2 to Small (2 HP); the last deals 10 to Boss (10 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small."
+        if (room == 14 && variant == 3) return "Swap allied powers at indices 0 and 3 using a saved number: 6 and 1 become 1 and 6. Blade's first Strike now deals 2 to Small (2 HP); the last deals 12 to Boss (12 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small."
+        if (room == 15 && variant == 1) return "Change BOTH enemy Wards, indices 0, 2, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield."
+        if (room == 15 && variant == 2) return "Change BOTH enemy Wards, indices 1, 3, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield."
+        if (room == 15 && variant == 3) return "Change BOTH enemy Wards, indices 2, 4, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield."
+        if (room == 16 && variant == 1) return "Build allied moves from empty: Ward, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order."
+        if (room == 16 && variant == 2) return "Build allied moves from empty: Strike, Ward, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order."
+        if (room == 16 && variant == 3) return "Build allied moves from empty: Ward, Strike, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order."
+        if (room == 17 && variant == 1) return "Get-and-remove the last reserve move: Strike. Append that returned move to allied moves at index 4. It uses power 5 against Raider. Blade's final Strike deals 10 damage to finish Raider. Keep the other reserve entries."
+        if (room == 17 && variant == 2) return "Get-and-remove the last reserve move: Strike. Append that returned move to allied moves at index 4. It uses power 6 against Raider. Blade's final Strike deals 12 damage to finish Raider. Keep the other reserve entries."
+        if (room == 17 && variant == 3) return "Get-and-remove the last reserve move: Reap. Append that returned move to allied moves at index 4. It uses power 7 against Raider. The earlier Strike wounds Raider, so Executioner's Reap can finish the missing-HP target. Keep the other reserve entries."
+        if (room == 18 && variant == 1) return "Remove enemy power 5 at index 2; append that returned number to allied values at index 4. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 5 and deals 10 damage. Leave move and target lists unchanged."
+        if (room == 18 && variant == 2) return "Remove enemy power 6 at index 3; append that returned number to allied values at index 5. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 6 and deals 12 damage. Leave move and target lists unchanged."
+        if (room == 18 && variant == 3) return "Remove enemy power 7 at index 4; append that returned number to allied values at index 6. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 7 and deals 14 damage. Leave move and target lists unchanged."
+        if (room == 19 && variant == 1) return "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Raider, Wisp; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass."
+        if (room == 19 && variant == 2) return "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Wisp, Raider; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass."
+        if (room == 19 && variant == 3) return "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Wisp, Raider; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass."
+        if (room == 20 && variant == 1) return "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Flurry, Strike. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan."
+        if (room == 20 && variant == 2) return "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Strike, Flurry. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan."
+        if (room == 20 && variant == 3) return "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Flurry, Strike. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan."
+        if (room == 21 && variant == 1) return "Find the first enemy Strike at index 1; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows."
+        if (room == 21 && variant == 2) return "Find the first enemy Strike at index 2; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows."
+        if (room == 21 && variant == 3) return "Find the first enemy Strike at index 3; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows."
+        if (room == 22 && variant == 1) return "Remove the Raider Sprite from enemy targets at index 1, then prepend that SAME Sprite to this target list. Blade's first Strike 4 now deals 8 to Raider (8 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists."
+        if (room == 22 && variant == 2) return "Remove the Raider Sprite from enemy targets at index 2, then prepend that SAME Sprite to this target list. Blade's first Strike 5 now deals 10 to Raider (9 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists."
+        if (room == 22 && variant == 3) return "Remove the Raider Sprite from enemy targets at index 3, then prepend that SAME Sprite to this target list. Blade's first Strike 5 now deals 10 to Raider (10 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists."
+        if (room == 23 && variant == 1) return "Find and remove enemy Ward at index 0. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 3. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies."
+        if (room == 23 && variant == 2) return "Find and remove enemy Ward at index 1. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 5. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies."
+        if (room == 23 && variant == 3) return "Find and remove enemy Ward at index 2. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 7. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies."
+        if (room == 24 && variant == 1) return "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 0 to 1. THEN use Station 2: set that shifted Strike to Wait. Its 8 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order."
+        if (room == 24 && variant == 2) return "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 1 to 2. THEN use Station 2: set that shifted Strike to Wait. Its 10 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order."
+        if (room == 24 && variant == 3) return "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 2 to 3. THEN use Station 2: set that shifted Strike to Wait. Its 12 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order."
+        if (room == 25 && variant == 1) return "Set allied Wait to Ward only at indices 0, 2, 4, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider."
+        if (room == 25 && variant == 2) return "Set allied Wait to Ward only at indices 1, 3, 5, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider."
+        if (room == 25 && variant == 3) return "Set allied Wait to Ward only at indices 2, 4, 6, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider."
+        if (room == 26 && variant == 1) return "Build from empty: Ward, Mend, Ward, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend."
+        if (room == 26 && variant == 2) return "Build from empty: Strike, Ward, Mend, Ward, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend."
+        if (room == 26 && variant == 3) return "Build from empty: Ward, Mend, Strike, Ward, Strike, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend."
+        if (room == 27 && variant == 1) return "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 3 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
+        if (room == 27 && variant == 2) return "Station 1: hold Wisp, Raider. Station 2: change enemy Wards at indices 1, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
+        if (room == 27 && variant == 3) return "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
+        return "Advice unavailable for this room setup."
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/save.ts
+// Only one game-specific record; does not persist code, actors or drafts.
+namespace apocSave {
+    const KEY = "al.progress.v1"
+    let recovery = ""
+    let future = false
+
+    export function notice(): string { return recovery }
+    export function isFuture(): boolean { return future }
+
+    function fresh(): apocTypes.Progress {
+        return new apocTypes.Progress()
+    }
+    function integer(n: number): boolean { return n == Math.floor(n) && n >= 0 }
+    function earnedCeiling(mask: number): number {
+        let top = 1
+        for (let room = 1; room <= 26; room++) {
+            if ((mask & (1 << (room - 1))) == 0) break
+            top = room + 1
+        }
+        return top
+    }
+    function consistent(mask: number, highest: number): boolean {
+        const expected = (1 << (highest - 1)) - 1
+        if (highest == 27) return mask == expected || mask == (expected | (1 << 26))
+        return mask == expected
+    }
+    export function load(): apocTypes.Progress {
+        recovery = ""
+        future = false
+        const data = settings.readNumberArray(KEY)
+        if (!data) return fresh()
+        if (data.length > 0 && integer(data[0]) && data[0] > 1) {
+            future = true
+            recovery = "Save uses a newer version; not overwritten"
+            return fresh()
+        }
+        if (data.length != 4 || data[0] != 1 || !integer(data[1]) || !integer(data[2]) || !integer(data[3]) ||
+            data[1] < 1 || data[1] > 27 || data[2] < 1 || data[2] > data[1] || data[3] >= (1 << 27) ||
+            data[1] != earnedCeiling(data[3]) || !consistent(data[3], data[1])) {
+            recovery = "Save invalid; temporary start at R01"
+            return fresh()
+        }
+        let result = fresh()
+        result.highestUnlocked = data[1]
+        result.resumeRoom = data[2]
+        result.completedMask = data[3]
+        return result
+    }
+    export function store(value: apocTypes.Progress): void {
+        if (future || !value) return
+        if (value.schemaVersion != 1 || !integer(value.highestUnlocked) || !integer(value.resumeRoom) ||
+            !integer(value.completedMask) || value.highestUnlocked != earnedCeiling(value.completedMask) ||
+            value.resumeRoom < 1 || value.resumeRoom > value.highestUnlocked || value.completedMask >= (1 << 27) ||
+            !consistent(value.completedMask, value.highestUnlocked)) return
+        settings.writeNumberArray(KEY, [1, value.highestUnlocked, value.resumeRoom, value.completedMask])
+    }
+    export function clear(): void {
+        settings.remove(KEY)
+        future = false
+        recovery = "Progress erased; R01 ready"
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/view.ts
+// Native room renderer. World owns trial state and the exact combat forecast.
+// Conserve usage. Before/after motion depicts edits, not learner statement tracing.
+namespace apocView {
+    const WIDTH = 576
+    const CENTER = 288
+    const JOBS = ["Write plan", "Hold threat", "Rewrite", "Append", "Insert Ward", "Delay", "Remove Ward", "Repair last", "Remove first", "Remove last", "Banish first", "Find Ward", "Hold hazards", "Swap power", "Clear Wards", "Build counters", "Use reserve", "Steal power", "Hold one", "Reverse", "Find defense", "Move target", "Find + remove", "Delay", "Repair gaps", "Build recovery", "Hold hazards"]
+    const OPS = ["create", "get", "set", "append", "insert", "prepend", "remove", "length", "remove", "remove", "remove", "find", "foreach", "swap", "foreach", "build", "transfer", "transfer", "get", "reverse", "find", "transfer", "find", "order", "foreach", "build", "foreach"]
+    const MENU = ["Use first altar", "Use second altar", "Release time", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Room instructions + strategy", "Reset saved progress"]
+    const MOVES = ["Strike", "Flurry", "Mend", "Ward", "Venom", "Reap", "Empower", "Wait"]
+    let moveIcons: Image[] = []
+    let actorRefs: Sprite[] = []
+    let portraits: Image[] = []
+    let bodies: Image[] = []
+    let pandaFrames: Image[] = []
+    let props: Image[] = []
+    let digits: Image[] = []
+    let floor: Image = null
+    let pads: Image[] = []
+    let allPortrait: Image = null
+    let unknown: Image = null
+    let ready = false
+    let cachedRoom = -1
+    let cachedVariant = -1
+    let motionStamp = -1
+    let motions: CellMotion[] = []
+    class CellMotion {
+        constructor() {}
+        side: number = 0
+        part: number = 0 // move, power, target, roster, source
+        fromSide: number = 0
+        fromPart: number = 0
+        merged: boolean = false
+        from: number = -1
+        to: number = -1
+        move: string = ""
+        power: number = 0
+        target: Sprite = null
+    }
+    function text(s: string, x: number, y: number, color: number = 1): void { screen.print(s, x, y, color, image.font8) }
+    function tiny(s: string, x: number, y: number, color: number = 1): void { screen.print(s, x, y, color, image.font5) }
+    function centered(s: string, x: number, y: number, color: number = 1): void { text(s, x - Math.idiv(s.length * 6, 2), y, color) }
+    function smallCentered(s: string, x: number, y: number, color: number = 1): void { tiny(s, x - Math.idiv(s.length * 6, 2), y, color) }
+    function shortName(s: string): string { return s.substr(0, 2) == "A-" || s.substr(0, 2) == "E-" ? s.substr(2) : s }
+    function resize(source: Image, w: number, h: number): Image {
+        const out = image.create(w, h)
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) out.setPixel(x, y, source.getPixel(Math.idiv(x * source.width, w), Math.idiv(y * source.height, h)))
+        return out
+    }
+    function oval(pic: Image, cx: number, cy: number, rx: number, ry: number, fill: number, edge: number): void {
+        for (let y = -ry; y <= ry; y++) {
+            const w = Math.floor(rx * Math.sqrt(Math.max(0, 1 - y * y / (ry * ry))))
+            pic.drawLine(cx - w, cy + y, cx + w, cy + y, fill)
+            if (edge) { pic.setPixel(cx - w, cy + y, edge); pic.setPixel(cx + w, cy + y, edge) }
+        }
+        if (edge) { pic.drawLine(cx - 16, cy - ry, cx + 16, cy - ry, edge); pic.drawLine(cx - 16, cy + ry, cx + 16, cy + ry, edge) }
+    }
+    function cross(x: number, y: number, r: number, color: number = 2): void {
+        for (let d = -1; d <= 1; d++) { screen.drawLine(x - r, y - r + d, x + r, y + r + d, 15); screen.drawLine(x + r, y - r + d, x - r, y + r + d, 15) }
+        screen.drawLine(x - r, y - r, x + r, y + r, color); screen.drawLine(x + r, y - r, x - r, y + r, color)
+    }
+    function init(): void {
+        if (ready) return
+        ready = true
+        for (let i = 0; i < MOVES.length; i++) moveIcons.push(resize(apocArt.move(MOVES[i]), 16, 16))
+        for (let i = 0; i < 10; i++) digits.push(apocArt.digit(i))
+        const names = ["altar-primary", "altar-secondary", "clock-crystal", "fountain-reset", "exit-gate"]
+        for (let i = 0; i < names.length; i++) props.push(apocArt.prop(names[i]))
+        for (let d = 0; d < 4; d++) for (let s = -1; s < 3; s++) pandaFrames.push(apocArt.observerFrame(d, s))
+        unknown = resize(apocArt.move("?"), 16, 16); allPortrait = resize(apocArt.targetAll(), 24, 24)
+        for (let i = 0; i < 3; i++) {
+            const pic = image.create(239, 51)
+            oval(pic, 119, 26, 118, 24, 15, 0); oval(pic, 119, 24, 117, 24, i == 0 ? 12 : 8, i == 0 ? 11 : i == 1 ? 5 : 9); pads.push(pic)
+        }
+    }
+    function makeFloor(): void {
+        floor = image.create(WIDTH, 720); floor.fill(15); floor.fillRect(14, 40, WIDTH - 28, 644, 11)
+        for (let y = 40; y < 684; y += 12) {
+            floor.drawLine(14, y, WIDTH - 15, y, 15)
+            for (let x = 14 + (Math.idiv(y, 12) % 2) * 24; x < WIDTH - 14; x += 48) floor.drawLine(x, y, x, y + 11, 15)
+        }
+        floor.fillRect(29, 78, WIDTH - 58, 592, 12)
+        for (let y = 78; y < 670; y += 32) for (let x = 30; x < WIDTH - 29; x += 32) {
+            floor.drawLine(x, y, x + 30, y, 15)
+            floor.drawLine(x, y, x, y + 30, 15)
+            floor.drawLine(x + 4, y + 23, x + 10, y + 23, 15)
+        }
+        for (let i = 0; i < 4; i++) {
+            const x = i % 2 == 0 ? 116 : WIDTH - 130, y = i < 2 ? 88 : 608
+            floor.fillRect(x, y, 14, 5, 11); floor.fillRect(x + 4, y + 5, 17, 4, 15)
+        }
+        for (let x = 40; x < WIDTH; x += WIDTH - 90) { floor.fillRect(x, 56, 8, 14, 13); floor.fillRect(x + 1, 52, 6, 12, 5); floor.fillRect(x + 3, 49, 2, 9, 1) }
+    }
+    function actorFor(ref: Sprite, state: apocTypes.TrialSnapshot): apocTypes.ActorState {
+        if (state && ref) for (let i = 0; i < state.actors.length; i++) if (state.actors[i].sprite == ref) return state.actors[i]
+        return null
+    }
+    function actorIndex(ref: Sprite): number { return actorRefs.indexOf(ref) }
+    function rebuild(state: apocTypes.TrialSnapshot): void {
+        cachedRoom = apocWorld.uiRoom(); cachedVariant = apocWorld.uiVariant(); actorRefs = []; portraits = []; bodies = []
+        for (let i = 0; i < state.actors.length; i++) {
+            const a = state.actors[i], pic = resize(apocArt.largePortrait(a.id, a.side), 28, 31)
+            for (let y = 0; y < 31; y++) for (let x = 0; x < 28; x++) if ((x - 13.5) * (x - 13.5) + (y - 15) * (y - 15) > 196) pic.setPixel(x, y, 0)
+            actorRefs.push(a.sprite); portraits.push(pic)
+            const size = a.id == "E-Boss" || a.id == "E-King" ? 64 : 48
+            bodies.push(resize(apocArt.actor(a.id, a.side), size, a.side == apocTypes.Side.Ally ? 54 : size))
+        }
+        makeFloor()
+    }
+    function moveIcon(s: string): Image { const i = MOVES.indexOf(s); return i < 0 ? unknown : moveIcons[i] }
+    function rowY(row: number): number { return 114 + row * 54 }
+    function px(side: number, part: number): number { return part == 2 ? (side == 0 ? 265 : 311) : part == 1 ? (side == 0 ? 197 : 379) : side == 0 ? 215 : 361 }
+    function listLength(t: apocTypes.TrialSnapshot, side: number, part: number): number {
+        if (part == 3) return t.roster.length
+        if (part == 4) return t.sourceMoves.length
+        if (part == 0) return side == 0 ? t.lists.allyMoves.length : t.lists.enemyMoves.length
+        if (part == 1) return side == 0 ? t.lists.allyValues.length : t.lists.enemyValues.length
+        return side == 0 ? t.lists.allyTargets.length : t.lists.enemyTargets.length
+    }
+    function equalCell(a: apocTypes.TrialSnapshot, b: apocTypes.TrialSnapshot, side: number, part: number, i: number, j: number): boolean {
+        if (part == 3) return a.roster[i] == b.roster[j]
+        if (part == 4) return a.sourceMoves[i] == b.sourceMoves[j]
+        if (part == 0) return side == 0 ? a.lists.allyMoves[i] == b.lists.allyMoves[j] : a.lists.enemyMoves[i] == b.lists.enemyMoves[j]
+        if (part == 1) return side == 0 ? a.lists.allyValues[i] == b.lists.allyValues[j] : a.lists.enemyValues[i] == b.lists.enemyValues[j]
+        return side == 0 ? a.lists.allyTargets[i] == b.lists.allyTargets[j] : a.lists.enemyTargets[i] == b.lists.enemyTargets[j]
+    }
+    function loadMotion(m: CellMotion, state: apocTypes.TrialSnapshot, row: number): void {
+        m.fromSide = m.side; m.fromPart = m.part
+        if (m.part == 0) m.move = m.side == 0 ? state.lists.allyMoves[row] : state.lists.enemyMoves[row]
+        if (m.part == 1) m.power = m.side == 0 ? state.lists.allyValues[row] : state.lists.enemyValues[row]
+        if (m.part == 2) m.target = m.side == 0 ? state.lists.allyTargets[row] : state.lists.enemyTargets[row]
+        if (m.part == 3) m.target = state.roster[row]
+        if (m.part == 4) m.move = state.sourceMoves[row]
+    }
+    function prepareMotion(): void {
+        const stamp = apocWorld.uiEditStarted(), record = apocWorld.uiEditRecord()
+        if (stamp == motionStamp || !record) return
+        motionStamp = stamp; motions = []
+        for (let side = 0; side < 2; side++) for (let part = 0; part < 5; part++) {
+            if (side == 1 && part >= 3) continue
+            const before = record.before, after = record.after, oldLen = listLength(before, side, part), newLen = listLength(after, side, part)
+            let used: boolean[] = [], fixed: boolean[] = []
+            for (let i = 0; i < 10; i++) { used.push(false); fixed.push(false) }
+            for (let i = 0; i < Math.min(oldLen, newLen); i++) if (equalCell(before, after, side, part, i, i)) { used[i] = true; fixed[i] = true }
+            for (let j = 0; j < newLen; j++) {
+                if (fixed[j]) continue
+                let from = -1, distance = 99
+                for (let i = 0; i < oldLen; i++) if (!used[i] && equalCell(before, after, side, part, i, j) && Math.abs(i - j) < distance) { from = i; distance = Math.abs(i - j) }
+                if (from >= 0) used[from] = true
+                const m = new CellMotion(); m.side = side; m.part = part; m.from = from; m.to = j; loadMotion(m, after, j); motions.push(m)
+            }
+            for (let i = 0; i < oldLen; i++) if (!used[i]) { const m = new CellMotion(); m.side = side; m.part = part; m.from = i; m.to = -1; loadMotion(m, before, i); motions.push(m) }
+        }
+        // A returned number, move or Sprite transferred to another list is one
+        // traveling piece, rather than an unrelated disappearance/appearance.
+        for (let i = 0; i < motions.length; i++) {
+            const incoming = motions[i]
+            if (incoming.from >= 0 || incoming.to < 0) continue
+            for (let j = 0; j < motions.length; j++) {
+                const outgoing = motions[j]
+                if (outgoing.merged || outgoing.from < 0 || outgoing.to >= 0) continue
+                const sameMove = (incoming.part == 0 || incoming.part == 4) && (outgoing.part == 0 || outgoing.part == 4) && incoming.move == outgoing.move
+                const sameNumber = incoming.part == 1 && outgoing.part == 1 && incoming.power == outgoing.power
+                const sameTarget = (incoming.part == 2 || incoming.part == 3) && (outgoing.part == 2 || outgoing.part == 3) && incoming.target == outgoing.target
+                if (sameMove || sameNumber || sameTarget) { incoming.from = outgoing.from; incoming.fromSide = outgoing.side; incoming.fromPart = outgoing.part; outgoing.merged = true; break }
+            }
+        }
+    }
+    function target(ref: Sprite, x: number, y: number, side: number, picked: boolean, dead: boolean, held: boolean): void {
+        screen.fillCircle(x, y, 16, 15)
+        const i = actorIndex(ref)
+        if (ref == apocWorld.uiSentinel()) screen.drawTransparentImage(allPortrait, x - 12, y - 12)
+        else if (i >= 0) screen.drawTransparentImage(portraits[i], x - 14, y - 15)
+        else screen.fillCircle(x, y, 2, 11)
+        screen.drawCircle(x, y, 16, ref ? (side == 0 ? 9 : 3) : 11)
+        if (picked) screen.drawCircle(x, y, 19, 5)
+        if (dead) cross(x, y, 10)
+        else if (held) { screen.drawCircle(x, y, 18, 10); tiny("H", x - 2, y - 3, 1) }
+    }
+    function moveBubble(move: string, x: number, y: number, side: number, picked: boolean, dead: boolean): void {
+        screen.fillCircle(x, y, 12, !move ? 15 : side == 0 ? 6 : 14); screen.drawCircle(x, y, 12, picked ? 5 : !move ? 11 : side == 0 ? 9 : 3)
+        if (move) screen.drawTransparentImage(moveIcon(move), x - 8, y - 8)
+        else screen.fillCircle(x, y, 1, 11)
+        if (dead) cross(x, y, 7)
+    }
+    function powerBubble(power: number, x: number, y: number, side: number, picked: boolean): void {
+        screen.fillCircle(x, y, 9, 15); screen.drawCircle(x, y, 9, picked ? 5 : power < 0 ? 11 : side == 0 ? 9 : 3)
+        if (power >= 0) screen.drawTransparentImage(digits[Math.constrain(power, 0, 9)], x - 3, y - 4)
+    }
+    function helpful(move: string): boolean { return move == "Mend" || move == "Ward" || move == "Empower" }
+    function chosen(state: apocTypes.TrialSnapshot, side: number, row: number): Sprite {
+        const moves = side == 0 ? state.lists.allyMoves : state.lists.enemyMoves
+        if (row >= moves.length || !moves[row] || moves[row] == "Wait") return null
+        const toSide = helpful(moves[row]) ? side : 1 - side, targets = toSide == 0 ? state.lists.allyTargets : state.lists.enemyTargets
+        return row < targets.length ? targets[row] : null
+    }
+    function route(state: apocTypes.TrialSnapshot, side: number, row: number, now: number): void {
+        const ref = chosen(state, side, row)
+        if (!ref) return
+        const moves = side == 0 ? state.lists.allyMoves : state.lists.enemyMoves, same = helpful(moves[row]), toSide = same ? side : 1 - side
+        const y = rowY(row), start = px(side, 0) + (side == 0 ? 12 : -12), tx = px(toSide, 2), sign = side == 0 ? -1 : 1
+        const x0 = start, y0 = y + sign * 2, x1 = start + (side == 0 ? 8 : -8), y1 = y + sign * (same ? 7 : 25)
+        const x2 = same ? tx + (side == 0 ? -23 : 23) : tx + (side == 0 ? -3 : 3), y2 = y + sign * (same ? 7 : 26)
+        const x3 = same ? tx + (side == 0 ? -18 : 18) : tx, y3 = y + sign * (same ? 2 : 18)
+        const hovered = apocWorld.uiNearRow() == row && !apocWorld.uiPlaying() && !apocWorld.uiAnimating()
+        const dt = (now - apocWorld.uiHoverStarted()) % 3500, progress = Math.constrain((dt - (side == 0 ? 0 : 1150)) / 850, 0, 1)
+        let lastX = x0, lastY = y0
+        for (let i = 1; i <= 36; i++) {
+            const t = i / 36, s = 1 - t, x = s * s * s * x0 + 3 * s * s * t * x1 + 3 * s * t * t * x2 + t * t * t * x3
+            const yy = s * s * s * y0 + 3 * s * s * t * y1 + 3 * s * t * t * y2 + t * t * t * y3
+            screen.drawLine(lastX, lastY, x, yy, side == 0 ? 6 : 14)
+            if (hovered && t <= progress && i % 2 == 0) screen.fillCircle(x, yy, 1, side == 0 ? 9 : 3)
+            if (hovered && t <= progress && t + 1 / 36 > progress) screen.fillCircle(x, yy, 2, 1)
+            lastX = x; lastY = yy
+        }
+        if (hovered && progress >= 1) screen.drawCircle(tx, y, 19, side == 0 ? 9 : 3)
+    }
+    function timeline(state: apocTypes.TrialSnapshot, now: number): void {
+        const spec = apocWorld.uiSpec(), near = apocWorld.uiNearRow(), active = apocWorld.uiActiveRow(), activeSide = apocWorld.uiActiveSide()
+        for (let row = 0; row < 10; row++) {
+            const cy = rowY(row), playing = apocWorld.uiPlaying() && active == row
+            screen.drawTransparentImage(pads[playing ? 2 : near == row ? 1 : 0], CENTER - 119, cy - 24)
+            route(state, 0, row, now); route(state, 1, row, now)
+            const aftermath = apocWorld.uiAfter(apocTypes.Side.Enemy, row) || apocWorld.uiAfter(apocTypes.Side.Ally, row) || apocWorld.uiTerminal()
+            for (let side = 0; side < 2; side++) {
+                const selected = apocWorld.uiSelectedRow() == row && apocWorld.uiSelectedSide() == side
+                const marked = (apocWorld.uiRoom() == 14 && (row == 0 || row == 3)) || spec.primaryIndex == row || spec.secondaryIndex == row
+                const targets = side == 0 ? state.lists.allyTargets : state.lists.enemyTargets, ref = row < targets.length ? targets[row] : null
+                const a = actorFor(ref, aftermath || state), moves = side == 0 ? state.lists.allyMoves : state.lists.enemyMoves, values = side == 0 ? state.lists.allyValues : state.lists.enemyValues
+                const move = row < moves.length ? moves[row] : "", before = apocWorld.uiBefore(side, row) || apocWorld.uiTerminal()
+                let owner = actorFor(apocWorld.uiActionActor(side, row), before)
+                if (!owner && before) for (let n = 0; n < before.actors.length; n++) if (before.actors[n].side == side && before.actors[n].ability == move) owner = before.actors[n]
+                target(ref, px(side, 2), cy, side, selected, !!a && (!a.present || a.hp <= 0), !!a && a.held)
+                moveBubble(move, px(side, 0), cy, side, selected || marked, !!owner && (owner.hp <= 0 || !owner.present || owner.held))
+                powerBubble(row < values.length ? values[row] : -1, px(side, 1), cy, side, marked)
+                if (playing && activeSide == side) { screen.drawCircle(px(side, 0), cy, 15, 1); screen.fillCircle(px(side, 0), cy - 19, 2, 5) }
+            }
+        }
+    }
+    function actorX(side: number): number { return side == 0 ? 62 : WIDTH - 62 }
+    function actorY(ref: Sprite, state: apocTypes.TrialSnapshot): number {
+        const a = actorFor(ref, state)
+        if (!a) return 300
+        let pos = 0, count = 0
+        for (let i = 0; i < state.actors.length; i++) if (state.actors[i].side == a.side) { if (state.actors[i].sprite == ref) pos = count; count++ }
+        return count <= 1 ? 340 : 170 + pos * Math.idiv(370, count - 1)
+    }
+    function focusSide(now: number): number { return apocWorld.uiPlaying() ? apocWorld.uiActiveSide() : (now - apocWorld.uiHoverStarted()) % 3500 < 1150 ? 0 : 1 }
+    function party(state: apocTypes.TrialSnapshot, now: number): void {
+        smallCentered("ALLIES", 62, 119, 9); smallCentered("ENEMIES", WIDTH - 62, 119, 3)
+        const row = apocWorld.uiPlaying() ? apocWorld.uiActiveRow() : apocWorld.uiNearRow(), side = focusSide(now)
+        const events = row >= 0 ? apocWorld.uiActionEvents(side, row) : [], phase = apocWorld.uiPhase()
+        let event: apocTypes.TraceEvent = null
+        for (let i = 0; i < events.length; i++) if (events[i].kind == "action") { event = events[i]; break }
+        const source = row >= 0 ? apocWorld.uiActionActor(side, row) : null, recipient = row >= 0 ? chosen(apocWorld.uiTrial(), side, row) : null
+        for (let i = 0; i < state.actors.length; i++) {
+            const a = state.actors[i], k = actorIndex(a.sprite), body = k < 0 ? unknown : bodies[k]
+            let x = actorX(a.side), y = actorY(a.sprite, state)
+            if (apocWorld.uiPlaying() && event && event.actor == a.sprite) x += (a.side == 0 ? 1 : -1) * Math.sin(phase * Math.PI) * 8
+            oval(screen, x, y + body.height / 2, 23, 6, 15, recipient == a.sprite ? 5 : 0)
+            if (recipient == a.sprite) screen.drawCircle(x, y, Math.idiv(body.height, 2) + 6, event && helpful(event.move) ? 7 : 5)
+            if (a.present) screen.drawTransparentImage(body, x - body.width / 2, y - body.height / 2)
+            if (!a.present || a.hp <= 0) cross(x, y, 19)
+            smallCentered(shortName(a.id).toUpperCase(), x, y - body.height / 2 - 12, 1)
+            const hpY = y + body.height / 2 + 8
+            screen.fillRect(x - 24, hpY, 48, 4, 15); screen.fillRect(x - 24, hpY, Math.idiv(48 * a.hp, a.maxHP), 4, a.side == 0 ? 9 : 2)
+            smallCentered(a.hp + "/" + a.maxHP, x, hpY + 7, 1)
+            moveBubble(a.ability, x + (a.side == 0 ? 1 : -1) * (body.width / 2 + 14), y, a.side, source == a.sprite, false)
+            if (a.ward) screen.drawTransparentImage(moveIcon("Ward"), x + 23, y - 25)
+            if (a.venom) screen.drawTransparentImage(moveIcon("Venom"), x + 23, y - 7)
+            if (a.empower) screen.drawTransparentImage(moveIcon("Empower"), x + 23, y + 11)
+            if (a.held) { screen.drawCircle(x, y, 30, 10); smallCentered("HELD", x, y + 13, 1) }
+            if (a.trait != "Plain") smallCentered(a.trait, x, hpY + 19, 11)
+        }
+    }
+    export function stationLabel(i: number): string { return i == 0 ? JOBS[apocWorld.uiRoom() - 1] : i == 1 ? (apocWorld.uiRoom() == 24 ? "Rewrite" : "Clear Wards") : i == 2 ? "Release time" : i == 3 ? "Reset" : "Exit" }
+    export function stationIcon(i: number): string { return i == 0 ? OPS[apocWorld.uiRoom() - 1] : i == 1 ? "set" : i == 2 ? "run" : i == 3 ? "reset" : "exit" }
+    function stations(now: number): void {
+        const xs = [86, 490, 288, 82, 288], ys = [650, 650, 66, 84, 664], spec = apocWorld.uiSpec(), suggested = apocWorld.uiSuggestedStation()
+        for (let i = 0; i < 5; i++) {
+            if (i == 1 && !spec.twoStations) continue
+            const x = xs[i], y = ys[i], near = apocWorld.uiNearStation() == i, glow = i == suggested
+            if (glow || near) oval(screen, x, y + 6, i == 2 ? 28 : 24, 8, 8, now % 900 < 550 ? 5 : 11)
+            screen.drawTransparentImage(props[i], x - 16, y - 28 + (i == 2 ? Math.sin(now / 340) * 2 : 0))
+            smallCentered(stationLabel(i), x, y + (i == 2 ? 12 : 14), glow || near ? 5 : 1)
+        }
+        const forecast = apocWorld.uiForecast(), outcome = forecast ? forecast.status : "invalid"
+        const label = outcome == "victory" ? "VICTORY" : outcome == "defeat" ? "DEFEAT" : outcome == "incomplete" ? "ENEMIES REMAIN" : "REPAIR PLAN"
+        screen.fillRect(CENTER - 95, 628, 190, 15, 15); smallCentered("FORECAST: " + label, CENTER, 633, outcome == "victory" ? 9 : 3)
+    }
+    function sources(state: apocTypes.TrialSnapshot): void {
+        if (state.roster.length) {
+            smallCentered("ROSTER", 143, 139, 9)
+            for (let i = 0; i < state.roster.length; i++) {
+                const x = 143, y = 180 + i * 40, k = actorIndex(state.roster[i]), a = actorFor(state.roster[i], state)
+                if (k >= 0) screen.drawTransparentImage(portraits[k], x - 14, y - 15)
+                screen.drawCircle(x, y, 16, a && a.held ? 10 : 11); if (a && !a.present) cross(x, y, 10)
+            }
+        } else if (state.sourceMoves.length) {
+            smallCentered(apocWorld.uiRoom() == 17 ? "RESERVE" : "SOURCE", 143, 139, 9)
+            for (let i = 0; i < state.sourceMoves.length; i++) moveBubble(state.sourceMoves[i], 143, 180 + i * 40, 0, false, false)
+        }
+    }
+    function editAnimation(now: number): void {
+        const dt = now - motionStamp, duration = apocWorld.uiEditDuration()
+        if (dt < 0 || dt >= duration) return
+        const opening = apocWorld.uiEditFizzleDuration()
+        const t = Math.constrain((dt - opening - 60) / (duration - opening - 160), 0, 1), q = t * t * (3 - 2 * t)
+        for (let i = 0; i < motions.length; i++) {
+            const m = motions[i]
+            if (m.merged) continue
+            const startY = m.from >= 0 ? (m.fromPart >= 3 ? 180 + m.from * 40 : rowY(m.from)) : 650
+            const endY = m.to >= 0 ? (m.part >= 3 ? 180 + m.to * 40 : rowY(m.to)) : 650
+            const startX = m.fromPart >= 3 ? 143 : px(m.fromSide, m.fromPart), endX = m.part >= 3 ? 143 : px(m.side, m.part)
+            const bend = m.from < 0 || m.to < 0 ? 60 : m.from < m.to ? 21 : 65
+            const x = startX + (endX - startX) * q + (m.side == 0 ? -1 : 1) * Math.sin(q * Math.PI) * bend, y = startY + (endY - startY) * q
+            screen.drawCircle(x, y, m.part == 2 || m.part == 3 ? 20 : 13, 5)
+            if (m.part == 0 || m.part == 4) moveBubble(m.move, x, y, m.side, true, false)
+            else if (m.part == 1) powerBubble(m.power, x, y, m.side, true)
+            else target(m.target, x, y, m.side, false, false, false)
+        }
+        const record = apocWorld.uiEditRecord()
+        if (!record) return
+        for (let i = 0; i < record.effects.length; i++) {
+            const effect = record.effects[i], a = actorFor(effect.actor, record.before), index = actorIndex(effect.actor)
+            if (!a || index < 0) continue
+            const body = bodies[index], x = actorX(a.side), y = actorY(effect.actor, record.before) - Math.sin(q * Math.PI) * 16
+            screen.drawTransparentImage(body, x - body.width / 2, y - body.height / 2)
+            if (effect.kind == "hold") {
+                screen.drawCircle(x, y, 30, 10); screen.drawCircle(x, y, 34, 9)
+                for (let bar = -2; bar <= 2; bar++) screen.drawLine(x + bar * 10, y - 25, x + bar * 10, y + 25, 10)
+            } else {
+                const gone = Math.floor(body.height * q)
+                for (let line = 0; line < gone; line++) screen.drawLine(x - body.width / 2, y + body.height / 2 - line, x + body.width / 2, y + body.height / 2 - line, 12)
+                screen.drawLine(x - 29, y + body.height / 2 - gone, x + 29, y + body.height / 2 - gone, 9)
+            }
+        }
+    }
+    function combatAnimation(state: apocTypes.TrialSnapshot): void {
+        if (!apocWorld.uiPlaying()) return
+        const row = apocWorld.uiActiveRow(), side = apocWorld.uiActiveSide(), phase = apocWorld.uiPhase(), events = apocWorld.uiActionEvents(side, row)
+        if (phase <= 0 || phase >= 1) return
+        for (let i = 0; i < events.length; i++) {
+            const e = events[i]
+            if (e.kind == "action" && e.actor && e.target) {
+                const a = actorFor(e.actor, state), b = actorFor(e.target, state)
+                if (!a || !b) continue
+                const tx = actorX(b.side), ty = actorY(e.target, state), sx = actorX(a.side), sy = actorY(e.actor, state)
+                if (!helpful(e.move)) {
+                    const p = Math.min(1, phase * 1.5), x = sx + (tx - sx) * p, y = sy + (ty - sy) * p - Math.sin(p * Math.PI) * 24
+                    screen.drawTransparentImage(moveIcon(e.move), x - 8, y - 8)
+                    if (phase > .6) { screen.drawLine(tx - 23, ty, tx + 23, ty, 5); screen.drawLine(tx, ty - 23, tx, ty + 23, 1) }
+                } else for (let k = 0; k < 5; k++) {
+                    const angle = k * Math.PI * 2 / 5 + phase * 2
+                    screen.drawTransparentImage(moveIcon(e.move), tx + Math.cos(angle) * (12 + phase * 12) - 8, ty + Math.sin(angle) * 12 - phase * 20 - 8)
+                }
+            }
+            if ((e.kind == "damage" || e.kind == "heal" || e.kind == "leech") && phase > .6 && e.target) {
+                const a = actorFor(e.target, state)
+                if (a) centered((e.kind == "damage" ? "-" : "+") + e.amount, actorX(a.side), actorY(e.target, state) - 38 - phase * 12, e.kind == "damage" ? 5 : 7)
+            }
+            if (e.kind == "skip" && e.target && phase > .4) { const a = actorFor(e.target, state); if (a) cross(actorX(a.side), actorY(e.target, state), 23, 11) }
+        }
+    }
+    function distortion(now: number): void {
+        if (apocWorld.uiFizzle()) {
+            for (let i = 0; i < 16; i++) { const y = 45 + (i * 43 + Math.idiv(now, 13) * 7) % 630; screen.drawLine((i * 37) % 180, y, WIDTH - (i * 53) % 160, y, i % 2 ? 9 : 1) }
+        }
+    }
+    function editVeil(now: number): void {
+        // Opaque temporal mist, not a black screen or a dimmed room. Only the
+        // affected pieces are drawn over it during the isolated travel phase.
+        screen.fill(12)
+        for (let i = 0; i < 20; i++) {
+            const y = (i * 37 + Math.idiv(now, 35)) % 720, x = (i * 83 + Math.idiv(now, 50) * 3) % WIDTH
+            screen.drawLine(x, y, Math.min(WIDTH - 1, x + 15 + i % 4 * 8), y, i % 3 == 0 ? 6 : 11)
+            screen.setPixel((x + 160) % WIDTH, (y + 230) % 720, 9)
+        }
+    }
+    function screenFizzle(now: number, covered: number): void {
+        const threshold = Math.constrain(covered, 0, 1) * 31, seed = Math.idiv(now, 27)
+        for (let y = 0; y < 720; y += 16) for (let x = 0; x < WIDTH; x += 16) {
+            const noise = (Math.idiv(x, 16) * 13 + Math.idiv(y, 16) * 7 + seed * 3) % 31
+            if (noise < threshold) {
+                screen.fillRect(x, y, 16, 16, 12)
+                if ((noise + seed) % 5 == 0) screen.drawLine(x, y + 3, x + 15, y + 3, noise % 2 == 0 ? 9 : 11)
+            }
+        }
+        for (let i = 0; i < 14; i++) {
+            const y = (i * 53 + seed * 11) % 720, x = (i * 97 + seed * 17) % WIDTH
+            screen.drawLine(x, y, Math.min(WIDTH - 1, x + 16 + i % 4 * 8), y, i % 2 == 0 ? 9 : 1)
+        }
+    }
+    function wrap(s: string, x: number, y: number, width: number, color: number = 1): number {
+        let rest = s
+        while (rest.length > 0) {
+            let cut = Math.min(rest.length, Math.idiv(width, 6))
+            if (cut < rest.length) { let i = cut; while (i > cut - 18 && rest.charAt(i) != " ") i--; if (i > cut - 18) cut = i }
+            text(rest.substr(0, cut), x, y, color); y += 14; rest = rest.substr(cut); while (rest.charAt(0) == " ") rest = rest.substr(1)
+        }
+        return y
+    }
+    function menu(): void {
+        screen.fillRect(64, 112, WIDTH - 128, 470, 15); screen.drawRect(64, 112, WIDTH - 128, 470, 5)
+        if (apocWorld.uiEraseConfirm()) { centered("Reset saved expedition progress?", CENTER, 235, 2); centered("A confirm    B keep progress", CENTER, 270, 1); return }
+        if (apocWorld.uiPicking()) { centered("Revisit an unlocked room", CENTER, 174, 9); centered("Room " + apocWorld.uiPickRoom(), CENTER, 230, 5); centered("Left/Right choose. A travel. B back.", CENTER, 278, 1); return }
+        if (apocWorld.uiHelp()) {
+            centered("ROOM " + apocWorld.uiRoom() + " INSTRUCTIONS", CENTER, 134, 9)
+            let y = wrap(apocWorld.uiSpec().instruction, 83, 170, 408)
+            y = wrap("Walk to the glowing altar. A uses your current code. The crystal at the top releases time. B beside a moment previews only that action.", 83, y + 22, 408)
+            text("IF YOU NEED IT, HERE IS A STRATEGY", 83, y + 25, 5); wrap(apocAdvice.text(apocWorld.uiRoom(), apocWorld.uiVariant()), 83, y + 48, 408)
+            centered("B returns to the room", CENTER, 547, 9); return
+        }
+        centered("EXPEDITION MENU", CENTER, 132, 9)
+        const progress = apocWorld.uiProgress(), spec = apocWorld.uiSpec()
+        for (let i = 0; i < MENU.length; i++) {
+            const y = 168 + i * 29, locked = (i == 1 && !spec.twoStations) || (i == 6 && (progress.completedMask & (1 << (apocWorld.uiRoom() - 1))) == 0)
+            if (i == apocWorld.uiMenuIndex()) screen.fillRect(76, y - 5, WIDTH - 152, 23, 8)
+            text((i == apocWorld.uiMenuIndex() ? "> " : "  ") + MENU[i], 86, y, locked ? 11 : 1)
+        }
+        centered("A choose    B close", CENTER, 482, 9)
+        for (let i = 0; i < apocArt.creditCount(); i++) tiny(apocArt.creditLine(i), 83, 515 + i * 13, 11)
+    }
+    function footer(now: number): void {
+        screen.fillRect(14, 690, WIDTH - 28, 25, 15)
+        let s = apocWorld.uiNotice(), row = apocWorld.uiNearRow(), side = apocWorld.uiNearSide()
+        if (!apocWorld.uiPlaying() && !apocWorld.uiAnimating() && row >= 0) {
+            const t = apocWorld.uiTrial(), moves = side == 0 ? t.lists.allyMoves : t.lists.enemyMoves, values = side == 0 ? t.lists.allyValues : t.lists.enemyValues
+            const ref = chosen(t, side, row), a = actorFor(ref, t)
+            s = "A select | B watch: " + (row < moves.length ? moves[row] : "No move") + " " + (row < values.length ? "" + values[row] : "") + " > " + (ref == apocWorld.uiSentinel() ? "ALL" : a ? shortName(a.id) : "nothing")
+        }
+        if (apocWorld.uiAnimating() && !apocWorld.uiPlaying()) s = now - apocWorld.uiEditStarted() < apocWorld.uiEditDuration() ? "The changed pieces travel to their new positions." : "The room returns with the new future already resolved."
+        if (s.length > 89) s = s.substr(0, 86) + "..."
+        tiny(s, 23, 695, apocWorld.uiPlaying() ? 5 : 1)
+        tiny("Arrows walk | A select/use | B watch/menu | X = fallen by this moment", 23, 706, 11)
+    }
+    export function draw(): void {
+        init()
+        const state = apocWorld.uiTrial(), spec = apocWorld.uiSpec(), now = control.millis()
+        if (!state || !spec) { screen.fill(15); text("Preparing the expedition...", 160, 330, 1); return }
+        if (cachedRoom != apocWorld.uiRoom() || cachedVariant != apocWorld.uiVariant() || actorRefs[0] != state.actors[0].sprite) rebuild(state)
+        prepareMotion()
+        const dt = now - apocWorld.uiEditStarted(), opening = apocWorld.uiEditFizzleDuration(), travelEnd = apocWorld.uiEditDuration(), reveal = apocWorld.uiEditRevealDuration(), record = apocWorld.uiEditRecord()
+        if (record && dt >= opening && dt < travelEnd) { editVeil(now); editAnimation(now); return }
+        const openingEdit = !!record && dt >= 0 && dt < opening
+        const scene = openingEdit ? record.before : state
+        screen.drawImage(floor, 0, 0); text("APOCALYPTIC LISTS", 16, 9, 5); tiny("A future held outside time", 16, 25, 1)
+        const label = "ROOM " + apocWorld.uiRoom() + " / 27  |  SETUP " + apocWorld.uiVariant()
+        tiny(label, WIDTH - label.length * 6 - 16, 10, 9)
+        smallCentered(apocWorld.uiPlaying() ? "TIME IN MOTION" : apocWorld.uiAnimating() ? "FUTURE CHANGING" : "TIME IS FROZEN", WIDTH - 77, 26, apocWorld.uiPlaying() ? 5 : 11)
+        timeline(scene, now); party(openingEdit ? scene : apocWorld.uiDisplay() || state, now); sources(scene); stations(now)
+        const step = apocWorld.uiStep(), frame = pandaFrames[apocWorld.uiDirection() * 4 + (step < 0 ? 0 : step % 3 + 1)], x = apocWorld.uiObserverX(), y = apocWorld.uiObserverY()
+        oval(screen, x, y + 2, 9, 3, 15, 0); screen.drawTransparentImage(frame, x - 16, y - 30); smallCentered("YOU", x, y - 40, 1)
+        combatAnimation(apocWorld.uiDisplay() || state); distortion(now); footer(now)
+        if (openingEdit) { screenFizzle(now, dt / opening); editAnimation(now) }
+        else if (record && dt >= travelEnd && dt < travelEnd + reveal) screenFizzle(now, 1 - (dt - travelEnd) / reveal)
+        if (apocWorld.uiMenu() || apocWorld.uiPicking() || apocWorld.uiEraseConfirm() || apocWorld.uiHelp()) menu()
+    }
+}
+
+// SUPPLIED SOURCE supplied-world/world.ts
+// Apocalyptic Lists world owner: current learner callbacks, Sprite-bound trials,
+// atomically committed drafts, controller flow, frozen combat playback and progress.
+namespace SpriteKind {
+    export const ApocActor = SpriteKind.create()
+    export const ApocObserver = SpriteKind.create()
+    export const ApocStation = SpriteKind.create()
+    export const ApocTargetMarker = SpriteKind.create()
+}
+namespace apocWorld {
+    const LIMIT = 10
+    const STATION_X = [86, 490, 288, 82, 288]
+    const STATION_Y = [650, 650, 66, 84, 664]
+    const WALK_SPEED = 110
+    const HALF_MS = 900
+    const PREVIEW_MS = 2300
+    const EDIT_MS = 1400
+    const RIPPLE_MS = 650
+    const EDIT_FIZZLE_MS = 220
+    const EDIT_REVEAL_MS = 260
+    const NO_EVENTS: apocTypes.TraceEvent[] = []
+    class HalfAction {
+        constructor() {}
+        side: number = 0
+        row: number = 0
+        before: apocTypes.TrialSnapshot = null
+        after: apocTypes.TrialSnapshot = null
+        events: apocTypes.TraceEvent[] = []
+        actor: Sprite = null
+        target: Sprite = null
+        fizzle: boolean = false
+        status: string = "continue"
+    }
+    let begun = false
+    let busy = false
+    let invoking = false
+    let generation = 0
+    let playing = false
+    let forecast: apocTypes.BattleResult = null
+    let terminal: apocTypes.TrialSnapshot = null
+    let halves: HalfAction[] = []
+    let activeHalf: HalfAction = null
+    let halfIndex = 0
+    let halfStarted = 0
+    let halfDuration = HALF_MS
+    let halfEventPos = 0
+    let previewing = false
+    let previewReturn: apocTypes.TrialSnapshot = null
+    let previewReturnEvent: apocTypes.TraceEvent = null
+    let selectedRow = -1
+    let selectedSide = 0
+    let nearRow = -1
+    let nearSide = -1
+    let nearStation = -1
+    let hoverStarted = 0
+    let editStarted = -10000
+    let editRecord: apocTypes.StationRecord = null
+    let editForecastPending = false
+    let selectedRoom = 1
+    let selectedVariant = 1
+    let progress: apocTypes.Progress = null
+    let roomSpec: apocTypes.RoomSpec = null
+    let initial: apocTypes.TrialSnapshot = null
+    let trial: apocTypes.TrialSnapshot = null
+    let display: apocTypes.TrialSnapshot = null
+    let draft: apocTypes.TrialSnapshot = null
+    let actors: Sprite[] = []
+    let observer: Sprite = null
+    let props: Sprite[] = []
+    let allTarget: Sprite = null
+    let handlers: (() => void)[] = []
+    let staged: string[] = []
+    let effectDraft: apocTypes.EffectEvent[] = []
+    let records: apocTypes.StationRecord[] = []
+    let callError = ""
+    let activeStation = apocTypes.Station.Primary
+    let recent = "Walk to a labeled station, press A; B opens menu"
+    let recentEvent: apocTypes.TraceEvent = null
+    let result: apocTypes.BattleResult = null
+    let goal: apocTypes.GoalResult = null
+    let menu = false
+    let menuIndex = 0
+    let roomPicker = false
+    let pickerRoom = 1
+    let lastAction = ""
+    let resultingVictory = false
+    let eraseConfirm = false
+    let help = false
+    let observerLockX = 171
+    let observerLockY = 650
+    let motionLocked = false
+    let direction = 0
+
+    function copyStrings(a: string[]): string[] { let b: string[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
+    function copyNumbers(a: number[]): number[] { let b: number[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
+    function copySprites(a: Sprite[]): Sprite[] { let b: Sprite[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
+    function copyPower(p: apocTypes.PowerSource): apocTypes.PowerSource {
+        if (!p) return null
+        const q = new apocTypes.PowerSource()
+        q.side = p.side; q.index = p.index; q.isAll = p.isAll; q.bonus = copyPower(p.bonus)
+        return q
+    }
+    function applyTo(state: apocTypes.TrialSnapshot, e: apocTypes.TraceEvent): void {
+        if (!state || !e || !e.target) return
+        for (let i = 0; i < state.actors.length; i++) {
+            const a = state.actors[i]
+            if (a.sprite != e.target) continue
+            if (e.hp >= 0) a.hp = e.hp
+            if (e.kind == "ward-set") a.ward = copyPower(e.mark)
+            else if (e.kind == "ward-consumed") a.ward = null
+            else if (e.kind == "venom-set") a.venom = copyPower(e.mark)
+            else if (e.kind == "venom-cleared") a.venom = null
+            else if (e.kind == "empower-set") a.empower = copyPower(e.mark)
+            else if (e.kind == "empower-used") a.empower = null
+            return
+        }
+    }
+    function halfFor(side: number, row: number): HalfAction {
+        for (let i = 0; i < halves.length; i++) if (halves[i].side == side && halves[i].row == row) return halves[i]
+        return null
+    }
+    // This cache is derived only from the actual resolver trace. It never edits
+    // the authored trial, invokes a learner callback, draws randomness or awards.
+    function refreshForecast(): void {
+        forecast = trial ? apocCombat.resolve(trial, allTarget) : null
+        terminal = trial ? apocCombat.cloneTrial(trial) : null
+        halves = []
+        if (!trial || !forecast || forecast.status == "invalid") return
+        const state = apocCombat.cloneTrial(trial)
+        let half: HalfAction = null
+        for (let i = 0; i < forecast.trace.length; i++) {
+            const e = forecast.trace[i]
+            if (e.kind == "cursor" && (e.reason == "before ally half-turn" || e.reason == "before enemy half-turn")) {
+                if (half) half.after = apocCombat.cloneTrial(state)
+                half = new HalfAction()
+                half.side = e.side; half.row = e.index; half.before = apocCombat.cloneTrial(state)
+                const moves = e.side == apocTypes.Side.Ally ? state.lists.allyMoves : state.lists.enemyMoves
+                const move = e.index < moves.length ? moves[e.index] : ""
+                for (let j = 0; j < state.actors.length; j++) {
+                    const a = state.actors[j]
+                    if (a.side == e.side && a.ability == move) half.actor = a.sprite
+                }
+                const helpful = move == "Mend" || move == "Ward" || move == "Empower"
+                const targetSide = helpful ? e.side : e.side == apocTypes.Side.Ally ? apocTypes.Side.Enemy : apocTypes.Side.Ally
+                const targets = targetSide == apocTypes.Side.Ally ? state.lists.allyTargets : state.lists.enemyTargets
+                if (e.index < targets.length) half.target = targets[e.index]
+                halves.push(half)
+            }
+            if (half) {
+                half.events.push(e)
+                if (e.kind == "skip") half.fizzle = true
+                if (e.kind == "result") half.status = forecast.status
+            }
+            applyTo(state, e)
+        }
+        if (half) half.after = apocCombat.cloneTrial(state)
+        terminal = apocCombat.cloneTrial(state)
+    }
+    function animationActive(): boolean {
+        return playing || previewing || control.millis() < editStarted + EDIT_MS + RIPPLE_MS
+    }
+    function lockObserver(): void {
+        if (observer) { observerLockX = observer.x; observerLockY = observer.y }
+    }
+    function updateNear(): void {
+        let row = -1, side = -1, station = -1
+        if (observer) {
+            // The panda may stand on any move, portrait or target in the pad.
+            // Keep a small approach margin at both ends and a separate band
+            // for each row; the centre line determines which half is selected.
+            let distance = 24
+            if (observer.x >= 157 && observer.x <= 419) for (let r = 0; r < 10; r++) {
+                const d = Math.abs(observer.y - (114 + 54 * r))
+                if (d <= distance) { row = r; side = observer.x < 288 ? 0 : 1; distance = d }
+            }
+            distance = 36 * 36 + 1
+            for (let i = 0; i < STATION_X.length; i++) {
+                if (i == 1 && (!roomSpec || !roomSpec.twoStations)) continue
+                const dx = observer.x - STATION_X[i], dy = observer.y - STATION_Y[i]
+                const d = dx * dx + dy * dy
+                if (d < distance) { station = i; distance = d }
+            }
+        }
+        if (row != nearRow || side != nearSide) hoverStarted = control.millis()
+        nearRow = row; nearSide = side; nearStation = station
+    }
+    function active(): boolean { return invoking && busy && draft != null }
+    function indexFor(room: apocTypes.Room, station: apocTypes.Station): number {
+        if (room < 1 || room > 27 || (station != 1 && station != 2)) return -1
+        return (room - 1) * 2 + station - 1
+    }
+    export function register(room: apocTypes.Room, station: apocTypes.Station, handler: () => void): void {
+        const id = indexFor(room, station)
+        if (id < 0) return
+        while (handlers.length <= id) handlers.push(null)
+        handlers[id] = handler // replaces current code; never invokes/caches a prior solution
+    }
+    function findActor(sprite: Sprite): apocTypes.ActorState {
+        if (!trial || !sprite || sprite == allTarget) return null
+        for (let i = 0; i < trial.actors.length; i++) if (trial.actors[i].sprite == sprite) return trial.actors[i]
+        return null
+    }
+    function spriteFor(id: string): Sprite {
+        if (id == "ALL" || id == "ALL_TARGET") return allTarget
+        if (!trial) return null
+        for (let i = 0; i < trial.actors.length; i++) if (trial.actors[i].id == id) return trial.actors[i].sprite
+        return null
+    }
+    function permitted(name: string): boolean {
+        if (!roomSpec) return false
+        if (selectedRoom == 24) return name == "enemyMoves" // both stations, different ordered transformations
+        if (selectedRoom == 27) return activeStation == apocTypes.Station.Secondary && name == "enemyMoves"
+        for (let i = 0; i < roomSpec.editableLists.length; i++) if (roomSpec.editableLists[i] == name) return true
+        return false
+    }
+    function allowedEffect(kind: string): boolean {
+        if (!roomSpec) return false
+        if (selectedRoom == 27) return activeStation == apocTypes.Station.Primary && kind == "hold"
+        return kind == "hold" ? roomSpec.allowHold : roomSpec.allowBanish
+    }
+    function markStaged(name: string): void {
+        for (let i = 0; i < staged.length; i++) if (staged[i] == name) return
+        staged.push(name)
+    }
+    function reject(message: string): void { if (active() && !callError) callError = message }
+    export function readMoves(side: apocTypes.Side): string[] {
+        if (!active()) return []
+        if (side == apocTypes.Side.Ally) return copyStrings(draft.lists.allyMoves)
+        if (side == apocTypes.Side.Enemy) return copyStrings(draft.lists.enemyMoves)
+        return []
+    }
+    export function readValues(side: apocTypes.Side): number[] {
+        if (!active()) return []
+        if (side == apocTypes.Side.Ally) return copyNumbers(draft.lists.allyValues)
+        if (side == apocTypes.Side.Enemy) return copyNumbers(draft.lists.enemyValues)
+        return []
+    }
+    export function readTargets(side: apocTypes.Side): Sprite[] {
+        if (!active()) return []
+        if (side == apocTypes.Side.Ally) return copySprites(draft.lists.allyTargets)
+        if (side == apocTypes.Side.Enemy) return copySprites(draft.lists.enemyTargets)
+        return []
+    }
+    export function readRoster(): Sprite[] { return active() ? copySprites(draft.roster) : [] }
+    export function readSourceMoves(): string[] { return active() ? copyStrings(draft.sourceMoves) : [] }
+    export function markedIndex(): number {
+        if (!active() || !roomSpec) return -1
+        return activeStation == apocTypes.Station.Primary ? roomSpec.primaryIndex : roomSpec.secondaryIndex
+    }
+    export function numberHint(): number { return active() && roomSpec ? roomSpec.numberHint : 0 }
+    export function writeMoves(side: apocTypes.Side, list: string[]): void {
+        if (!active()) return
+        if (!list) { reject("Missing move array"); return }
+        if (side == apocTypes.Side.Ally) { draft.lists.allyMoves = copyStrings(list); markStaged("allyMoves") }
+        else if (side == apocTypes.Side.Enemy) { draft.lists.enemyMoves = copyStrings(list); markStaged("enemyMoves") }
+        else reject("Unknown move side")
+    }
+    export function writeValues(side: apocTypes.Side, list: number[]): void {
+        if (!active()) return
+        if (!list) { reject("Missing value array"); return }
+        if (side == apocTypes.Side.Ally) { draft.lists.allyValues = copyNumbers(list); markStaged("allyValues") }
+        else if (side == apocTypes.Side.Enemy) { draft.lists.enemyValues = copyNumbers(list); markStaged("enemyValues") }
+        else reject("Unknown value side")
+    }
+    export function writeTargets(side: apocTypes.Side, list: Sprite[]): void {
+        if (!active()) return
+        if (!list) { reject("Missing target array"); return }
+        if (side == apocTypes.Side.Ally) { draft.lists.allyTargets = copySprites(list); markStaged("allyTargets") }
+        else if (side == apocTypes.Side.Enemy) { draft.lists.enemyTargets = copySprites(list); markStaged("enemyTargets") }
+        else reject("Unknown target side")
+    }
+    export function writeRoster(list: Sprite[]): void {
+        if (!active()) return
+        if (!list) { reject("Missing roster array"); return }
+        draft.roster = copySprites(list)
+        markStaged("roster")
+    }
+    export function writeSourceMoves(list: string[]): void {
+        if (!active()) return
+        if (!list) { reject("Missing reserve array"); return }
+        draft.sourceMoves = copyStrings(list)
+        markStaged("sourceMoves")
+    }
+    function effect(kind: string, actor: Sprite): void {
+        if (!active()) return
+        if (!allowedEffect(kind)) { reject(kind + " not allowed here"); return }
+        const original = findActor(actor)
+        if (!original || !original.present || original.hp <= 0) { reject("Not a current available actor Sprite"); return }
+        for (let i = 0; i < draft.actors.length; i++) {
+            if (draft.actors[i].sprite == actor) {
+                if (kind == "hold") draft.actors[i].held = true
+                else draft.actors[i].present = false
+                let e = new apocTypes.EffectEvent()
+                e.kind = kind
+                e.actor = actor
+                effectDraft.push(e)
+                return
+            }
+        }
+        reject("Effect actor missing")
+    }
+    export function hold(actor: Sprite): void { effect("hold", actor) }
+    export function banish(actor: Sprite): void { effect("banish", actor) }
+
+    function validStrings(a: string[]): boolean {
+        if (!a || a.length > LIMIT) return false
+        for (let i = 0; i < a.length; i++) if (typeof a[i] != "string") return false
+        return true // unknown move names are intentional combat fizzles
+    }
+    function validValues(a: number[]): boolean {
+        if (!a || a.length > LIMIT) return false
+        for (let i = 0; i < a.length; i++) if (typeof a[i] != "number" || a[i] < 0 || a[i] > 9 || a[i] != Math.floor(a[i])) return false
+        return true
+    }
+    function validSprites(a: Sprite[], allowAll: boolean): boolean {
+        if (!a || a.length > LIMIT) return false
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] == allTarget && allowAll) continue
+            if (!findActor(a[i])) return false
+        }
+        return true
+    }
+    function same(a: any[], b: any[]): boolean {
+        if (!a || !b || a.length != b.length) return false
+        for (let i = 0; i < a.length; i++) if (a[i] != b[i]) return false
+        return true
+    }
+    function edited(name: string): boolean {
+        return name == "allyMoves" ? !same(trial.lists.allyMoves, draft.lists.allyMoves) :
+            name == "enemyMoves" ? !same(trial.lists.enemyMoves, draft.lists.enemyMoves) :
+            name == "allyValues" ? !same(trial.lists.allyValues, draft.lists.allyValues) :
+            name == "enemyValues" ? !same(trial.lists.enemyValues, draft.lists.enemyValues) :
+            name == "allyTargets" ? !same(trial.lists.allyTargets, draft.lists.allyTargets) :
+            name == "enemyTargets" ? !same(trial.lists.enemyTargets, draft.lists.enemyTargets) :
+            name == "roster" ? !same(trial.roster, draft.roster) : !same(trial.sourceMoves, draft.sourceMoves)
+    }
+    function validateDraft(): string {
+        if (callError) return callError
+        const names = ["allyMoves", "allyValues", "allyTargets", "enemyMoves", "enemyValues", "enemyTargets", "roster", "sourceMoves"]
+        for (let i = 0; i < staged.length; i++) if (!permitted(staged[i])) return "Cannot write " + staged[i] + " at this station"
+        for (let i = 0; i < names.length; i++) if (edited(names[i]) && !permitted(names[i])) return "Unauthorized " + names[i]
+        const l = draft.lists
+        if (!validStrings(l.allyMoves) || !validStrings(l.enemyMoves) || !validStrings(draft.sourceMoves)) return "Move/source must be <=10 strings"
+        if (!validValues(l.allyValues) || !validValues(l.enemyValues)) return "Values must be integer 0..9 (<=10)"
+        if (!validSprites(l.allyTargets, true) || !validSprites(l.enemyTargets, true)) return "Unknown target Sprite or >10 targets"
+        if (!validSprites(draft.roster, false)) return "Roster must contain current Sprite references"
+        return ""
+    }
+    function canVisitStation(station: apocTypes.Station): boolean {
+        return !!roomSpec && (station == apocTypes.Station.Primary || (station == apocTypes.Station.Secondary && roomSpec.twoStations))
+    }
+    function interact(station: apocTypes.Station): void {
+        if (busy || animationActive() || menu || help || !trial) return
+        if (!canVisitStation(station)) { recent = "No secondary station in R" + roomLabel(); return }
+        const slot = indexFor(selectedRoom, station)
+        if (slot < 0 || slot >= handlers.length || !handlers[slot]) {
+            recent = "No current handler. Open R" + roomLabel() + " Recipe and add the block"
+            return
+        }
+        busy = true
+        const callGeneration = generation
+        activeStation = station
+        draft = apocCombat.cloneTrial(trial)
+        staged = []
+        effectDraft = []
+        callError = ""
+        invoking = true
+        // The learner callback is required by contract to be synchronous/non-yielding.
+        handlers[slot]()
+        invoking = false
+        if (callGeneration != generation) callError = "Trial changed during callback"
+        const bad = validateDraft()
+        if (bad) {
+            recent = "Rejected: " + bad + "; previous lists kept"
+        } else {
+            let record = new apocTypes.StationRecord()
+            record.station = station
+            record.before = apocCombat.cloneTrial(trial)
+            record.after = apocCombat.cloneTrial(draft)
+            record.effects = effectDraft.slice()
+            records.push(record)
+            trial = apocCombat.cloneTrial(draft)
+            display = apocCombat.cloneTrial(trial)
+            // A fresh accepted edit supersedes the previous battle visualization.
+            recentEvent = null
+            lastAction = apocView.stationLabel(station == apocTypes.Station.Primary ? 0 : 1)
+            result = null
+            goal = null
+            resultingVictory = false
+            editRecord = record
+            editStarted = control.millis()
+            editForecastPending = true
+            lockObserver()
+            recent = selectedRoom == 24 && station == apocTypes.Station.Primary ? "The list shifted. Use Rewrite next, then Run." :
+                selectedRoom == 27 && station == apocTypes.Station.Primary ? "Hazards held. Use Clear Wards next, then Run." :
+                "Plan changed. Follow the glowing Run station to see the result."
+        }
+        draft = null
+        effectDraft = []
+        staged = []
+        busy = false
+    }
+    function destroyActors(): void {
+        // Remove every reference path before destroying any old Sprite.
+        draft = null
+        trial = null
+        display = null
+        initial = null
+        roomSpec = null
+        recentEvent = null
+        result = null
+        goal = null
+        records = []
+        forecast = null
+        terminal = null
+        halves = []
+        activeHalf = null
+        previewReturn = null
+        previewReturnEvent = null
+        previewing = false
+        editRecord = null
+        editStarted = -10000
+        editForecastPending = false
+        selectedRow = -1
+        selectedSide = apocTypes.Side.Ally
+        nearRow = -1
+        nearSide = -1
+        nearStation = -1
+        effectDraft = []
+        staged = []
+        for (let i = 0; i < actors.length; i++) sprites.destroy(actors[i])
+        actors = []
+    }
+    function build(room: number, variant: number): void {
+        if (busy || animationActive()) return
+        generation++
+        destroyActors()
+        selectedRoom = room
+        selectedVariant = variant
+        roomSpec = apocRooms.spec(room, variant)
+        if (!roomSpec || !roomSpec.battle) { recent = "Missing curated room setup R" + room; return }
+        trial = new apocTypes.TrialSnapshot()
+        trial.lists = new apocTypes.CombatLists()
+        trial.actors = []
+        const battle = roomSpec.battle
+        for (let i = 0; i < battle.actors.length; i++) {
+            const source = battle.actors[i]
+            let sprite = sprites.create(apocArt.actor(source.artKey, source.side), SpriteKind.ApocActor)
+            sprite.setFlag(SpriteFlag.Invisible, true)
+            sprite.setFlag(SpriteFlag.Ghost, true)
+            sprite.setPosition(0, 0)
+            actors.push(sprite)
+            let state = new apocTypes.ActorState()
+            state.id = source.id; state.sprite = sprite; state.side = source.side
+            state.hp = source.hp; state.maxHP = source.maxHP
+            state.ability = source.ability; state.trait = source.trait
+            state.present = source.present; state.held = source.held
+            state.ward = source.ward; state.venom = source.venom; state.empower = source.empower
+            trial.actors.push(state)
+        }
+        trial.lists.allyMoves = copyStrings(battle.allyMoves)
+        trial.lists.allyValues = copyNumbers(battle.allyValues)
+        trial.lists.enemyMoves = copyStrings(battle.enemyMoves)
+        trial.lists.enemyValues = copyNumbers(battle.enemyValues)
+        trial.lists.allyTargets = []
+        trial.lists.enemyTargets = []
+        trial.roster = []
+        for (let i = 0; i < battle.allyTargetIDs.length; i++) trial.lists.allyTargets.push(spriteFor(battle.allyTargetIDs[i]))
+        for (let i = 0; i < battle.enemyTargetIDs.length; i++) trial.lists.enemyTargets.push(spriteFor(battle.enemyTargetIDs[i]))
+        for (let i = 0; i < roomSpec.rosterIDs.length; i++) trial.roster.push(spriteFor(roomSpec.rosterIDs[i]))
+        trial.sourceMoves = copyStrings(roomSpec.sourceMoves)
+        trial.goal = battle.goal
+        trial.requiredIDs = copyStrings(battle.requiredIDs)
+        if (observer) observer.setPosition(171, 650)
+        direction = 0
+        initial = apocCombat.cloneTrial(trial)
+        display = apocCombat.cloneTrial(trial)
+        refreshForecast()
+        lastAction = ""
+        recent = "Open Recipe R" + roomLabel() + ". Use the glowing station, then Run. B opens the menu."
+        menu = false
+        roomPicker = false
+        playing = false
+        previewing = false
+        eraseConfirm = false
+        help = false
+        updateNear()
+    }
+    function roomLabel(): string { return selectedRoom < 10 ? "0" + selectedRoom : "" + selectedRoom }
+    function reset(): void { if (!busy && !animationActive()) build(selectedRoom, selectedVariant) }
+    function nextVariant(): void {
+        if (!busy && !animationActive()) build(selectedRoom, selectedVariant % 3 + 1)
+    }
+    function travel(to: number): void {
+        if (busy || animationActive() || !progress || to < 1 || to > progress.highestUnlocked) return
+        build(to, 1)
+        progress.resumeRoom = to
+        apocSave.store(progress)
+    }
+    function doneWithTrace(): void {
+        if (!playing) return
+        playing = false
+        if (result && result.finalActors && display) display.actors = result.finalActors.slice()
+        if (resultingVictory) {
+            const bit = 1 << (selectedRoom - 1)
+            progress.completedMask |= bit
+            // Unlock only the contiguous path actually earned, never grant skipped rooms.
+            if (selectedRoom == progress.highestUnlocked && selectedRoom < 27) progress.highestUnlocked = selectedRoom + 1
+            apocSave.store(progress)
+            recent = selectedRoom == 27 ? "The expedition survived! All 27 list powers restored. B to revisit." : "Plan worked! The gate is open. Walk to Exit, or choose Continue in B."
+        } else if (!result || result.status != "victory") {
+            // A lost battle must remain visible even when the list task is also unfinished.
+            recent = result ? "Battle " + result.status + ": Retry or Reset" : "Battle did not resolve"
+        } else {
+            recent = "Battle won. Finish the list task: " + (goal && goal.messages.length > 0 ? goal.messages[0] : "check the changed lists")
+        }
+    }
+    function applyTrace(e: apocTypes.TraceEvent): void {
+        if (!e) return
+        recentEvent = e
+        applyTo(display, e)
+    }
+    function beginHalf(half: HalfAction, duration: number): void {
+        activeHalf = half
+        halfDuration = duration
+        halfStarted = control.millis()
+        halfEventPos = 0
+        recentEvent = null
+        display = apocCombat.cloneTrial(half.before)
+    }
+    function previewMoment(side: number, row: number): void {
+        if (busy || animationActive() || menu || help || !trial) return
+        const half = halfFor(side, row)
+        if (!half) {
+            recent = "The pass ends before this moment. Its cells stay in place."
+            return
+        }
+        previewReturn = apocCombat.cloneTrial(display || trial)
+        previewReturnEvent = recentEvent
+        previewing = true
+        lockObserver()
+        beginHalf(half, PREVIEW_MS)
+        recent = "Preview only: " + (side == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + row
+    }
+    function tickAnimation(): void {
+        // Keep the old scene through the opening fizzle. Resolve exactly once
+        // while the edit pieces are isolated, before the room is revealed.
+        if (editForecastPending && control.millis() >= editStarted + EDIT_FIZZLE_MS) {
+            editForecastPending = false
+            refreshForecast()
+        }
+        if ((!playing && !previewing) || !activeHalf) return
+        const elapsed = control.millis() - halfStarted
+        const phase = Math.min(1, elapsed / halfDuration)
+        // Preview holds its exact before/after states around a single action.
+        // Full playback approaches, applies events, and returns within 900 ms.
+        const eventPhase = previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) :
+            Math.max(0, Math.min(1, (phase - 0.25) / 0.5))
+        const count = Math.min(activeHalf.events.length, Math.floor(eventPhase * activeHalf.events.length))
+        while (halfEventPos < count) applyTrace(activeHalf.events[halfEventPos++])
+        if (phase < 1) return
+        while (halfEventPos < activeHalf.events.length) applyTrace(activeHalf.events[halfEventPos++])
+        display = apocCombat.cloneTrial(activeHalf.after)
+        if (previewing) {
+            previewing = false
+            display = previewReturn
+            recentEvent = previewReturnEvent
+            previewReturn = null
+            previewReturnEvent = null
+            activeHalf = null
+            recent = "Preview finished. The plan and saved progress are unchanged."
+        } else {
+            halfIndex++
+            if (halfIndex < halves.length) beginHalf(halves[halfIndex], HALF_MS)
+            else { activeHalf = null; doneWithTrace() }
+        }
+    }
+    function run(): void {
+        if (busy || animationActive() || menu || help || !trial || !roomSpec) return
+        busy = true
+        // Do not leave an old cursor/mark on screen if validation rejects this run.
+        recentEvent = null
+        const frozen = apocCombat.cloneTrial(trial)
+        goal = apocGoals.assess(roomSpec, apocCombat.cloneTrial(initial), apocCombat.cloneTrial(frozen), records.slice())
+        result = forecast
+        if (!result || result.status == "invalid") {
+            recent = "Invalid combat: " + (result && result.errors.length ? result.errors[0] : "no forecast")
+            display = apocCombat.cloneTrial(trial)
+            busy = false
+            return
+        }
+        resultingVictory = result.status == "victory" && goal.met
+        display = apocCombat.cloneTrial(frozen)
+        recentEvent = null
+        playing = true
+        lockObserver()
+        halfIndex = 0
+        recent = "The frozen plan plays once, one half-action at a time."
+        busy = false
+        if (halves.length) beginHalf(halves[0], HALF_MS)
+        else doneWithTrace()
+    }
+    function useAction(n: number): void {
+        if (busy || animationActive() || eraseConfirm || help) return
+        if (n == 0) interact(apocTypes.Station.Primary)
+        else if (n == 1) interact(apocTypes.Station.Secondary)
+        else if (n == 2) run()
+        else if (n == 3 || n == 4) reset()
+        else if (n == 5) nextVariant()
+        else if (n == 6) {
+            const completed = progress && (progress.completedMask & (1 << (selectedRoom - 1))) != 0
+            if (completed && selectedRoom < 27) travel(selectedRoom + 1)
+            else recent = selectedRoom == 27 && completed ? "The End - replay any earned room from B" : "EXIT locked: finish task AND win"
+        } else if (n == 7) { roomPicker = true; pickerRoom = selectedRoom; lockObserver() }
+        else if (n == 8) { help = true; lockObserver(); recent = "Room instructions and advice. B returns to the room." }
+        else if (n == 9) {
+            eraseConfirm = true
+            lockObserver()
+            recent = "ERASE game progress? A confirm, B cancel"
+        }
+    }
+    function stationAction(): void {
+        if (!observer) return
+        updateNear()
+        if (nearStation >= 0) { useAction(nearStation == 4 ? 6 : nearStation); return }
+        if (nearRow >= 0) {
+            selectedRow = nearRow
+            selectedSide = nearSide
+            recent = "Selected " + (selectedSide == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + selectedRow + ". B previews this half-action."
+        } else recent = "Walk beside a moment to select it, or approach a room object. B opens the menu."
+    }
+    function menuUp(delta: number): void {
+        if (animationActive() || help || eraseConfirm) return
+        if (roomPicker) { pickerRoom += delta; if (pickerRoom < 1) pickerRoom = 1; if (pickerRoom > progress.highestUnlocked) pickerRoom = progress.highestUnlocked }
+        else if (menu) { menuIndex += delta; if (menuIndex < 0) menuIndex = 9; if (menuIndex > 9) menuIndex = 0 }
+    }
+    export function start(): void {
+        if (begun) return
+        begun = true
+        progress = apocSave.load()
+        allTarget = sprites.create(image.create(1, 1), SpriteKind.ApocTargetMarker)
+        allTarget.setFlag(SpriteFlag.Invisible, true)
+        allTarget.setFlag(SpriteFlag.Ghost, true)
+        observer = sprites.create(apocArt.observer(), SpriteKind.ApocObserver)
+        observer.setFlag(SpriteFlag.Invisible, true)
+        observer.setFlag(SpriteFlag.Ghost, true)
+        observer.setPosition(171, 650)
+        controller.moveSprite(observer, WALK_SPEED, WALK_SPEED)
+        for (let i = 0; i < STATION_X.length; i++) {
+            let station = sprites.create(image.create(1, 1), SpriteKind.ApocStation)
+            station.setPosition(STATION_X[i], STATION_Y[i])
+            station.setFlag(SpriteFlag.Ghost, true)
+            station.setFlag(SpriteFlag.Invisible, true)
+            props.push(station)
+        }
+        build(progress.resumeRoom, 1)
+        if (apocSave.notice()) recent = apocSave.notice()
+        controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+            if (busy || animationActive() || help) return
+            if (eraseConfirm) {
+                eraseConfirm = false
+                apocSave.clear()
+                progress = apocSave.load()
+                build(1, 1)
+                recent = "Only Apocalyptic Lists progress was erased"
+                return
+            }
+            if (roomPicker) { roomPicker = false; menu = false; travel(pickerRoom); return }
+            if (menu) {
+                const selected = menuIndex
+                menu = false
+                useAction(selected)
+                return
+            }
+            stationAction()
+        })
+        controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+            if (busy || animationActive()) return
+            if (help) { help = false; recent = "Back in the room. A selects a nearby moment; B previews it."; return }
+            if (eraseConfirm) { eraseConfirm = false; recent = "Progress erase canceled"; return }
+            if (roomPicker) { roomPicker = false; return }
+            updateNear()
+            if (!menu && nearRow >= 0) { previewMoment(nearSide, nearRow); return }
+            menu = !menu
+            if (menu) { menuIndex = 0; lockObserver() }
+        })
+        controller.up.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(-1) })
+        controller.down.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(1) })
+        controller.left.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker) menuUp(-1) })
+        controller.right.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker) menuUp(1) })
+        game.onUpdate(function () {
+            if (observer) {
+                const lock = menu || roomPicker || animationActive() || busy || eraseConfirm || help
+                if (lock != motionLocked) {
+                    motionLocked = lock
+                    controller.moveSprite(observer, lock ? 0 : WALK_SPEED, lock ? 0 : WALK_SPEED)
+                }
+                if (observer.x < 36) observer.x = 36
+                if (observer.x > 540) observer.x = 540
+                if (observer.y < 86) observer.y = 86
+                if (observer.y > 674) observer.y = 674
+                if (lock) {
+                    observer.vx = 0
+                    observer.vy = 0
+                    observer.x = observerLockX
+                    observer.y = observerLockY
+                } else if (Math.abs(observer.vx) > Math.abs(observer.vy)) {
+                    if (observer.vx < 0) direction = 1
+                    else if (observer.vx > 0) direction = 2
+                } else {
+                    if (observer.vy < 0) direction = 3
+                    else if (observer.vy > 0) direction = 0
+                }
+            }
+            updateNear()
+            tickAnimation()
+        })
+        game.onPaint(function () { apocView.draw() })
+    }
+    // Read-only renderer bindings. Only apocWorld changes authoritative trial/progress.
+    export function uiSpec(): apocTypes.RoomSpec { return roomSpec }
+    export function uiInitial(): apocTypes.TrialSnapshot { return initial }
+    export function uiTrial(): apocTypes.TrialSnapshot { return trial }
+    export function uiDisplay(): apocTypes.TrialSnapshot { return display }
+    export function uiRecords(): apocTypes.StationRecord[] { return records }
+    export function uiResult(): apocTypes.BattleResult { return result }
+    export function uiGoal(): apocTypes.GoalResult { return goal }
+    export function uiProgress(): apocTypes.Progress { return progress }
+    export function uiEvent(): apocTypes.TraceEvent { return recentEvent }
+    export function uiNotice(): string { return recent }
+    export function uiPlaying(): boolean { return playing }
+    export function uiMenu(): boolean { return menu }
+    export function uiEraseConfirm(): boolean { return eraseConfirm }
+    export function uiMenuIndex(): number { return menuIndex }
+    export function uiPicking(): boolean { return roomPicker }
+    export function uiPickRoom(): number { return pickerRoom }
+    export function uiRoom(): number { return selectedRoom }
+    export function uiVariant(): number { return selectedVariant }
+    export function uiSentinel(): Sprite { return allTarget }
+    export function uiObserverX(): number { return observer ? observer.x : 171 }
+    export function uiObserverY(): number { return observer ? observer.y : 650 }
+    export function uiDirection(): number { return direction }
+    export function uiStep(): number {
+        return observer && !motionLocked && (Math.abs(observer.vx) > 4 || Math.abs(observer.vy) > 4) ? Math.idiv(control.millis(), 140) % 2 : -1
+    }
+    export function uiSelectedRow(): number { return selectedRow }
+    export function uiSelectedSide(): number { return selectedSide }
+    export function uiNearRow(): number { return nearRow }
+    export function uiNearSide(): number { return nearSide }
+    export function uiNearStation(): number { return nearStation }
+    export function uiHoverStarted(): number { return hoverStarted }
+    export function uiStationX(index: number): number { return index >= 0 && index < STATION_X.length ? STATION_X[index] : -1 }
+    export function uiStationY(index: number): number { return index >= 0 && index < STATION_Y.length ? STATION_Y[index] : -1 }
+    export function uiMomentX(side: number): number { return side == apocTypes.Side.Ally ? 171 : 405 }
+    export function uiMomentY(row: number): number { return 114 + 54 * row }
+    export function uiForecast(): apocTypes.BattleResult { return forecast }
+    export function uiTerminal(): apocTypes.TrialSnapshot { return terminal }
+    export function uiBefore(side: number, row: number): apocTypes.TrialSnapshot {
+        const h = halfFor(side, row); return h ? h.before : null
+    }
+    export function uiAfter(side: number, row: number): apocTypes.TrialSnapshot {
+        const h = halfFor(side, row); return h ? h.after : null
+    }
+    export function uiActionEvents(side: number, row: number): apocTypes.TraceEvent[] {
+        const h = halfFor(side, row); return h ? h.events : NO_EVENTS
+    }
+    export function uiReached(side: number, row: number): boolean { return !!halfFor(side, row) }
+    export function uiActionActor(side: number, row: number): Sprite {
+        const h = halfFor(side, row); return h ? h.actor : null
+    }
+    export function uiActionTarget(side: number, row: number): Sprite {
+        const h = halfFor(side, row); return h ? h.target : null
+    }
+    export function uiActionStatus(side: number, row: number): string {
+        const h = halfFor(side, row); return h ? h.status : "not-reached"
+    }
+    export function uiSkipReason(side: number, row: number): string {
+        const h = halfFor(side, row)
+        if (h) for (let i = 0; i < h.events.length; i++) if (h.events[i].kind == "skip") return h.events[i].reason
+        return ""
+    }
+    export function uiActiveRow(): number { return activeHalf ? activeHalf.row : selectedRow }
+    export function uiActiveSide(): number { return activeHalf ? activeHalf.side : selectedSide }
+    export function uiPhase(): number {
+        if (!activeHalf) return 0
+        const elapsed = control.millis() - halfStarted
+        return previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) : Math.max(0, Math.min(1, elapsed / halfDuration))
+    }
+    export function uiPreview(): boolean { return previewing }
+    export function uiFizzle(): boolean {
+        if (!activeHalf) return false
+        const elapsed = control.millis() - halfStarted
+        if (previewing) return elapsed < 200 || elapsed >= 2100 || (activeHalf.fizzle && elapsed >= 960 && elapsed < 1120)
+        return activeHalf.fizzle && elapsed >= 315 && elapsed < 525
+    }
+    export function uiEditStarted(): number { return editStarted }
+    export function uiEditDuration(): number { return EDIT_MS }
+    export function uiEditFizzleDuration(): number { return EDIT_FIZZLE_MS }
+    export function uiEditRevealDuration(): number { return EDIT_REVEAL_MS }
+    export function uiRippleDuration(): number { return RIPPLE_MS }
+    export function uiEditRecord(): apocTypes.StationRecord { return editRecord }
+    export function uiAnimating(): boolean { return animationActive() }
+    export function uiHelp(): boolean { return help }
+    export function uiLastAction(): string { return lastAction }
+    // Guide the physical interaction, without doing or grading the learner's edit.
+    export function uiSuggestedStation(): number {
+        if (animationActive()) return -1
+        if (result) return resultingVictory ? 4 : 3
+        if (records.length == 0) return 0
+        if (roomSpec && roomSpec.twoStations && records.length == 1 && records[0].station == apocTypes.Station.Primary) return 1
+        return 2
+    }
+}
+
+// SUPPLIED SOURCE learner-api.ts
+//% color=#735AA6 block="Apocalyptic Lists" weight=85
+namespace apocalypse {
+    //% blockId=al_on_interact block="on room $room station $station" weight=100
+    export function onInteract(room: apocTypes.Room, station: apocTypes.Station, handler: () => void): void {
+        apocWorld.register(room, station, handler)
+    }
+    //% blockId=al_moves block="$side move list" weight=90
+    export function moves(side: apocTypes.Side): string[] { return apocWorld.readMoves(side) }
+    //% blockId=al_values block="$side value list" weight=89
+    export function values(side: apocTypes.Side): number[] { return apocWorld.readValues(side) }
+    //% blockId=al_targets block="$side target list" weight=88
+    export function targets(side: apocTypes.Side): Sprite[] { return apocWorld.readTargets(side) }
+    //% blockId=al_roster block="hazard roster" weight=87
+    export function roster(): Sprite[] { return apocWorld.readRoster() }
+    //% blockId=al_source_moves block="source move list" weight=86
+    export function sourceMoves(): string[] { return apocWorld.readSourceMoves() }
+    //% blockId=al_set_moves block="use $list as $side move list" weight=80
+    export function setMoves(side: apocTypes.Side, list: string[]): void { apocWorld.writeMoves(side, list) }
+    //% blockId=al_set_values block="use $list as $side value list" weight=79
+    export function setValues(side: apocTypes.Side, list: number[]): void { apocWorld.writeValues(side, list) }
+    //% blockId=al_set_targets block="use $list as $side target list" weight=78
+    export function setTargets(side: apocTypes.Side, list: Sprite[]): void { apocWorld.writeTargets(side, list) }
+    //% blockId=al_set_roster block="use $list as hazard roster" weight=77
+    export function setRoster(list: Sprite[]): void { apocWorld.writeRoster(list) }
+    //% blockId=al_set_source_moves block="use $list as reserve move list" weight=76
+    export function setSourceMoves(list: string[]): void { apocWorld.writeSourceMoves(list) }
+    //% blockId=al_hold block="hold $actor" weight=70
+    export function hold(actor: Sprite): void { apocWorld.hold(actor) }
+    //% blockId=al_banish block="banish $actor" weight=69
+    export function banish(actor: Sprite): void { apocWorld.banish(actor) }
+    //% blockId=al_marked_index block="marked index" weight=60
+    export function markedIndex(): number { return apocWorld.markedIndex() }
+    //% blockId=al_number_hint block="shown leading Wait count" weight=59
+    export function numberHint(): number { return apocWorld.numberHint() }
+}
+
+// SUPPLIED SOURCE bootstrap.ts
+// Loaded after learner main.ts: register current learner code before world startup.
+apocWorld.start()
+```

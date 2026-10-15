@@ -11,7 +11,7 @@ const sort=x=>Array.isArray(x)?x.map(sort):(x&&typeof x==='object'?Object.fromEn
 const stable=x=>JSON.stringify(sort(x),null,2)+'\n';
 // Inspection only: ignore ordinary TS comments when guarding the blank starter and startup.
 const withoutComments=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/[^\n]*/g,'');
-const order=['contracts.ts','config.ts','supplied-world/rooms.ts','supplied-world/combat.ts','supplied-world/goals.ts','supplied-world/art.ts','supplied-world/save.ts','supplied-world/view.ts','supplied-world/world.ts','learner-api.ts','main.ts','bootstrap.ts'];
+const order=['contracts.ts','config.ts','supplied-world/rooms.ts','supplied-world/combat.ts','supplied-world/goals.ts','supplied-world/art.ts','supplied-world/advice.ts','supplied-world/save.ts','supplied-world/view.ts','supplied-world/world.ts','learner-api.ts','main.ts','bootstrap.ts'];
 function params(args){const opt={gameRoot:defaultRoot,commonRoot:null,check:false,partial:false,repository:'mrbrackebusch-code/apocalyptic-lists'};for(let i=0;i<args.length;i++){
  if(args[i]==='--check')opt.check=true;
  else if(args[i]==='--partial')opt.partial=true;

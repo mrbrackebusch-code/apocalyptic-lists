@@ -1,0 +1,1061 @@
+{
+  "schema": "AL-ROOM-ADVICE-1",
+  "generated_by": "tools/generate-room-advice.mjs",
+  "index_convention": "zero-based, matching the visible list rows",
+  "purpose": "Optional explicit gameplay solutions requested by owner; does not execute or replace learner code",
+  "entries": [
+    {
+      "room": 1,
+      "variant": 1,
+      "text": "Create allied moves: Ward, Mend, Strike, Strike. Guardian's Ward 4 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 8 and Decoy for 2.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/0",
+        "encounter_sha256": "f6013c1e7e1460fa8213fbfb8753dfea6c48a57c2d8f4b96ee76e2a98081c476",
+        "reference": "implementation/learner-states/rooms/R01.ts",
+        "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order."
+      }
+    },
+    {
+      "room": 1,
+      "variant": 2,
+      "text": "Create allied moves: Wait, Ward, Mend, Strike, Strike. Guardian's Ward 3 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 10 and Decoy for 2. Keep the 1 leading Wait entry.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/1",
+        "encounter_sha256": "667bffb9712098bfb2774ec0791ebe6d0333f963c05c1da6d0faf7bde9e43476",
+        "reference": "implementation/learner-states/rooms/R01.ts",
+        "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order."
+      }
+    },
+    {
+      "room": 1,
+      "variant": 3,
+      "text": "Create allied moves: Wait, Wait, Ward, Mend, Strike, Strike. Guardian's Ward 5 protects Medic before the incoming Strike; Medic then heals 3. Blade's final Strikes hit Raider for 12 and Decoy for 2. Keep the 2 leading Wait entries.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/2",
+        "encounter_sha256": "bd07c1ff98be1adcde5d3d7dede29ba17f7bf777f1f36aabc6830966b0b7e00d",
+        "reference": "implementation/learner-states/rooms/R01.ts",
+        "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order."
+      }
+    },
+    {
+      "room": 2,
+      "variant": 1,
+      "text": "Get roster index 0: Raider. Hold that Sprite so its Strike cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/3",
+        "encounter_sha256": "8b609336bb8c10fc564f8604b6600eac9c218d046d44e398c61f4283cf6b4781",
+        "reference": "implementation/learner-states/rooms/R02.ts",
+        "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Hold the marked attacking Sprite at roster index 0."
+      }
+    },
+    {
+      "room": 2,
+      "variant": 2,
+      "text": "Get roster index 1: Wisp. Hold that Sprite so its Flurry cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/4",
+        "encounter_sha256": "00e38aba8bc73f008bacecb1f08dfe149eb3737d55b52fe71fb47f537541e9f4",
+        "reference": "implementation/learner-states/rooms/R02.ts",
+        "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Hold the marked attacking Sprite at roster index 1."
+      }
+    },
+    {
+      "room": 2,
+      "variant": 3,
+      "text": "Get roster index 1: Raider. Hold that Sprite so its Strike cannot hit Medic. Holding the actor stops its casting; leave the roster and move lists as they are. Then run the protected Ward, Mend, Strike plan.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/5",
+        "encounter_sha256": "d8653da7078d72b360bd0c6f068f32595f606e0d97c096c295c12b77c22caff1",
+        "reference": "implementation/learner-states/rooms/R02.ts",
+        "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Hold the marked attacking Sprite at roster index 1."
+      }
+    },
+    {
+      "room": 3,
+      "variant": 1,
+      "text": "Set enemy move index 0 from Strike to Wait. This cancels Raider's 6 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/6",
+        "encounter_sha256": "5f403da54f2e19b0fc13f726aab1c514b1a9c887804ad8d2565a97386b487247",
+        "reference": "implementation/learner-states/rooms/R03.ts",
+        "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Target selector highlights enemy move index 0; replace Strike with Wait."
+      }
+    },
+    {
+      "room": 3,
+      "variant": 2,
+      "text": "Set enemy move index 1 from Strike to Wait. This cancels Raider's 8 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/7",
+        "encounter_sha256": "969bc8b4b5eb15c66fab8eb65bcf4597bbb676b9a5b445fa0db799efb9ff6e09",
+        "reference": "implementation/learner-states/rooms/R03.ts",
+        "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Target selector highlights enemy move index 1; replace Strike with Wait."
+      }
+    },
+    {
+      "room": 3,
+      "variant": 3,
+      "text": "Set enemy move index 2 from Strike to Wait. This cancels Raider's 8 damage to Medic without shifting any rows. Leave every other entry unchanged; Guardian and Medic can then protect and heal Medic through the pass.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/8",
+        "encounter_sha256": "f9386b4866c85913bde5f062b9a7226bd360bf7d59e48d62028fde84d0114d4b",
+        "reference": "implementation/learner-states/rooms/R03.ts",
+        "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Target selector highlights enemy move index 2; replace Strike with Wait."
+      }
+    },
+    {
+      "room": 4,
+      "variant": 1,
+      "text": "Append Strike to allied moves. It lands at index 4, using the waiting power 3 to deal 6 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/9",
+        "encounter_sha256": "28f1ae405cc4d25688df5ba41d38dca64a479e2ae1db46d31e0c7f9c6cd5c3d9",
+        "reference": "implementation/learner-states/rooms/R04.ts",
+        "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Append supplied Strike to complete the last damage row; preset final power is 3."
+      }
+    },
+    {
+      "room": 4,
+      "variant": 2,
+      "text": "Append Strike to allied moves. It lands at index 5, using the waiting power 4 to deal 8 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/10",
+        "encounter_sha256": "9b1aba03415a41916ce561dffca5a3391521b39fe0f33f34cf6b55461ef2ef51",
+        "reference": "implementation/learner-states/rooms/R04.ts",
+        "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Append supplied Strike to complete the last damage row; preset final power is 4."
+      }
+    },
+    {
+      "room": 4,
+      "variant": 3,
+      "text": "Append Strike to allied moves. It lands at index 6, using the waiting power 5 to deal 10 damage to Raider. The earlier Strike deals 2 damage; together they finish Raider after Ward and Mend keep Medic alive.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/11",
+        "encounter_sha256": "2162caa9b46846e9ec045dc9bf463c7d54dcd40f0193f009849aba493385d2a9",
+        "reference": "implementation/learner-states/rooms/R04.ts",
+        "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Append supplied Strike to complete the last damage row; preset final power is 5."
+      }
+    },
+    {
+      "room": 5,
+      "variant": 1,
+      "text": "Insert Ward at allied index 1, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/12",
+        "encounter_sha256": "77b891bff67b47baa0b30ce817d5285bb2c087f972ce2c678d4be940d35d9ef1",
+        "reference": "implementation/learner-states/rooms/R05.ts",
+        "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Insert the supplied Ward at index 1 just before the second incoming hit."
+      }
+    },
+    {
+      "room": 5,
+      "variant": 2,
+      "text": "Insert Ward at allied index 2, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/13",
+        "encounter_sha256": "998934834feb4f146a13b5ab028e17e47678a835c3b9ac9921901108e4a8e834",
+        "reference": "implementation/learner-states/rooms/R05.ts",
+        "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Insert the supplied Ward at index 2 just before the second incoming hit."
+      }
+    },
+    {
+      "room": 5,
+      "variant": 3,
+      "text": "Insert Ward at allied index 3, before Mend. It uses power 6 to absorb Decoy's 6 damage to Medic. The earlier Strike hits Boss; after the shield, Mend heals Medic and the remaining Strikes finish Boss and Decoy. Move entries shift; values and targets stay put.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/14",
+        "encounter_sha256": "f5aeff87f5530d4df04f856fb826c1363117dfac8093db206950fe9d51427073",
+        "reference": "implementation/learner-states/rooms/R05.ts",
+        "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Insert the supplied Ward at index 3 just before the second incoming hit."
+      }
+    },
+    {
+      "room": 6,
+      "variant": 1,
+      "text": "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/15",
+        "encounter_sha256": "ca5d06ee36b6a583f3f4e844ff4a2c442589289e620420c7b602067d9ea8e47c",
+        "reference": "implementation/learner-states/rooms/R06.ts",
+        "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row."
+      }
+    },
+    {
+      "room": 6,
+      "variant": 2,
+      "text": "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/16",
+        "encounter_sha256": "8b03a4b2c3037a099873dfc9867d650d272e75f41d299e69313d8f48a3688957",
+        "reference": "implementation/learner-states/rooms/R06.ts",
+        "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row."
+      }
+    },
+    {
+      "room": 6,
+      "variant": 3,
+      "text": "Prepend Wait to enemy moves. Raider's first Strike moves from index 0 to 1, where Guardian's Ward 6 absorbs its 6 damage to Medic. Only enemy move names shift. The allied plan then heals Medic and finishes Raider.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/17",
+        "encounter_sha256": "a0d3c334c0b37a79264bff23a8bd02afc6c2f73b54bebbcfdc54e17db2498827",
+        "reference": "implementation/learner-states/rooms/R06.ts",
+        "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row."
+      }
+    },
+    {
+      "room": 7,
+      "variant": 1,
+      "text": "Remove the Ward at enemy index 0; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/18",
+        "encounter_sha256": "632ca266ab2deea2bd4d6cc95b89b32cfc4a90d47bcfb1ad134c9b0fcdce18cb",
+        "reference": "implementation/learner-states/rooms/R07.ts",
+        "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove marked enemy Ward at index 0 and discard the returned string."
+      }
+    },
+    {
+      "room": 7,
+      "variant": 2,
+      "text": "Remove the Ward at enemy index 1; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/19",
+        "encounter_sha256": "c8ed053d91c884259b1e1788bd19afcf7b79ade288dc188ccf345dd4fea70062",
+        "reference": "implementation/learner-states/rooms/R07.ts",
+        "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove marked enemy Ward at index 1 and discard the returned string."
+      }
+    },
+    {
+      "room": 7,
+      "variant": 3,
+      "text": "Remove the Ward at enemy index 2; discard the removed string. Shaman loses the shield cast for Boss. Later enemy moves shift left, while powers and targets stay put. Allied Ward protects Medic, and Blade's Strikes can damage the unshielded enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/20",
+        "encounter_sha256": "e28c6f5517cb1f855f85be27d4bf57c165a5c35edeb85c6bb8515e5a5c30e4aa",
+        "reference": "implementation/learner-states/rooms/R07.ts",
+        "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove marked enemy Ward at index 2 and discard the returned string."
+      }
+    },
+    {
+      "room": 8,
+      "variant": 1,
+      "text": "Set the existing last allied move, index 4 (length minus 1), to Strike. Its power 3 deals 6 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/21",
+        "encounter_sha256": "77df93f8015adda3d5aee453bfa7ed0bc4dc0cd62075ffd325babb846f072b89",
+        "reference": "implementation/learner-states/rooms/R08.ts",
+        "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append."
+      }
+    },
+    {
+      "room": 8,
+      "variant": 2,
+      "text": "Set the existing last allied move, index 5 (length minus 1), to Strike. Its power 4 deals 8 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/22",
+        "encounter_sha256": "8d3233776fe7f743d16970a02387da9af00695d6de4035fb820ebee887513e3c",
+        "reference": "implementation/learner-states/rooms/R08.ts",
+        "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append."
+      }
+    },
+    {
+      "room": 8,
+      "variant": 3,
+      "text": "Set the existing last allied move, index 6 (length minus 1), to Strike. Its power 5 deals 10 damage to Raider after the earlier small Strike. Do not append: the needed power and target are already in this last row.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/23",
+        "encounter_sha256": "13789819b739119e15163d1d088217c53386bb3b03864f9bee1575f40f44a490",
+        "reference": "implementation/learner-states/rooms/R08.ts",
+        "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append."
+      }
+    },
+    {
+      "room": 9,
+      "variant": 1,
+      "text": "Remove just the first allied Wait. Ward moves to index 0 and uses power 4 to block Raider's 4 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/24",
+        "encounter_sha256": "aa2229c36eac4f82c127f5258490754a01e44639f63c41c91487286942ac5485",
+        "reference": "implementation/learner-states/rooms/R09.ts",
+        "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams."
+      }
+    },
+    {
+      "room": 9,
+      "variant": 2,
+      "text": "Remove just the first allied Wait. Ward moves to index 0 and uses power 6 to block Raider's 6 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/25",
+        "encounter_sha256": "ba1ec2c630527a233b96b83b585fe1c33ae059f5bbf42b68d49c4b44b1517c60",
+        "reference": "implementation/learner-states/rooms/R09.ts",
+        "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams."
+      }
+    },
+    {
+      "room": 9,
+      "variant": 3,
+      "text": "Remove just the first allied Wait. Ward moves to index 0 and uses power 4 to block Raider's 4 opening damage to Medic. Mend and the Strikes move earlier too. Keep the value and target lists still, so the moves use their new rows' powers.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/26",
+        "encounter_sha256": "5de5bef23c647cc3f4141f8c769fc844ad07157f34ebfd9dd308fe4a67d5596f",
+        "reference": "implementation/learner-states/rooms/R09.ts",
+        "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams."
+      }
+    },
+    {
+      "room": 10,
+      "variant": 1,
+      "text": "Remove the last enemy move at index 3. This deletes Raider's final Strike 3, which would deal 6 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/27",
+        "encounter_sha256": "161a84136526c087c5983ed894543b9351ff7df0ad1e06647ecc3b1d50967dd5",
+        "reference": "implementation/learner-states/rooms/R10.ts",
+        "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass."
+      }
+    },
+    {
+      "room": 10,
+      "variant": 2,
+      "text": "Remove the last enemy move at index 4. This deletes Raider's final Strike 4, which would deal 8 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/28",
+        "encounter_sha256": "a852e040ef50f4c9143360fb106687fb48f88f5c340080409fa7af6f04350520",
+        "reference": "implementation/learner-states/rooms/R10.ts",
+        "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass."
+      }
+    },
+    {
+      "room": 10,
+      "variant": 3,
+      "text": "Remove the last enemy move at index 5. This deletes Raider's final Strike 5, which would deal 10 damage to Medic. Keep the earlier moves and all values/targets. Ward and Mend handle the opening hit; survival through this one pass wins.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/29",
+        "encounter_sha256": "f1c73e1d5b8adb9c64442cdf9dd2cd6d4b52f9e7035f5f3a2c0b8e7a2dc0fde3",
+        "reference": "implementation/learner-states/rooms/R10.ts",
+        "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass."
+      }
+    },
+    {
+      "room": 11,
+      "variant": 1,
+      "text": "Get-and-remove the first roster Sprite: Raider. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/30",
+        "encounter_sha256": "7b515b4a23381deade8f867729aca8d999cf8cc61e8e3c1ede7fd614047cd6c6",
+        "reference": "implementation/learner-states/rooms/R11.ts",
+        "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station."
+      }
+    },
+    {
+      "room": 11,
+      "variant": 2,
+      "text": "Get-and-remove the first roster Sprite: Wisp. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/31",
+        "encounter_sha256": "355542dcd0a79d564ed6ce013cafdb56ad879ab4d7eef398c374c44f2a3503ba",
+        "reference": "implementation/learner-states/rooms/R11.ts",
+        "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station."
+      }
+    },
+    {
+      "room": 11,
+      "variant": 3,
+      "text": "Get-and-remove the first roster Sprite: Raider. Banish that returned Sprite, so it is absent and cannot cast. Removing its roster entry alone does not stop it. Blade's final Strike 8 targets ALL, dealing 8 damage to each remaining enemy.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/32",
+        "encounter_sha256": "6555474e1946a2c6d838a1031cae464298e42d55b9b1de80f7e47c785a5ec5b5",
+        "reference": "implementation/learner-states/rooms/R11.ts",
+        "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station."
+      }
+    },
+    {
+      "room": 12,
+      "variant": 1,
+      "text": "Find Ward in enemy moves: index 0. Set that entry to Wait, keeping the list length. This prevents Shaman's power 4 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/33",
+        "encounter_sha256": "ba3b49a580ef5a3f8912e7d417e9924e14b7447e61d3f6dcffe1d3d59dbf64e2",
+        "reference": "implementation/learner-states/rooms/R12.ts",
+        "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait."
+      }
+    },
+    {
+      "room": 12,
+      "variant": 2,
+      "text": "Find Ward in enemy moves: index 1. Set that entry to Wait, keeping the list length. This prevents Shaman's power 5 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/34",
+        "encounter_sha256": "30b7163d0358836b67e4c2179279534ea3d91f471f84edda215cb08be62f31da",
+        "reference": "implementation/learner-states/rooms/R12.ts",
+        "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait."
+      }
+    },
+    {
+      "room": 12,
+      "variant": 3,
+      "text": "Find Ward in enemy moves: index 2. Set that entry to Wait, keeping the list length. This prevents Shaman's power 6 shield on Boss. Guardian's Ward and Medic's Mend keep Medic safe while Blade hits the unshielded targets.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/35",
+        "encounter_sha256": "3e26b86e2c2a848e361c091c49cc5c4851a013d1d08320e0d831cd148b8d9112",
+        "reference": "implementation/learner-states/rooms/R12.ts",
+        "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait."
+      }
+    },
+    {
+      "room": 13,
+      "variant": 1,
+      "text": "Hold every roster Sprite, in this setup: Raider, Wisp, Plague. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/36",
+        "encounter_sha256": "d6bc2db9b310722664ee016dae9335b80086c21eafce0dbc0dfe3aabf93a8ded",
+        "reference": "implementation/learner-states/rooms/R13.ts",
+        "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act."
+      }
+    },
+    {
+      "room": 13,
+      "variant": 2,
+      "text": "Hold every roster Sprite, in this setup: Plague, Raider, Wisp. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/37",
+        "encounter_sha256": "c45da17bc6b167fbd1ead86b6ccc487ba889a15695e70a8b1bd36cb29c45e95d",
+        "reference": "implementation/learner-states/rooms/R13.ts",
+        "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act."
+      }
+    },
+    {
+      "room": 13,
+      "variant": 3,
+      "text": "Hold every roster Sprite, in this setup: Wisp, Plague, Raider. This stops Strike, Flurry and Venom, so none can answer the allied attacks. Keep every Sprite in the roster; pass each real Sprite to hold. Then run the supplied Strike, Reap and Flurry attacks to clear the enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/38",
+        "encounter_sha256": "71b7d8b85cb987d12e59ed50cef6b1c4aec10acafa6ab09311c5641754da99a9",
+        "reference": "implementation/learner-states/rooms/R13.ts",
+        "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act."
+      }
+    },
+    {
+      "room": 14,
+      "variant": 1,
+      "text": "Swap allied powers at indices 0 and 3 using a saved number: 4 and 1 become 1 and 4. Blade's first Strike now deals 2 to Small (2 HP); the last deals 8 to Boss (8 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/39",
+        "encounter_sha256": "d2cc0479adf9efb7dfb01351c89103a2f130f44bdc2f542325d5053820390956",
+        "reference": "implementation/learner-states/rooms/R14.ts",
+        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values."
+      }
+    },
+    {
+      "room": 14,
+      "variant": 2,
+      "text": "Swap allied powers at indices 0 and 3 using a saved number: 5 and 1 become 1 and 5. Blade's first Strike now deals 2 to Small (2 HP); the last deals 10 to Boss (10 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/40",
+        "encounter_sha256": "8ebe990e958e4c3536cd8fc695ab5aeb7282d66048d2ca057b8a966169630428",
+        "reference": "implementation/learner-states/rooms/R14.ts",
+        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values."
+      }
+    },
+    {
+      "room": 14,
+      "variant": 3,
+      "text": "Swap allied powers at indices 0 and 3 using a saved number: 6 and 1 become 1 and 6. Blade's first Strike now deals 2 to Small (2 HP); the last deals 12 to Boss (12 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/41",
+        "encounter_sha256": "c3517f31a00ee51cb30bccd3cb90427773efae9bef48bb1436c1aace1b9b0782",
+        "reference": "implementation/learner-states/rooms/R14.ts",
+        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values."
+      }
+    },
+    {
+      "room": 15,
+      "variant": 1,
+      "text": "Change BOTH enemy Wards, indices 0, 2, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/42",
+        "encounter_sha256": "ffc5c984331b5d90c81406167244cf46df69f8422e56f1115a255e1b3a20095f",
+        "reference": "implementation/learner-states/rooms/R15.ts",
+        "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched."
+      }
+    },
+    {
+      "room": 15,
+      "variant": 2,
+      "text": "Change BOTH enemy Wards, indices 1, 3, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/43",
+        "encounter_sha256": "12c3bb7f161bc22d7d3dc0d8a69af36ff31e23e9b2bdf73fd52e096a24f318c1",
+        "reference": "implementation/learner-states/rooms/R15.ts",
+        "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched."
+      }
+    },
+    {
+      "room": 15,
+      "variant": 3,
+      "text": "Change BOTH enemy Wards, indices 2, 4, to Wait. Leave Strike and Flurry where they are. Removing these power-9 shields lets Venom 2 keep hurting enemies and lets Blade's later Strikes finish them. Replacing only the first Ward leaves another shield.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/44",
+        "encounter_sha256": "9c1346cbc520e47d94ffcea817a92c6db8126a817d3c7746184967125627b141",
+        "reference": "implementation/learner-states/rooms/R15.ts",
+        "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched."
+      }
+    },
+    {
+      "room": 16,
+      "variant": 1,
+      "text": "Build allied moves from empty: Ward, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/45",
+        "encounter_sha256": "d3fc5d6dc91c4c62938f1b1d649a916938659516d38a3521010cf2b4ace8e408",
+        "reference": "implementation/learner-states/rooms/R16.ts",
+        "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order."
+      }
+    },
+    {
+      "room": 16,
+      "variant": 2,
+      "text": "Build allied moves from empty: Strike, Ward, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/46",
+        "encounter_sha256": "fc624ec50d394ae8ec207fa5455b3772dba4a10c0911fe78ac56acdbfa4f2382",
+        "reference": "implementation/learner-states/rooms/R16.ts",
+        "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order."
+      }
+    },
+    {
+      "room": 16,
+      "variant": 3,
+      "text": "Build allied moves from empty: Ward, Strike, Strike, Ward, Strike, Strike. For every enemy Strike use Ward; for every Wait use Strike. Ward power 3 protects Medic against each Strike's 4 damage; Blade's power-3 Strikes deal 6 in the openings. Read every source move in its current order.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/47",
+        "encounter_sha256": "d7c72ec5e08da88622c1e55004bb780f6339681a85857c0e2ef0383f2a38fc77",
+        "reference": "implementation/learner-states/rooms/R16.ts",
+        "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order."
+      }
+    },
+    {
+      "room": 17,
+      "variant": 1,
+      "text": "Get-and-remove the last reserve move: Strike. Append that returned move to allied moves at index 4. It uses power 5 against Raider. Blade's final Strike deals 10 damage to finish Raider. Keep the other reserve entries.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/48",
+        "encounter_sha256": "62da0c369103d5cd45b8b72566f9a4772e37ce908d7cf739909cf61040c286ec",
+        "reference": "implementation/learner-states/rooms/R17.ts",
+        "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups."
+      }
+    },
+    {
+      "room": 17,
+      "variant": 2,
+      "text": "Get-and-remove the last reserve move: Strike. Append that returned move to allied moves at index 4. It uses power 6 against Raider. Blade's final Strike deals 12 damage to finish Raider. Keep the other reserve entries.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/49",
+        "encounter_sha256": "4ee78fbd09cfea234d5c499d84ffb21c7b6684711cfc061453605a9358bf0b8f",
+        "reference": "implementation/learner-states/rooms/R17.ts",
+        "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups."
+      }
+    },
+    {
+      "room": 17,
+      "variant": 3,
+      "text": "Get-and-remove the last reserve move: Reap. Append that returned move to allied moves at index 4. It uses power 7 against Raider. The earlier Strike wounds Raider, so Executioner's Reap can finish the missing-HP target. Keep the other reserve entries.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/50",
+        "encounter_sha256": "7fa771f644ef3814dadba96beda538e8e9cc864996624aa7a12130e4f76dec7e",
+        "reference": "implementation/learner-states/rooms/R17.ts",
+        "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups."
+      }
+    },
+    {
+      "room": 18,
+      "variant": 1,
+      "text": "Remove enemy power 5 at index 2; append that returned number to allied values at index 4. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 5 and deals 10 damage. Leave move and target lists unchanged.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/51",
+        "encounter_sha256": "5f8d5fe1d2cbb618d400132c590eac08247275c38d43bc9528b02bed64b32df1",
+        "reference": "implementation/learner-states/rooms/R18.ts",
+        "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues."
+      }
+    },
+    {
+      "room": 18,
+      "variant": 2,
+      "text": "Remove enemy power 6 at index 3; append that returned number to allied values at index 5. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 6 and deals 12 damage. Leave move and target lists unchanged.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/52",
+        "encounter_sha256": "cd79a869955c89c73c288a8a11424e4f0e171f580c56e67ea7c983ab73712e53",
+        "reference": "implementation/learner-states/rooms/R18.ts",
+        "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues."
+      }
+    },
+    {
+      "room": 18,
+      "variant": 3,
+      "text": "Remove enemy power 7 at index 4; append that returned number to allied values at index 6. Raider's dangerous Strike is left with power 1, while Blade's final Strike gains 7 and deals 14 damage. Leave move and target lists unchanged.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/53",
+        "encounter_sha256": "2789306b4d014baea8e4b219786991e0e51ed3a40eac9a26a1b89a871b078c7a",
+        "reference": "implementation/learner-states/rooms/R18.ts",
+        "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues."
+      }
+    },
+    {
+      "room": 19,
+      "variant": 1,
+      "text": "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Raider, Wisp; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/54",
+        "encounter_sha256": "ad06ae837e0d3aaeb7df90b0c97a33646ad5f1c39ecac982d13757ea6ef52803",
+        "reference": "implementation/learner-states/rooms/R19.ts",
+        "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive."
+      }
+    },
+    {
+      "room": 19,
+      "variant": 2,
+      "text": "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Wisp, Raider; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/55",
+        "encounter_sha256": "1ebace1179eb29b3b958760e91961d28f5f9d2830480a3caffd3ab36a2655028",
+        "reference": "implementation/learner-states/rooms/R19.ts",
+        "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive."
+      }
+    },
+    {
+      "room": 19,
+      "variant": 3,
+      "text": "Choose a random roster index from 0 to 1, then hold the returned Sprite. This setup's choices are Wisp, Raider; either choice works. Keep both roster entries. Ward 5 limits incoming damage, and Medic's Mend 3 heals and clears Venom so Medic survives the pass.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/56",
+        "encounter_sha256": "c803a004301d614dae54ededbad1f2b5b5a00c4835b5254a8f26bdbf7a95157f",
+        "reference": "implementation/learner-states/rooms/R19.ts",
+        "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive."
+      }
+    },
+    {
+      "room": 20,
+      "variant": 1,
+      "text": "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Flurry, Strike. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/57",
+        "encounter_sha256": "5d1fccee03095fcba05f040135ee7fc41be58155873599417e2d69f39e6e5f90",
+        "reference": "implementation/learner-states/rooms/R20.ts",
+        "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged."
+      }
+    },
+    {
+      "room": 20,
+      "variant": 2,
+      "text": "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Strike, Flurry. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/58",
+        "encounter_sha256": "923e5805fb01aa23c7e6daa00a42910e416a25e2f09a14e5d748df57c80593e1",
+        "reference": "implementation/learner-states/rooms/R20.ts",
+        "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged."
+      }
+    },
+    {
+      "room": 20,
+      "variant": 3,
+      "text": "Reverse only enemy moves to: Wait, Wait, Ward, Wait, Flurry, Strike. Enemy attacks are delayed until the last rows. Blade wounds Raider, Ranger's Flurry hits Shaman before its delayed Ward, and Executioner's Reap finishes wounded targets. Keep enemy powers and targets fixed; reversing those too would change the plan.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/59",
+        "encounter_sha256": "ddf218d62f0575def6d4369c491519768f87ab77bdf3dc2e6cf68f48d3fabf1d",
+        "reference": "implementation/learner-states/rooms/R20.ts",
+        "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged."
+      }
+    },
+    {
+      "room": 21,
+      "variant": 1,
+      "text": "Find the first enemy Strike at index 1; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/60",
+        "encounter_sha256": "0138e536543875d89b6f3423cc90393e2289b2be3ec3e2a5bae2f2918e1544b9",
+        "reference": "implementation/learner-states/rooms/R21.ts",
+        "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index."
+      }
+    },
+    {
+      "room": 21,
+      "variant": 2,
+      "text": "Find the first enemy Strike at index 2; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/61",
+        "encounter_sha256": "51f603a8b928e9e86bad10ab4bb238cc0620a7bc6e259ae22836163cc8ca16ff",
+        "reference": "implementation/learner-states/rooms/R21.ts",
+        "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index."
+      }
+    },
+    {
+      "room": 21,
+      "variant": 3,
+      "text": "Find the first enemy Strike at index 3; insert Ward at that same allied index. It uses power 6 to block Raider's 6 damage to Medic. Mend shifts to the next row, followed by the remaining Strikes. Keep all powers and targets in their original rows.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/62",
+        "encounter_sha256": "0ad2db8d224324e32de2b7de6d5fd12f1b8af479d496b6020dd0d9cbac44391f",
+        "reference": "implementation/learner-states/rooms/R21.ts",
+        "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index."
+      }
+    },
+    {
+      "room": 22,
+      "variant": 1,
+      "text": "Remove the Raider Sprite from enemy targets at index 1, then prepend that SAME Sprite to this target list. Blade's first Strike 4 now deals 8 to Raider (8 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/63",
+        "encounter_sha256": "862f4e3438933d500a35271fe2541a89fc09fc196e754841d13542b1242a2bcb",
+        "reference": "implementation/learner-states/rooms/R22.ts",
+        "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move."
+      }
+    },
+    {
+      "room": 22,
+      "variant": 2,
+      "text": "Remove the Raider Sprite from enemy targets at index 2, then prepend that SAME Sprite to this target list. Blade's first Strike 5 now deals 10 to Raider (9 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/64",
+        "encounter_sha256": "dc5f5645441d7dcd35d510dde72a31552ec5170b10081de8eca715f8d48de93c",
+        "reference": "implementation/learner-states/rooms/R22.ts",
+        "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move."
+      }
+    },
+    {
+      "room": 22,
+      "variant": 3,
+      "text": "Remove the Raider Sprite from enemy targets at index 3, then prepend that SAME Sprite to this target list. Blade's first Strike 5 now deals 10 to Raider (10 HP), killing it before its lethal reply to Medic. Preserve the other targets' order and all other lists.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/65",
+        "encounter_sha256": "e4748a062609e15794a3fc5afbf24f78a540e9cc3c12f077c73253007b3089a6",
+        "reference": "implementation/learner-states/rooms/R22.ts",
+        "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move."
+      }
+    },
+    {
+      "room": 23,
+      "variant": 1,
+      "text": "Find and remove enemy Ward at index 0. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 3. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/66",
+        "encounter_sha256": "01ebf59e63e44ea78493946615c7f7a3bd21d489ffb7ea61d659c14abd979404",
+        "reference": "implementation/learner-states/rooms/R23.ts",
+        "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list."
+      }
+    },
+    {
+      "room": 23,
+      "variant": 2,
+      "text": "Find and remove enemy Ward at index 1. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 5. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/67",
+        "encounter_sha256": "ac5d814c572090fb82ec77178c4f3ea5b7fefdf7960c160b944f32da5e973843",
+        "reference": "implementation/learner-states/rooms/R23.ts",
+        "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list."
+      }
+    },
+    {
+      "room": 23,
+      "variant": 3,
+      "text": "Find and remove enemy Ward at index 2. Discard the string; leave values and targets fixed. Raider's next Strike shifts onto the row where Guardian casts Ward 7. Shaman also loses its shield cast. Medic heals, then Blade clears the unshielded enemies.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/68",
+        "encounter_sha256": "13148948d013a1498db80f2537a6c11e676fc8f6a9e1ec68768d5acfe9d55fb7",
+        "reference": "implementation/learner-states/rooms/R23.ts",
+        "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list."
+      }
+    },
+    {
+      "room": 24,
+      "variant": 1,
+      "text": "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 0 to 1. THEN use Station 2: set that shifted Strike to Wait. Its 8 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/69",
+        "encounter_sha256": "608f50d8550a0e6ac10ccfef1e63eaf7e6accaabf1f236aa2ba77e41cdf75582",
+        "reference": "implementation/learner-states/rooms/R24.ts",
+        "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail."
+      }
+    },
+    {
+      "room": 24,
+      "variant": 2,
+      "text": "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 1 to 2. THEN use Station 2: set that shifted Strike to Wait. Its 10 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/70",
+        "encounter_sha256": "71c4671865179533cca184f5bb6b7ceca0bd6ffe71e82e934f464d12b96c6fd9",
+        "reference": "implementation/learner-states/rooms/R24.ts",
+        "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail."
+      }
+    },
+    {
+      "room": 24,
+      "variant": 3,
+      "text": "Use Station 1 FIRST: prepend Wait to enemy moves. Raider's Strike shifts from index 2 to 3. THEN use Station 2: set that shifted Strike to Wait. Its 12 damage is cancelled, leaving Medic safe while Blade finishes Raider. Both station actions are required in this order.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/71",
+        "encounter_sha256": "99fd73896ddbc46e080803bd4d79f854ae5833d114431370bd399c41768edc4c",
+        "reference": "implementation/learner-states/rooms/R24.ts",
+        "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail."
+      }
+    },
+    {
+      "room": 25,
+      "variant": 1,
+      "text": "Set allied Wait to Ward only at indices 0, 2, 4, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/72",
+        "encounter_sha256": "86d35bc945874a404ab906033fbd4a0ac9b6e71f006f17e80ba4063a67d60797",
+        "reference": "implementation/learner-states/rooms/R25.ts",
+        "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged."
+      }
+    },
+    {
+      "room": 25,
+      "variant": 2,
+      "text": "Set allied Wait to Ward only at indices 1, 3, 5, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/73",
+        "encounter_sha256": "3a5b6aa919523823f430c248375a0de0496d0ebcb36d2e12686c80a64e51d0f0",
+        "reference": "implementation/learner-states/rooms/R25.ts",
+        "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged."
+      }
+    },
+    {
+      "room": 25,
+      "variant": 3,
+      "text": "Set allied Wait to Ward only at indices 2, 4, 6, where enemy moves are Strike. Each Ward 6 blocks Raider's 8 damage down to 2; Mend 4 restores Medic between hits. Keep harmless Wait fillers and existing attacks. Blade's three Strikes 4 deal 24 total damage to Raider.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/74",
+        "encounter_sha256": "4353dcd473fa1bc6c608e4e42d6556d64c9ae59eb8aaf6973b681f1c26b5a134",
+        "reference": "implementation/learner-states/rooms/R25.ts",
+        "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged."
+      }
+    },
+    {
+      "room": 26,
+      "variant": 1,
+      "text": "Build from empty: Ward, Mend, Ward, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/75",
+        "encounter_sha256": "8e9b0482a457a0bcabed45f6999562fa02d1b0f62e43e603479ba0879e87a27e",
+        "reference": "implementation/learner-states/rooms/R26.ts",
+        "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings."
+      }
+    },
+    {
+      "room": 26,
+      "variant": 2,
+      "text": "Build from empty: Strike, Ward, Mend, Ward, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/76",
+        "encounter_sha256": "0aa6db2490cc566d2aeb2fe37e1e182e15822e0eac9b2538392b7833584c100f",
+        "reference": "implementation/learner-states/rooms/R26.ts",
+        "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings."
+      }
+    },
+    {
+      "room": 26,
+      "variant": 3,
+      "text": "Build from empty: Ward, Mend, Strike, Ward, Strike, Strike, Strike. Ward every Strike. Use Mend for the first opening AFTER an attack; Strike in all other openings. Ward 2 reduces each 4-damage hit to 2; Mend 2 restores Medic. Blade's remaining Strikes each deal 4 to Raider. A leading opening is for Strike, not Mend.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/77",
+        "encounter_sha256": "46dd69bc3e888ac99bb322f0f45701c3bb34f2b33c0e2a100870e6e628a5fe35",
+        "reference": "implementation/learner-states/rooms/R26.ts",
+        "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings."
+      }
+    },
+    {
+      "room": 27,
+      "variant": 1,
+      "text": "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 3 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/78",
+        "encounter_sha256": "f2557a56b71b966fe9c58e58da4a68a0c16d18eff65a9bd5d397aea313d2a689",
+        "reference": "implementation/learner-states/rooms/R27.ts",
+        "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks."
+      }
+    },
+    {
+      "room": 27,
+      "variant": 2,
+      "text": "Station 1: hold Wisp, Raider. Station 2: change enemy Wards at indices 1, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/79",
+        "encounter_sha256": "e37ce274f7bf047d50a00d5192a353017e39304e8dc7b212718b77af8c65eb7e",
+        "reference": "implementation/learner-states/rooms/R27.ts",
+        "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks."
+      }
+    },
+    {
+      "room": 27,
+      "variant": 3,
+      "text": "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP.",
+      "provenance": {
+        "encounter": "implementation/encounters.json#/variants/80",
+        "encounter_sha256": "f481e18415c477f7d968273432e8e0b84ab64770c438412df6f39c9a86e63a46",
+        "reference": "implementation/learner-states/rooms/R27.ts",
+        "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
+        "instruction": "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks."
+      }
+    }
+  ]
+}
