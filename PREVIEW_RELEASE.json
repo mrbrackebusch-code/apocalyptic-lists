@@ -1,7 +1,7 @@
 {
   "schema": "AL-OWNER-PREVIEW-PUBLICATION-1",
   "kind": "learner",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": "mrbrackebusch-code/apocalyptic-lists",
   "status": "experimental-owner-directed-preview",
   "primary_directive": "Conserve usage indefinitely. Preserve complete requested quality; reuse sufficient evidence and frozen Recipes/media.",
@@ -100,16 +100,16 @@
       {
         "file": "supplied-world/view.ts",
         "source": "implementation/supplied-world/view.ts",
-        "bytes": 37183,
-        "sha256": "35dfd531b5e44b27506a9887830fbdaf821de441568649f5659dffec3d119299",
-        "lf_sha256": "35dfd531b5e44b27506a9887830fbdaf821de441568649f5659dffec3d119299"
+        "bytes": 42242,
+        "sha256": "8140734c7f6053df048e4e20f7f36757de68044f372b78aa99a9940f80accd3f",
+        "lf_sha256": "8140734c7f6053df048e4e20f7f36757de68044f372b78aa99a9940f80accd3f"
       },
       {
         "file": "supplied-world/world.ts",
         "source": "implementation/supplied-world/world.ts",
-        "bytes": 41274,
-        "sha256": "12f136b22a16023a24167f56e6a3fa598364890bd0bee4d7da0e38d6f7b169d1",
-        "lf_sha256": "12f136b22a16023a24167f56e6a3fa598364890bd0bee4d7da0e38d6f7b169d1"
+        "bytes": 42103,
+        "sha256": "5f8f8ae540f47920875c3bd9e6abc654ec69f9427fdb94422c2732584bb58f9d",
+        "lf_sha256": "5f8f8ae540f47920875c3bd9e6abc654ec69f9427fdb94422c2732584bb58f9d"
       },
       {
         "file": "learner-api.ts",
@@ -133,7 +133,7 @@
         "lf_sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc"
       }
     ],
-    "customts_sha256": "356017d561c5d1f38a01d7a3e0a0baebca0bb6af388e95057bffe78c7c5caefb",
+    "customts_sha256": "dabaf9cf3891e13ed9faa5c9ba365838240e0100a3579844be5979ec401e1db4",
     "learner_main_comment_only": true,
     "learner_reference_callbacks": 0
   },
@@ -144,10 +144,10 @@
     "new_visual_media_qualification": "not_run"
   },
   "demo": {
-    "source_project": "review-delivery/project-activation-v0.2.1",
-    "source_compile": "review-delivery/project-activation-v0.2.1/COMPILE.json",
-    "compile_receipt_sha256": "896c61ba9997bc8abc1fafbaac031e4cc17942902918335b89cac6604ba83c72",
-    "binary_sha256": "f93b44199df05f2a2b879056556e8697d3838d871d96ad56accd79c737df1b5b",
+    "source_project": "review-delivery/project-staged-combat-v0.2.2",
+    "source_compile": "review-delivery/project-staged-combat-v0.2.2/COMPILE.json",
+    "compile_receipt_sha256": "71289719f0c45f6a6fc22ee041bb3460caf618003e736de53a5529d62675f6a1",
+    "binary_sha256": "e014b52b1d8d2bfa677f71ef7e7a35f917a898bdfe12961964b8d4faf430ed95",
     "target": {
       "branch": "stable4.1",
       "tag": "v4.1.25",
@@ -198,13 +198,13 @@
       },
       {
         "file": "supplied-world/view.ts",
-        "bytes": 37183,
-        "sha256": "35dfd531b5e44b27506a9887830fbdaf821de441568649f5659dffec3d119299"
+        "bytes": 42242,
+        "sha256": "8140734c7f6053df048e4e20f7f36757de68044f372b78aa99a9940f80accd3f"
       },
       {
         "file": "supplied-world/world.ts",
-        "bytes": 41274,
-        "sha256": "12f136b22a16023a24167f56e6a3fa598364890bd0bee4d7da0e38d6f7b169d1"
+        "bytes": 42103,
+        "sha256": "5f8f8ae540f47920875c3bd9e6abc654ec69f9427fdb94422c2732584bb58f9d"
       },
       {
         "file": "learner-api.ts",
@@ -721,8 +721,8 @@
     },
     {
       "path": "FIRST.md",
-      "bytes": 710773,
-      "sha256": "4b8a855c2b6cdeb7c419bc2e4b2e5bf20cc6510dfad1826400e4adb31781edaa"
+      "bytes": 716661,
+      "sha256": "19628ee36edca3516edb8de9e24bcfd36405aad7003513ae1dbef907f39810c0"
     },
     {
       "path": "implementation/bootstrap.ts",
@@ -1071,13 +1071,13 @@
     },
     {
       "path": "implementation/supplied-world/view.ts",
-      "bytes": 37183,
-      "sha256": "35dfd531b5e44b27506a9887830fbdaf821de441568649f5659dffec3d119299"
+      "bytes": 42242,
+      "sha256": "8140734c7f6053df048e4e20f7f36757de68044f372b78aa99a9940f80accd3f"
     },
     {
       "path": "implementation/supplied-world/world.ts",
-      "bytes": 41274,
-      "sha256": "12f136b22a16023a24167f56e6a3fa598364890bd0bee4d7da0e38d6f7b169d1"
+      "bytes": 42103,
+      "sha256": "5f8f8ae540f47920875c3bd9e6abc654ec69f9427fdb94422c2732584bb58f9d"
     },
     {
       "path": "main.ts",
@@ -1102,12 +1102,12 @@
     {
       "path": "pxt.json",
       "bytes": 1230,
-      "sha256": "7a1a60b9991fe9aa917f567881858e19f5e93ace21c37636fba8b9c33dae4281"
+      "sha256": "69c7a41850bb56a4ab2683138dc518f7770dfd81871076d0518d5cc7257b430b"
     },
     {
       "path": "README.md",
-      "bytes": 707322,
-      "sha256": "018099448a882e7db3381273b01647468a83710fb5a3aa759cfa8cf933a2d8eb"
+      "bytes": 713210,
+      "sha256": "dbb220ca63f259d844e77c10b615a6fd81fce0db6c49372f3e35de061001db3d"
     },
     {
       "path": "recipes/directory.md",

@@ -10703,9 +10703,10 @@ namespace apocView {
     function timeline(state: apocTypes.TrialSnapshot, now: number): void {
         const spec = apocWorld.uiSpec(), near = apocWorld.uiNearRow(), active = apocWorld.uiActiveRow(), activeSide = apocWorld.uiActiveSide()
         for (let row = 0; row < 10; row++) {
-            const cy = rowY(row), playing = apocWorld.uiPlaying() && active == row
+            if (apocWorld.uiCombatTimelineActive() && (apocWorld.uiMomentConsumed(row) || (!apocWorld.uiReached(0, row) && !apocWorld.uiReached(1, row)))) continue
+            const cy = rowY(row), playing = (apocWorld.uiPlaying() || apocWorld.uiPreview()) && active == row
             screen.drawTransparentImage(pads[playing ? 2 : near == row ? 1 : 0], CENTER - 119, cy - 24)
-            route(state, 0, row, now); route(state, 1, row, now)
+            if (!apocWorld.uiPlaying() && !apocWorld.uiPreview() && !apocWorld.uiCombatTimelineActive()) { route(state, 0, row, now); route(state, 1, row, now) }
             const aftermath = apocWorld.uiAfter(apocTypes.Side.Enemy, row) || apocWorld.uiAfter(apocTypes.Side.Ally, row) || apocWorld.uiTerminal()
             for (let side = 0; side < 2; side++) {
                 const selected = apocWorld.uiSelectedRow() == row && apocWorld.uiSelectedSide() == side
@@ -10716,9 +10717,11 @@ namespace apocView {
                 let owner = actorFor(apocWorld.uiActionActor(side, row), before)
                 if (!owner && before) for (let n = 0; n < before.actors.length; n++) if (before.actors[n].side == side && before.actors[n].ability == move) owner = before.actors[n]
                 if (!activatingCell(side, 2, row, now)) target(ref, px(side, 2), cy, side, selected, !!a && (!a.present || a.hp <= 0), !!a && a.held)
-                if (!activatingCell(side, 0, row, now)) moveBubble(move, px(side, 0), cy, side, selected || marked, !!owner && (owner.hp <= 0 || !owner.present || owner.held))
-                if (!activatingCell(side, 1, row, now)) powerBubble(row < values.length ? values[row] : -1, px(side, 1), cy, side, marked)
-                if (playing && activeSide == side) { screen.drawCircle(px(side, 0), cy, 15, 1); screen.fillCircle(px(side, 0), cy - 19, 2, 5) }
+                const consumed = !apocWorld.uiPreview() && apocWorld.uiCombatConsumed(side, row)
+                const casting = playing && activeSide == side && !apocWorld.uiCombatSkipped()
+                if (!consumed && !(casting && apocWorld.uiCombatProgress() >= .22) && !activatingCell(side, 0, row, now)) moveBubble(move, px(side, 0), cy, side, selected || marked, !!owner && (owner.hp <= 0 || !owner.present || owner.held))
+                if (!consumed && !casting && !activatingCell(side, 1, row, now)) powerBubble(row < values.length ? values[row] : -1, px(side, 1), cy, side, marked)
+                if (playing && activeSide == side && !consumed && (!casting || apocWorld.uiCombatProgress() < .22)) { screen.drawCircle(px(side, 0), cy, 15, 5); screen.fillCircle(px(side, 0), cy - 19, 2, 5) }
             }
         }
     }
@@ -10733,7 +10736,8 @@ namespace apocView {
     function focusSide(now: number): number { return apocWorld.uiPlaying() ? apocWorld.uiActiveSide() : (now - apocWorld.uiHoverStarted()) % 3500 < 1150 ? 0 : 1 }
     function party(state: apocTypes.TrialSnapshot, now: number): void {
         smallCentered("ALLIES", 62, 119, 9); smallCentered("ENEMIES", WIDTH - 62, 119, 3)
-        const row = apocWorld.uiPlaying() ? apocWorld.uiActiveRow() : apocWorld.uiNearRow(), side = focusSide(now)
+        const combat = apocWorld.uiPlaying() || apocWorld.uiPreview()
+        const row = combat ? apocWorld.uiActiveRow() : apocWorld.uiNearRow(), side = combat ? apocWorld.uiActiveSide() : focusSide(now)
         const events = row >= 0 ? apocWorld.uiActionEvents(side, row) : [], phase = apocWorld.uiPhase()
         let event: apocTypes.TraceEvent = null
         for (let i = 0; i < events.length; i++) if (events[i].kind == "action") { event = events[i]; break }
@@ -10747,16 +10751,24 @@ namespace apocView {
                 screen.drawCircle(x, y, Math.idiv(body.height, 2) + 7, 5)
                 screen.drawCircle(x, y, Math.idiv(body.height, 2) + 10 + Math.sin(dt / 55) * 2, 1)
             }
-            if (apocWorld.uiPlaying() && event && event.actor == a.sprite) x += (a.side == 0 ? 1 : -1) * Math.sin(phase * Math.PI) * 8
-            oval(screen, x, y + body.height / 2, 23, 6, 15, recipient == a.sprite ? 5 : 0)
-            if (recipient == a.sprite) screen.drawCircle(x, y, Math.idiv(body.height, 2) + 6, event && helpful(event.move) ? 7 : 5)
+            const charged = combat && !apocWorld.uiCombatSkipped() && source == a.sprite && phase >= .48 && phase < .86
+            let receiving = !combat && recipient == a.sprite
+            if (combat && phase >= .5) for (let e = 0; e < events.length; e++) if (events[e].kind == "action" && events[e].target == a.sprite) receiving = true
+            if (charged) {
+                const pulse = Math.sin(phase * Math.PI * 20) * 2
+                screen.drawCircle(x, y, Math.idiv(body.height, 2) + 7 + pulse, 5)
+                screen.drawCircle(x, y, Math.idiv(body.height, 2) + 11, a.side == 0 ? 9 : 3)
+            }
+            if (combat && event && event.actor == a.sprite && phase >= .5 && phase < .8) x += (a.side == 0 ? 1 : -1) * Math.sin((phase - .5) / .3 * Math.PI) * 8
+            oval(screen, x, y + body.height / 2, 23, 6, 15, receiving ? 5 : 0)
+            if (receiving) screen.drawCircle(x, y, Math.idiv(body.height, 2) + 6, event && helpful(event.move) ? 7 : 5)
             if (a.present) screen.drawTransparentImage(body, x - body.width / 2, y - body.height / 2)
             if (!a.present || a.hp <= 0) cross(x, y, 19)
             smallCentered(shortName(a.id).toUpperCase(), x, y - body.height / 2 - 12, 1)
             const hpY = y + body.height / 2 + 8
             screen.fillRect(x - 24, hpY, 48, 4, 15); screen.fillRect(x - 24, hpY, Math.idiv(48 * a.hp, a.maxHP), 4, a.side == 0 ? 9 : 2)
             smallCentered(a.hp + "/" + a.maxHP, x, hpY + 7, 1)
-            moveBubble(a.ability, x + (a.side == 0 ? 1 : -1) * (body.width / 2 + 14), y, a.side, source == a.sprite, false)
+            moveBubble(a.ability, x + (a.side == 0 ? 1 : -1) * (body.width / 2 + 14), y, a.side, combat ? charged : source == a.sprite, false)
             if (a.ward) screen.drawTransparentImage(moveIcon("Ward"), x + 23, y - 25)
             if (a.venom) screen.drawTransparentImage(moveIcon("Venom"), x + 23, y - 7)
             if (a.empower) screen.drawTransparentImage(moveIcon("Empower"), x + 23, y + 11)
@@ -10860,34 +10872,69 @@ namespace apocView {
         }
     }
     function combatAnimation(state: apocTypes.TrialSnapshot): void {
-        if (!apocWorld.uiPlaying()) return
-        const row = apocWorld.uiActiveRow(), side = apocWorld.uiActiveSide(), phase = apocWorld.uiPhase(), events = apocWorld.uiActionEvents(side, row)
-        if (phase <= 0 || phase >= 1) return
-        for (let i = 0; i < events.length; i++) {
-            const e = events[i]
-            if (e.kind == "action" && e.actor && e.target) {
-                const a = actorFor(e.actor, state), b = actorFor(e.target, state)
-                if (!a || !b) continue
-                const tx = actorX(b.side), ty = actorY(e.target, state), sx = actorX(a.side), sy = actorY(e.actor, state)
-                if (!helpful(e.move)) {
-                    const p = Math.min(1, phase * 1.5), x = sx + (tx - sx) * p, y = sy + (ty - sy) * p - Math.sin(p * Math.PI) * 24
-                    screen.drawTransparentImage(moveIcon(e.move), x - 8, y - 8)
-                    if (phase > .6) { screen.drawLine(tx - 23, ty, tx + 23, ty, 5); screen.drawLine(tx, ty - 23, tx, ty + 23, 1) }
-                } else for (let k = 0; k < 5; k++) {
-                    const angle = k * Math.PI * 2 / 5 + phase * 2
-                    screen.drawTransparentImage(moveIcon(e.move), tx + Math.cos(angle) * (12 + phase * 12) - 8, ty + Math.sin(angle) * 12 - phase * 20 - 8)
+        if (!apocWorld.uiPlaying() && !apocWorld.uiPreview()) return
+        const row = apocWorld.uiActiveRow(), side = apocWorld.uiActiveSide(), phase = apocWorld.uiCombatProgress(), events = apocWorld.uiActionEvents(side, row)
+        const before = apocWorld.uiBefore(side, row) || state, cy = rowY(row), mx = px(side, 0), nx = px(side, 1)
+        const values = side == 0 ? before.lists.allyValues : before.lists.enemyValues
+        let action: apocTypes.TraceEvent = null
+        for (let i = 0; i < events.length; i++) if (events[i].kind == "action") { action = events[i]; break }
+        if (!apocWorld.uiCombatSkipped() && action) {
+            const actor = actorFor(action.actor, before), power = row < values.length ? values[row] : 0
+            if (actor) {
+                const sx = actorX(actor.side), sy = actorY(actor.sprite, before), color = side == 0 ? 9 : 3
+                if (phase < .22) {
+                    const t = Math.constrain(phase / .22, 0, 1), q = t * t * (3 - 2 * t)
+                    powerBubble(power, nx + (mx - nx) * q, cy - Math.sin(q * Math.PI) * 10, side, true)
+                    screen.drawCircle(mx, cy, 14 + q * 5, 5)
+                    screen.drawCircle(mx, cy, 17 + Math.sin(q * Math.PI) * 4, color)
+                } else if (phase < .5) {
+                    const t = Math.constrain((phase - .22) / .28, 0, 1), q = t * t * (3 - 2 * t)
+                    const x = mx + (sx - mx) * q, y = cy + (sy - cy) * q - Math.sin(q * Math.PI) * 24
+                    screen.drawCircle(x, y, 16, color); screen.drawCircle(x, y, 19 + Math.sin(t * Math.PI * 4) * 2, 5)
+                    moveBubble(action.move, x, y, side, true, false)
+                    for (let k = 0; k < 3; k++) { const angle = t * 8 + k * Math.PI * 2 / 3; screen.fillCircle(x + Math.cos(angle) * 17, y + Math.sin(angle) * 17, 1, color) }
+                } else if (phase < .8) {
+                    const p = Math.constrain((phase - .5) / .3, 0, 1)
+                    for (let i = 0; i < events.length; i++) {
+                        const e = events[i]
+                        if (e.kind != "action" || !e.target) continue
+                        const recipient = actorFor(e.target, before)
+                        if (!recipient) continue
+                        const tx = actorX(recipient.side), ty = actorY(e.target, before)
+                        // One real recipient per action event; ALL visibly branches
+                        // to its actual recipients. A self-cast makes a small orbit.
+                        const x = sx + (tx - sx) * p + (e.target == e.actor ? Math.sin(p * Math.PI * 2) * 22 : 0)
+                        const y = sy + (ty - sy) * p - Math.sin(p * Math.PI) * (e.target == e.actor ? 36 : 24)
+                        const effectColor = helpful(e.move) ? 7 : color
+                        screen.fillCircle(x, y, 10, 15); screen.drawCircle(x, y, 11, effectColor)
+                        screen.drawTransparentImage(moveIcon(e.move), x - 8, y - 8)
+                        for (let k = 1; k < 4; k++) { const tail = Math.max(0, p - k * .035); screen.fillCircle(sx + (tx - sx) * tail, sy + (ty - sy) * tail - Math.sin(tail * Math.PI) * 24, 1, effectColor) }
+                    }
                 }
             }
-            if ((e.kind == "damage" || e.kind == "heal" || e.kind == "leech") && phase > .6 && e.target) {
-                const a = actorFor(e.target, state)
-                if (a) centered((e.kind == "damage" ? "-" : "+") + e.amount, actorX(a.side), actorY(e.target, state) - 38 - phase * 12, e.kind == "damage" ? 5 : 7)
-            }
-            if (e.kind == "skip" && e.target && phase > .4) { const a = actorFor(e.target, state); if (a) cross(actorX(a.side), actorY(e.target, state), 23, 11) }
+        } else if (phase < .8) {
+            // An inactive owner, dead target or Wait never invents a cast.
+            screen.drawCircle(mx, cy, 16, 11); cross(mx, cy, 9, 11)
+            smallCentered("NO ACTION", side == 0 ? 220 : 356, cy + 19, 11)
         }
-    }
-    function distortion(now: number): void {
-        if (apocWorld.uiFizzle()) {
-            for (let i = 0; i < 16; i++) { const y = 45 + (i * 43 + Math.idiv(now, 13) * 7) % 630; screen.drawLine((i * 37) % 180, y, WIDTH - (i * 53) % 160, y, i % 2 ? 9 : 1) }
+        if (phase < .8 || phase >= 1) return
+        const impact = Math.constrain((phase - .8) / .2, 0, 1)
+        for (let i = 0; i < events.length; i++) {
+            const e = events[i], recipient = actorFor(e.target, before)
+            if (!recipient) continue
+            const tx = actorX(recipient.side), ty = actorY(e.target, before)
+            if (e.kind == "action" || e.kind == "venom-tick") {
+                const color = helpful(e.move) ? 7 : e.move == "Venom" ? 10 : 5
+                screen.drawCircle(tx, ty, 15 + impact * 16, color)
+                for (let k = 0; k < 6; k++) { const angle = k * Math.PI / 3 + impact; screen.fillCircle(tx + Math.cos(angle) * (12 + impact * 21), ty + Math.sin(angle) * (12 + impact * 21), 2, color) }
+            }
+            if (e.kind == "damage" || e.kind == "heal" || e.kind == "leech") {
+                let amount = e.amount, first = true
+                for (let j = 0; j < i; j++) if (events[j].kind == e.kind && events[j].target == e.target) first = false
+                if (!first) continue
+                for (let j = i + 1; j < events.length; j++) if (events[j].kind == e.kind && events[j].target == e.target) amount += events[j].amount
+                centered((e.kind == "damage" ? "-" : "+") + amount, tx, ty - 38 - impact * 12, e.kind == "damage" ? 5 : 7)
+            }
         }
     }
     function editVeil(now: number): void {
@@ -10952,11 +10999,16 @@ namespace apocView {
             const ref = chosen(t, side, row), a = actorFor(ref, t)
             s = "A select | B watch: " + (row < moves.length ? moves[row] : "No move") + " " + (row < values.length ? "" + values[row] : "") + " > " + (ref == apocWorld.uiSentinel() ? "ALL" : a ? shortName(a.id) : "nothing")
         }
-        if (apocWorld.uiAnimating() && !apocWorld.uiPlaying()) s = activating(now) ? "These glowing pieces are about to move." : now - apocWorld.uiEditStarted() < apocWorld.uiEditDuration() ? "The changed pieces travel to their new positions." : "The room returns with the new future already resolved."
+        if (apocWorld.uiPlaying() || apocWorld.uiPreview()) {
+            const side = apocWorld.uiActiveSide(), row = apocWorld.uiActiveRow(), before = apocWorld.uiBefore(side, row), actor = actorFor(apocWorld.uiActionActor(side, row), before)
+            const moves = side == 0 ? tMoves(before, 0) : tMoves(before, 1), move = row < moves.length ? moves[row] : "No move", phase = apocWorld.uiCombatProgress()
+            s = apocWorld.uiCombatSkipped() ? "No action: " + apocWorld.uiSkipReason(side, row) : phase < .22 ? "The number charges " + move + "." : phase < .5 ? move + " travels to " + (actor ? shortName(actor.id) : "its actor") + "." : phase < .8 ? (actor ? shortName(actor.id) : "The actor") + " sends " + move + " to its target." : "The effect lands. This action is spent."
+        } else if (apocWorld.uiAnimating()) s = activating(now) ? "These glowing pieces are about to move." : now - apocWorld.uiEditStarted() < apocWorld.uiEditDuration() ? "The changed pieces travel to their new positions." : "The room returns with the new future already resolved."
         if (s.length > 89) s = s.substr(0, 86) + "..."
         tiny(s, 23, 695, apocWorld.uiPlaying() ? 5 : 1)
         tiny("Arrows walk | A select/use | B watch/menu | X = fallen by this moment", 23, 706, 11)
     }
+    function tMoves(state: apocTypes.TrialSnapshot, side: number): string[] { return !state ? [] : side == 0 ? state.lists.allyMoves : state.lists.enemyMoves }
     export function draw(): void {
         init()
         const state = apocWorld.uiTrial(), spec = apocWorld.uiSpec(), now = control.millis()
@@ -10974,7 +11026,7 @@ namespace apocView {
         timeline(scene, now); party(openingEdit ? scene : apocWorld.uiDisplay() || state, now); sources(scene, now); stations(now)
         const step = apocWorld.uiStep(), frame = pandaFrames[apocWorld.uiDirection() * 4 + (step < 0 ? 0 : step % 3 + 1)], x = apocWorld.uiObserverX(), y = apocWorld.uiObserverY()
         oval(screen, x, y + 2, 9, 3, 15, 0); screen.drawTransparentImage(frame, x - 16, y - 30); smallCentered("YOU", x, y - 40, 1)
-        combatAnimation(apocWorld.uiDisplay() || state); distortion(now); footer(now)
+        combatAnimation(apocWorld.uiDisplay() || state); footer(now)
         if (openingEdit && dt < activation) editActivation(now)
         else if (openingEdit) { screenFizzle(now, (dt - activation) / apocWorld.uiEditFizzleDuration()); editAnimation(now) }
         else if (record && dt >= travelEnd && dt < travelEnd + reveal) screenFizzle(now, 1 - (dt - travelEnd) / reveal)
@@ -10996,8 +11048,9 @@ namespace apocWorld {
     const STATION_X = [86, 490, 288, 82, 288]
     const STATION_Y = [650, 650, 66, 84, 664]
     const WALK_SPEED = 220
-    const HALF_MS = 900
-    const PREVIEW_MS = 2300
+    const HALF_MS = 1600
+    const SKIP_MS = 650
+    const PREVIEW_HOLD_MS = 300
     const EDIT_ACTIVATION_MS = 600
     const EDIT_MS = 2000
     const RIPPLE_MS = 650
@@ -11029,6 +11082,7 @@ namespace apocWorld {
     let halfStarted = 0
     let halfDuration = HALF_MS
     let halfEventPos = 0
+    let consumed: boolean[] = []
     let previewing = false
     let previewReturn: apocTypes.TrialSnapshot = null
     let previewReturnEvent: apocTypes.TraceEvent = null
@@ -11155,8 +11209,10 @@ namespace apocWorld {
             // for each row; the centre line determines which half is selected.
             let distance = 24
             if (observer.x >= 157 && observer.x <= 419) for (let r = 0; r < 10; r++) {
+                const s = observer.x < 288 ? 0 : 1
+                if (uiCombatTimelineActive() && (uiCombatConsumed(s, r) || !halfFor(s, r))) continue
                 const d = Math.abs(observer.y - (114 + 54 * r))
-                if (d <= distance) { row = r; side = observer.x < 288 ? 0 : 1; distance = d }
+                if (d <= distance) { row = r; side = s; distance = d }
             }
             distance = 36 * 36 + 1
             for (let i = 0; i < STATION_X.length; i++) {
@@ -11375,6 +11431,7 @@ namespace apocWorld {
             editRecord = record
             editStarted = control.millis()
             editForecastPending = true
+            consumed = []
             lockObserver()
             recent = selectedRoom == 24 && station == apocTypes.Station.Primary ? "The list shifted. Use Rewrite next, then Run." :
                 selectedRoom == 27 && station == apocTypes.Station.Primary ? "Hazards held. Use Clear Wards next, then Run." :
@@ -11399,6 +11456,7 @@ namespace apocWorld {
         forecast = null
         terminal = null
         halves = []
+        consumed = []
         activeHalf = null
         previewReturn = null
         previewReturnEvent = null
@@ -11505,9 +11563,9 @@ namespace apocWorld {
         recentEvent = e
         applyTo(display, e)
     }
-    function beginHalf(half: HalfAction, duration: number): void {
+    function beginHalf(half: HalfAction): void {
         activeHalf = half
-        halfDuration = duration
+        halfDuration = (half.fizzle ? SKIP_MS : HALF_MS) + (previewing ? PREVIEW_HOLD_MS * 2 : 0)
         halfStarted = control.millis()
         halfEventPos = 0
         recentEvent = null
@@ -11524,7 +11582,7 @@ namespace apocWorld {
         previewReturnEvent = recentEvent
         previewing = true
         lockObserver()
-        beginHalf(half, PREVIEW_MS)
+        beginHalf(half)
         recent = "Preview only: " + (side == apocTypes.Side.Ally ? "ally" : "enemy") + " moment " + row
     }
     function tickAnimation(): void {
@@ -11536,14 +11594,13 @@ namespace apocWorld {
         }
         if ((!playing && !previewing) || !activeHalf) return
         const elapsed = control.millis() - halfStarted
-        const phase = Math.min(1, elapsed / halfDuration)
-        // Preview holds its exact before/after states around a single action.
-        // Full playback approaches, applies events, and returns within 900 ms.
-        const eventPhase = previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) :
-            Math.max(0, Math.min(1, (phase - 0.25) / 0.5))
+        const phase = uiCombatProgress()
+        // The number, move and actor travel before impact. Preserve actual trace
+        // order, but apply HP/marks only as effects land in the final action stage.
+        const eventPhase = phase >= 0.94 ? 1 : Math.max(0, (phase - 0.80) / 0.14)
         const count = Math.min(activeHalf.events.length, Math.floor(eventPhase * activeHalf.events.length))
         while (halfEventPos < count) applyTrace(activeHalf.events[halfEventPos++])
-        if (phase < 1) return
+        if (elapsed < halfDuration) return
         while (halfEventPos < activeHalf.events.length) applyTrace(activeHalf.events[halfEventPos++])
         display = apocCombat.cloneTrial(activeHalf.after)
         if (previewing) {
@@ -11555,8 +11612,9 @@ namespace apocWorld {
             activeHalf = null
             recent = "Preview finished. The plan and saved progress are unchanged."
         } else {
+            consumed[activeHalf.side * LIMIT + activeHalf.row] = true
             halfIndex++
-            if (halfIndex < halves.length) beginHalf(halves[halfIndex], HALF_MS)
+            if (halfIndex < halves.length) beginHalf(halves[halfIndex])
             else { activeHalf = null; doneWithTrace() }
         }
     }
@@ -11578,11 +11636,12 @@ namespace apocWorld {
         display = apocCombat.cloneTrial(frozen)
         recentEvent = null
         playing = true
+        consumed = []
         lockObserver()
         halfIndex = 0
         recent = "The frozen plan plays once, one half-action at a time."
         busy = false
-        if (halves.length) beginHalf(halves[0], HALF_MS)
+        if (halves.length) beginHalf(halves[0])
         else doneWithTrace()
     }
     function useAction(n: number): void {
@@ -11766,18 +11825,28 @@ namespace apocWorld {
     }
     export function uiActiveRow(): number { return activeHalf ? activeHalf.row : selectedRow }
     export function uiActiveSide(): number { return activeHalf ? activeHalf.side : selectedSide }
-    export function uiPhase(): number {
+    export function uiCombatProgress(): number {
         if (!activeHalf) return 0
-        const elapsed = control.millis() - halfStarted
-        return previewing ? Math.max(0, Math.min(1, (elapsed - 650) / 850)) : Math.max(0, Math.min(1, elapsed / halfDuration))
+        const elapsed = control.millis() - halfStarted - (previewing ? PREVIEW_HOLD_MS : 0)
+        return Math.max(0, Math.min(1, elapsed / (activeHalf.fizzle ? SKIP_MS : HALF_MS)))
+    }
+    export function uiPhase(): number { return uiCombatProgress() }
+    export function uiCombatSkipped(): boolean { return !!activeHalf && activeHalf.fizzle }
+    export function uiCombatConsumed(side: number, row: number): boolean {
+        return side >= 0 && side < 2 && row >= 0 && row < LIMIT && !!consumed[side * LIMIT + row]
+    }
+    export function uiMomentConsumed(row: number): boolean {
+        const ally = halfFor(0, row), enemy = halfFor(1, row)
+        return (!!ally || !!enemy) && (!ally || uiCombatConsumed(0, row)) && (!enemy || uiCombatConsumed(1, row))
+    }
+    export function uiCombatTimelineActive(): boolean {
+        if (previewing) return false
+        if (playing) return true
+        for (let i = 0; i < LIMIT * 2; i++) if (consumed[i]) return true
+        return false
     }
     export function uiPreview(): boolean { return previewing }
-    export function uiFizzle(): boolean {
-        if (!activeHalf) return false
-        const elapsed = control.millis() - halfStarted
-        if (previewing) return elapsed < 200 || elapsed >= 2100 || (activeHalf.fizzle && elapsed >= 960 && elapsed < 1120)
-        return activeHalf.fizzle && elapsed >= 315 && elapsed < 525
-    }
+    export function uiFizzle(): boolean { return false }
     export function uiEditStarted(): number { return editStarted }
     export function uiEditDuration(): number { return EDIT_MS }
     export function uiEditActivationDuration(): number { return EDIT_ACTIVATION_MS }
