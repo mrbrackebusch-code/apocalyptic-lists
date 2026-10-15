@@ -6,7 +6,7 @@
 
 ## Build your first move list
 
-Expand the simulator with **Fullscreen** so you can read the portrait room. Move with the arrow keys. **B** beside an altar explains its list operation; **B** beside a moment watches it; **B** elsewhere opens the menu. **A** at an altar runs your current code. The room begins with an empty allied move list. Your Blocks provide its first plan.
+Expand the simulator with **Fullscreen** so you can read the portrait room. Move with the arrow keys. **B** beside an altar explains its list operation; **B** beside a moment watches it; **B** elsewhere opens the menu. **A** at an altar runs your current code. The **Animation** hourglass changes animation speed without changing walking. The room begins with an empty allied move list. Your Blocks provide its first plan.
 
 A move list keeps a team's script in one place. Your first job is to build the allied script, then give it to the room.
 
@@ -10544,14 +10544,23 @@ namespace apocAdvice {
 }
 
 // SUPPLIED SOURCE supplied-world/save.ts
-// Only one game-specific record; does not persist code, actors or drafts.
+// Game-specific progress and speed only; never code, actors or drafts.
 namespace apocSave {
     const KEY = "al.progress.v1"
+    const SPEED_KEY = "al.speed.v1"
     let recovery = ""
     let future = false
 
     export function notice(): string { return recovery }
     export function isFuture(): boolean { return future }
+    export function hasProgress(): boolean { return !!settings.readNumberArray(KEY) }
+    export function loadSpeed(): number {
+        const data = settings.readNumberArray(SPEED_KEY)
+        return data && data.length == 1 && integer(data[0]) && data[0] <= 3 ? data[0] : 1
+    }
+    export function storeSpeed(index: number): void {
+        if (integer(index) && index <= 3) settings.writeNumberArray(SPEED_KEY, [index])
+    }
 
     function fresh(): apocTypes.Progress {
         return new apocTypes.Progress()
@@ -10601,8 +10610,10 @@ namespace apocSave {
         settings.writeNumberArray(KEY, [1, value.highestUnlocked, value.resumeRoom, value.completedMask])
     }
     export function clear(): void {
-        settings.remove(KEY)
         future = false
+        // A valid fresh record distinguishes explicit erase from first launch.
+        // Demo startup must not turn an erased expedition into an unlocked one.
+        store(fresh())
         recovery = "Progress erased; R01 ready"
     }
 }
@@ -10615,7 +10626,7 @@ namespace apocView {
     const CENTER = 288
     const JOBS = ["Write plan", "Hold threat", "Rewrite", "Append", "Insert Ward", "Delay", "Remove Ward", "Repair last", "Remove first", "Remove last", "Banish first", "Find Ward", "Hold hazards", "Swap power", "Clear Wards", "Build counters", "Use reserve", "Steal power", "Hold one", "Reverse", "Find defense", "Move target", "Find + remove", "Delay", "Repair gaps", "Build recovery", "Hold hazards"]
     const OPS = ["create", "get", "set", "append", "insert", "prepend", "remove", "length", "remove", "remove", "remove", "find", "foreach", "swap", "foreach", "build", "transfer", "transfer", "get", "reverse", "find", "transfer", "find", "order", "foreach", "build", "foreach"]
-    const MENU = ["Use first altar", "Use second altar", "Release time", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Altar help + room strategy", "Reset saved progress"]
+    const MENU = ["Use first altar", "Use second altar", "Release time", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Altar help + room strategy", "Reset saved progress", "Animation speed"]
     const MOVES = ["Strike", "Flurry", "Mend", "Ward", "Venom", "Reap", "Empower", "Wait"]
     let moveIcons: Image[] = []
     let actorRefs: Sprite[] = []
@@ -10675,6 +10686,7 @@ namespace apocView {
         for (let i = 0; i < 10; i++) digits.push(apocArt.digit(i))
         const names = ["altar-primary", "altar-secondary", "clock-crystal", "fountain-reset", "exit-gate"]
         for (let i = 0; i < names.length; i++) props.push(apocArt.prop(names[i]))
+        props.push(resize(apocArt.move("Wait"), 32, 32))
         for (let d = 0; d < 4; d++) for (let s = -1; s < 3; s++) pandaFrames.push(apocArt.observerFrame(d, s))
         unknown = resize(apocArt.move("?"), 16, 16); allPortrait = resize(apocArt.targetAll(), 24, 24)
         for (let i = 0; i < 3; i++) {
@@ -10900,15 +10912,16 @@ namespace apocView {
             if (a.trait != "Plain") smallCentered(a.trait, x, hpY + 19, 11)
         }
     }
-    export function stationLabel(i: number): string { return i == 0 ? JOBS[apocWorld.uiRoom() - 1] : i == 1 ? (apocWorld.uiRoom() == 24 ? "Rewrite" : "Clear Wards") : i == 2 ? "Release time" : i == 3 ? "Reset" : "Exit" }
-    export function stationIcon(i: number): string { return i == 0 ? OPS[apocWorld.uiRoom() - 1] : i == 1 ? "set" : i == 2 ? "run" : i == 3 ? "reset" : "exit" }
+    export function stationLabel(i: number): string { return i == 0 ? JOBS[apocWorld.uiRoom() - 1] : i == 1 ? (apocWorld.uiRoom() == 24 ? "Rewrite" : "Clear Wards") : i == 2 ? "Release time" : i == 3 ? "Reset" : i == 5 ? "Speed " + apocWorld.uiSpeedLabel() : "Exit" }
+    export function stationIcon(i: number): string { return i == 0 ? OPS[apocWorld.uiRoom() - 1] : i == 1 ? "set" : i == 2 ? "run" : i == 3 ? "reset" : i == 5 ? "speed" : "exit" }
     function stations(now: number): void {
-        const xs = [86, 490, 288, 82, 288], ys = [650, 650, 66, 84, 664], spec = apocWorld.uiSpec(), suggested = apocWorld.uiSuggestedStation()
-        for (let i = 0; i < 5; i++) {
+        const xs = [86, 490, 288, 82, 288, 490], ys = [650, 650, 66, 84, 664, 84], spec = apocWorld.uiSpec(), suggested = apocWorld.uiSuggestedStation()
+        for (let i = 0; i < 6; i++) {
             if (i == 1 && !spec.twoStations) continue
             const x = xs[i], y = ys[i], near = apocWorld.uiNearStation() == i, glow = i == suggested
             if (glow || near) oval(screen, x, y + 6, i == 2 ? 28 : 24, 8, 8, now % 900 < 550 ? 5 : 11)
             screen.drawTransparentImage(props[i], x - 16, y - 28 + (i == 2 ? Math.sin(now / 340) * 2 : 0))
+            if (i == 5) smallCentered("ANIMATION", x, 46, 11)
             smallCentered(stationLabel(i), x, y + (i == 2 ? 12 : 14), glow || near ? 5 : 1)
         }
         const forecast = apocWorld.uiForecast(), outcome = forecast ? forecast.status : "invalid"
@@ -11105,7 +11118,7 @@ namespace apocView {
                 let y = wrap(apocWorld.uiSpec().instruction, 83, 174, 408)
                 text("IF YOU NEED IT, HERE IS A STRATEGY", 83, y + 20, 5)
                 y = wrap(apocAdvice.text(apocWorld.uiRoom(), apocWorld.uiVariant()), 83, y + 45, 408)
-                wrap("A at an altar runs your code. The top crystal releases time. B beside a moment watches that action; B beside an altar explains its job.", 83, y + 24, 408, 11)
+                wrap("A at an altar runs your code. The top crystal releases time. B beside a moment watches that action; B beside an altar explains its job. A at the hourglass changes animation speed.", 83, y + 24, 408, 11)
             } else {
                 const station = page + 1
                 centered("HOW THIS LIST OPERATION WORKS", CENTER, 156, 5)
@@ -11121,7 +11134,7 @@ namespace apocView {
         for (let i = 0; i < MENU.length; i++) {
             const y = 168 + i * 29, locked = (i == 1 && !spec.twoStations) || (i == 6 && (progress.completedMask & (1 << (apocWorld.uiRoom() - 1))) == 0)
             if (i == apocWorld.uiMenuIndex()) screen.fillRect(76, y - 5, WIDTH - 152, 23, 8)
-            text((i == apocWorld.uiMenuIndex() ? "> " : "  ") + MENU[i], 86, y, locked ? 11 : 1)
+            text((i == apocWorld.uiMenuIndex() ? "> " : "  ") + (i == 10 ? "Animation speed: " + apocWorld.uiSpeedLabel() : MENU[i]), 86, y, locked ? 11 : 1)
         }
         centered("A choose    B close", CENTER, 482, 9)
         for (let i = 0; i < apocArt.creditCount(); i++) tiny(apocArt.creditLine(i), 83, 515 + i * 13, 11)
@@ -11151,6 +11164,10 @@ namespace apocView {
                 controls = menu ? "A runs your altar code | B closes menu | Altar help is also in this menu" : near == station ? "A runs your altar code | B explains this list operation | Arrows walk" : "At the glowing altar: A use code, B explanation | B here opens the menu"
                 if (apocWorld.uiRoom() == 1) controls = "Leading Waits: " + apocWorld.uiSpec().numberHint + ". " + (menu ? "A use code | B close menu | Choose Altar help for steps" : near == station ? "A use code | B explains the operation" : "Approach the altar: A use code, B explanation")
             }
+            if (near == 5 || (menu && apocWorld.uiMenuIndex() == 10)) {
+                s = "Animation speed: " + apocWorld.uiSpeedLabel() + ". Cycle 0.5x > 1x > 2x > 4x."
+                controls = menu ? "A changes animation speed | B closes menu | Walking speed stays the same" : "A changes animation speed | B opens menu | Set it before releasing time"
+            }
         }
         if (apocWorld.uiHelp()) controls = "Left/Right turn the help pages | B returns | Reading does not use the altar"
         if (s.length > 89) s = s.substr(0, 86) + "..."
@@ -11160,7 +11177,7 @@ namespace apocView {
     function tMoves(state: apocTypes.TrialSnapshot, side: number): string[] { return !state ? [] : side == 0 ? state.lists.allyMoves : state.lists.enemyMoves }
     export function draw(): void {
         init()
-        const state = apocWorld.uiTrial(), spec = apocWorld.uiSpec(), now = control.millis()
+        const state = apocWorld.uiTrial(), spec = apocWorld.uiSpec(), now = apocWorld.uiAnimationTime()
         if (!state || !spec) { screen.fill(15); text("Preparing the expedition...", 160, 330, 1); return }
         if (cachedRoom != apocWorld.uiRoom() || cachedVariant != apocWorld.uiVariant() || actorRefs[0] != state.actors[0].sprite) rebuild(state)
         prepareMotion()
@@ -11194,12 +11211,14 @@ namespace SpriteKind {
 }
 namespace apocWorld {
     const LIMIT = 10
-    const STATION_X = [86, 490, 288, 82, 288]
-    const STATION_Y = [650, 650, 66, 84, 664]
+    const STATION_X = [86, 490, 288, 82, 288, 490]
+    const STATION_Y = [650, 650, 66, 84, 664, 84]
+    const SPEED_RATES = [0.5, 1, 2, 4]
+    const SPEED_LABELS = ["0.5x", "1x", "2x", "4x"]
     const WALK_SPEED = 220
-    const HALF_MS = 1600
-    const SKIP_MS = 650
-    const PREVIEW_HOLD_MS = 300
+    const HALF_MS = 3200
+    const SKIP_MS = 1000
+    const PREVIEW_HOLD_MS = 500
     const EDIT_ACTIVATION_MS = 600
     const EDIT_MS = 2000
     const RIPPLE_MS = 650
@@ -11280,6 +11299,9 @@ namespace apocWorld {
     let observerLockY = 650
     let motionLocked = false
     let direction = 0
+    let speedIndex = 1
+    let animationBaseWall = 0
+    let animationBaseVirtual = 0
 
     function copyStrings(a: string[]): string[] { let b: string[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
     function copyNumbers(a: number[]): number[] { let b: number[] = []; if (a) for (let i = 0; i < a.length; i++) b.push(a[i]); return b }
@@ -11347,7 +11369,7 @@ namespace apocWorld {
         terminal = apocCombat.cloneTrial(state)
     }
     function animationActive(): boolean {
-        return playing || previewing || control.millis() < editStarted + EDIT_MS + RIPPLE_MS
+        return playing || previewing || uiAnimationTime() < editStarted + EDIT_MS + RIPPLE_MS
     }
     function lockObserver(): void {
         if (observer) { observerLockX = observer.x; observerLockY = observer.y }
@@ -11373,7 +11395,7 @@ namespace apocWorld {
                 if (d < distance) { station = i; distance = d }
             }
         }
-        if (row != nearRow || side != nearSide) hoverStarted = control.millis()
+        if (row != nearRow || side != nearSide) hoverStarted = uiAnimationTime()
         nearRow = row; nearSide = side; nearStation = station
     }
     function active(): boolean { return invoking && busy && draft != null }
@@ -11580,7 +11602,7 @@ namespace apocWorld {
             goal = null
             resultingVictory = false
             editRecord = record
-            editStarted = control.millis()
+            editStarted = uiAnimationTime()
             editForecastPending = true
             consumed = []
             lockObserver()
@@ -11719,7 +11741,7 @@ namespace apocWorld {
     function beginHalf(half: HalfAction): void {
         activeHalf = half
         halfDuration = (half.fizzle ? SKIP_MS : HALF_MS) + (previewing ? PREVIEW_HOLD_MS * 2 : 0)
-        halfStarted = control.millis()
+        halfStarted = uiAnimationTime()
         halfEventPos = 0
         recentEvent = null
         display = apocCombat.cloneTrial(half.before)
@@ -11741,12 +11763,12 @@ namespace apocWorld {
     function tickAnimation(): void {
         // Keep the old scene through activation and the opening fizzle. Resolve exactly once
         // while the edit pieces are isolated, before the room is revealed.
-        if (editForecastPending && control.millis() >= editStarted + EDIT_ACTIVATION_MS + EDIT_FIZZLE_MS) {
+        if (editForecastPending && uiAnimationTime() >= editStarted + EDIT_ACTIVATION_MS + EDIT_FIZZLE_MS) {
             editForecastPending = false
             refreshForecast()
         }
         if ((!playing && !previewing) || !activeHalf) return
-        const elapsed = control.millis() - halfStarted
+        const elapsed = uiAnimationTime() - halfStarted
         const phase = uiCombatProgress()
         // The number, move and actor travel before impact. Preserve actual trace
         // order, but apply HP/marks only as effects land in the final action stage.
@@ -11814,7 +11836,16 @@ namespace apocWorld {
             eraseConfirm = true
             lockObserver()
             recent = "ERASE game progress? A confirm, B cancel"
-        }
+        } else if (n == 10) cycleSpeed()
+    }
+    function cycleSpeed(): void {
+        if (busy || animationActive() || help || roomPicker || eraseConfirm) return
+        const wall = control.millis()
+        animationBaseVirtual += (wall - animationBaseWall) * SPEED_RATES[speedIndex]
+        animationBaseWall = wall
+        speedIndex = (speedIndex + 1) % SPEED_RATES.length
+        apocSave.storeSpeed(speedIndex)
+        recent = "Animation speed " + uiSpeedLabel() + ". Walking speed is unchanged."
     }
     function openHelp(page: number, fromMenu: boolean): void {
         helpPage = Math.constrain(page, 0, roomSpec && roomSpec.twoStations ? 2 : 1)
@@ -11826,7 +11857,7 @@ namespace apocWorld {
     function stationAction(): void {
         if (!observer) return
         updateNear()
-        if (nearStation >= 0) { useAction(nearStation == 4 ? 6 : nearStation); return }
+        if (nearStation >= 0) { useAction(nearStation == 5 ? 10 : nearStation == 4 ? 6 : nearStation); return }
         if (nearRow >= 0) {
             selectedRow = nearRow
             selectedSide = nearSide
@@ -11841,11 +11872,14 @@ namespace apocWorld {
             return
         }
         if (roomPicker) { pickerRoom += delta; if (pickerRoom < 1) pickerRoom = 1; if (pickerRoom > progress.highestUnlocked) pickerRoom = progress.highestUnlocked }
-        else if (menu) { menuIndex += delta; if (menuIndex < 0) menuIndex = 9; if (menuIndex > 9) menuIndex = 0 }
+        else if (menu) { menuIndex += delta; if (menuIndex < 0) menuIndex = 10; if (menuIndex > 10) menuIndex = 0 }
     }
     export function start(): void {
         if (begun) return
         begun = true
+        speedIndex = apocSave.loadSpeed()
+        animationBaseWall = control.millis()
+        animationBaseVirtual = 0
         progress = apocSave.load()
         allTarget = sprites.create(image.create(1, 1), SpriteKind.ApocTargetMarker)
         allTarget.setFlag(SpriteFlag.Invisible, true)
@@ -11954,6 +11988,10 @@ namespace apocWorld {
     export function uiSentinel(): Sprite { return allTarget }
     export function uiObserverX(): number { return observer ? observer.x : 171 }
     export function uiObserverY(): number { return observer ? observer.y : 650 }
+    export function uiAnimationTime(): number { return animationBaseVirtual + (control.millis() - animationBaseWall) * SPEED_RATES[speedIndex] }
+    export function uiSpeedLabel(): string { return SPEED_LABELS[speedIndex] }
+    export function uiSpeedMultiplier(): number { return SPEED_RATES[speedIndex] }
+    export function uiCombatBaseDuration(): number { return HALF_MS }
     export function uiDirection(): number { return direction }
     export function uiStep(): number {
         return observer && !motionLocked && (Math.abs(observer.vx) > 4 || Math.abs(observer.vy) > 4) ? Math.idiv(control.millis(), 140) % 2 : -1
@@ -11998,7 +12036,7 @@ namespace apocWorld {
     export function uiActiveSide(): number { return activeHalf ? activeHalf.side : selectedSide }
     export function uiCombatProgress(): number {
         if (!activeHalf) return 0
-        const elapsed = control.millis() - halfStarted - (previewing ? PREVIEW_HOLD_MS : 0)
+        const elapsed = uiAnimationTime() - halfStarted - (previewing ? PREVIEW_HOLD_MS : 0)
         return Math.max(0, Math.min(1, elapsed / (activeHalf.fizzle ? SKIP_MS : HALF_MS)))
     }
     export function uiPhase(): number { return uiCombatProgress() }
