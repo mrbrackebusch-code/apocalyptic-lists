@@ -1,42 +1,24 @@
 {
+  "name": "apocalyptic-lists",
+  "version": "0.2.0",
   "dependencies": {
     "device": "*"
   },
-  "description": "Apocalyptic Lists — experimental current visual game preview",
   "files": [
+    "contracts.ts",
+    "config.ts",
+    "supplied-world/rooms.ts",
+    "supplied-world/combat.ts",
+    "supplied-world/goals.ts",
+    "supplied-world/art.ts",
+    "supplied-world/advice.ts",
+    "supplied-world/save.ts",
+    "supplied-world/view.ts",
+    "supplied-world/world.ts",
+    "learner-api.ts",
     "main.ts",
-    "README.md",
-    "recipes/directory.md",
-    "recipes/r01.md",
-    "recipes/r02.md",
-    "recipes/r03.md",
-    "recipes/r04.md",
-    "recipes/r05.md",
-    "recipes/r06.md",
-    "recipes/r07.md",
-    "recipes/r08.md",
-    "recipes/r09.md",
-    "recipes/r10.md",
-    "recipes/r11.md",
-    "recipes/r12.md",
-    "recipes/r13.md",
-    "recipes/r14.md",
-    "recipes/r15.md",
-    "recipes/r16.md",
-    "recipes/r17.md",
-    "recipes/r18.md",
-    "recipes/r19.md",
-    "recipes/r20.md",
-    "recipes/r21.md",
-    "recipes/r22.md",
-    "recipes/r23.md",
-    "recipes/r24.md",
-    "recipes/r25.md",
-    "recipes/r26.md",
-    "recipes/r27.md",
-    "FIRST.md"
+    "bootstrap.ts"
   ],
-  "name": "apocalyptic-lists",
   "palette": [
     "#000000",
     "#f4e7cf",
@@ -55,10 +37,10 @@
     "#674533",
     "#151321"
   ],
-  "preferredEditor": "blocksprj",
+  "preferredEditor": "tsprj",
   "supportedTargets": [
     "arcade"
   ],
   "testDependencies": {},
-  "version": "0.2.0"
+  "description": "Apocalyptic Lists — ready-to-play reference demo, all rooms unlocked"
 }
