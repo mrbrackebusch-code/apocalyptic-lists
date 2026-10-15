@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "replayed_cases": 513,
+  "canonical_branches": 84,
+  "starting_variants": 81,
+  "model_matches_saved_result_and_hp": 513,
+  "model_matches_independent_result_and_hp": 513,
+  "observable_complete_cases": 102,
+  "native_compile": "not_run",
+  "native_blocks": "not_run",
+  "gameplay": "not_run",
+  "limits": "Python arithmetic replay only; independent resolver shares authored fixtures. Historical task predicates are not native runtime acceptance."
+}

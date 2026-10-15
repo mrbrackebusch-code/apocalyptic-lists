@@ -1,0 +1,10 @@
+{
+  "name": "apocalyptic-lists-authoring",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/sync-tutorial.mjs",
+    "check": "node tools/build.mjs --check --common-root shared",
+    "check:learners": "node tools/verify-learner-states.mjs --common-root shared"
+  }
+}

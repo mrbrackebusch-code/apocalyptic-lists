@@ -1,0 +1,358 @@
+{
+  "game_id": "apocalyptic-lists",
+  "contract_version": "AL-IMPLEMENTATION-1.0",
+  "primary_directive": "Conserve usage indefinitely; reuse attached methods and sufficient evidence, complete substantial outcomes, own ordinary repair, avoid duplicate work without reducing quality.",
+  "target": {
+    "platform": "MakeCode Arcade",
+    "arcade": "4.0.14",
+    "pxt": "12.2.34",
+    "runtime_language": "PXT Static TypeScript",
+    "host_tools": "Node.js .mjs; Python reference arithmetic only",
+    "dependencies": {
+      "device": "*"
+    },
+    "baseline": "retained local target, not latest-public claim"
+  },
+  "scope": "Initial implementation of settled Rev4, all27 list rooms with three authored configurations each; actual native integration follows local return.",
+  "namespace_and_file_owners": [
+    {
+      "assignment": "01-combat-encounters",
+      "root": "games/apocalyptic-lists/",
+      "owned_files": [
+        "implementation/supplied-world/combat.ts",
+        "implementation/supplied-world/rooms.ts",
+        "implementation/supplied-world/goals.ts",
+        "implementation/encounters.json",
+        "tools/generate-room-data.mjs",
+        "tests/combat-port.mjs",
+        "tests/combat-port/**",
+        "docs/COMBAT_IMPLEMENTATION.md"
+      ]
+    },
+    {
+      "assignment": "02-playable-world",
+      "root": "games/apocalyptic-lists/",
+      "owned_files": [
+        "implementation/config.ts",
+        "implementation/bootstrap.ts",
+        "implementation/learner-api.ts",
+        "implementation/supplied-world/world.ts",
+        "implementation/supplied-world/view.ts",
+        "implementation/supplied-world/save.ts",
+        "implementation/supplied-world/art.ts",
+        "tests/world-boundaries.mjs",
+        "tests/world-boundaries/**",
+        "docs/WORLD_IMPLEMENTATION.md"
+      ]
+    },
+    {
+      "assignment": "03-tutorial-build",
+      "root": "games/apocalyptic-lists/",
+      "owned_files": [
+        "implementation/main.ts",
+        "implementation/learner-states/rooms/R01.ts..R27.ts",
+        "implementation/learner-states/cumulative/R01.ts..R27.ts",
+        "implementation/LEARNER_STATE_CATALOG.json",
+        "copy/recipes/r01.md..r27.md",
+        "copy/SOURCE_LINEAGE.md",
+        "copy/ROOM_TEACHING_MAP.json",
+        "tools/build.mjs",
+        "tools/build-recipes.mjs",
+        "tools/verify-learner-states.mjs",
+        "docs/IMPLEMENTATION_RETURN.md"
+      ]
+    },
+    {
+      "assignment": "local-lead",
+      "owned_files": [
+        "implementation/contracts.ts"
+      ],
+      "source_input": "common/contracts.ts"
+    }
+  ],
+  "public_api": [
+    {
+      "namespace": "apocalypse",
+      "signature": "onInteract(room: apocTypes.Room, station: apocTypes.Station, handler: () => void): void",
+      "block_id": "al_on_interact",
+      "block_text": "on room $room station $station"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "moves(side: apocTypes.Side): string[]",
+      "block_id": "al_moves",
+      "block_text": "$side move list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "values(side: apocTypes.Side): number[]",
+      "block_id": "al_values",
+      "block_text": "$side value list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "targets(side: apocTypes.Side): Sprite[]",
+      "block_id": "al_targets",
+      "block_text": "$side target list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "roster(): Sprite[]",
+      "block_id": "al_roster",
+      "block_text": "hazard roster"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "sourceMoves(): string[]",
+      "block_id": "al_source_moves",
+      "block_text": "source move list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "setMoves(side: apocTypes.Side, list: string[]): void",
+      "block_id": "al_set_moves",
+      "block_text": "use $list as $side move list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "setValues(side: apocTypes.Side, list: number[]): void",
+      "block_id": "al_set_values",
+      "block_text": "use $list as $side value list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "setTargets(side: apocTypes.Side, list: Sprite[]): void",
+      "block_id": "al_set_targets",
+      "block_text": "use $list as $side target list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "setRoster(list: Sprite[]): void",
+      "block_id": "al_set_roster",
+      "block_text": "use $list as hazard roster"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "setSourceMoves(list: string[]): void",
+      "block_id": "al_set_source_moves",
+      "block_text": "use $list as reserve move list"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "hold(actor: Sprite): void",
+      "block_id": "al_hold",
+      "block_text": "hold $actor"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "banish(actor: Sprite): void",
+      "block_id": "al_banish",
+      "block_text": "banish $actor"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "markedIndex(): number",
+      "block_id": "al_marked_index",
+      "block_text": "marked index"
+    },
+    {
+      "namespace": "apocalypse",
+      "signature": "numberHint(): number",
+      "block_id": "al_number_hint",
+      "block_text": "shown leading Wait count"
+    }
+  ],
+  "supplied_api_signatures": "API_CONTRACT.md frozen ownership table",
+  "types_and_data": {
+    "runtime_definition_file": "contracts.ts",
+    "build_time_inputs": [
+      "ROOM_DATA.json",
+      "ROOM_GOALS.json",
+      "STATION_MAP.json"
+    ],
+    "sprite_transport": "ID strings in build-time JSON; actual stable Sprite references in runtime targets/rosters",
+    "room_range": [
+      1,
+      27
+    ],
+    "variant_range": [
+      1,
+      3
+    ],
+    "array_index_base": 0,
+    "list_cap": 10,
+    "value_range": [
+      0,
+      9
+    ]
+  },
+  "sprite_kinds": [
+    {
+      "name": "ApocActor",
+      "declaration": "namespace SpriteKind { export const ApocActor = SpriteKind.create() }",
+      "file": "implementation/supplied-world/world.ts",
+      "owner": "02-playable-world",
+      "initialized_before": "room Sprite creation / target binding / callbacks"
+    },
+    {
+      "name": "ApocObserver",
+      "declaration": "namespace SpriteKind { export const ApocObserver = SpriteKind.create() }",
+      "file": "implementation/supplied-world/world.ts",
+      "owner": "02-playable-world",
+      "initialized_before": "room Sprite creation / target binding / callbacks"
+    },
+    {
+      "name": "ApocStation",
+      "declaration": "namespace SpriteKind { export const ApocStation = SpriteKind.create() }",
+      "file": "implementation/supplied-world/world.ts",
+      "owner": "02-playable-world",
+      "initialized_before": "room Sprite creation / target binding / callbacks"
+    },
+    {
+      "name": "ApocTargetMarker",
+      "declaration": "namespace SpriteKind { export const ApocTargetMarker = SpriteKind.create() }",
+      "file": "implementation/supplied-world/world.ts",
+      "owner": "02-playable-world",
+      "initialized_before": "room Sprite creation / target binding / callbacks"
+    }
+  ],
+  "learner_owned": [
+    "native list creation/read/mutation/traversal/search/random selection",
+    "current editable callback program",
+    "explicit typed submission and Hold/Banish calls"
+  ],
+  "supplied_owned": [
+    "actor/setup/list display/station events",
+    "draft validation without solving",
+    "pure combat outcome/trace",
+    "visible goal assessment",
+    "earned save state"
+  ],
+  "startup_order": [
+    "register current learner callbacks in main.ts",
+    "single bootstrap apocWorld.start after main",
+    "initialize once and load progress",
+    "create sentinel and room actors before binding actual Sprite references",
+    "draw/accept marked interactions"
+  ],
+  "controller_mapping": "Package02 sole owner: D-pad observer, A near marked station/Run/Reset/Exit, B accessible menu; no timers; Run never invokes learner automatically.",
+  "art": {
+    "screen": {
+      "dimensions": [
+        480,
+        360
+      ],
+      "configuration_owner": "02-playable-world",
+      "configuration_file": "implementation/config.ts",
+      "declarations": [
+        "userconfig.ARCADE_SCREEN_WIDTH = 480",
+        "userconfig.ARCADE_SCREEN_HEIGHT = 360"
+      ]
+    },
+    "palette": "Arcade default 16 entries",
+    "factory_owner": "02-playable-world",
+    "factories": [
+      {
+        "signature": "apocArt.actor(artKey: string, side: apocTypes.Side): Image",
+        "dimensions": [
+          24,
+          24
+        ]
+      },
+      {
+        "signature": "apocArt.observer(): Image",
+        "dimensions": [
+          12,
+          12
+        ]
+      },
+      {
+        "signature": "apocArt.station(kind: apocTypes.Station): Image",
+        "dimensions": [
+          16,
+          16
+        ]
+      }
+    ],
+    "ownership": "fresh mutable Image per call; centered anchors, world-owned collision; no factory startup",
+    "initial_input": "functional primitive placeholders; final art supplied separately via artKey"
+  },
+  "persistence": {
+    "enabled": true,
+    "keys": [
+      "al.progress.v1"
+    ],
+    "schema": [
+      1,
+      "highestUnlocked 1..27",
+      "resumeRoom 1..highestUnlocked",
+      "completedMask bits0..26"
+    ],
+    "load_migration": "exact length/integer/version/bounds checks; safe missing/corrupt recovery; future version not silently overwritten",
+    "save_triggers": [
+      "earned completion",
+      "room travel"
+    ],
+    "reset": "only assigned game key through explicit progress reset",
+    "current_code": "Always execute current learner callbacks; progress is not an accepted-program cache."
+  },
+  "tutorial": {
+    "mode": "27 same-project Recipes",
+    "learner_state_catalog": "implementation/LEARNER_STATE_CATALOG.json",
+    "starter": "implementation/main.ts comment-only",
+    "recipe_resources": "existing-project overlay; no later template/customts/resource replacement",
+    "source_packet": "Package03 references/SOURCE_GUIDE.md and actual retained passages",
+    "media": "planned bindings; native instruction/game recordings captured locally later"
+  },
+  "integration": {
+    "assembler": "Package03 tools/build.mjs and tools/build-recipes.mjs",
+    "input_order": [
+      "implementation/contracts.ts",
+      "implementation/config.ts",
+      "implementation/supplied-world/rooms.ts",
+      "implementation/supplied-world/combat.ts",
+      "implementation/supplied-world/goals.ts",
+      "implementation/supplied-world/art.ts",
+      "implementation/supplied-world/save.ts",
+      "implementation/supplied-world/view.ts",
+      "implementation/supplied-world/world.ts",
+      "implementation/learner-api.ts",
+      "implementation/main.ts",
+      "implementation/bootstrap.ts"
+    ],
+    "generated_outputs": [
+      "generated/project/",
+      "generated/supplied-runtime.ts",
+      "generated/tutorial/recipes/",
+      "generated/BUILD.json",
+      "generated/RECIPE_BUILD.json"
+    ],
+    "owner": "local game lead; independent external returns use contract/test adapters and do not write peer files"
+  },
+  "acceptance": [
+    {
+      "case": "combat submitted states",
+      "expected": "513 outcome/HP matches",
+      "check_owner": "Package01",
+      "evidence_level": "host actual-port execution; native pending"
+    },
+    {
+      "case": "all reference handlers and equivalent observable states",
+      "expected": "84 reference branches; 102 supplied-case completions under corrected visible grading",
+      "check_owner": "Packages01/03",
+      "evidence_level": "host; native pending"
+    },
+    {
+      "case": "missing/wrong code, rollback, identity, reset/restart",
+      "expected": "honest current-code behavior and bounded native save/world states",
+      "check_owner": "Package02/local lead",
+      "evidence_level": "host boundaries + local native"
+    },
+    {
+      "case": "ten-row display, actual editable Blocks, Recipe overlays",
+      "expected": "actual target works with current source and all relevant data visible",
+      "check_owner": "local lead",
+      "evidence_level": "native not_run during package preparation"
+    }
+  ]
+}

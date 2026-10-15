@@ -1,0 +1,2869 @@
+{
+  "schema": "AL-TEACHING-MAP-1",
+  "lesson_count": 27,
+  "accepted_program_cache": false,
+  "rooms": [
+    {
+      "room": "R01",
+      "sequence": 1,
+      "room_situation": "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order.",
+      "native_construction": "create string array; prefix loop; append",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [],
+      "support_level": "worked",
+      "exposed_lists": [
+        "allyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R01-V1",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R01-V1"
+        },
+        {
+          "variant_id": "R01-V2",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R01-V2"
+        },
+        {
+          "variant_id": "R01-V3",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R01-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R01.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R01.ts",
+      "recipe_source": "copy/recipes/r01.md",
+      "recipe_output": "generated/tutorial/recipes/r01.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R01 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R01-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R01-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "create string array; prefix loop; append",
+          "intended_visible_change": "Editable Arcade Blocks for create string array; prefix loop; append",
+          "alt_text": "R01 native editable Arcade Blocks showing create string array; prefix loop; append, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R01-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R01-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "alt_text": "R01 R01-V1 game view, before and after Primary interaction: allyMoves: [] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R02",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Build your first move list"
+    },
+    {
+      "room": "R02",
+      "sequence": 2,
+      "room_situation": "Hold the marked attacking Sprite at roster index 0.",
+      "native_construction": "indexed Sprite read; hold",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R01"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "hazardRoster"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [],
+          "effects": [
+            "hold"
+          ],
+          "marked_index": 0
+        }
+      ],
+      "index_identity_rule": "Sprite reference identity matters",
+      "examples": [
+        {
+          "variant_id": "R02-V1",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Raider",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R02-V1"
+        },
+        {
+          "variant_id": "R02-V2",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R02-V2"
+        },
+        {
+          "variant_id": "R02-V3",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Raider",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R02-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R02.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R02.ts",
+      "recipe_source": "copy/recipes/r02.md",
+      "recipe_output": "generated/tutorial/recipes/r02.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R02 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R02-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R02-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "indexed Sprite read; hold",
+          "intended_visible_change": "Editable Arcade Blocks for indexed Sprite read; hold",
+          "alt_text": "R02 native editable Arcade Blocks showing indexed Sprite read; hold, inside Primary onInteract handler; apply `hold` to the retrieved Sprite(s)."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R02-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R02-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Only the marked real hazard is held. The roster still contains the same Sprite references in the same order.",
+          "intended_visible_change": "Hold: E-Raider",
+          "alt_text": "R02 R02-V1 game view, before and after Primary interaction: List cells unchanged; actor effect only → Hold: E-Raider."
+        }
+      ],
+      "next_recipe": "R03",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Hold one hazard"
+    },
+    {
+      "room": "R03",
+      "sequence": 3,
+      "room_situation": "Target selector highlights enemy move index 0; replace Strike with Wait.",
+      "native_construction": "indexed string replacement",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R02"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": 0
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R03-V1",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R03-V1"
+        },
+        {
+          "variant_id": "R03-V2",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R03-V2"
+        },
+        {
+          "variant_id": "R03-V3",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R03-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R03.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R03.ts",
+      "recipe_source": "copy/recipes/r03.md",
+      "recipe_output": "generated/tutorial/recipes/r03.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R03 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R03-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R03-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "indexed string replacement",
+          "intended_visible_change": "Editable Arcade Blocks for indexed string replacement",
+          "alt_text": "R03 native editable Arcade Blocks showing indexed string replacement, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R03-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R03-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The marked enemy `Strike` becomes `Wait`. No item is inserted or removed.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\"]",
+          "alt_text": "R03 R03-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R04",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Change one move"
+    },
+    {
+      "room": "R04",
+      "sequence": 4,
+      "room_situation": "Append supplied Strike to complete the last damage row; preset final power is 3.",
+      "native_construction": "push string",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R03"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "allyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R04-V1",
+          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R04-V1"
+        },
+        {
+          "variant_id": "R04-V2",
+          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R04-V2"
+        },
+        {
+          "variant_id": "R04-V3",
+          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R04-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R04.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R04.ts",
+      "recipe_source": "copy/recipes/r04.md",
+      "recipe_output": "generated/tutorial/recipes/r04.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R04 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R04-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R04-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "push string",
+          "intended_visible_change": "Editable Arcade Blocks for push string",
+          "alt_text": "R04 native editable Arcade Blocks showing push string, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R04-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R04-before-after",
+          "kind": "game_before_after",
+          "focal_change": "One `Strike` appears at the end of `allyMoves`. The other allied lists keep their original lengths.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "alt_text": "R04 R04-V1 game view, before and after Primary interaction: allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R05",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Add a final attack"
+    },
+    {
+      "room": "R05",
+      "sequence": 5,
+      "room_situation": "Insert the supplied Ward at index 1 just before the second incoming hit.",
+      "native_construction": "insertAt marked index",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R04"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "allyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": 1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R05-V1",
+          "initial_summary": "allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R05-V1"
+        },
+        {
+          "variant_id": "R05-V2",
+          "initial_summary": "allyMoves: [\"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R05-V2"
+        },
+        {
+          "variant_id": "R05-V3",
+          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R05-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R05.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R05.ts",
+      "recipe_source": "copy/recipes/r05.md",
+      "recipe_output": "generated/tutorial/recipes/r05.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R05 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R05-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R05-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "insertAt marked index",
+          "intended_visible_change": "Editable Arcade Blocks for insertAt marked index",
+          "alt_text": "R05 native editable Arcade Blocks showing insertAt marked index, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R05-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R05-before-after",
+          "kind": "game_before_after",
+          "focal_change": "`Ward` appears at the marked insertion position; all later allied moves shift one index to the right.",
+          "intended_visible_change": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "alt_text": "R05 R05-V1 game view, before and after Primary interaction: allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"] → allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R06",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Insert a shield"
+    },
+    {
+      "room": "R06",
+      "sequence": 6,
+      "room_situation": "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row.",
+      "native_construction": "unshift string",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R05"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R06-V1",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R06-V1"
+        },
+        {
+          "variant_id": "R06-V2",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R06-V2"
+        },
+        {
+          "variant_id": "R06-V3",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R06-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R06.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R06.ts",
+      "recipe_source": "copy/recipes/r06.md",
+      "recipe_output": "generated/tutorial/recipes/r06.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R06 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R06-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R06-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "unshift string",
+          "intended_visible_change": "Editable Arcade Blocks for unshift string",
+          "alt_text": "R06 native editable Arcade Blocks showing unshift string, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R06-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R06-before-after",
+          "kind": "game_before_after",
+          "focal_change": "A new `Wait` occupies enemy index 0. The original first `Strike` shifts to index 1.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "alt_text": "R06 R06-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R07",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Delay the enemy"
+    },
+    {
+      "room": "R07",
+      "sequence": 7,
+      "room_situation": "Remove marked enemy Ward at index 0 and discard the returned string.",
+      "native_construction": "removeAt marked index",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R06"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": 0
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R07-V1",
+          "initial_summary": "enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R07-V1"
+        },
+        {
+          "variant_id": "R07-V2",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R07-V2"
+        },
+        {
+          "variant_id": "R07-V3",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R07-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R07.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R07.ts",
+      "recipe_source": "copy/recipes/r07.md",
+      "recipe_output": "generated/tutorial/recipes/r07.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R07 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R07-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R07-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "removeAt marked index",
+          "intended_visible_change": "Editable Arcade Blocks for removeAt marked index",
+          "alt_text": "R07 native editable Arcade Blocks showing removeAt marked index, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R07-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R07-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The marked enemy `Ward` is gone. The enemy move list is shorter by one, with later items shifted left.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "alt_text": "R07 R07-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R08",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Remove one shield"
+    },
+    {
+      "room": "R08",
+      "sequence": 8,
+      "room_situation": "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append.",
+      "native_construction": "length-minus-one indexed set",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R07"
+      ],
+      "support_level": "worked",
+      "exposed_lists": [
+        "allyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based indices; last valid index is length - 1",
+      "examples": [
+        {
+          "variant_id": "R08-V1",
+          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R08-V1"
+        },
+        {
+          "variant_id": "R08-V2",
+          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R08-V2"
+        },
+        {
+          "variant_id": "R08-V3",
+          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R08-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R08.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R08.ts",
+      "recipe_source": "copy/recipes/r08.md",
+      "recipe_output": "generated/tutorial/recipes/r08.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R08 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R08-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R08-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "length-minus-one indexed set",
+          "intended_visible_change": "Editable Arcade Blocks for length-minus-one indexed set",
+          "alt_text": "R08 native editable Arcade Blocks showing length-minus-one indexed set, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R08-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R08-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Only the last allied `Wait` changes to `Strike`; list length does not change, even in a longer setup.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "alt_text": "R08 R08-V1 game view, before and after Primary interaction: allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R09",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Find the final cell"
+    },
+    {
+      "room": "R09",
+      "sequence": 9,
+      "room_situation": "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams.",
+      "native_construction": "shift move",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R08"
+      ],
+      "support_level": "guided",
+      "exposed_lists": [
+        "allyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R09-V1",
+          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R09-V1"
+        },
+        {
+          "variant_id": "R09-V2",
+          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R09-V2"
+        },
+        {
+          "variant_id": "R09-V3",
+          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R09-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R09.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R09.ts",
+      "recipe_source": "copy/recipes/r09.md",
+      "recipe_output": "generated/tutorial/recipes/r09.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R09 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R09-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R09-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "shift move",
+          "intended_visible_change": "Editable Arcade Blocks for shift move",
+          "alt_text": "R09 native editable Arcade Blocks showing shift move, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R09-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R09-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The first allied move disappears and the other moves shift left; the list becomes shorter, not a list with a new `Wait`.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "alt_text": "R09 R09-V1 game view, before and after Primary interaction: allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R10",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Remove the first move"
+    },
+    {
+      "room": "R10",
+      "sequence": 10,
+      "room_situation": "Remove the final enemyMoves entry so the lethal cast is absent, not replaced with Wait; survive the published one pass.",
+      "native_construction": "pop move",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R09"
+      ],
+      "support_level": "guided",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R10-V1",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Strike\"]",
+          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R10-V1"
+        },
+        {
+          "variant_id": "R10-V2",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\", \"Strike\"]",
+          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R10-V2"
+        },
+        {
+          "variant_id": "R10-V3",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Strike\"]",
+          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R10-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R10.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R10.ts",
+      "recipe_source": "copy/recipes/r10.md",
+      "recipe_output": "generated/tutorial/recipes/r10.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R10 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R10-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R10-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "pop move",
+          "intended_visible_change": "Editable Arcade Blocks for pop move",
+          "alt_text": "R10 native editable Arcade Blocks showing pop move, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R10-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R10-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The final enemy move disappears. The list loses one cell instead of replacing its last move with `Wait`.",
+          "intended_visible_change": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]",
+          "alt_text": "R10 R10-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Strike\"] → enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R11",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Remove the final move"
+    },
+    {
+      "room": "R11",
+      "sequence": 11,
+      "room_situation": "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station.",
+      "native_construction": "shift Sprite; setRoster; banish identity",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R10",
+        "R02"
+      ],
+      "support_level": "guided",
+      "exposed_lists": [
+        "hazardRoster"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "roster"
+          ],
+          "effects": [
+            "banish"
+          ],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "Sprite reference identity matters",
+      "examples": [
+        {
+          "variant_id": "R11-V1",
+          "initial_summary": "hazardRoster: [\"E-Raider\", \"E-Wisp\", \"E-Shaman\"]",
+          "expected_summary": "hazardRoster: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R11-V1"
+        },
+        {
+          "variant_id": "R11-V2",
+          "initial_summary": "hazardRoster: [\"E-Wisp\", \"E-Raider\", \"E-Shaman\"]",
+          "expected_summary": "hazardRoster: [\"E-Raider\", \"E-Shaman\"]; Banish: E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R11-V2"
+        },
+        {
+          "variant_id": "R11-V3",
+          "initial_summary": "hazardRoster: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\"]",
+          "expected_summary": "hazardRoster: [\"E-Shaman\", \"E-Wisp\"]; Banish: E-Raider",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R11-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R11.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R11.ts",
+      "recipe_source": "copy/recipes/r11.md",
+      "recipe_output": "generated/tutorial/recipes/r11.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R11 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R11-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R11-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "shift Sprite; setRoster; banish identity",
+          "intended_visible_change": "Editable Arcade Blocks for shift Sprite; setRoster; banish identity",
+          "alt_text": "R11 native editable Arcade Blocks showing shift Sprite; setRoster; banish identity, inside Primary onInteract handler; submit `roster` and apply `banish` to the retrieved Sprite(s)."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R11-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R11-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The roster loses its first Sprite, and that *same real actor* is banished from the world.",
+          "intended_visible_change": "hazardRoster: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider",
+          "alt_text": "R11 R11-V1 game view, before and after Primary interaction: hazardRoster: [\"E-Raider\", \"E-Wisp\", \"E-Shaman\"] → hazardRoster: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider."
+        }
+      ],
+      "next_recipe": "R12",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Take a hazard out of play"
+    },
+    {
+      "room": "R12",
+      "sequence": 12,
+      "room_situation": "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait.",
+      "native_construction": "indexOf + indexed set with -1 guard",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        },
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R11",
+        "R03"
+      ],
+      "support_level": "guided",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "−1 search guard",
+      "examples": [
+        {
+          "variant_id": "R12-V1",
+          "initial_summary": "enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R12-V1"
+        },
+        {
+          "variant_id": "R12-V2",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R12-V2"
+        },
+        {
+          "variant_id": "R12-V3",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R12-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R12.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R12.ts",
+      "recipe_source": "copy/recipes/r12.md",
+      "recipe_output": "generated/tutorial/recipes/r12.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R12 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R12-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R12-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "indexOf + indexed set with -1 guard",
+          "intended_visible_change": "Editable Arcade Blocks for indexOf + indexed set with -1 guard",
+          "alt_text": "R12 native editable Arcade Blocks showing indexOf + indexed set with -1 guard, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R12-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R12-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The current enemy `Ward` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "alt_text": "R12 R12-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R13",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Find a move by its value"
+    },
+    {
+      "room": "R13",
+      "sequence": 13,
+      "room_situation": "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act.",
+      "native_construction": "for-of Sprite traversal; hold each",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R12",
+        "R02"
+      ],
+      "support_level": "guided",
+      "exposed_lists": [
+        "hazardRoster"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [],
+          "effects": [
+            "hold"
+          ],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "Sprite reference identity matters",
+      "examples": [
+        {
+          "variant_id": "R13-V1",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Plague, E-Raider, E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R13-V1"
+        },
+        {
+          "variant_id": "R13-V2",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Plague, E-Raider, E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R13-V2"
+        },
+        {
+          "variant_id": "R13-V3",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Plague, E-Raider, E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R13-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R13.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R13.ts",
+      "recipe_source": "copy/recipes/r13.md",
+      "recipe_output": "generated/tutorial/recipes/r13.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R13 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R13-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R13-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "for-of Sprite traversal; hold each",
+          "intended_visible_change": "Editable Arcade Blocks for for-of Sprite traversal; hold each",
+          "alt_text": "R13 native editable Arcade Blocks showing for-of Sprite traversal; hold each, inside Primary onInteract handler; apply `hold` to the retrieved Sprite(s)."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R13-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R13-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Every hazard-roster Sprite is held; none is removed from the list.",
+          "intended_visible_change": "Hold: E-Plague, E-Raider, E-Wisp",
+          "alt_text": "R13 R13-V1 game view, before and after Primary interaction: List cells unchanged; actor effect only → Hold: E-Plague, E-Raider, E-Wisp."
+        }
+      ],
+      "next_recipe": "R14",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Hold every hazard"
+    },
+    {
+      "room": "R14",
+      "sequence": 14,
+      "room_situation": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values.",
+      "native_construction": "numeric temporary-variable swap",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R13"
+      ],
+      "support_level": "guided",
+      "exposed_lists": [
+        "allyValues"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyValues"
+          ],
+          "effects": [],
+          "marked_index": 0
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R14-V1",
+          "initial_summary": "allyValues: [4, 1, 2, 1]",
+          "expected_summary": "allyValues: [1, 1, 2, 4]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R14-V1"
+        },
+        {
+          "variant_id": "R14-V2",
+          "initial_summary": "allyValues: [5, 1, 2, 1]",
+          "expected_summary": "allyValues: [1, 1, 2, 5]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R14-V2"
+        },
+        {
+          "variant_id": "R14-V3",
+          "initial_summary": "allyValues: [6, 1, 2, 1]",
+          "expected_summary": "allyValues: [1, 1, 2, 6]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R14-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R14.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R14.ts",
+      "recipe_source": "copy/recipes/r14.md",
+      "recipe_output": "generated/tutorial/recipes/r14.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R14 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R14-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R14-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "numeric temporary-variable swap",
+          "intended_visible_change": "Editable Arcade Blocks for numeric temporary-variable swap",
+          "alt_text": "R14 native editable Arcade Blocks showing numeric temporary-variable swap, inside Primary onInteract handler; submit `allyValues`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R14-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R14-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The numbers from allied positions 0 and 3 exchange places; positions 1 and 2 stay untouched.",
+          "intended_visible_change": "allyValues: [1, 1, 2, 4]",
+          "alt_text": "R14 R14-V1 game view, before and after Primary interaction: allyValues: [4, 1, 2, 1] → allyValues: [1, 1, 2, 4]."
+        }
+      ],
+      "next_recipe": "R15",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Swap two numbers"
+    },
+    {
+      "room": "R15",
+      "sequence": 15,
+      "room_situation": "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched.",
+      "native_construction": "length-derived indexed conditional loop",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R14",
+        "R08"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based indices; last valid index is length - 1",
+      "examples": [
+        {
+          "variant_id": "R15-V1",
+          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R15-V1"
+        },
+        {
+          "variant_id": "R15-V2",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R15-V2"
+        },
+        {
+          "variant_id": "R15-V3",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R15-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R15.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R15.ts",
+      "recipe_source": "copy/recipes/r15.md",
+      "recipe_output": "generated/tutorial/recipes/r15.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R15 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R15-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R15-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "length-derived indexed conditional loop",
+          "intended_visible_change": "Editable Arcade Blocks for length-derived indexed conditional loop",
+          "alt_text": "R15 native editable Arcade Blocks showing length-derived indexed conditional loop, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R15-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R15-before-after",
+          "kind": "game_before_after",
+          "focal_change": "All enemy `Ward` moves become `Wait`; existing attacks and other moves stay in their original positions.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "alt_text": "R15 R15-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R16",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Repair every shield"
+    },
+    {
+      "room": "R16",
+      "sequence": 16,
+      "room_situation": "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order.",
+      "native_construction": "typed empty string array; for-of; push counters",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R15"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "allyMoves",
+        "sourceMoves (read-only enemyMoves alias)"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R16-V1",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R16-V1"
+        },
+        {
+          "variant_id": "R16-V2",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R16-V2"
+        },
+        {
+          "variant_id": "R16-V3",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Ward\", \"Strike\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R16-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R16.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R16.ts",
+      "recipe_source": "copy/recipes/r16.md",
+      "recipe_output": "generated/tutorial/recipes/r16.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R16 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R16-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R16-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "typed empty string array; for-of; push counters",
+          "intended_visible_change": "Editable Arcade Blocks for typed empty string array; for-of; push counters",
+          "alt_text": "R16 native editable Arcade Blocks showing typed empty string array; for-of; push counters, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R16-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R16-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Each source move produces one allied move in the same order: `Strike` → `Ward`, and `Wait` → `Strike`. The source list stays unchanged.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "alt_text": "R16 R16-V1 game view, before and after Primary interaction: allyMoves: [] → allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R17",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Build a response list"
+    },
+    {
+      "room": "R17",
+      "sequence": 17,
+      "room_situation": "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups.",
+      "native_construction": "pop source + push returned string; two setters",
+      "source_support": [
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R16"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "allyMoves",
+        "sourceMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves",
+            "sourceMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R17-V1",
+          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Wait\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R17-V1"
+        },
+        {
+          "variant_id": "R17-V2",
+          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Mend\", \"Wait\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Mend\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R17-V2"
+        },
+        {
+          "variant_id": "R17-V3",
+          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Ward\", \"Mend\", \"Wait\", \"Reap\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Reap\"]; reserveMoves: [\"Ward\", \"Mend\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R17-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R17.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R17.ts",
+      "recipe_source": "copy/recipes/r17.md",
+      "recipe_output": "generated/tutorial/recipes/r17.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R17 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R17-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R17-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "pop source + push returned string; two setters",
+          "intended_visible_change": "Editable Arcade Blocks for pop source + push returned string; two setters",
+          "alt_text": "R17 native editable Arcade Blocks showing pop source + push returned string; two setters, inside Primary onInteract handler; submit `allyMoves`, `sourceMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R17-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R17-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The source/reserve list loses its last move; that exact string is now the final move of `allyMoves`.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Wait\"]",
+          "alt_text": "R17 R17-V1 game view, before and after Primary interaction: allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Wait\", \"Strike\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Wait\"]."
+        }
+      ],
+      "next_recipe": "R18",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Transfer a reserve move"
+    },
+    {
+      "room": "R18",
+      "sequence": 18,
+      "room_situation": "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues.",
+      "native_construction": "removeAt numeric value + append returned number; two setters",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R17"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "allyValues",
+        "enemyValues"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyValues",
+            "allyValues"
+          ],
+          "effects": [],
+          "marked_index": 2
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R18-V1",
+          "initial_summary": "allyValues: [2, 2, 1, 1]; enemyValues: [1, 1, 5, 1, 1]",
+          "expected_summary": "allyValues: [2, 2, 1, 1, 5]; enemyValues: [1, 1, 1, 1]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R18-V1"
+        },
+        {
+          "variant_id": "R18-V2",
+          "initial_summary": "allyValues: [1, 2, 2, 1, 1]; enemyValues: [1, 1, 1, 6, 1, 1]",
+          "expected_summary": "allyValues: [1, 2, 2, 1, 1, 6]; enemyValues: [1, 1, 1, 1, 1]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R18-V2"
+        },
+        {
+          "variant_id": "R18-V3",
+          "initial_summary": "allyValues: [1, 1, 2, 2, 1, 1]; enemyValues: [1, 1, 1, 1, 7, 1, 1]",
+          "expected_summary": "allyValues: [1, 1, 2, 2, 1, 1, 7]; enemyValues: [1, 1, 1, 1, 1, 1]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R18-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R18.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R18.ts",
+      "recipe_source": "copy/recipes/r18.md",
+      "recipe_output": "generated/tutorial/recipes/r18.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R18 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R18-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R18-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "removeAt numeric value + append returned number; two setters",
+          "intended_visible_change": "Editable Arcade Blocks for removeAt numeric value + append returned number; two setters",
+          "alt_text": "R18 native editable Arcade Blocks showing removeAt numeric value + append returned number; two setters, inside Primary onInteract handler; submit `allyValues`, `enemyValues`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R18-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R18-before-after",
+          "kind": "game_before_after",
+          "focal_change": "`enemyValues` loses its marked number, and `allyValues` gains that same number at the end.",
+          "intended_visible_change": "allyValues: [2, 2, 1, 1, 5]; enemyValues: [1, 1, 1, 1]",
+          "alt_text": "R18 R18-V1 game view, before and after Primary interaction: allyValues: [2, 2, 1, 1]; enemyValues: [1, 1, 5, 1, 1] → allyValues: [2, 2, 1, 1, 5]; enemyValues: [1, 1, 1, 1]."
+        }
+      ],
+      "next_recipe": "R19",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Transfer a number"
+    },
+    {
+      "room": "R19",
+      "sequence": 19,
+      "room_situation": "Get random Sprite from the two-entry threatRoster; HOLD returned real actor without removing it. Both possible draws must survive.",
+      "native_construction": "randint index + Sprite retrieval/hold",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R18",
+        "R02"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "hazardRoster"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [],
+          "effects": [
+            "hold"
+          ],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "Sprite reference identity matters",
+      "examples": [
+        {
+          "variant_id": "R19-V1",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Raider",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R19-V1"
+        },
+        {
+          "variant_id": "R19-V2",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R19-V2"
+        },
+        {
+          "variant_id": "R19-V3",
+          "initial_summary": "List cells unchanged; actor effect only",
+          "expected_summary": "Hold: E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R19-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R19.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R19.ts",
+      "recipe_source": "copy/recipes/r19.md",
+      "recipe_output": "generated/tutorial/recipes/r19.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R19 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R19-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R19-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "randint index + Sprite retrieval/hold",
+          "intended_visible_change": "Editable Arcade Blocks for randint index + Sprite retrieval/hold",
+          "alt_text": "R19 native editable Arcade Blocks showing randint index + Sprite retrieval/hold, inside Primary onInteract handler; apply `hold` to the retrieved Sprite(s)."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R19-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R19-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Exactly one roster actor is held. Either random choice is correct, and both Sprite references remain in the roster.",
+          "intended_visible_change": "Hold: E-Raider",
+          "alt_text": "R19 R19-V1 game view, before and after Primary interaction: List cells unchanged; actor effect only → Hold: E-Raider."
+        }
+      ],
+      "next_recipe": "R20",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Choose one hazard at random"
+    },
+    {
+      "room": "R20",
+      "sequence": 20,
+      "room_situation": "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged.",
+      "native_construction": "reverse existing string array",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R19"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R20-V1",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Flurry\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R20-V1"
+        },
+        {
+          "variant_id": "R20-V2",
+          "initial_summary": "enemyMoves: [\"Flurry\", \"Strike\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Flurry\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R20-V2"
+        },
+        {
+          "variant_id": "R20-V3",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Flurry\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R20-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R20.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R20.ts",
+      "recipe_source": "copy/recipes/r20.md",
+      "recipe_output": "generated/tutorial/recipes/r20.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R20 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R20-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R20-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "reverse existing string array",
+          "intended_visible_change": "Editable Arcade Blocks for reverse existing string array",
+          "alt_text": "R20 native editable Arcade Blocks showing reverse existing string array, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R20-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R20-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Only the order of `enemyMoves` reverses. Enemy values and target references keep their positions.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]",
+          "alt_text": "R20 R20-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Flurry\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R21",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Reverse the move order"
+    },
+    {
+      "room": "R21",
+      "sequence": 21,
+      "room_situation": "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index.",
+      "native_construction": "indexOf Strike + insertAt other list",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        },
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R20",
+        "R12"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "allyMoves",
+        "sourceMoves (read-only enemyMoves alias)"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "−1 search guard",
+      "examples": [
+        {
+          "variant_id": "R21-V1",
+          "initial_summary": "allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R21-V1"
+        },
+        {
+          "variant_id": "R21-V2",
+          "initial_summary": "allyMoves: [\"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R21-V2"
+        },
+        {
+          "variant_id": "R21-V3",
+          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R21-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R21.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R21.ts",
+      "recipe_source": "copy/recipes/r21.md",
+      "recipe_output": "generated/tutorial/recipes/r21.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R21 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R21-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R21-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "indexOf Strike + insertAt other list",
+          "intended_visible_change": "Editable Arcade Blocks for indexOf Strike + insertAt other list",
+          "alt_text": "R21 native editable Arcade Blocks showing indexOf Strike + insertAt other list, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R21-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R21-before-after",
+          "kind": "game_before_after",
+          "focal_change": "A new allied `Ward` appears at the index where the current enemy list contains its first `Strike`.",
+          "intended_visible_change": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "alt_text": "R21 R21-V1 game view, before and after Primary interaction: allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"] → allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R22",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Insert at the matching index"
+    },
+    {
+      "room": "R22",
+      "sequence": 22,
+      "room_situation": "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move.",
+      "native_construction": "removeAt marked Sprite + unshift same identity",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R21",
+        "R02"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "enemyTargets"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyTargets"
+          ],
+          "effects": [],
+          "marked_index": 1
+        }
+      ],
+      "index_identity_rule": "Sprite reference identity matters",
+      "examples": [
+        {
+          "variant_id": "R22-V1",
+          "initial_summary": "enemyTargets: [\"E-Shaman\", \"E-Raider\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
+          "expected_summary": "enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R22-V1"
+        },
+        {
+          "variant_id": "R22-V2",
+          "initial_summary": "enemyTargets: [\"E-Shaman\", \"E-Wisp\", \"E-Raider\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
+          "expected_summary": "enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R22-V2"
+        },
+        {
+          "variant_id": "R22-V3",
+          "initial_summary": "enemyTargets: [\"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Raider\", \"E-Shaman\", \"E-Shaman\"]",
+          "expected_summary": "enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R22-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R22.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R22.ts",
+      "recipe_source": "copy/recipes/r22.md",
+      "recipe_output": "generated/tutorial/recipes/r22.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R22 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R22-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R22-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "removeAt marked Sprite + unshift same identity",
+          "intended_visible_change": "Editable Arcade Blocks for removeAt marked Sprite + unshift same identity",
+          "alt_text": "R22 native editable Arcade Blocks showing removeAt marked Sprite + unshift same identity, inside Primary onInteract handler; submit `enemyTargets`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R22-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R22-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The marked Sprite reference moves to the front of `enemyTargets`; the target count and all other list contents stay unchanged.",
+          "intended_visible_change": "enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
+          "alt_text": "R22 R22-V1 game view, before and after Primary interaction: enemyTargets: [\"E-Shaman\", \"E-Raider\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"] → enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]."
+        }
+      ],
+      "next_recipe": "R23",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Move the same target"
+    },
+    {
+      "room": "R23",
+      "sequence": 23,
+      "room_situation": "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list.",
+      "native_construction": "indexOf Ward + removeAt guarded",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        },
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R22",
+        "R12"
+      ],
+      "support_level": "light",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "−1 search guard",
+      "examples": [
+        {
+          "variant_id": "R23-V1",
+          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R23-V1"
+        },
+        {
+          "variant_id": "R23-V2",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R23-V2"
+        },
+        {
+          "variant_id": "R23-V3",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R23-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R23.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R23.ts",
+      "recipe_source": "copy/recipes/r23.md",
+      "recipe_output": "generated/tutorial/recipes/r23.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R23 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R23-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R23-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "indexOf Ward + removeAt guarded",
+          "intended_visible_change": "Editable Arcade Blocks for indexOf Ward + removeAt guarded",
+          "alt_text": "R23 native editable Arcade Blocks showing indexOf Ward + removeAt guarded, inside Primary onInteract handler; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R23-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R23-before-after",
+          "kind": "game_before_after",
+          "focal_change": "The found `Ward` is removed from `enemyMoves`; following entries shift left and the list becomes shorter.",
+          "intended_visible_change": "enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "alt_text": "R23 R23-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"] → enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R24",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Search, then remove"
+    },
+    {
+      "room": "R24",
+      "sequence": 24,
+      "room_situation": "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail.",
+      "native_construction": "primary unshift then secondary post-shift indexed set",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R23"
+      ],
+      "support_level": "independent",
+      "exposed_lists": [
+        "enemyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        },
+        {
+          "station": "Secondary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": 1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R24-V1",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R24-V1"
+        },
+        {
+          "variant_id": "R24-V2",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R24-V2"
+        },
+        {
+          "variant_id": "R24-V3",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R24-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R24.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R24.ts",
+      "recipe_source": "copy/recipes/r24.md",
+      "recipe_output": "generated/tutorial/recipes/r24.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R24 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R24-V1",
+          "station_interactions": [
+            "Primary",
+            "Secondary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R24-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "primary unshift then secondary post-shift indexed set",
+          "intended_visible_change": "Editable Arcade Blocks for primary unshift then secondary post-shift indexed set",
+          "alt_text": "R24 native editable Arcade Blocks showing primary unshift then secondary post-shift indexed set, inside Primary followed by Secondary onInteract handlers; submit `enemyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R24-V1",
+          "station_interactions": [
+            "Primary",
+            "Secondary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R24-before-after",
+          "kind": "game_before_after",
+          "focal_change": "After **Primary**, the enemy move list grows by one and existing moves shift right. After **Secondary**, the post-shift marked `Strike` becomes `Wait`. Do these in that order before running combat.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "alt_text": "R24 R24-V1 game view, before and after Primary followed by Secondary interactions: enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]."
+        }
+      ],
+      "next_recipe": "R25",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Two stations, one changing list"
+    },
+    {
+      "room": "R25",
+      "sequence": 25,
+      "room_situation": "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged.",
+      "native_construction": "dynamic indexed conditional parallel list check",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R24",
+        "R08"
+      ],
+      "support_level": "independent",
+      "exposed_lists": [
+        "allyMoves"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based indices; last valid index is length - 1",
+      "examples": [
+        {
+          "variant_id": "R25-V1",
+          "initial_summary": "allyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R25-V1"
+        },
+        {
+          "variant_id": "R25-V2",
+          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R25-V2"
+        },
+        {
+          "variant_id": "R25-V3",
+          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"]",
+          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R25-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R25.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R25.ts",
+      "recipe_source": "copy/recipes/r25.md",
+      "recipe_output": "generated/tutorial/recipes/r25.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R25 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R25-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R25-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "dynamic indexed conditional parallel list check",
+          "intended_visible_change": "Editable Arcade Blocks for dynamic indexed conditional parallel list check",
+          "alt_text": "R25 native editable Arcade Blocks showing dynamic indexed conditional parallel list check, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R25-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R25-before-after",
+          "kind": "game_before_after",
+          "focal_change": "Only allied `Wait` cells opposite an enemy `Strike` turn into `Ward`. Harmless `Wait` cells, attacks and `Mend` remain untouched.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "alt_text": "R25 R25-V1 game view, before and after Primary interaction: allyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"] → allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R26",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Match two lists by index"
+    },
+    {
+      "room": "R26",
+      "sequence": 26,
+      "room_situation": "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings.",
+      "native_construction": "stateful for-of result construction with seenAttack/didHeal",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R25",
+        "R08"
+      ],
+      "support_level": "independent",
+      "exposed_lists": [
+        "allyMoves",
+        "sourceMoves (read-only enemyMoves alias)"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "allyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "0-based array indices and exact detached commits",
+      "examples": [
+        {
+          "variant_id": "R26-V1",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R26-V1"
+        },
+        {
+          "variant_id": "R26-V2",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R26-V2"
+        },
+        {
+          "variant_id": "R26-V3",
+          "initial_summary": "allyMoves: []",
+          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Ward\", \"Strike\", \"Strike\", \"Strike\"]",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R26-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R26.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R26.ts",
+      "recipe_source": "copy/recipes/r26.md",
+      "recipe_output": "generated/tutorial/recipes/r26.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R26 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R26-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R26-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "stateful for-of result construction with seenAttack/didHeal",
+          "intended_visible_change": "Editable Arcade Blocks for stateful for-of result construction with seenAttack/didHeal",
+          "alt_text": "R26 native editable Arcade Blocks showing stateful for-of result construction with seenAttack/didHeal, inside Primary onInteract handler; submit `allyMoves`."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R26-V1",
+          "station_interactions": [
+            "Primary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R26-before-after",
+          "kind": "game_before_after",
+          "focal_change": "There is one output for each source move: `Ward` against an attack, one `Mend` at the first later opening, and `Strike` at other openings.",
+          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "alt_text": "R26 R26-V1 game view, before and after Primary interaction: allyMoves: [] → allyMoves: [\"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]."
+        }
+      ],
+      "next_recipe": "R27",
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Remember what happened earlier"
+    },
+    {
+      "room": "R27",
+      "sequence": 27,
+      "room_situation": "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks.",
+      "native_construction": "primary Sprite for-of effects + secondary indexed Ward replacements",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "adaptation": "Learner list editing at a physical station; custom API getters/commits/effects and combat outcome are game-specific, not quoted source instruction.",
+      "prerequisites": [
+        "R26",
+        "R02",
+        "R08"
+      ],
+      "support_level": "independent",
+      "exposed_lists": [
+        "enemyMoves",
+        "hazardRoster"
+      ],
+      "stations": [
+        {
+          "station": "Primary",
+          "physical_action": "Press A at this room station",
+          "edits": [],
+          "effects": [
+            "hold"
+          ],
+          "marked_index": -1
+        },
+        {
+          "station": "Secondary",
+          "physical_action": "Press A at this room station",
+          "edits": [
+            "enemyMoves"
+          ],
+          "effects": [],
+          "marked_index": -1
+        }
+      ],
+      "index_identity_rule": "Sprite reference identity matters",
+      "examples": [
+        {
+          "variant_id": "R27-V1",
+          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Ward\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R27-V1"
+        },
+        {
+          "variant_id": "R27-V2",
+          "initial_summary": "enemyMoves: [\"Strike\", \"Ward\", \"Wait\", \"Flurry\", \"Ward\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R27-V2"
+        },
+        {
+          "variant_id": "R27-V3",
+          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Flurry\", \"Ward\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "goal_ref": "common/ROOM_GOALS.json#variants/R27-V3"
+        }
+      ],
+      "reference_file": "implementation/learner-states/rooms/R27.ts",
+      "cumulative_file": "implementation/learner-states/cumulative/R27.ts",
+      "recipe_source": "copy/recipes/r27.md",
+      "recipe_output": "generated/tutorial/recipes/r27.md",
+      "hint_binding": "<!-- AP_HINT cumulative=R27 -->",
+      "media": [
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R27-V1",
+          "station_interactions": [
+            "Primary",
+            "Secondary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R27-blocks",
+          "kind": "assembled_native_blocks",
+          "focal_change": "primary Sprite for-of effects + secondary indexed Ward replacements",
+          "intended_visible_change": "Editable Arcade Blocks for primary Sprite for-of effects + secondary indexed Ward replacements",
+          "alt_text": "R27 native editable Arcade Blocks showing primary Sprite for-of effects + secondary indexed Ward replacements, inside Primary followed by Secondary onInteract handlers; submit `enemyMoves` and apply `hold` to the retrieved Sprite(s)."
+        },
+        {
+          "status": "planned",
+          "capture_status": "planned",
+          "verification_status": "not_run",
+          "artifact_path": null,
+          "variant_id": "R27-V1",
+          "station_interactions": [
+            "Primary",
+            "Secondary"
+          ],
+          "dimensions": [
+            480,
+            360
+          ],
+          "id": "R27-before-after",
+          "kind": "game_before_after",
+          "focal_change": "After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Ward` moves become `Wait` while the other enemy moves remain in place.",
+          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "alt_text": "R27 R27-V1 game view, before and after Primary followed by Secondary interactions: enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Ward\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp."
+        }
+      ],
+      "next_recipe": null,
+      "state_ownership": {
+        "learner_behavior": "current_editable_program",
+        "world_progress": "supplied_world_settings"
+      },
+      "accepted_program_cache": false,
+      "title": "Finish both jobs"
+    }
+  ]
+}

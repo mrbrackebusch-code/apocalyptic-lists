@@ -1,0 +1,1383 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "AL-IMPLEMENTATION-1.0",
+  "variants": [
+    {
+      "id": "R01-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R01-V2",
+      "numberHint": 1,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R01-V3",
+      "numberHint": 2,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R02-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        0
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "R02-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        1
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R02-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        1
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R03-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        0
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "R03-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        1
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R03-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        2
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "R04-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R04-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R04-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R05-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        1
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R05-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        2
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "R05-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        3
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "R06-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R06-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R06-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R07-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        0
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "R07-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        1
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R07-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        2
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "R08-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R08-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R08-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R09-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R09-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R09-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R10-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R10-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R10-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R11-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "roster"
+          ],
+          "allowHold": false,
+          "allowBanish": true,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R11-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "roster"
+          ],
+          "allowHold": false,
+          "allowBanish": true,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R11-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "roster"
+          ],
+          "allowHold": false,
+          "allowBanish": true,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R12-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R12-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R12-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R13-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R13-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R13-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R14-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        0,
+        3
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyValues"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "R14-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        0,
+        3
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyValues"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "R14-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        0,
+        3
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyValues"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "R15-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R15-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R15-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R16-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R16-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R16-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R17-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves",
+            "sourceMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R17-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves",
+            "sourceMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R17-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves",
+            "sourceMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R18-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        2
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyValues",
+            "allyValues"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "R18-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        3
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyValues",
+            "allyValues"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "R18-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        4
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyValues",
+            "allyValues"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "R19-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R19-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R19-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R20-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R20-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R20-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R21-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R21-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R21-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R22-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        1
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyTargets"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R22-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        2
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyTargets"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "R22-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [
+        3
+      ],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyTargets"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "R23-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R23-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R23-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R24-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        },
+        {
+          "station": 2,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "R24-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        },
+        {
+          "station": 2,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "R24-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        },
+        {
+          "station": 2,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "R25-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R25-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R25-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R26-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R26-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R26-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [
+            "allyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R27-V1",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        },
+        {
+          "station": 2,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R27-V2",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        },
+        {
+          "station": 2,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    },
+    {
+      "id": "R27-V3",
+      "numberHint": 0,
+      "displayMarkedIndices": [],
+      "stations": [
+        {
+          "station": 1,
+          "editableLists": [],
+          "allowHold": true,
+          "allowBanish": false,
+          "markedIndex": -1
+        },
+        {
+          "station": 2,
+          "editableLists": [
+            "enemyMoves"
+          ],
+          "allowHold": false,
+          "allowBanish": false,
+          "markedIndex": -1
+        }
+      ]
+    }
+  ]
+}
