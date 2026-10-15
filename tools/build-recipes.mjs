@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import {sourceOrder,projectSources,suppliedRuntime,runtimeDimensions} from './project-source.mjs';
 const defaultRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const hash = b => crypto.createHash('sha256').update(b).digest('hex');
 const stable = x => JSON.stringify(sort(x), null, 2) + '\n';
@@ -32,6 +33,10 @@ function build(opts) {
  const read=(base,p)=>fs.readFileSync(contained(base,p),'utf8').replace(/\r\n/g,'\n');
  const get=(base,p)=>JSON.parse(read(base,p));
  const mapping=get(root,'copy/ROOM_TEACHING_MAP.json'),catalog=get(root,'implementation/LEARNER_STATE_CATALOG.json');
+ const sources=projectSources(root,commonRoot),runtime=suppliedRuntime(sources),screen=runtimeDimensions(sources);
+ const runtimeFence='\n\n```customts\n'+runtime.trimEnd()+'\n```\n';
+ const reuse=get(root,'copy/media/NATIVE_BLOCKS_REUSE.json');
+ for(const [file,expected]of Object.entries(reuse.native_api_lf_sha256))if(hash(sources[file])!==expected)throw Error('Native instruction API changed: '+file+'; refresh affected native Blocks proof');
  const goals=get(commonRoot,'ROOM_GOALS.json');
  const nativePath=contained(root,'validation/native-tutorial/RESULTS.json');
  const nativeProof=fs.existsSync(nativePath)?JSON.parse(fs.readFileSync(nativePath,'utf8')):null;
@@ -61,6 +66,7 @@ function build(opts) {
   const cumulative=header+cumulatives.join('\n\n')+'\n';
   outputs.set(item.cumulative_file,cumulative);
   const cumulativeHash=hash(cumulative),sourceHash=hash(source);sourceHashes[id]={isolated:sourceHash,cumulative:cumulativeHash};
+  if(reuse.references[id]?.isolated!==sourceHash||reuse.references[id]?.cumulative!==cumulativeHash)throw Error('Native instruction reference changed: '+id+'; refresh affected native Blocks proof');
   const canonical=read(root,item.recipe_source);
   if(!canonical.includes(`<!-- AP_RECIPE id=${id} same_project=true -->`) || !canonical.includes('### @explicitHints true'))throw new Error(id+' missing same-project Recipe identity / hint mode');
   const token=`<!-- AP_HINT cumulative=${id} -->`;
@@ -85,18 +91,23 @@ function build(opts) {
    if(m.id!==id+'-'+suffix||m.kind!==kind)throw new Error(id+' wrong media target ID/kind '+m.id);
    const stations=['R24','R27'].includes(id)?['Primary','Secondary']:['Primary'];
    if(!Array.isArray(m.station_interactions)||m.station_interactions.join(',')!==stations.join(','))throw new Error(id+' wrong ordered media stations');
-   if(!Array.isArray(m.dimensions)||m.dimensions[0]!==480||m.dimensions[1]!==360)throw new Error('Incorrect media capture plan dimensions');
+   const planSize=kind==='game_before_after'?screen:[480,360];
+   if(!Array.isArray(m.dimensions)||m.dimensions.some((n,i)=>n!==planSize[i]))throw new Error('Incorrect media capture plan dimensions: '+m.id);
    if(!goals.variants.some(v=>v.goalId===m.variant_id&&v.roomId===id))throw new Error('Bad planned media variant ID '+m.variant_id);
    if(typeof m.alt_text!=='string'||!m.alt_text.trim()||typeof m.focal_change!=='string'||!m.focal_change.trim())throw new Error(id+' missing media alt text or focal change');
-   const binding={id:m.id,kind,room:id,variant_id:m.variant_id,reference_source:item.reference_file,reference_sha256:sourceHash,cumulative_source:item.cumulative_file,cumulative_sha256:cumulativeHash,station_interactions:stations,intended_visible_change:m.intended_visible_change,focal_change:m.focal_change,alt_text:m.alt_text,dimensions:{width:480,height:360},status:'planned',capture_status:'planned',artifact_path:null,verification_status:'not_run'};
+   const binding={id:m.id,kind,room:id,variant_id:m.variant_id,reference_source:item.reference_file,reference_sha256:sourceHash,cumulative_source:item.cumulative_file,cumulative_sha256:cumulativeHash,station_interactions:stations,intended_visible_change:m.intended_visible_change,focal_change:m.focal_change,alt_text:m.alt_text,dimensions:{width:planSize[0],height:planSize[1]},status:'planned',capture_status:'planned',artifact_path:null,verification_status:'not_run'};
    const capture=captured.get(m.id);
-   if(capture&&capture.reference_sha256===sourceHash){
+   if(capture&&capture.reference_sha256===sourceHash&&(kind!=='game_before_after'||(capture.width===screen[0]&&capture.height===screen[1]))){
     const local=capture.artifact_path.replace(/^games\/apocalyptic-lists\//,'');
     const artifact=contained(root,local);
     if(!fs.existsSync(artifact)||hash(fs.readFileSync(artifact))!==capture.sha256)throw Error('Missing/changed capture '+m.id);
     if(!capture.capture_method||!capture.evidence_path||!capture.width||!capture.height)throw Error('Incomplete capture lineage '+m.id);
-    if(kind==='game_before_after'&&(capture.width!==480||capture.height!==360))throw Error('Runtime capture must retain native 480x360 '+m.id);
+    if(kind==='game_before_after'){
+     if(capture.runtime_sources?.length!==sourceOrder.length-1||new Set(capture.runtime_sources.map(s=>s.file)).size!==sourceOrder.length-1||capture.runtime_sources.some(s=>!sourceOrder.includes(s.file)))throw Error('Missing exact current runtime capture identity '+m.id);
+     for(const s of capture.runtime_sources){const input=s.file==='contracts.ts'?contained(commonRoot,s.file):contained(root,'implementation/'+s.file);if(s.file==='main.ts'||s.hash_form!=='raw-bytes'||hash(fs.readFileSync(input))!==s.sha256)throw Error('Gameplay capture runtime changed: '+m.id+' '+s.file);}
+    }else binding.native_blocks_reuse={manifest:'copy/media/NATIVE_BLOCKS_REUSE.json',sha256:hash(read(root,'copy/media/NATIVE_BLOCKS_REUSE.json')),reference_api_unchanged:true,historical_runtime_sha256:reuse.historical_runtime_sha256};
     Object.assign(binding,{status:capture.verification_status==='passed'?'ready':'captured',capture_status:'captured',artifact_path:local,verification_status:capture.verification_status,dimensions:{width:capture.width,height:capture.height},capture_sha256:capture.sha256,capture_method:capture.capture_method,evidence_path:capture.evidence_path});
+    if(kind==='game_before_after')binding.capture_lineage={runtime_sources:capture.runtime_sources,executed_main_sha256:capture.executed_main_sha256,executed_reference_sha256:capture.executed_reference_sha256,native_compile_evidence_path:capture.native_compile_evidence_path,recorded_speed:capture.recorded_speed,speed_multiplier:capture.speed_multiplier,native_binary_sha256:capture.native_binary_sha256,lineage:capture.lineage,actual_target:capture.actual_target};
     const url='https://raw.githubusercontent.com/'+opts.repository+'/main/'+local;
     let shown=kind==='assembled_native_blocks'&&item.support_level!=='worked'?'[Compare with complete native Blocks]('+url+')':'!['+m.alt_text.replace(/\]/g,'')+']('+url+')';
     if(kind==='assembled_native_blocks'&&item.support_level==='worked'&&capture.native_menu){
@@ -111,28 +122,30 @@ function build(opts) {
    }
    media.push(binding);planned.push(m.id);
   }
+  render=render.trimEnd()+runtimeFence;
   outputs.set(outputPath,render);
-  index.push({id,order:k,canonical:item.recipe_source,output:outputPath,sha256:hash(render),next_recipe:item.next_recipe,reference_sha256:sourceHash,cumulative_sha256:cumulativeHash,hint_from:item.cumulative_file,media_ids:planned,overlay_only:true,initial_project_resources:false});
+  index.push({id,order:k,canonical:item.recipe_source,output:outputPath,sha256:hash(render),next_recipe:item.next_recipe,reference_sha256:sourceHash,cumulative_sha256:cumulativeHash,hint_from:item.cumulative_file,media_ids:planned,overlay_only:true,initial_project_resources:false,supplied_runtime_sha256:hash(runtime),learner_template:false});
   // Keep the catalog's planned-media IDs aligned with the canonical teaching map.
   // Isolated learner source and all original shared contracts remain untouched.
   record.media=media.filter(m=>m.room===id);
   record.cumulative.sha256=cumulativeHash;
   const native=nativeProof?.passed&&nativeProof.isolated?.find(r=>r.id===id&&r.success&&r.source_sha256===sourceHash);
-  if(native){record.native_compile='pass';record.native_decompile='pass';record.native_media_capture=media.find(m=>m.id===id+'-blocks')?.capture_status==='captured'?'captured':'not_run';record.native_evidence={path:'validation/native-tutorial/RESULTS.json',sha256:hash(fs.readFileSync(nativePath)),target:nativeProof.target,isolated_xml_sha256:native.xml_sha256,roundtrip_sha256:native.roundtrip_sha256};}
+  if(native){record.native_compile='pass';record.native_decompile='pass';record.native_media_capture=media.find(m=>m.id===id+'-blocks')?.capture_status==='captured'?'captured':'not_run';record.native_evidence={path:'validation/native-tutorial/RESULTS.json',sha256:hash(fs.readFileSync(nativePath)),target:nativeProof.target,isolated_xml_sha256:native.xml_sha256,roundtrip_sha256:native.roundtrip_sha256,context:'Historical native reference/API proof, reused with exact source identity; not a current full-runtime compile.',reuse_manifest:'copy/media/NATIVE_BLOCKS_REUSE.json'};}
   else{record.native_compile='not_run';record.native_decompile='not_run';record.native_media_capture='not_run';delete record.native_evidence;}
  }
  const inputHashes={teaching_map:hash(read(root,'copy/ROOM_TEACHING_MAP.json')),common_goals:hash(read(commonRoot,'ROOM_GOALS.json'))};
  let directory='# Apocalyptic Lists Recipes\n\n## Continue your current game\n\nOpen the Recipe for your current room. These links keep the same project and your editable code. Complete each room in the game to open the next one.\n\n';
  for(const item of mapping.rooms)directory+='- ['+item.room+' — '+item.title+']('+recipeLink(item.room)+')\n';
- outputs.set('generated/tutorial/recipes/directory.md',directory);
+ outputs.set('generated/tutorial/recipes/directory.md',directory.trimEnd()+runtimeFence);
  let setup=resolveLinks(read(root,'copy/setup.md'));
  const first=outputs.get(mapping.rooms[0].cumulative_file).trim();
  setup=setup.replace(/<!-- AP_HINT cumulative=R01 -->/g,'#### ~ tutorialhint\n\n```blocks\n'+first+'\n```');
  outputs.set('generated/tutorial/setup.md',setup);
  const mediaCaptured=media.filter(m=>m.capture_status==='captured').length,mediaVerified=media.filter(m=>m.verification_status==='passed').length;
- if(Array.isArray(catalog.deferred))catalog.deferred=catalog.deferred.filter(x=>!(nativeProof?.passed&&x==='Native PXT compile/decompile')&&!(mediaVerified===54&&x==='480x360 instructional media capture'));
+ catalog.deferred=[];
+ catalog.assembly_provenance={supplied_runtime_sha256:hash(runtime),runtime_dimensions:screen,learner_main_comment_only:true,recipes_preserve_current_code:true,source_bound_native_blocks_reuse:'copy/media/NATIVE_BLOCKS_REUSE.json',current_runtime_checks:'Native world, progress/restart and source-cleared demo receipts are separate release evidence; historical native reference checks do not qualify changed rendering.'};
  outputs.set('generated/tutorial/recipes/index.json',stable({schema:'AL-RECIPE-INDEX-1',existing_project_overlay:true,not_startup_project:true,repository:opts.repository,recipes:index}));
- outputs.set('generated/tutorial/MEDIA_BINDINGS.json',stable({schema:'AL-INSTRUCTION-MEDIA-2',runtime_dimensions:[480,360],count:media.length,captures:mediaCaptured===media.length?'complete':mediaCaptured?'partial':'not_run',media}));
+ outputs.set('generated/tutorial/MEDIA_BINDINGS.json',stable({schema:'AL-INSTRUCTION-MEDIA-3',runtime_dimensions:screen,native_blocks_plan_dimensions:[480,360],supplied_runtime_sha256:hash(runtime),count:media.length,captures:mediaCaptured===media.length?'complete':mediaCaptured?'partial':'not_run',media}));
  outputs.set('implementation/LEARNER_STATE_CATALOG.json',stable(catalog));
  const manifest={schema:'AL-RECIPE-BUILD-2',draft_complete:true,release_complete:mediaVerified===media.length,recipe_count:index.length,media_planned:media.length-mediaCaptured,media_captured:mediaCaptured,media_verified:mediaVerified,release_strict_passed:mediaVerified===media.length,accepted_program_cache:false,source_hashes:sourceHashes,input_hashes:inputHashes,generated_files:[...outputs].filter(([p])=>p.startsWith('generated/tutorial/')).map(([p,s])=>({path:p,sha256:hash(s),bytes:Buffer.byteLength(s)})).sort((a,b)=>a.path.localeCompare(b.path)),native_recipe_attachment:'not_run'};
  outputs.set('generated/RECIPE_BUILD.json',stable(manifest));

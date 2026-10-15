@@ -8,6 +8,7 @@
       "hint_from": "implementation/learner-states/cumulative/R01.ts",
       "id": "R01",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R01-blocks",
         "R01-before-after"
@@ -17,7 +18,8 @@
       "output": "generated/tutorial/recipes/r01.md",
       "overlay_only": true,
       "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
-      "sha256": "df7680c8ca2e2caf82de931287628f91433a6092581816fb64840274b3e88504"
+      "sha256": "ae2ae9eb2e9ab651469a69485996ffc8679a6d709a099be35e64631c7e780d1c",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r02.md",
@@ -25,6 +27,7 @@
       "hint_from": "implementation/learner-states/cumulative/R02.ts",
       "id": "R02",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R02-blocks",
         "R02-before-after"
@@ -34,7 +37,8 @@
       "output": "generated/tutorial/recipes/r02.md",
       "overlay_only": true,
       "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
-      "sha256": "f2d2cd1ddcc1ac40564c0bf6a4a513d3321f916880ff6c81f1fbbd81077dc07b"
+      "sha256": "dd6c809afc66ca0d893186cb81d6fba0316e9ea11a1ad2e788ff2cca79abdf9b",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r03.md",
@@ -42,6 +46,7 @@
       "hint_from": "implementation/learner-states/cumulative/R03.ts",
       "id": "R03",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R03-blocks",
         "R03-before-after"
@@ -51,7 +56,8 @@
       "output": "generated/tutorial/recipes/r03.md",
       "overlay_only": true,
       "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
-      "sha256": "eca4cc707165cf23b6857a169f142ff960a936df4fe4f0b6c2fa69dd2058e4ea"
+      "sha256": "3345295452a54019a644709a9dec7258ed600449d7b5036f3a9ef6a1bc353381",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r04.md",
@@ -59,6 +65,7 @@
       "hint_from": "implementation/learner-states/cumulative/R04.ts",
       "id": "R04",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R04-blocks",
         "R04-before-after"
@@ -68,7 +75,8 @@
       "output": "generated/tutorial/recipes/r04.md",
       "overlay_only": true,
       "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
-      "sha256": "3bc7e187f7df45af126986c04374e740d5a65014f567ccf41cd25cf2e9d07f9f"
+      "sha256": "e0e34fbecffc15926db7dd979104d7fce08eb015e0ca0ec2fcd430d411c0763c",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r05.md",
@@ -76,6 +84,7 @@
       "hint_from": "implementation/learner-states/cumulative/R05.ts",
       "id": "R05",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R05-blocks",
         "R05-before-after"
@@ -85,7 +94,8 @@
       "output": "generated/tutorial/recipes/r05.md",
       "overlay_only": true,
       "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
-      "sha256": "cecc7d3f03eafb420a3739e7e4ad2cdb0625aacbc7cb047356ba4e4cb19b2d86"
+      "sha256": "4a7cb62a48cf0d72af3b1d41304f6f68a40b9216f0327ed1831123eb8c86c6aa",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r06.md",
@@ -93,6 +103,7 @@
       "hint_from": "implementation/learner-states/cumulative/R06.ts",
       "id": "R06",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R06-blocks",
         "R06-before-after"
@@ -102,7 +113,8 @@
       "output": "generated/tutorial/recipes/r06.md",
       "overlay_only": true,
       "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
-      "sha256": "701d817c7303e04fb75c7d95093d7fd03f190bd8419a74b16c14f8ad859442d6"
+      "sha256": "03afc06cc1dfca6403dbe85cf6493e78c815b03c4ed8b47944f3aed2f7152f2d",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r07.md",
@@ -110,6 +122,7 @@
       "hint_from": "implementation/learner-states/cumulative/R07.ts",
       "id": "R07",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R07-blocks",
         "R07-before-after"
@@ -119,7 +132,8 @@
       "output": "generated/tutorial/recipes/r07.md",
       "overlay_only": true,
       "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
-      "sha256": "85e4eaead66b6ebfecba14c2275902b827887cf785da692e30435887ef9aa995"
+      "sha256": "422c0feda1128231db9882781251542af681ccb1528b00229cb63c2fd581dbc4",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r08.md",
@@ -127,6 +141,7 @@
       "hint_from": "implementation/learner-states/cumulative/R08.ts",
       "id": "R08",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R08-blocks",
         "R08-before-after"
@@ -136,7 +151,8 @@
       "output": "generated/tutorial/recipes/r08.md",
       "overlay_only": true,
       "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
-      "sha256": "82323359a9dd01f4e8e4d754028b99d12465bffedcac96cbe79097c4a9516862"
+      "sha256": "b5e0406e92ace9f8ff99c445fd5ec16d198ac98b244c1c1b0707b58ee4c9bdbe",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r09.md",
@@ -144,6 +160,7 @@
       "hint_from": "implementation/learner-states/cumulative/R09.ts",
       "id": "R09",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R09-blocks",
         "R09-before-after"
@@ -153,7 +170,8 @@
       "output": "generated/tutorial/recipes/r09.md",
       "overlay_only": true,
       "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
-      "sha256": "483650ac2da609e2f763b49a330950d15d7ce7d965afb6809078688515d25c36"
+      "sha256": "b9def8b8e8b84a47dd83c858af741a2e0b9483db3b28ba10643cb9373c8dae12",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r10.md",
@@ -161,6 +179,7 @@
       "hint_from": "implementation/learner-states/cumulative/R10.ts",
       "id": "R10",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R10-blocks",
         "R10-before-after"
@@ -170,7 +189,8 @@
       "output": "generated/tutorial/recipes/r10.md",
       "overlay_only": true,
       "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
-      "sha256": "b47e0435e5dc68d8afae48196e1aa2275839efd68c8b4fb24c8c57ab5a98feb4"
+      "sha256": "9643f9fdb4e24113708367e1b5f775b0957b163a47d33bd4b8db7970c2d149a4",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r11.md",
@@ -178,6 +198,7 @@
       "hint_from": "implementation/learner-states/cumulative/R11.ts",
       "id": "R11",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R11-blocks",
         "R11-before-after"
@@ -187,7 +208,8 @@
       "output": "generated/tutorial/recipes/r11.md",
       "overlay_only": true,
       "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
-      "sha256": "cf4243189c60b31eac83fe73f313f0fea38864a20860b66d7ceeae93a0503e90"
+      "sha256": "8153b7a17c9b2fb3810932a31734caed075c92b20eb973c3d84d693499277c6c",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r12.md",
@@ -195,6 +217,7 @@
       "hint_from": "implementation/learner-states/cumulative/R12.ts",
       "id": "R12",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R12-blocks",
         "R12-before-after"
@@ -204,7 +227,8 @@
       "output": "generated/tutorial/recipes/r12.md",
       "overlay_only": true,
       "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
-      "sha256": "9a2928340aee1d97ee0ba38db1df1094f4a213facc09b392391d072cda7aaf37"
+      "sha256": "9a1f2c8e987df4ef00ccc8cdc9dc0605209bbb3e7c2d6325dd36eaf3763ef686",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r13.md",
@@ -212,6 +236,7 @@
       "hint_from": "implementation/learner-states/cumulative/R13.ts",
       "id": "R13",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R13-blocks",
         "R13-before-after"
@@ -221,7 +246,8 @@
       "output": "generated/tutorial/recipes/r13.md",
       "overlay_only": true,
       "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
-      "sha256": "7e727e41158a756661d6eac00f330b57535887282b42307e5b2f3b0a4a519807"
+      "sha256": "4d1b8c1b2c590a365e66f75c012294d1dffd70e9b96cc1d16edb094dcad9cd21",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r14.md",
@@ -229,6 +255,7 @@
       "hint_from": "implementation/learner-states/cumulative/R14.ts",
       "id": "R14",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R14-blocks",
         "R14-before-after"
@@ -238,7 +265,8 @@
       "output": "generated/tutorial/recipes/r14.md",
       "overlay_only": true,
       "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
-      "sha256": "33394947205600486fbe4f9ab831f4eae3ef6cbbbb9c5d9d8e685312b2703713"
+      "sha256": "1a8991d9dca549c443a2561404dfeb9243060de95cbddb21ffe195c40b14aed4",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r15.md",
@@ -246,6 +274,7 @@
       "hint_from": "implementation/learner-states/cumulative/R15.ts",
       "id": "R15",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R15-blocks",
         "R15-before-after"
@@ -255,7 +284,8 @@
       "output": "generated/tutorial/recipes/r15.md",
       "overlay_only": true,
       "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
-      "sha256": "a76398f762938eb847e94406e0ae9c5aa12d0bea0fabd7db12b8c583398eb9b1"
+      "sha256": "a6b94ce45c13003aecb8fe873d8c5893e76cfb3a3a7d5039efa7206886bb7447",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r16.md",
@@ -263,6 +293,7 @@
       "hint_from": "implementation/learner-states/cumulative/R16.ts",
       "id": "R16",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R16-blocks",
         "R16-before-after"
@@ -272,7 +303,8 @@
       "output": "generated/tutorial/recipes/r16.md",
       "overlay_only": true,
       "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
-      "sha256": "6237e0fa2bea42fb587af7553a4d753f39a22bee766eb2a34f0e65f1112935a4"
+      "sha256": "befcba43be221434949cf64ea93faec57046c58827071603d15bc9b1d5556845",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r17.md",
@@ -280,6 +312,7 @@
       "hint_from": "implementation/learner-states/cumulative/R17.ts",
       "id": "R17",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R17-blocks",
         "R17-before-after"
@@ -289,7 +322,8 @@
       "output": "generated/tutorial/recipes/r17.md",
       "overlay_only": true,
       "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
-      "sha256": "2cc646bd5060b9164a30ba169c04cc28dc9c00c4858ed819fd0e1542d5cc8d8a"
+      "sha256": "238bda5a6f784eff673ccb90d015f9c3240473844aedae35272a63dabccd090b",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r18.md",
@@ -297,6 +331,7 @@
       "hint_from": "implementation/learner-states/cumulative/R18.ts",
       "id": "R18",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R18-blocks",
         "R18-before-after"
@@ -306,7 +341,8 @@
       "output": "generated/tutorial/recipes/r18.md",
       "overlay_only": true,
       "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
-      "sha256": "15ef209ea2603d62efe22a940882c921823807a5a9c0cdf1bee132fa4679f734"
+      "sha256": "58d960183d7a94fd5c654bb8a1d493794325ce485ef90e657c00b5bd4565d13d",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r19.md",
@@ -314,6 +350,7 @@
       "hint_from": "implementation/learner-states/cumulative/R19.ts",
       "id": "R19",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R19-blocks",
         "R19-before-after"
@@ -323,7 +360,8 @@
       "output": "generated/tutorial/recipes/r19.md",
       "overlay_only": true,
       "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
-      "sha256": "77e2f8dad853cdcc07d7ce7a8c95c6c95e914f7118322b94a956eb405cc03611"
+      "sha256": "9c2ccfbb368b9c0ab10be05d934d65fad78b56c20c3436a824577a4c836bc8e3",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r20.md",
@@ -331,6 +369,7 @@
       "hint_from": "implementation/learner-states/cumulative/R20.ts",
       "id": "R20",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R20-blocks",
         "R20-before-after"
@@ -340,7 +379,8 @@
       "output": "generated/tutorial/recipes/r20.md",
       "overlay_only": true,
       "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
-      "sha256": "a653b291a25225f1fe64d4bb1721a9270c0960b63fa6690e2103d9c3892a995b"
+      "sha256": "3ef18a5f2b750c56b1723b67d6a5dbaf2f82a7a9ccd5dc347294a72b7cc162d9",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r21.md",
@@ -348,6 +388,7 @@
       "hint_from": "implementation/learner-states/cumulative/R21.ts",
       "id": "R21",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R21-blocks",
         "R21-before-after"
@@ -357,7 +398,8 @@
       "output": "generated/tutorial/recipes/r21.md",
       "overlay_only": true,
       "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
-      "sha256": "d9efa2c5d9e002ba3b8f79159d8e7afa222070f375acbcd5561fc51aee7dad28"
+      "sha256": "c87415c5a0e40dc4b242f155cfb18879a7b525fb06639b89dabe55ac19ca0c26",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r22.md",
@@ -365,6 +407,7 @@
       "hint_from": "implementation/learner-states/cumulative/R22.ts",
       "id": "R22",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R22-blocks",
         "R22-before-after"
@@ -374,7 +417,8 @@
       "output": "generated/tutorial/recipes/r22.md",
       "overlay_only": true,
       "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
-      "sha256": "01945671304326b4f1b2646f0ae806c30767f304f684f4ed5319e86c8528d264"
+      "sha256": "3b767a9aad7ebf9c7292373ca1a8e7b08c9770166fd5cf921ae542af39c9cecb",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r23.md",
@@ -382,6 +426,7 @@
       "hint_from": "implementation/learner-states/cumulative/R23.ts",
       "id": "R23",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R23-blocks",
         "R23-before-after"
@@ -391,7 +436,8 @@
       "output": "generated/tutorial/recipes/r23.md",
       "overlay_only": true,
       "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
-      "sha256": "8d7431cc4c16464b04f07c42707b409494807613d90625b9e40f102045d13326"
+      "sha256": "96a1648f622b335ac2c5b52fdbee7204864f361ca457c5e9df0faa4de93b946a",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r24.md",
@@ -399,6 +445,7 @@
       "hint_from": "implementation/learner-states/cumulative/R24.ts",
       "id": "R24",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R24-blocks",
         "R24-before-after"
@@ -408,7 +455,8 @@
       "output": "generated/tutorial/recipes/r24.md",
       "overlay_only": true,
       "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
-      "sha256": "8b315e0487c1707703466e15237c57c4c8c5048df67acb2487b86f418734ef26"
+      "sha256": "38fd05289bbc2cdef1c6db0aa1df12b761eabd86655d5dd53edbfc553c15f4c8",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r25.md",
@@ -416,6 +464,7 @@
       "hint_from": "implementation/learner-states/cumulative/R25.ts",
       "id": "R25",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R25-blocks",
         "R25-before-after"
@@ -425,7 +474,8 @@
       "output": "generated/tutorial/recipes/r25.md",
       "overlay_only": true,
       "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
-      "sha256": "6ad094157cb077b9cdeefec3634fea9e263ae702e664977ffe03192d9fc08d48"
+      "sha256": "53988dd3383659b1e23ec4f0bf5f02edba316ddf7eea6568e88115ef80e3d168",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r26.md",
@@ -433,6 +483,7 @@
       "hint_from": "implementation/learner-states/cumulative/R26.ts",
       "id": "R26",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R26-blocks",
         "R26-before-after"
@@ -442,7 +493,8 @@
       "output": "generated/tutorial/recipes/r26.md",
       "overlay_only": true,
       "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
-      "sha256": "ba7994c15089b4e59669fd2fb4b1d94dae6ee507be8bf792f23852f7ae18d1ba"
+      "sha256": "f484a1b7ef5184f2912766cc5fb354bb3e5bbc8637e6f2c69e75b46f10f2c3d1",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     },
     {
       "canonical": "copy/recipes/r27.md",
@@ -450,6 +502,7 @@
       "hint_from": "implementation/learner-states/cumulative/R27.ts",
       "id": "R27",
       "initial_project_resources": false,
+      "learner_template": false,
       "media_ids": [
         "R27-blocks",
         "R27-before-after"
@@ -459,7 +512,8 @@
       "output": "generated/tutorial/recipes/r27.md",
       "overlay_only": true,
       "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
-      "sha256": "72784febe35557ce90fe000a170f1466fbc4eb95ab635722a483a93dcad139ed"
+      "sha256": "f89a4c3d59f67e147c429be1f5631ee8a9bcdc2e8e1ffac2ac521f6ccbc4fbb2",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
     }
   ],
   "repository": "mrbrackebusch-code/apocalyptic-lists",

@@ -1,6 +1,6 @@
 # Apocalyptic Lists — instructional source lineage
 
-The selected teaching excerpts are real retained passages in the incoming Package 03 (`references/human/`). They motivate the **sequence of explanations** and not the game's custom operations. All combat fixtures, public before/after states, station interactions, actor hold/banish, and 480×360 media plans are new game adaptations governed by frozen `common/` inputs. Do not present game-specific commands as direct quotations of the course.
+The selected teaching excerpts are real retained passages in the incoming Package 03 (`references/human/`). They motivate the **sequence of explanations** and not the game's custom operations. All combat fixtures, public before/after states, physical altar interactions, actor hold/banish, 576×720 native gameplay media plans and 480×360 native Blocks media plans are game adaptations. The frozen `common/` inputs govern the existing encounter and learner-operation semantics; the current spatial runtime governs gameplay presentation. Do not present game-specific commands as direct quotations of the course.
 
 | Retained source | Selected original span | Used for | Distinction |
 | --- | --- | --- | --- |

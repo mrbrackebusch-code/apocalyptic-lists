@@ -4,23 +4,29 @@
 
 ## Your code runs the room
 
-You can see both teams' moves, values and targets. Build and edit lists to change what happens when the battle runs. The room supplies the characters and battle rules; your Blocks control the list work at each station.
+Move the panda with the arrow keys. The chamber holds ten moment pads, read from top to bottom: allies act first at each moment, then enemies. A move icon, power number and target portrait show what each side will do. A Wait is a real move that does nothing; an empty move space means the move list has no entry there.
 
-Use the simulator's expand button to play at full size. Move the small observer with the arrow keys. Walk to a labeled station and press **A** to use it. Press **B** to open the menu; use **↑ / ↓** to choose and **A** to confirm. Use **Run the plan** after your station work to watch the current lists play out.
+Use the simulator's expand button to see the chamber at full size. Walk beside a moment and press **A** to select it; press **B** there to watch that action. Watching lets you inspect the consequence without changing your lists or completing the room. Selection does not change the marked position supplied to your code.
+
+Walk to the glowing physical altar and read its **Altar job** reminder. **B** beside the altar explains the list operation; **A** runs your current code for that altar. The room supplies the characters and battle rules. Your Blocks must do the altar's list work.
 
 Start with **R01**. Its allied move list is empty. {{recipe:R01}} to build the first script. Keep this project as you continue: Recipe links add instructions around your own editable code.
 
 <!-- AP_HINT cumulative=R01 -->
 
-## Read a list, change a list
+## Change a list, then release time
 
-The six visible columns are independent lists. On the left are enemy values, moves and targets; on the right are allied targets, moves and values. Each column shows its current length. Row labels are indices: the first cell is **0**. A dash marks a cell beyond that list's length; it is different from an actual `Wait` move.
+Each team has three independent lists: moves, powers and targets. Changing one does not carry the other two along. An inserted move pushes later moves toward later moments; a removed move pulls them toward earlier moments. Their powers and targets stay in place. In code, the first entry has index **0**; the chamber shows positions as moments rather than a numbered table.
 
-A station gives your code a copy of the list. Make the changes you need, then use the matching **use … as … list** block to submit that copy. The room highlights changed cells so you can compare what your code did. A target or roster entry refers to a real Sprite; the actor's displayed name helps you recognize it.
+An altar gives your code a copy of the requested list. Edit that copy, then put it into the matching **use … as … list** block. The pieces move to show the submitted change. A target or roster entry refers to an actual Sprite, which you can recognize by its portrait and name.
 
-After both the task and the battle succeed, the **Exit** gate opens the next room. The B menu also offers **Retry this setup** for a fresh attempt, **Try another setup** for a changed setup, and **Revisit an unlocked room** for replay. Your earned rooms are saved; your current program remains responsible for their behavior.
+When your altar work is ready, walk to the **Release time** crystal at the top and press **A**. The plan plays from top to bottom, using your edited lists. Watch the outcome at the bottom. Completing the list task and winning the room opens the bottom **Exit** gate; walk there and press **A** to continue.
 
-If you need a complete program to compare with, use the native lightbulb hint. In later rooms, try planning the operation before opening it.
+For help with the current setup, press **B** in open space, choose **Altar help + room strategy**, and press **A**. Turn pages with **Left / Right** for the operation explanation and the exact strategy for the setup you are playing; **B** returns. Reading help does not run your code. The native lightbulb hint also contains the complete Blocks program for comparison.
+
+The hourglass changes animation speed when you press **A** beside it; walking speed stays the same. Set it before releasing time. From the B menu, **Retry this setup** starts the same setup again, **Try another setup** changes its arrangement, and **Revisit an unlocked room** returns to an earned room. 
+
+The editor saves your program. Completed rooms, unlocks, the last room you travelled to and animation speed are remembered for this same MakeCode project in this browser. Open your saved project to resume; starting a new tutorial or project starts separate progress. If your code restarts, unfinished in-room list edits reset to the starting lists. Use your altar code again to make those changes.
 
 {{directory}}
 

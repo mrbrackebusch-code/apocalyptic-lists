@@ -23,7 +23,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -87,14 +87,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R01-before-after",
           "kind": "game_before_after",
           "focal_change": "The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
-          "alt_text": "R01 R01-V1 game view, before and after Primary interaction: allyMoves: [] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.",
+          "alt_text": "R01 spatial chamber before and after its altar job. The allied move list starts with the displayed number of Wait entries, followed by Ward, Mend, Strike, Strike. Its new length matches what you built."
         }
       ],
       "next_recipe": "R02",
@@ -103,7 +103,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Build your first move list"
+      "title": "Build your first move list",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R02",
@@ -127,7 +128,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [],
           "effects": [
             "hold"
@@ -191,14 +192,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R02-before-after",
           "kind": "game_before_after",
           "focal_change": "Only the marked real hazard is held. The roster still contains the same Sprite references in the same order.",
-          "intended_visible_change": "Hold: E-Raider",
-          "alt_text": "R02 R02-V1 game view, before and after Primary interaction: List cells unchanged; actor effect only → Hold: E-Raider."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only the marked real hazard is held. The roster still contains the same Sprite references in the same order.",
+          "alt_text": "R02 spatial chamber before and after its altar job. Only the marked real hazard is held. The roster still contains the same Sprite references in the same order."
         }
       ],
       "next_recipe": "R03",
@@ -207,7 +208,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Hold one hazard"
+      "title": "Hold one hazard",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R03",
@@ -231,7 +233,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -295,14 +297,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R03-before-after",
           "kind": "game_before_after",
           "focal_change": "The marked enemy `Strike` becomes `Wait`. No item is inserted or removed.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\"]",
-          "alt_text": "R03 R03-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Wait\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked enemy `Strike` becomes `Wait`. No item is inserted or removed.",
+          "alt_text": "R03 spatial chamber before and after its altar job. The marked enemy Strike becomes Wait. No item is inserted or removed."
         }
       ],
       "next_recipe": "R04",
@@ -311,7 +313,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Change one move"
+      "title": "Change one move",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R04",
@@ -335,7 +338,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -399,14 +402,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R04-before-after",
           "kind": "game_before_after",
           "focal_change": "One `Strike` appears at the end of `allyMoves`. The other allied lists keep their original lengths.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
-          "alt_text": "R04 R04-V1 game view, before and after Primary interaction: allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. One `Strike` appears at the end of `allyMoves`. The other allied lists keep their original lengths.",
+          "alt_text": "R04 spatial chamber before and after its altar job. One Strike appears at the end of allyMoves. The other allied lists keep their original lengths."
         }
       ],
       "next_recipe": "R05",
@@ -415,7 +418,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Add a final attack"
+      "title": "Add a final attack",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R05",
@@ -439,7 +443,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -503,14 +507,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R05-before-after",
           "kind": "game_before_after",
-          "focal_change": "`Ward` appears at the marked insertion position; all later allied moves shift one index to the right.",
-          "intended_visible_change": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
-          "alt_text": "R05 R05-V1 game view, before and after Primary interaction: allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"] → allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+          "focal_change": "`Ward` appears at the marked insertion position; all later allied moves shift toward later moments.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. `Ward` appears at the marked insertion position; all later allied moves shift toward later moments.",
+          "alt_text": "R05 spatial chamber before and after its altar job. Ward appears at the marked insertion position; all later allied moves shift toward later moments."
         }
       ],
       "next_recipe": "R06",
@@ -519,7 +523,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Insert a shield"
+      "title": "Insert a shield",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R06",
@@ -543,7 +548,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -607,14 +612,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R06-before-after",
           "kind": "game_before_after",
-          "focal_change": "A new `Wait` occupies enemy index 0. The original first `Strike` shifts to index 1.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
-          "alt_text": "R06 R06-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]."
+          "focal_change": "A new `Wait` becomes the first enemy move. The original first `Strike` becomes the second move.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. A new `Wait` becomes the first enemy move. The original first `Strike` becomes the second move.",
+          "alt_text": "R06 spatial chamber before and after its altar job. A new Wait becomes the first enemy move. The original first Strike becomes the second move."
         }
       ],
       "next_recipe": "R07",
@@ -623,7 +628,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Delay the enemy"
+      "title": "Delay the enemy",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R07",
@@ -647,7 +653,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -711,14 +717,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R07-before-after",
           "kind": "game_before_after",
-          "focal_change": "The marked enemy `Ward` is gone. The enemy move list is shorter by one, with later items shifted left.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "alt_text": "R07 R07-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]."
+          "focal_change": "The marked enemy `Ward` is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked enemy `Ward` is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments.",
+          "alt_text": "R07 spatial chamber before and after its altar job. The marked enemy Ward is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments."
         }
       ],
       "next_recipe": "R08",
@@ -727,7 +733,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Remove one shield"
+      "title": "Remove one shield",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R08",
@@ -751,7 +758,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -815,14 +822,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R08-before-after",
           "kind": "game_before_after",
           "focal_change": "Only the last allied `Wait` changes to `Strike`; list length does not change, even in a longer setup.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
-          "alt_text": "R08 R08-V1 game view, before and after Primary interaction: allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only the last allied `Wait` changes to `Strike`; list length does not change, even in a longer setup.",
+          "alt_text": "R08 spatial chamber before and after its altar job. Only the last allied Wait changes to Strike; list length does not change, even in a longer setup."
         }
       ],
       "next_recipe": "R09",
@@ -831,7 +838,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Find the final cell"
+      "title": "Find the final entry",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R09",
@@ -855,7 +863,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -919,14 +927,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R09-before-after",
           "kind": "game_before_after",
-          "focal_change": "The first allied move disappears and the other moves shift left; the list becomes shorter, not a list with a new `Wait`.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
-          "alt_text": "R09 R09-V1 game view, before and after Primary interaction: allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+          "focal_change": "The first allied move disappears and the other moves shift toward earlier moments; the list becomes shorter, not a list with a new `Wait`.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The first allied move disappears and the other moves shift toward earlier moments; the list becomes shorter, not a list with a new `Wait`.",
+          "alt_text": "R09 spatial chamber before and after its altar job. The first allied move disappears and the other moves shift toward earlier moments; the list becomes shorter, not a list with a new Wait."
         }
       ],
       "next_recipe": "R10",
@@ -935,7 +943,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Remove the first move"
+      "title": "Remove the first move",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R10",
@@ -959,7 +968,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -1023,14 +1032,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R10-before-after",
           "kind": "game_before_after",
-          "focal_change": "The final enemy move disappears. The list loses one cell instead of replacing its last move with `Wait`.",
-          "intended_visible_change": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]",
-          "alt_text": "R10 R10-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Strike\"] → enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]."
+          "focal_change": "The final enemy move disappears. The list loses one entry instead of replacing its last move with `Wait`.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The final enemy move disappears. The list loses one entry instead of replacing its last move with `Wait`.",
+          "alt_text": "R10 spatial chamber before and after its altar job. The final enemy move disappears. The list loses one entry instead of replacing its last move with Wait."
         }
       ],
       "next_recipe": "R11",
@@ -1039,7 +1048,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Remove the final move"
+      "title": "Remove the final move",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R11",
@@ -1064,7 +1074,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "roster"
           ],
@@ -1130,14 +1140,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R11-before-after",
           "kind": "game_before_after",
           "focal_change": "The roster loses its first Sprite, and that *same real actor* is banished from the world.",
-          "intended_visible_change": "hazardRoster: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider",
-          "alt_text": "R11 R11-V1 game view, before and after Primary interaction: hazardRoster: [\"E-Raider\", \"E-Wisp\", \"E-Shaman\"] → hazardRoster: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The roster loses its first Sprite, and that *same real actor* is banished from the world.",
+          "alt_text": "R11 spatial chamber before and after its altar job. The roster loses its first Sprite, and that same real actor is banished from the world."
         }
       ],
       "next_recipe": "R12",
@@ -1146,7 +1156,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Take a hazard out of play"
+      "title": "Take a hazard out of play",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R12",
@@ -1175,7 +1186,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -1239,14 +1250,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R12-before-after",
           "kind": "game_before_after",
           "focal_change": "The current enemy `Ward` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "alt_text": "R12 R12-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The current enemy `Ward` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
+          "alt_text": "R12 spatial chamber before and after its altar job. The current enemy Ward changes to Wait wherever the search finds it. Other entries remain unchanged."
         }
       ],
       "next_recipe": "R13",
@@ -1255,7 +1266,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Find a move by its value"
+      "title": "Find a move by its value",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R13",
@@ -1280,7 +1292,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [],
           "effects": [
             "hold"
@@ -1344,14 +1356,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R13-before-after",
           "kind": "game_before_after",
           "focal_change": "Every hazard-roster Sprite is held; none is removed from the list.",
-          "intended_visible_change": "Hold: E-Plague, E-Raider, E-Wisp",
-          "alt_text": "R13 R13-V1 game view, before and after Primary interaction: List cells unchanged; actor effect only → Hold: E-Plague, E-Raider, E-Wisp."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Every hazard-roster Sprite is held; none is removed from the list.",
+          "alt_text": "R13 spatial chamber before and after its altar job. Every hazard-roster Sprite is held; none is removed from the list."
         }
       ],
       "next_recipe": "R14",
@@ -1360,7 +1372,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Hold every hazard"
+      "title": "Hold every hazard",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R14",
@@ -1384,7 +1397,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyValues"
           ],
@@ -1448,14 +1461,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R14-before-after",
           "kind": "game_before_after",
-          "focal_change": "The numbers from allied positions 0 and 3 exchange places; positions 1 and 2 stay untouched.",
-          "intended_visible_change": "allyValues: [1, 1, 2, 4]",
-          "alt_text": "R14 R14-V1 game view, before and after Primary interaction: allyValues: [4, 1, 2, 1] → allyValues: [1, 1, 2, 4]."
+          "focal_change": "The first and fourth allied powers exchange places; the second and third stay untouched. These positions are fixed, regardless of which moment you select.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The first and fourth allied powers exchange places; the second and third stay untouched. These positions are fixed, regardless of which moment you select.",
+          "alt_text": "R14 spatial chamber before and after its altar job. The first and fourth allied powers exchange places; the second and third stay untouched. These positions are fixed, regardless of which moment you select."
         }
       ],
       "next_recipe": "R15",
@@ -1464,7 +1477,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Swap two numbers"
+      "title": "Swap two numbers",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R15",
@@ -1489,7 +1503,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -1553,14 +1567,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R15-before-after",
           "kind": "game_before_after",
           "focal_change": "All enemy `Ward` moves become `Wait`; existing attacks and other moves stay in their original positions.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
-          "alt_text": "R15 R15-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. All enemy `Ward` moves become `Wait`; existing attacks and other moves stay in their original positions.",
+          "alt_text": "R15 spatial chamber before and after its altar job. All enemy Ward moves become Wait; existing attacks and other moves stay in their original positions."
         }
       ],
       "next_recipe": "R16",
@@ -1569,7 +1583,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Repair every shield"
+      "title": "Repair every shield",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R16",
@@ -1594,7 +1609,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -1658,14 +1673,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R16-before-after",
           "kind": "game_before_after",
           "focal_change": "Each source move produces one allied move in the same order: `Strike` → `Ward`, and `Wait` → `Strike`. The source list stays unchanged.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
-          "alt_text": "R16 R16-V1 game view, before and after Primary interaction: allyMoves: [] → allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Each source move produces one allied move in the same order: `Strike` → `Ward`, and `Wait` → `Strike`. The source list stays unchanged.",
+          "alt_text": "R16 spatial chamber before and after its altar job. Each source move produces one allied move in the same order: Strike → Ward, and Wait → Strike. The source list stays unchanged."
         }
       ],
       "next_recipe": "R17",
@@ -1674,7 +1689,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Build a response list"
+      "title": "Build a response list",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R17",
@@ -1699,7 +1715,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves",
             "sourceMoves"
@@ -1764,14 +1780,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R17-before-after",
           "kind": "game_before_after",
           "focal_change": "The source/reserve list loses its last move; that exact string is now the final move of `allyMoves`.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Wait\"]",
-          "alt_text": "R17 R17-V1 game view, before and after Primary interaction: allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Wait\", \"Strike\"] → allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Wait\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The source/reserve list loses its last move; that exact string is now the final move of `allyMoves`.",
+          "alt_text": "R17 spatial chamber before and after its altar job. The source/reserve list loses its last move; that exact string is now the final move of allyMoves."
         }
       ],
       "next_recipe": "R18",
@@ -1780,7 +1796,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Transfer a reserve move"
+      "title": "Transfer a reserve move",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R18",
@@ -1805,7 +1822,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyValues",
             "allyValues"
@@ -1870,14 +1887,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R18-before-after",
           "kind": "game_before_after",
           "focal_change": "`enemyValues` loses its marked number, and `allyValues` gains that same number at the end.",
-          "intended_visible_change": "allyValues: [2, 2, 1, 1, 5]; enemyValues: [1, 1, 1, 1]",
-          "alt_text": "R18 R18-V1 game view, before and after Primary interaction: allyValues: [2, 2, 1, 1]; enemyValues: [1, 1, 5, 1, 1] → allyValues: [2, 2, 1, 1, 5]; enemyValues: [1, 1, 1, 1]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. `enemyValues` loses its marked number, and `allyValues` gains that same number at the end.",
+          "alt_text": "R18 spatial chamber before and after its altar job. enemyValues loses its marked number, and allyValues gains that same number at the end."
         }
       ],
       "next_recipe": "R19",
@@ -1886,7 +1903,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Transfer a number"
+      "title": "Transfer a number",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R19",
@@ -1911,7 +1929,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [],
           "effects": [
             "hold"
@@ -1975,14 +1993,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R19-before-after",
           "kind": "game_before_after",
           "focal_change": "Exactly one roster actor is held. Either random choice is correct, and both Sprite references remain in the roster.",
-          "intended_visible_change": "Hold: E-Raider",
-          "alt_text": "R19 R19-V1 game view, before and after Primary interaction: List cells unchanged; actor effect only → Hold: E-Raider."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Exactly one roster actor is held. Either random choice is correct, and both Sprite references remain in the roster.",
+          "alt_text": "R19 spatial chamber before and after its altar job. Exactly one roster actor is held. Either random choice is correct, and both Sprite references remain in the roster."
         }
       ],
       "next_recipe": "R20",
@@ -1991,7 +2009,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Choose one hazard at random"
+      "title": "Choose one hazard at random",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R20",
@@ -2015,7 +2034,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -2079,14 +2098,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R20-before-after",
           "kind": "game_before_after",
           "focal_change": "Only the order of `enemyMoves` reverses. Enemy values and target references keep their positions.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]",
-          "alt_text": "R20 R20-V1 game view, before and after Primary interaction: enemyMoves: [\"Strike\", \"Flurry\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only the order of `enemyMoves` reverses. Enemy values and target references keep their positions.",
+          "alt_text": "R20 spatial chamber before and after its altar job. Only the order of enemyMoves reverses. Enemy values and target references keep their positions."
         }
       ],
       "next_recipe": "R21",
@@ -2095,7 +2114,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Reverse the move order"
+      "title": "Reverse the move order",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R21",
@@ -2125,7 +2145,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -2189,14 +2209,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R21-before-after",
           "kind": "game_before_after",
           "focal_change": "A new allied `Ward` appears at the index where the current enemy list contains its first `Strike`.",
-          "intended_visible_change": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
-          "alt_text": "R21 R21-V1 game view, before and after Primary interaction: allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"] → allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. A new allied `Ward` appears at the index where the current enemy list contains its first `Strike`.",
+          "alt_text": "R21 spatial chamber before and after its altar job. A new allied Ward appears at the index where the current enemy list contains its first Strike."
         }
       ],
       "next_recipe": "R22",
@@ -2205,7 +2225,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Insert at the matching index"
+      "title": "Insert at the matching index",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R22",
@@ -2230,7 +2251,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyTargets"
           ],
@@ -2294,14 +2315,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R22-before-after",
           "kind": "game_before_after",
           "focal_change": "The marked Sprite reference moves to the front of `enemyTargets`; the target count and all other list contents stay unchanged.",
-          "intended_visible_change": "enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]",
-          "alt_text": "R22 R22-V1 game view, before and after Primary interaction: enemyTargets: [\"E-Shaman\", \"E-Raider\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"] → enemyTargets: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\", \"E-Shaman\", \"E-Shaman\", \"E-Shaman\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked Sprite reference moves to the front of `enemyTargets`; the target count and all other list contents stay unchanged.",
+          "alt_text": "R22 spatial chamber before and after its altar job. The marked Sprite reference moves to the front of enemyTargets; the target count and all other list contents stay unchanged."
         }
       ],
       "next_recipe": "R23",
@@ -2310,7 +2331,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Move the same target"
+      "title": "Move the same target",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R23",
@@ -2339,7 +2361,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -2403,14 +2425,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R23-before-after",
           "kind": "game_before_after",
-          "focal_change": "The found `Ward` is removed from `enemyMoves`; following entries shift left and the list becomes shorter.",
-          "intended_visible_change": "enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
-          "alt_text": "R23 R23-V1 game view, before and after Primary interaction: enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"] → enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\"]."
+          "focal_change": "The found `Ward` is removed from `enemyMoves`; following entries shift toward earlier moments and the list becomes shorter.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The found `Ward` is removed from `enemyMoves`; following entries shift toward earlier moments and the list becomes shorter.",
+          "alt_text": "R23 spatial chamber before and after its altar job. The found Ward is removed from enemyMoves; following entries shift toward earlier moments and the list becomes shorter."
         }
       ],
       "next_recipe": "R24",
@@ -2419,7 +2441,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Search, then remove"
+      "title": "Search, then remove",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R24",
@@ -2443,7 +2466,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -2452,7 +2475,7 @@
         },
         {
           "station": "Secondary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Secondary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -2518,14 +2541,14 @@
             "Secondary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R24-before-after",
           "kind": "game_before_after",
-          "focal_change": "After **Primary**, the enemy move list grows by one and existing moves shift right. After **Secondary**, the post-shift marked `Strike` becomes `Wait`. Do these in that order before running combat.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
-          "alt_text": "R24 R24-V1 game view, before and after Primary followed by Secondary interactions: enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]."
+          "focal_change": "After **Primary**, the enemy move list grows by one and existing moves shift toward later moments. After **Secondary**, the post-shift marked `Strike` becomes `Wait`. Do these in that order before running combat.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. After **Primary**, the enemy move list grows by one and existing moves shift toward later moments. After **Secondary**, the post-shift marked `Strike` becomes `Wait`. Do these in that order before running combat.",
+          "alt_text": "R24 spatial chamber before and after its altar job. After Primary, the enemy move list grows by one and existing moves shift toward later moments. After Secondary, the post-shift marked Strike becomes Wait. Do these in that order before running combat."
         }
       ],
       "next_recipe": "R25",
@@ -2534,7 +2557,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Two stations, one changing list"
+      "title": "Two altars, one changing list",
+      "runtime_navigation": "shared runtime_navigation; Primary before Secondary, then top Release time crystal"
     },
     {
       "room": "R25",
@@ -2559,7 +2583,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -2623,14 +2647,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R25-before-after",
           "kind": "game_before_after",
-          "focal_change": "Only allied `Wait` cells opposite an enemy `Strike` turn into `Ward`. Harmless `Wait` cells, attacks and `Mend` remain untouched.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
-          "alt_text": "R25 R25-V1 game view, before and after Primary interaction: allyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"] → allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]."
+          "focal_change": "Only allied `Wait` entries opposite an enemy `Strike` turn into `Ward`. Harmless `Wait` entries, attacks and `Mend` remain untouched.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only allied `Wait` entries opposite an enemy `Strike` turn into `Ward`. Harmless `Wait` entries, attacks and `Mend` remain untouched.",
+          "alt_text": "R25 spatial chamber before and after its altar job. Only allied Wait entries opposite an enemy Strike turn into Ward. Harmless Wait entries, attacks and Mend remain untouched."
         }
       ],
       "next_recipe": "R26",
@@ -2639,7 +2663,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Match two lists by index"
+      "title": "Match two lists by index",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R26",
@@ -2665,7 +2690,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [
             "allyMoves"
           ],
@@ -2729,14 +2754,14 @@
             "Primary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R26-before-after",
           "kind": "game_before_after",
           "focal_change": "There is one output for each source move: `Ward` against an attack, one `Mend` at the first later opening, and `Strike` at other openings.",
-          "intended_visible_change": "allyMoves: [\"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
-          "alt_text": "R26 R26-V1 game view, before and after Primary interaction: allyMoves: [] → allyMoves: [\"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. There is one output for each source move: `Ward` against an attack, one `Mend` at the first later opening, and `Strike` at other openings.",
+          "alt_text": "R26 spatial chamber before and after its altar job. There is one output for each source move: Ward against an attack, one Mend at the first later opening, and Strike at other openings."
         }
       ],
       "next_recipe": "R27",
@@ -2745,7 +2770,8 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Remember what happened earlier"
+      "title": "Remember what happened earlier",
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
     },
     {
       "room": "R27",
@@ -2772,7 +2798,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
           "edits": [],
           "effects": [
             "hold"
@@ -2781,7 +2807,7 @@
         },
         {
           "station": "Secondary",
-          "physical_action": "Press A at this room station",
+          "physical_action": "Walk to the Secondary altar; A runs current learner code; B explains the operation",
           "edits": [
             "enemyMoves"
           ],
@@ -2847,14 +2873,14 @@
             "Secondary"
           ],
           "dimensions": [
-            480,
-            360
+            576,
+            720
           ],
           "id": "R27-before-after",
           "kind": "game_before_after",
           "focal_change": "After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Ward` moves become `Wait` while the other enemy moves remain in place.",
-          "intended_visible_change": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
-          "alt_text": "R27 R27-V1 game view, before and after Primary followed by Secondary interactions: enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Ward\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"] → enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp."
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Ward` moves become `Wait` while the other enemy moves remain in place.",
+          "alt_text": "R27 spatial chamber before and after its altar job. After Primary, both listed hazard actors are held. After Secondary, all enemy Ward moves become Wait while the other enemy moves remain in place."
         }
       ],
       "next_recipe": null,
@@ -2863,7 +2889,41 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Finish both jobs"
+      "title": "Finish both jobs",
+      "runtime_navigation": "shared runtime_navigation; use both altars, then top Release time crystal"
     }
-  ]
+  ],
+  "runtime_navigation": {
+    "scene": "spatial panda chamber; ten moment pads read from top to bottom",
+    "moment_controls": "Arrows walk; A selects the nearby moment; B watches its half-action without editing lists",
+    "altar_controls": "A at a physical altar runs current learner code; B explains its list operation",
+    "release_time": "A at the top Release time crystal plays the plan",
+    "outcome_exit": "Outcome and Exit gate are at the bottom; complete the list task and win before A at Exit advances",
+    "setup_strategy": "B in open space; Altar help + room strategy; Left/Right pages show current-setup strategy; B returns",
+    "speed": "A at the hourglass changes animation speed, not walking speed",
+    "marked_position": "Setup-defined callback input; independent of viewing selection",
+    "resume": "Open the saved MakeCode project in the same browser to resume completed rooms, unlocks, last travelled room and animation speed. The editor saves code; unfinished in-room edits reset on code restart. A new project has separate progress."
+  },
+  "copy_review": {
+    "kind": "AGENT_EDITORIAL_REVIEW",
+    "scope": "All 27 canonical Recipes (29 altar jobs), setup and current 576x720 game-media captions",
+    "source_wording": "Retained callback constructions, AP_HINT bindings and source_support; game-specific navigation adapted to current world/view controls",
+    "factual_repairs": [
+      "R17 returned string uses removed to match reference/variable list",
+      "R18 returned number uses stolen to match reference/variable list",
+      "R08 uses length minus one directly, matching the reference without undeclared last variable",
+      "Variation described between setups, not guaranteed on same-setup retry"
+    ],
+    "uninspected": "Fresh rendered guide/media review is owned by tutorial integration; this is source-copy review",
+    "status": "PASS_SOURCE_COPY_ONLY",
+    "source_context": "copy/SOURCE_LINEAGE.md and retained package-03 human arrays intro lines 1-104, strings lines 30-32 and 74-106, sprites lines 23-38 and 93-105; world.ts A/B/menu/help and view.ts spatial controls checked",
+    "retained_invariants": "All AP_RECIPE identities, AP_HINT cumulative tokens, AP_MEDIA IDs, same-project links and learner reference/cumulative paths retained; 29 callback constructions unchanged except R18 variable-name correction",
+    "resolved_copy_hazards": [
+      "Retired six-column/table description and B Run instructions replaced",
+      "R24 ordered physical altars; R27 both altar jobs required",
+      "Setup marker distinguished from moment selection",
+      "Current-setup strategy remains in runtime help; no variant-specific static damage values added"
+    ],
+    "media_dimensions": "Game plans 576x720; native Blocks plans retain 480x360 and actual specimen sizes bind from capture records"
+  }
 }

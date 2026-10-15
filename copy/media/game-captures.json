@@ -3,19 +3,24 @@
   "captures": [
     {
       "id": "R01-before-after",
-      "artifact_path": "assets/demos/r01.gif",
-      "sha256": "64d6c11db3dcea6195e1d7adcd4a2916678dd22036f427ef9415ba76379ae993",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r01.gif",
+      "sha256": "0b8b0aaff5f9ecc3b0974291821a4a4d79e54eb8904cc18f9d5398481417f912",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -23,27 +28,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 504,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1083,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R02-before-after",
-      "artifact_path": "assets/demos/r02.gif",
-      "sha256": "9158a4bc70516654761c26c121bc6c3e42d42d327137c2fee8fbad893f952c40",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r02.gif",
+      "sha256": "bcbba333c5ec103f22e250a1e833d9487131c5ff0b6175359c33945e937bb6b3",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -51,27 +140,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 488,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1067,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R03-before-after",
-      "artifact_path": "assets/demos/r03.gif",
-      "sha256": "e2cea1806da3b1ae5504440c0fdac32e4c416469a497c6702edb822098cad72f",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r03.gif",
+      "sha256": "40ec99e016c79782b31e7d3aa3270ab07473e9c7bb0d447a5014ed0274f0e599",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -79,27 +252,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 396,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1066,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R04-before-after",
-      "artifact_path": "assets/demos/r04.gif",
-      "sha256": "91255a98411cf97da0bf442858bbf55338c2505bb9216ed41e0673acc781d6d8",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r04.gif",
+      "sha256": "7a3a7431167265fe864fcff05127b135a940ba97c1808fe5b4cedbfc8c57784e",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -107,27 +364,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 354,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1062,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R05-before-after",
-      "artifact_path": "assets/demos/r05.gif",
-      "sha256": "5a33e14a8348b4e0ed33da0ed0a92d06cde598114f8e436dc78aa5b8d7e169b2",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r05.gif",
+      "sha256": "ebbd7c6cc37edaa72abb5f1b066e373631f7de7c90841da726723d6dd6858aeb",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -135,27 +476,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 517,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1072,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R06-before-after",
-      "artifact_path": "assets/demos/r06.gif",
-      "sha256": "cf65c4f775a5923302ac383f90d0c31e51381df65f89d491cd8b215fe80aa80e",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r06.gif",
+      "sha256": "d1c34f9eac908069f3bbf7e82050bd24d01eb02e26f3f5e01d315fc9b7108abd",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -163,27 +588,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 464,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1099,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R07-before-after",
-      "artifact_path": "assets/demos/r07.gif",
-      "sha256": "e1099266cc038d40fdd21e73bdf50312a592b2d65b39ff06802ee2229eca8a25",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r07.gif",
+      "sha256": "ce99937836051484f36bd40ac5bd64429d6ce042b0b5f4f3812f749f1dcd6864",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -191,27 +700,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 411,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1088,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R08-before-after",
-      "artifact_path": "assets/demos/r08.gif",
-      "sha256": "d58172e1086b44bba3679630978052d2cb46f7593e8111af658a0497b3b78893",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r08.gif",
+      "sha256": "8c20db9f1bf5c4b72088fcf5730eeb1b90228e3388e3f618f032b75009b9cfdf",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -219,27 +812,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 454,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1081,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R09-before-after",
-      "artifact_path": "assets/demos/r09.gif",
-      "sha256": "53c4d8029de61ef82e989c20a2e81f69ba0d517df0112bc110a020a385046ecd",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r09.gif",
+      "sha256": "1735f7c189c2757e04aeea83b01f751785ebc983b836134bced16fa52a08dd41",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -247,27 +924,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 550,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1064,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R10-before-after",
-      "artifact_path": "assets/demos/r10.gif",
-      "sha256": "55d02e931e7b5fddba60f4d12d1d256dd7d74edaa83bba8a86ed482efbd5dcab",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r10.gif",
+      "sha256": "37789976519c5bf60ec3dad2755e0f9c80e96affe5f27572eaf7cff534887ae1",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -275,27 +1036,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 596,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1071,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R11-before-after",
-      "artifact_path": "assets/demos/r11.gif",
-      "sha256": "001cafa603af4f7a6fa4469e047f2c17382e73f597c70d98d45ececd53654ec1",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r11.gif",
+      "sha256": "dd077f0a2eadb680b7659467fd2be01cc51cdc8aa4b8c3367f8c2bf89b0ff1af",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -303,27 +1148,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 565,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1101,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R12-before-after",
-      "artifact_path": "assets/demos/r12.gif",
-      "sha256": "9e8eca615806e460529d6f119cf5200fdc332a4187073bebcba12ed0fb60dfa2",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r12.gif",
+      "sha256": "1fe422051706f718df07a33bd495ed318471f71e92f36003bbc64aa7ec020e65",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -331,27 +1260,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 566,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1041,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R13-before-after",
-      "artifact_path": "assets/demos/r13.gif",
-      "sha256": "5052cbea35331e888710117360861bf95ee581d4b9ae20b9083ad771353ae129",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r13.gif",
+      "sha256": "901b28f911622c6f687d39d3352c0f341c61074d427faba626218b874e684b19",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -359,27 +1372,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 505,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1095,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R14-before-after",
-      "artifact_path": "assets/demos/r14.gif",
-      "sha256": "829b1e3f4149a9b6ef6ce054506e279c82ea04126b3d3361212ca66d6e72f800",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r14.gif",
+      "sha256": "c375edb87c07e856b3cb46671062d022a216c3ef30cfb311827c6b5925d3bb04",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/samples/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -387,27 +1484,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 341,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1075,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R15-before-after",
-      "artifact_path": "assets/demos/r15.gif",
-      "sha256": "192e998c4e9becd6e965efe73091ecfeaf1d88c851b12a5685a661ec755ba007",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r15.gif",
+      "sha256": "24f7694714b25e63b5ae5d0b68bc35db6864af6afbfac1cb6778753dabee2403",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -415,27 +1596,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 491,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1051,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R16-before-after",
-      "artifact_path": "assets/demos/r16.gif",
-      "sha256": "f73e9a2c105df8de807c27f12e9f0b16a8bcfb8f870b87d01a1fab5fb54edef1",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r16.gif",
+      "sha256": "54ee581925ae0e2fb1dc711753d7f5183d64343aa3109fdf2d9bce6d693cb18d",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -443,27 +1708,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 534,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1074,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R17-before-after",
-      "artifact_path": "assets/demos/r17.gif",
-      "sha256": "32d95e6630efd1b24d41aeae86c998ab62c0584b83942fc8f4bb5cf67e6c77f1",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r17.gif",
+      "sha256": "fad75437b2de370c49d2cbeec6454c3d3b5042cef42a2a1665ce569f2237f50c",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -471,27 +1820,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 595,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1073,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R18-before-after",
-      "artifact_path": "assets/demos/r18.gif",
-      "sha256": "059ffb0a3949a207fc560106b36dea115dbc03aa29586ca2b902b6ad992cd71d",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r18.gif",
+      "sha256": "bae519978ce02f0e5589268595b51afb056ee504e679d5338b7556984f0b484e",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -499,27 +1932,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 563,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1063,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R19-before-after",
-      "artifact_path": "assets/demos/r19.gif",
-      "sha256": "47ecabf5ebe1e45a40b47f550e78911d9f1fd3ebf04e9b974d99ebf702a06104",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r19.gif",
+      "sha256": "dffe3603305bbac8975773aa1177eaf32b487af87941df89641480eba93b5e2f",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -527,27 +2044,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 568,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1061,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R20-before-after",
-      "artifact_path": "assets/demos/r20.gif",
-      "sha256": "98783a5be7859a961ab39bbd48be547303b28e8ca702b12563d4643ec75b9626",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r20.gif",
+      "sha256": "7b80a2ebcd0520c0c01647f1df21fbd8a89a528c8f314866ae5e74d9718eebe0",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -555,27 +2156,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 513,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1087,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R21-before-after",
-      "artifact_path": "assets/demos/r21.gif",
-      "sha256": "c0435e3817f0708ee77ddee9fdb01cc5192994465d1ecaad126d1386638cf2b9",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r21.gif",
+      "sha256": "0401034d793d08c809c70ac83a03336dcebd6ce3096c35d4e5c39a82c639ad6b",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -583,27 +2268,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 414,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1075,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R22-before-after",
-      "artifact_path": "assets/demos/r22.gif",
-      "sha256": "c632c58505590dd683b985216611f22e5c36ca2f36db5672ebe2d3a94f1222ab",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r22.gif",
+      "sha256": "5d8bc1a5764220f2e4f9cb3ab7d08f6990091436db1e6def986543875a6e8144",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -611,27 +2380,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 469,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1097,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R23-before-after",
-      "artifact_path": "assets/demos/r23.gif",
-      "sha256": "2a048f1e74da4fdd8ebe8dccd8840a1f6659a3fa205fcc6b0ecd85b85b8c0896",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r23.gif",
+      "sha256": "2a9ec1867f3571d28fd8f4a885148fdca4d8177cef08210d367b6ac8b4f19d67",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -639,27 +2492,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 522,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1072,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R24-before-after",
-      "artifact_path": "assets/demos/r24.gif",
-      "sha256": "5210dcbf1490818014d508e857e6513017542719fc07a00db5c77cb71d68f018",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r24.gif",
+      "sha256": "3cf04a3a15998e58605c5d5f321c12a0956cda3511d9cd7c502dfab7bf7ec8cc",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/samples/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary and Secondary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary and Secondary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -667,27 +2604,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 32,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 68,
       "interval_ms": 125,
-      "duration_ms": 4000,
-      "completion_visible_before_capture_end_ms": 430,
-      "variant": 1
+      "duration_ms": 8500,
+      "completion_visible_before_capture_end_ms": 1888,
+      "variant": 1,
+      "station_jobs": 2,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R25-before-after",
-      "artifact_path": "assets/demos/r25.gif",
-      "sha256": "69ef3f03e7393c4581d3a670c9ed385f3e9bc1047e2028501a7d141839a290d5",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r25.gif",
+      "sha256": "13206956e643314f8c8004a8fb9d79edddefc232653be60a4dbf317a5f07ea97",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -695,27 +2716,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 474,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1093,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R26-before-after",
-      "artifact_path": "assets/demos/r26.gif",
-      "sha256": "fd92c25ab6fb0c856c373fd01a2f9352fc9ca1c3648606a663c8e689919bcafe",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r26.gif",
+      "sha256": "58852166764d2877e5ba51a8ec52c358c96afce1f5e3244c2a38f4a1f2a42ea7",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -723,27 +2828,111 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 27,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 34,
       "interval_ms": 125,
-      "duration_ms": 3375,
-      "completion_visible_before_capture_end_ms": 518,
-      "variant": 1
+      "duration_ms": 4250,
+      "completion_visible_before_capture_end_ms": 1106,
+      "variant": 1,
+      "station_jobs": 1,
+      "final_forecast_status": "victory"
     },
     {
       "id": "R27-before-after",
-      "artifact_path": "assets/demos/r27.gif",
-      "sha256": "3c940b35f55601d38103da967770fdfbde1770941137f13c04ffbdb297b98f08",
-      "width": 480,
-      "height": 360,
+      "artifact_path": "assets/demos/v0.3.0/r27.gif",
+      "sha256": "aed16f13d5515f3b57ae8a103c4faabab602bf7b7fd138a3f83be62aba34ff1e",
+      "width": 576,
+      "height": 720,
       "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
-      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual PXT simulator framebuffer with ordinary controller inputs; engineering reference program. Normal A advances the remaining one-pass preview after its first events.",
+      "reference_hash_form": "LF-normalized UTF-8",
+      "capture_method": "ACTUAL_NATIVE_GAME_CONTROLLER_CAPTURE: actual576x720 PXT simulator framebuffer, ordinary controller room-picker and altar-menu inputs, current engineering reference callbacks; complete1x activation/isolation/travel/reveal list transformations. No combat fast-forward or host rendering.",
       "verification_status": "passed",
-      "evidence_path": "games/apocalyptic-lists/tests/native-world/runs/2026-10-14-world-legible/campaign/CAMPAIGN.json",
+      "evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/final/MEDIA_SET.json",
+      "runtime_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/remaining/runtime.json",
+      "native_compile_evidence_path": "games/apocalyptic-lists/tests/native-room-visuals/runs/current-media-v0.3.0/project/COMPILE.json",
       "executed_reference_path": "implementation/learner-states/cumulative/r27.ts",
       "executed_reference_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "executed_main_sha256": "5ce7ff60b6241c72eafb6747a51e21a50e305da31e6761ef3e7648f186fd2b1e",
-      "lineage": "The cumulative R27 reference installs all current room callbacks. Test-only logging at callback entry and read-only UI observation are explicit in compiled main.ts. This room was entered by controller travel; its actual Primary and Secondary callback ran once. The isolated room reference hash records the matching authored callback source, not a separate execution.",
-      "native_binary_sha256": "94eebf1a37fc121d983080787370816f50a86b5489d099b2ef1d4d79d3202116",
+      "executed_reference_hash_form": "LF-normalized UTF-8",
+      "executed_main_sha256": "f84d15b3ea81251b7480a739639e383e6b8bb376aba742a5dd2c305ab0d62ed1",
+      "executed_main_hash_form": "raw-bytes",
+      "lineage": "Current cumulative R27 installs all29 reference handlers in the isolated capture fixture; test-only callback-entry counting and readonly observation are explicit in main.ts. Unmodified previously earned native settings unlock review visits. Ordinary room-picker controls enter this room, then its actual Primary and Secondary callback runs once. Isolated reference hash identifies matching authored code, not a separate execution. Only ordinary callbacks edit the trial; release learner code is unchanged.",
+      "native_binary_sha256": "4be666376d259915cef40b359902280124e63e49e10f08e955ff2296e91245b6",
       "actual_target": {
         "branch": "stable4.1",
         "tag": "v4.1.25",
@@ -751,12 +2940,91 @@
         "target": "4.1.25",
         "pxt": "13.1.23"
       },
-      "frames": 32,
+      "runtime_sources": [
+        {
+          "file": "contracts.ts",
+          "bytes": 4720,
+          "sha256": "e3ab74d083a1a9ba744cc74322a5097ea66ba2544ae5dc506c0f309acd26913f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "config.ts",
+          "bytes": 429,
+          "sha256": "09f15a5eeca1d59942420be6af2c49de66467750bc771a8481a71944d6521965",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/rooms.ts",
+          "bytes": 117907,
+          "sha256": "64a9f05a4bc284e93c1159f546ff5bc05f7f8bcca0d2f07420dc19959c990d81",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/combat.ts",
+          "bytes": 22051,
+          "sha256": "9d5554f617002aefc515e7dd9ed9fb6a974d2aaff920f9bce9fab9d4a34ff2d3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/goals.ts",
+          "bytes": 73377,
+          "sha256": "0a91768e7b3e51e1e9f72e2ce3d39c76cd8af7e52205c9b752853c6f5d998b4b",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/art.ts",
+          "bytes": 385985,
+          "sha256": "be9695d0a41d0f5d572cfa71d30f322cfc08146c5b89d2bf251196e5e75c730f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/advice.ts",
+          "bytes": 38734,
+          "sha256": "59e8f635a52236b384cf7cde131be543b60ade1ec2769282d12c56b6f74644e4",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/save.ts",
+          "bytes": 3257,
+          "sha256": "bc93d798515506f460cf037930dfc5d907dd6d121a1d944894e8578e0ea367f3",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/view.ts",
+          "bytes": 45182,
+          "sha256": "1b9fb187ce98fa69f8597715b1a8588078f6cc7a771a084c2de51ca9365b709f",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "supplied-world/world.ts",
+          "bytes": 44179,
+          "sha256": "df232aa8c059f7d308253e4259d654b3d149531807c0e6b297ee2dddac9c3ad2",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "learner-api.ts",
+          "bytes": 2539,
+          "sha256": "5ca0ac0c0c0f95d7cd04f21c17fc080375a7ecf9cf00b271b7e0b219d146fcb8",
+          "hash_form": "raw-bytes"
+        },
+        {
+          "file": "bootstrap.ts",
+          "bytes": 103,
+          "sha256": "1fabf282ae7a1a6725c81aabcdb8274820e12948ff02653c917f3903f974fabc",
+          "hash_form": "raw-bytes"
+        }
+      ],
+      "project_manifest_sha256": "9a574edba30e45c460d337eceb8789b9ea9954a24fc666dc6518961eae68f2dd",
+      "recorded_speed": "1x",
+      "speed_multiplier": 1,
+      "frames": 68,
       "interval_ms": 125,
-      "duration_ms": 4000,
-      "completion_visible_before_capture_end_ms": 465,
-      "variant": 1
+      "duration_ms": 8500,
+      "completion_visible_before_capture_end_ms": 1889,
+      "variant": 1,
+      "station_jobs": 2,
+      "final_forecast_status": "victory"
     }
   ],
-  "claim_boundary": "Engineering reference fixture only; one-pass previews use ordinary A to finish their remaining events; no full unaltered playback, learner, human, publication or classroom claim."
+  "claim_boundary": "Fresh actual list-mechanic media for all27 rooms,29 current callbacks. Reuses sufficient behavior evidence; does not claim another full battle route, learner run, classroom outcome or publication verification."
 }

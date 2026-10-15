@@ -5,13 +5,14 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {sourceOrder,suppliedRuntime} from './project-source.mjs';
 const defaultRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const digest=x=>crypto.createHash('sha256').update(x).digest('hex');
 const sort=x=>Array.isArray(x)?x.map(sort):(x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sort(x[k])])):x);
 const stable=x=>JSON.stringify(sort(x),null,2)+'\n';
 // Inspection only: ignore ordinary TS comments when guarding the blank starter and startup.
 const withoutComments=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/[^\n]*/g,'');
-const order=['contracts.ts','config.ts','supplied-world/rooms.ts','supplied-world/combat.ts','supplied-world/goals.ts','supplied-world/art.ts','supplied-world/advice.ts','supplied-world/save.ts','supplied-world/view.ts','supplied-world/world.ts','learner-api.ts','main.ts','bootstrap.ts'];
+const order=sourceOrder;
 function params(args){const opt={gameRoot:defaultRoot,commonRoot:null,check:false,partial:false,repository:'mrbrackebusch-code/apocalyptic-lists'};for(let i=0;i<args.length;i++){
  if(args[i]==='--check')opt.check=true;
  else if(args[i]==='--partial')opt.partial=true;
@@ -66,7 +67,7 @@ function run(o){
  }
  const complete=missing.length===0, project={name:'apocalyptic-lists',version:'0.0.1',description:'Apocalyptic Lists — native MakeCode Arcade list tutorial',dependencies:{device:'*'},...(palette?{palette}:{}),files:order.slice(),preferredEditor:'blocksprj',supportedTargets:['arcade'],testDependencies:{}};
  const projectJson=stable(project);
- const supplied=order.filter(x=>x!=='main.ts'&&files[x]).map(name=>'// SUPPLIED SOURCE '+name+'\n'+files[name].trimEnd()+'\n').join('\n');
+ const supplied=suppliedRuntime(files);
  const outputs=new Map();
  if(complete){
   for(const f of order)outputs.set('generated/project/'+f,files[f]);
@@ -74,9 +75,13 @@ function run(o){
   const setup=fs.readFileSync(safe(o.gameRoot,'generated/tutorial/setup.md'),'utf8');
   if(/^```(?:template|customts|assetjson|package)\b/m.test(setup))throw Error('Starter copy cannot own runtime fences');
   const tutorial=setup.trimEnd()+'\n\n```template\n'+learnerMain.trimEnd()+'\n```\n\n```customts\n'+supplied.trimEnd()+'\n```\n';
-  const tutorialFiles=['main.ts','README.md','recipes/directory.md',...recipes.recipes.map(r=>'recipes/'+r.id.toLowerCase()+'.md')];
+  const firstRecipe=fs.readFileSync(safe(o.gameRoot,'generated/tutorial/recipes/r01.md'),'utf8');
+  const first=firstRecipe.replace(/\n```customts\n/,'\n```template\n'+learnerMain.trimEnd()+'\n```\n\n```customts\n');
+  if((first.match(/^```template$/gm)||[]).length!==1)throw Error('FIRST must have one blank learner template');
+  const tutorialFiles=['main.ts','README.md','FIRST.md','recipes/directory.md',...recipes.recipes.map(r=>'recipes/'+r.id.toLowerCase()+'.md')];
   outputs.set('generated/tutorial/main.ts',learnerMain);
   outputs.set('generated/tutorial/README.md',tutorial);
+  outputs.set('generated/tutorial/FIRST.md',first);
   outputs.set('generated/tutorial/pxt.json',stable({...project,files:tutorialFiles}));
  }
  const assembledList=[...outputs].map(([file,value])=>({path:file,sha256:digest(value),bytes:Buffer.byteLength(value)})).sort((a,b)=>a.path.localeCompare(b.path));

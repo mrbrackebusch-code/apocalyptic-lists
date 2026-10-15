@@ -6,8 +6,6 @@
 
 ## Build your first move list
 
-Expand the simulator with **Fullscreen** so you can read the portrait room. Move with the arrow keys. **B** beside an altar explains its list operation; **B** beside a moment watches it; **B** elsewhere opens the menu. **A** at an altar runs your current code. The **Animation** hourglass changes animation speed without changing walking. The room begins with an empty allied move list. Your Blocks provide its first plan.
-
 A move list keeps a team's script in one place. Your first job is to build the allied script, then give it to the room.
 
 ![Actual menu blocks used in R01](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-menu.png)
@@ -24,15 +22,21 @@ In ``||variables(noclick):Variables||``, choose **Make a Variable** and name it 
 
 From ``||apocalypse(noclick):Apocalyptic Lists||``, add ``||apocalypse(noclick):on room R01 station Primary||``. Inside it, set ``||variables(noclick):allyMoves||`` to that empty list. The ``||apocalypse(noclick):shown leading Wait count||`` tells you how many `Wait` moves come first. Use ``||loops(noclick):for index from 0 to||`` with **shown leading Wait count − 1** as its final index, adding one `Wait` to the end each time. When the count is 0, this loop adds no moves. Then add `Ward`, `Mend`, `Strike`, `Strike` in order. Finish with ``||apocalypse(noclick):use allyMoves as Ally move list||``. Put the `allyMoves` reporter into that block's list input.
 
-A room event runs when you press **A** at its station. Use the room and station dropdowns shown in the example. Your list work belongs inside that event, so it starts with the current attempt.
+A room event runs when you press **A** at its physical altar. The event block calls the altar a station: use the room and station dropdowns shown in the example. Your list work belongs inside that event, so it starts with the current attempt.
 
-**Try your code.** Walk to **Write plan** (the Primary station) and press **A** once. Watch the plan change. Then walk to the glowing crystal at the top of the room and press **A** to **Release time**.
+**Try your code.** Walk the panda to **Write plan** (the Primary altar) and press **A** once. Watch the altar's changes to the pieces and actors. Then walk to the **Release time** crystal at the top and press **A**. Watch the battle and the outcome at the bottom.
 
 The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.
 
-If the result differs, choose **Retry this setup** from the B menu, revise your code, and try the station again. After a code edit or restart the room returns to its starting lists; run your current station code again.
+![R01 spatial chamber before and after its altar job. The allied move list starts with the displayed number of Wait entries, followed by Ward, Mend, Strike, Strike. Its new length matches what you built.](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/demos/v0.3.0/r01.gif)
 
-After success, use the **Exit** gate to enter the next room, then follow [Open R02](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r02). This link keeps your current project.
+*Before and after this station job in the actual game.*
+
+If the result differs, use **B** in open space and choose **Retry this setup**, revise your code, and use the altar again. After a code edit or restart, the room returns to its starting lists; run your current altar code again.
+
+**Need a reminder?** Press **B** beside the altar for its list-operation explanation. For the exact strategy for this setup, press **B** in open space, choose **Altar help + room strategy** with **A**, and use **Left / Right** to turn pages. Beside a moment pad, **A** selects its action and **B** watches it. Use **A** at the hourglass before releasing time to change animation speed.
+
+After success, walk to the bottom **Exit** gate and press **A** to enter the next room, then follow [Open R02](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r02). This link keeps your current project.
 
 [Recipe directory](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/directory)
 

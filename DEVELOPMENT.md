@@ -1,8 +1,8 @@
 # Maintain Apocalyptic Lists
 
-The native Arcade tutorial starts from README.md. Recipes are overlays in that same project; they must preserve learner code and settings progress.
+The native Arcade tutorial starts directly from FIRST.md, or from the README.md introduction. All 27 Recipes and their directory carry the current supplied runtime, preserve the current learner program, and have no starter template. FIRST and README alone install a blank template.
 
-Canonical supplied code is under implementation/. Learner references are under implementation/learner-states/ and are never installed as hidden solutions. Copy is under copy/, shared contracts/data under shared/, and actual instruction/gameplay media under assets/.
+Canonical supplied code is under implementation/. npm build recreates FIRST, README, the full Recipe route and the supplied runtime together. Learner references are under implementation/learner-states/ and are never installed as hidden solutions. Copy is under copy/, shared contracts/data under shared/, and actual instruction/gameplay media under assets/.
 
 With Node.js, run npm run build to rebuild the project, Recipes and manifests; npm run check:learners verifies current reference algorithms against all three authored configurations. npm run check compares generated artifacts without writing. Source changes need actual Arcade compile, editable native Blocks and affected gameplay/media checks before a new release.
 

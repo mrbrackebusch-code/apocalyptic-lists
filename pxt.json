@@ -2,10 +2,11 @@
   "dependencies": {
     "device": "*"
   },
-  "description": "Apocalyptic Lists — experimental current visual game preview",
+  "description": "Apocalyptic Lists — native MakeCode Arcade list tutorial",
   "files": [
     "main.ts",
     "README.md",
+    "FIRST.md",
     "recipes/directory.md",
     "recipes/r01.md",
     "recipes/r02.md",
@@ -33,8 +34,7 @@
     "recipes/r24.md",
     "recipes/r25.md",
     "recipes/r26.md",
-    "recipes/r27.md",
-    "FIRST.md"
+    "recipes/r27.md"
   ],
   "name": "apocalyptic-lists",
   "palette": [
@@ -60,5 +60,5 @@
     "arcade"
   ],
   "testDependencies": {},
-  "version": "0.2.4"
+  "version": "0.3.0"
 }
