@@ -1,8 +1,503 @@
 {
   "schema": "AL-ROOM-ADVICE-1",
   "generated_by": "tools/generate-room-advice.mjs",
-  "index_convention": "zero-based, matching the visible list rows",
-  "purpose": "Optional explicit gameplay solutions requested by owner; does not execute or replace learner code",
+  "index_convention": "Strategy indices are zero-based; operation reminders use plain ordinals.",
+  "purpose": "Optional explicit gameplay solutions and mechanical altar reminders requested by owner; does not execute or replace learner code",
+  "operations": [
+    {
+      "room": 1,
+      "station": 1,
+      "operation": "Altar job: Add the shown Wait count, then Ward, Mend, Strike, Strike.",
+      "explain": "Start with an empty allied move list. Add the setup's number of leading Waits, then Ward, Mend, Strike and Strike, in that order. Save the finished move list. The power and target lists are independent: filling the move list does not move their entries. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R01.ts",
+        "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R01-V1",
+          "R01-V2",
+          "R01-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 2,
+      "station": 1,
+      "operation": "Altar job: Get the marked roster actor and hold it.",
+      "explain": "Get the actor stored at the marked roster position, then give that actor to hold. Getting an entry reads it without removing it or shifting the roster. Holding stops that actor from casting; it can still be targeted. The marked position belongs to this setup; moving the viewing selector does not change it. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R02.ts",
+        "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R02-V1",
+          "R02-V2",
+          "R02-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 3,
+      "station": 1,
+      "operation": "Altar job: Set the marked enemy move to Wait.",
+      "explain": "Replace the move at the marked enemy position with Wait, then save enemy moves. Setting an entry keeps the list the same length and leaves every other move in place. Moves, powers and targets are three independent lists: no power or target moves with this replacement. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R03.ts",
+        "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R03-V1",
+          "R03-V2",
+          "R03-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 4,
+      "station": 1,
+      "operation": "Altar job: Add Strike to the end of allied moves.",
+      "explain": "Append means add one entry after the current last entry. Add Strike to the end of allied moves and save that list. Earlier moves keep their positions. Moves, powers and targets are independent lists: the new Strike uses the power and target already waiting at its new position. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R04.ts",
+        "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R04-V1",
+          "R04-V2",
+          "R04-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 5,
+      "station": 1,
+      "operation": "Altar job: Insert Ward before the marked allied move.",
+      "explain": "Insert Ward at the marked position in allied moves, then save the list. The old move at that position and all later moves shift one place toward the end; the list grows by one. Powers and targets are separate lists and stay still. Ward therefore uses the power already at the insertion position. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R05.ts",
+        "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R05-V1",
+          "R05-V2",
+          "R05-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 6,
+      "station": 1,
+      "operation": "Altar job: Add Wait to the front of enemy moves.",
+      "explain": "Prepend means add a new first entry. Add Wait to the front of enemy moves and save the list. Every old enemy move shifts one place toward the end. Enemy powers and targets are independent lists and stay still, so the shifted moves use different positions in those lists. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R06.ts",
+        "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R06-V1",
+          "R06-V2",
+          "R06-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 7,
+      "station": 1,
+      "operation": "Altar job: Remove the marked enemy Ward.",
+      "explain": "Remove the enemy move at the marked position and save the shorter list. Discard the removed move. Every later move shifts one place toward the front. Enemy moves, powers and targets are independent lists: removing a move leaves every power and target where it was. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R07.ts",
+        "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R07-V1",
+          "R07-V2",
+          "R07-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 8,
+      "station": 1,
+      "operation": "Altar job: Replace the last allied move with Strike.",
+      "explain": "Find the current last entry of allied moves and set it to Strike, then save the list. Length minus one gives the last entry's code position because counting in code starts at zero. This replaces an existing entry; it does not append another. Powers and targets stay in place. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R08.ts",
+        "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R08-V1",
+          "R08-V2",
+          "R08-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 9,
+      "station": 1,
+      "operation": "Altar job: Remove the first allied move.",
+      "explain": "Remove the first entry of allied moves and save the shorter list. Every remaining move shifts one place toward the front. Moves, powers and targets are independent lists: leave the powers and targets in place. The new first move now uses the first power and first target. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R09.ts",
+        "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R09-V1",
+          "R09-V2",
+          "R09-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 10,
+      "station": 1,
+      "operation": "Altar job: Remove the last enemy move.",
+      "explain": "Remove the last entry of enemy moves and save the shorter list. The earlier moves do not shift. The removed entry is gone, rather than replaced with Wait. Enemy powers and targets are independent lists: they keep their lengths and their entries. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R10.ts",
+        "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R10-V1",
+          "R10-V2",
+          "R10-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 11,
+      "station": 1,
+      "operation": "Altar job: Remove the first roster actor, then banish that actor.",
+      "explain": "Get-and-remove the first actor from the roster. Save the shorter roster, then give the returned actor to banish. The remaining roster entries shift toward the front. Removing a roster entry alone does not remove an actor from battle; banishing that same actor makes it absent. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R11.ts",
+        "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R11-V1",
+          "R11-V2",
+          "R11-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 12,
+      "station": 1,
+      "operation": "Altar job: Find the first enemy Ward and replace it with Wait.",
+      "explain": "Search enemy moves from the beginning for Ward. If Ward is found, set that entry to Wait and save the list. Finding gives the entry's position; it does not remove anything. Replacing it keeps every other move in place. Powers and targets stay still. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R12.ts",
+        "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R12-V1",
+          "R12-V2",
+          "R12-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 13,
+      "station": 1,
+      "operation": "Altar job: Hold every actor in the roster.",
+      "explain": "Go through the roster from beginning to end. For each entry, give the actual actor stored there to hold. Holding stops that actor from casting but leaves it present as a target. Keep the roster entries: this job visits each actor without removing or rearranging the list. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R13.ts",
+        "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R13-V1",
+          "R13-V2",
+          "R13-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 14,
+      "station": 1,
+      "operation": "Altar job: Swap the first and fourth allied powers.",
+      "explain": "Save the first allied power in a temporary number. Put the fourth power in the first place, then put the saved number in the fourth place. Save allied powers. Saving first prevents one number from being lost when you overwrite it. These are always the first and fourth powers; move and target lists stay still. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R14.ts",
+        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R14-V1",
+          "R14-V2",
+          "R14-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 15,
+      "station": 1,
+      "operation": "Altar job: Replace every enemy Ward with Wait.",
+      "explain": "Visit every position in enemy moves. Whenever the move is Ward, set that same entry to Wait. Save the list after the loop. Keep all other moves in place. This searches the whole list, so it clears later Wards too. Power and target lists remain independent and unchanged. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R15.ts",
+        "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R15-V1",
+          "R15-V2",
+          "R15-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 16,
+      "station": 1,
+      "operation": "Altar job: Build allied moves: Ward for Strike, Strike for Wait.",
+      "explain": "Start an empty allied move list. Read the source enemy moves from beginning to end. For each Strike, add Ward to the new list; for each Wait, add Strike. Save the new allied list. Reading the source does not remove or reorder it. Allied powers and targets remain in place. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R16.ts",
+        "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R16-V1",
+          "R16-V2",
+          "R16-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 17,
+      "station": 1,
+      "operation": "Altar job: Move the last reserve move to the end of allied moves.",
+      "explain": "Get-and-remove the last entry from the reserve move list. Save the shorter reserve, append the returned move to allied moves, then save allied moves. Use the move that was returned: different setups can end with different abilities. Powers and targets are separate lists and stay still. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R17.ts",
+        "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R17-V1",
+          "R17-V2",
+          "R17-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 18,
+      "station": 1,
+      "operation": "Altar job: Move the marked enemy power to the end of allied powers.",
+      "explain": "Get-and-remove the marked number from enemy powers and save that shorter list. Later enemy numbers shift toward the front. Append the returned number to allied powers and save that list. Move names, powers and targets are independent: only these two power lists change. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R18.ts",
+        "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R18-V1",
+          "R18-V2",
+          "R18-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 19,
+      "station": 1,
+      "operation": "Altar job: Get a random roster actor and hold that actor.",
+      "explain": "Choose a random position from the first through the last roster entry. Get the actor stored there and give that returned actor to hold. Getting does not remove it: keep the whole roster. The random choice can be either listed threat; this job does not always pick one named actor. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R19.ts",
+        "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R19-V1",
+          "R19-V2",
+          "R19-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 20,
+      "station": 1,
+      "operation": "Altar job: Reverse the order of all enemy moves.",
+      "explain": "Reverse the entire enemy move list, then save it. The last move becomes first, the next-to-last becomes second, and so on. Moves, powers and targets are independent lists: reverse only move names. Their powers and targets stay in their old positions. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R20.ts",
+        "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R20-V1",
+          "R20-V2",
+          "R20-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 21,
+      "station": 1,
+      "operation": "Altar job: Find the first enemy Strike; insert allied Ward in the same place.",
+      "explain": "Find the first Strike in enemy moves. Insert Ward at the matching position in allied moves and save allied moves. The old allied move there and later allied moves shift toward the end. Do not change enemy moves. All powers and targets are separate lists and stay still. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R21.ts",
+        "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R21-V1",
+          "R21-V2",
+          "R21-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 22,
+      "station": 1,
+      "operation": "Altar job: Move the marked enemy target to the front.",
+      "explain": "Get-and-remove the actor at the marked position in enemy targets. Later target entries shift toward the front. Put that same returned actor at the beginning and save enemy targets; other targets keep their relative order. Move names, powers and targets are independent lists: only enemy targets change. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R22.ts",
+        "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R22-V1",
+          "R22-V2",
+          "R22-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 23,
+      "station": 1,
+      "operation": "Altar job: Find and remove the first enemy Ward.",
+      "explain": "Search enemy moves from the beginning for Ward. Remove that entry, discard the returned move, and save the shorter list. Later moves shift toward the front. This removes an entry rather than setting it to Wait. Powers and targets are separate lists and stay in place. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R23.ts",
+        "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R23-V1",
+          "R23-V2",
+          "R23-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 24,
+      "station": 1,
+      "operation": "Altar job: First altar: add Wait to the front of enemy moves.",
+      "explain": "Use this altar first. Prepend Wait to enemy moves and save the list. Every old enemy move shifts one place toward the end. Powers and targets are independent lists and stay still. The other altar must then replace the Strike at its shifted, marked position. Both altar jobs are needed. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R24.ts",
+        "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R24-V1",
+          "R24-V2",
+          "R24-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 24,
+      "station": 2,
+      "operation": "Altar job: Second altar: replace the shifted enemy Strike with Wait.",
+      "explain": "Use the first altar before this one. Its new Wait shifts the old enemy Strike one place toward the end. At this altar, set the marked enemy entry to Wait and save enemy moves. Setting keeps the length and other moves in place. The marked position comes from the setup, not the viewing selector. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R24.ts",
+        "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "callback": "apocTypes.Station.Secondary",
+        "encounters": [
+          "R24-V1",
+          "R24-V2",
+          "R24-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 25,
+      "station": 1,
+      "operation": "Altar job: Replace allied Wait with Ward only opposite enemy Strike.",
+      "explain": "Visit every allied move position. If that allied entry is Wait AND the enemy entry in the same place is Strike, set the allied entry to Ward. Leave harmless Waits and existing attacks alone. Save allied moves after the loop. These are independent lists; no enemy move, power or target shifts. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R25.ts",
+        "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R25-V1",
+          "R25-V2",
+          "R25-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 26,
+      "station": 1,
+      "operation": "Altar job: Ward per Strike; Mend once after an attack; Strike for other Waits.",
+      "explain": "Start an empty allied move list and read source moves in order. Add Ward for each Strike. Remember whether you have seen an attack and whether you have added Mend. At the first Wait after an attack, add Mend once. Add Strike for every other Wait, including any before the first attack. Save allied moves. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R26.ts",
+        "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R26-V1",
+          "R26-V2",
+          "R26-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 27,
+      "station": 1,
+      "operation": "Altar job: Hold every actor in the roster.",
+      "explain": "Go through the roster and give each actual actor to hold. Keep every entry in the roster. Holding stops those actors from casting but leaves them present for the later cleanup attacks. This altar does not edit enemy moves; use the second altar too, to replace every enemy Ward. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R27.ts",
+        "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R27-V1",
+          "R27-V2",
+          "R27-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 27,
+      "station": 2,
+      "operation": "Altar job: Replace every enemy Ward with Wait.",
+      "explain": "Visit every position in enemy moves and set each Ward to Wait. Keep the other moves in place, then save enemy moves. Powers and targets are independent lists and stay still. This clears the King's shield casts; it does not hold the attackers. Use the first altar too, to hold the roster actors. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R27.ts",
+        "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "callback": "apocTypes.Station.Secondary",
+        "encounters": [
+          "R27-V1",
+          "R27-V2",
+          "R27-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    }
+  ],
   "entries": [
     {
       "room": 1,

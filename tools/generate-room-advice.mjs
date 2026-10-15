@@ -13,6 +13,49 @@ const name=id=>id==='ALL'?'ALL':id.replace(/^[AE]-/,'');
 const names=ids=>ids.map(name).join(', ');
 const order=a=>a.join(', ');
 const indexes=(a,move)=>a.flatMap((m,i)=>m===move?[i]:[]).join(', ');
+// Literal, bounded reminders of the existing handlers. These are goals, not
+// built-in transformations: A always invokes the learner's current callback.
+const jobs=[
+ [1,1,'Add the shown Wait count, then Ward, Mend, Strike, Strike.', 'Start with an empty allied move list. Add the setup\'s number of leading Waits, then Ward, Mend, Strike and Strike, in that order. Save the finished move list. The power and target lists are independent: filling the move list does not move their entries.'],
+ [2,1,'Get the marked roster actor and hold it.', 'Get the actor stored at the marked roster position, then give that actor to hold. Getting an entry reads it without removing it or shifting the roster. Holding stops that actor from casting; it can still be targeted. The marked position belongs to this setup; moving the viewing selector does not change it.'],
+ [3,1,'Set the marked enemy move to Wait.', 'Replace the move at the marked enemy position with Wait, then save enemy moves. Setting an entry keeps the list the same length and leaves every other move in place. Moves, powers and targets are three independent lists: no power or target moves with this replacement.'],
+ [4,1,'Add Strike to the end of allied moves.', 'Append means add one entry after the current last entry. Add Strike to the end of allied moves and save that list. Earlier moves keep their positions. Moves, powers and targets are independent lists: the new Strike uses the power and target already waiting at its new position.'],
+ [5,1,'Insert Ward before the marked allied move.', 'Insert Ward at the marked position in allied moves, then save the list. The old move at that position and all later moves shift one place toward the end; the list grows by one. Powers and targets are separate lists and stay still. Ward therefore uses the power already at the insertion position.'],
+ [6,1,'Add Wait to the front of enemy moves.', 'Prepend means add a new first entry. Add Wait to the front of enemy moves and save the list. Every old enemy move shifts one place toward the end. Enemy powers and targets are independent lists and stay still, so the shifted moves use different positions in those lists.'],
+ [7,1,'Remove the marked enemy Ward.', 'Remove the enemy move at the marked position and save the shorter list. Discard the removed move. Every later move shifts one place toward the front. Enemy moves, powers and targets are independent lists: removing a move leaves every power and target where it was.'],
+ [8,1,'Replace the last allied move with Strike.', 'Find the current last entry of allied moves and set it to Strike, then save the list. Length minus one gives the last entry\'s code position because counting in code starts at zero. This replaces an existing entry; it does not append another. Powers and targets stay in place.'],
+ [9,1,'Remove the first allied move.', 'Remove the first entry of allied moves and save the shorter list. Every remaining move shifts one place toward the front. Moves, powers and targets are independent lists: leave the powers and targets in place. The new first move now uses the first power and first target.'],
+ [10,1,'Remove the last enemy move.', 'Remove the last entry of enemy moves and save the shorter list. The earlier moves do not shift. The removed entry is gone, rather than replaced with Wait. Enemy powers and targets are independent lists: they keep their lengths and their entries.'],
+ [11,1,'Remove the first roster actor, then banish that actor.', 'Get-and-remove the first actor from the roster. Save the shorter roster, then give the returned actor to banish. The remaining roster entries shift toward the front. Removing a roster entry alone does not remove an actor from battle; banishing that same actor makes it absent.'],
+ [12,1,'Find the first enemy Ward and replace it with Wait.', 'Search enemy moves from the beginning for Ward. If Ward is found, set that entry to Wait and save the list. Finding gives the entry\'s position; it does not remove anything. Replacing it keeps every other move in place. Powers and targets stay still.'],
+ [13,1,'Hold every actor in the roster.', 'Go through the roster from beginning to end. For each entry, give the actual actor stored there to hold. Holding stops that actor from casting but leaves it present as a target. Keep the roster entries: this job visits each actor without removing or rearranging the list.'],
+ [14,1,'Swap the first and fourth allied powers.', 'Save the first allied power in a temporary number. Put the fourth power in the first place, then put the saved number in the fourth place. Save allied powers. Saving first prevents one number from being lost when you overwrite it. These are always the first and fourth powers; move and target lists stay still.'],
+ [15,1,'Replace every enemy Ward with Wait.', 'Visit every position in enemy moves. Whenever the move is Ward, set that same entry to Wait. Save the list after the loop. Keep all other moves in place. This searches the whole list, so it clears later Wards too. Power and target lists remain independent and unchanged.'],
+ [16,1,'Build allied moves: Ward for Strike, Strike for Wait.', 'Start an empty allied move list. Read the source enemy moves from beginning to end. For each Strike, add Ward to the new list; for each Wait, add Strike. Save the new allied list. Reading the source does not remove or reorder it. Allied powers and targets remain in place.'],
+ [17,1,'Move the last reserve move to the end of allied moves.', 'Get-and-remove the last entry from the reserve move list. Save the shorter reserve, append the returned move to allied moves, then save allied moves. Use the move that was returned: different setups can end with different abilities. Powers and targets are separate lists and stay still.'],
+ [18,1,'Move the marked enemy power to the end of allied powers.', 'Get-and-remove the marked number from enemy powers and save that shorter list. Later enemy numbers shift toward the front. Append the returned number to allied powers and save that list. Move names, powers and targets are independent: only these two power lists change.'],
+ [19,1,'Get a random roster actor and hold that actor.', 'Choose a random position from the first through the last roster entry. Get the actor stored there and give that returned actor to hold. Getting does not remove it: keep the whole roster. The random choice can be either listed threat; this job does not always pick one named actor.'],
+ [20,1,'Reverse the order of all enemy moves.', 'Reverse the entire enemy move list, then save it. The last move becomes first, the next-to-last becomes second, and so on. Moves, powers and targets are independent lists: reverse only move names. Their powers and targets stay in their old positions.'],
+ [21,1,'Find the first enemy Strike; insert allied Ward in the same place.', 'Find the first Strike in enemy moves. Insert Ward at the matching position in allied moves and save allied moves. The old allied move there and later allied moves shift toward the end. Do not change enemy moves. All powers and targets are separate lists and stay still.'],
+ [22,1,'Move the marked enemy target to the front.', 'Get-and-remove the actor at the marked position in enemy targets. Later target entries shift toward the front. Put that same returned actor at the beginning and save enemy targets; other targets keep their relative order. Move names, powers and targets are independent lists: only enemy targets change.'],
+ [23,1,'Find and remove the first enemy Ward.', 'Search enemy moves from the beginning for Ward. Remove that entry, discard the returned move, and save the shorter list. Later moves shift toward the front. This removes an entry rather than setting it to Wait. Powers and targets are separate lists and stay in place.'],
+ [24,1,'First altar: add Wait to the front of enemy moves.', 'Use this altar first. Prepend Wait to enemy moves and save the list. Every old enemy move shifts one place toward the end. Powers and targets are independent lists and stay still. The other altar must then replace the Strike at its shifted, marked position. Both altar jobs are needed.'],
+ [24,2,'Second altar: replace the shifted enemy Strike with Wait.', 'Use the first altar before this one. Its new Wait shifts the old enemy Strike one place toward the end. At this altar, set the marked enemy entry to Wait and save enemy moves. Setting keeps the length and other moves in place. The marked position comes from the setup, not the viewing selector.'],
+ [25,1,'Replace allied Wait with Ward only opposite enemy Strike.', 'Visit every allied move position. If that allied entry is Wait AND the enemy entry in the same place is Strike, set the allied entry to Ward. Leave harmless Waits and existing attacks alone. Save allied moves after the loop. These are independent lists; no enemy move, power or target shifts.'],
+ [26,1,'Ward per Strike; Mend once after an attack; Strike for other Waits.', 'Start an empty allied move list and read source moves in order. Add Ward for each Strike. Remember whether you have seen an attack and whether you have added Mend. At the first Wait after an attack, add Mend once. Add Strike for every other Wait, including any before the first attack. Save allied moves.'],
+ [27,1,'Hold every actor in the roster.', 'Go through the roster and give each actual actor to hold. Keep every entry in the roster. Holding stops those actors from casting but leaves them present for the later cleanup attacks. This altar does not edit enemy moves; use the second altar too, to replace every enemy Ward.'],
+ [27,2,'Replace every enemy Ward with Wait.', 'Visit every position in enemy moves and set each Ward to Wait. Keep the other moves in place, then save enemy moves. Powers and targets are independent lists and stay still. This clears the King\'s shield casts; it does not hold the attackers. Use the first altar too, to hold the roster actors.']
+];
+const operations=jobs.map(([room,station,short,long])=>{
+ const reference=`implementation/learner-states/rooms/R${String(room).padStart(2,'0')}.ts`;
+ const callback=`apocTypes.Station.${station===1?'Primary':'Secondary'}`;
+ if(!read(reference).includes(callback))throw Error(`Missing callback ${room}/${station}`);
+ const operation='Altar job: '+short;
+ const explain=long+' A runs your current altar code; this is the job to write.';
+ if(operation.length>85||explain.length>500)throw Error(`Help too long ${room}/${station}: ${operation.length}/${explain.length}`);
+ return {room,station,operation,explain,provenance:{reference,reference_sha256:hash(read(reference)),callback,encounters:variants.filter(x=>x.room===room).map(x=>`R${String(room).padStart(2,'0')}-V${x.variant}`),adaptation:'Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text'}};
+});
+if(operations.length!==29||new Set(operations.map(x=>`${x.room}-${x.station}`)).size!==29)throw Error('Expected 29 station jobs');
 function strategy(x){
  const a=x.lists,f=x.expected.lists,m=x.stations[0].markedIndex;
  const owner=(side,move)=>name(x.actors.find(a=>a.side===side&&a.ability===move).id);
@@ -55,12 +98,18 @@ const entries=variants.map(x=>{
 });
 if(entries.length!==81||new Set(entries.map(e=>e.room+'-'+e.variant)).size!==81)throw Error('Expected all 27 x 3 variants');
 for(let r=1;r<=27;r++)for(let v=1;v<=3;v++)if(!entries.some(e=>e.room===r&&e.variant===v))throw Error('Missing '+r+'-'+v);
-const data=JSON.stringify({schema:'AL-ROOM-ADVICE-1',generated_by:'tools/generate-room-advice.mjs',index_convention:'zero-based, matching the visible list rows',purpose:'Optional explicit gameplay solutions requested by owner; does not execute or replace learner code',entries},null,2)+'\n';
+const data=JSON.stringify({schema:'AL-ROOM-ADVICE-1',generated_by:'tools/generate-room-advice.mjs',index_convention:'Strategy indices are zero-based; operation reminders use plain ordinals.',purpose:'Optional explicit gameplay solutions and mechanical altar reminders requested by owner; does not execute or replace learner code',operations,entries},null,2)+'\n';
 let ts='// Generated by tools/generate-room-advice.mjs. Read-only optional help.\nnamespace apocAdvice {\n    export function text(room: number, variant: number): string {\n';
 for(const e of entries)ts+=`        if (room == ${e.room} && variant == ${e.variant}) return ${JSON.stringify(e.text)}\n`;
-ts+='        return "Advice unavailable for this room setup."\n    }\n}\n';
+ts+='        return "Advice unavailable for this room setup."\n    }\n';
+for(const [method,field] of [['operation','operation'],['explain','explain']]){
+ ts+=`    export function ${method}(room: number, station: number): string {\n`;
+ for(const op of operations)ts+=`        if (room == ${op.room} && station == ${op.station}) return ${JSON.stringify(op[field])}\n`;
+ ts+='        return "No altar job is assigned here."\n    }\n';
+}
+ts+='}\n';
 for(const [p,content] of [['implementation/room-advice.json',data],['implementation/supplied-world/advice.ts',ts]]){
  if(process.argv.includes('--check')){if(read(p)!==content)throw Error('Stale advice: '+p);}
  else fs.writeFileSync(path.join(root,p),content);
 }
-console.log(`${process.argv.includes('--check')?'Checked':'Generated'} 81 room/variant advice entries with encounter and handler provenance.`);
+console.log(`${process.argv.includes('--check')?'Checked':'Generated'} 81 room/variant strategies and 29 short/long station jobs with source provenance.`);

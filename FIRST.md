@@ -6,7 +6,7 @@
 
 ## Build your first move list
 
-Expand the simulator with **Fullscreen** so you can read the portrait room. Move with the arrow keys. Press **A** at an altar; press **B** to open the expedition menu. The room begins with an empty allied move list. Your Blocks provide its first plan.
+Expand the simulator with **Fullscreen** so you can read the portrait room. Move with the arrow keys. **B** beside an altar explains its list operation; **B** beside a moment watches it; **B** elsewhere opens the menu. **A** at an altar runs your current code. The room begins with an empty allied move list. Your Blocks provide its first plan.
 
 A move list keeps a team's script in one place. Your first job is to build the allied script, then give it to the room.
 
@@ -26,7 +26,7 @@ From ``||apocalypse(noclick):Apocalyptic Lists||``, add ``||apocalypse(noclick):
 
 A room event runs when you press **A** at its station. Use the room and station dropdowns shown in the example. Your list work belongs inside that event, so it starts with the current attempt.
 
-**Try your code.** Walk to **Write plan** (the Primary station) and press **A** once. Watch the plan change. Then press **B**, choose **Release time**, and press **A**.
+**Try your code.** Walk to **Write plan** (the Primary station) and press **A** once. Watch the plan change. Then walk to the glowing crystal at the top of the room and press **A** to **Release time**.
 
 The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.
 
@@ -10477,6 +10477,70 @@ namespace apocAdvice {
         if (room == 27 && variant == 3) return "Station 1: hold Raider, Wisp. Station 2: change enemy Wards at indices 0, 4 to Wait. King then has no shields, and the held attackers cannot cast. Five Strikes 2 deal 20 to King; Ranger's Flurry 8 breaks Raider's one-hit shield and clears its 6 HP; Strike 3 clears Wisp's 6 HP."
         return "Advice unavailable for this room setup."
     }
+    export function operation(room: number, station: number): string {
+        if (room == 1 && station == 1) return "Altar job: Add the shown Wait count, then Ward, Mend, Strike, Strike."
+        if (room == 2 && station == 1) return "Altar job: Get the marked roster actor and hold it."
+        if (room == 3 && station == 1) return "Altar job: Set the marked enemy move to Wait."
+        if (room == 4 && station == 1) return "Altar job: Add Strike to the end of allied moves."
+        if (room == 5 && station == 1) return "Altar job: Insert Ward before the marked allied move."
+        if (room == 6 && station == 1) return "Altar job: Add Wait to the front of enemy moves."
+        if (room == 7 && station == 1) return "Altar job: Remove the marked enemy Ward."
+        if (room == 8 && station == 1) return "Altar job: Replace the last allied move with Strike."
+        if (room == 9 && station == 1) return "Altar job: Remove the first allied move."
+        if (room == 10 && station == 1) return "Altar job: Remove the last enemy move."
+        if (room == 11 && station == 1) return "Altar job: Remove the first roster actor, then banish that actor."
+        if (room == 12 && station == 1) return "Altar job: Find the first enemy Ward and replace it with Wait."
+        if (room == 13 && station == 1) return "Altar job: Hold every actor in the roster."
+        if (room == 14 && station == 1) return "Altar job: Swap the first and fourth allied powers."
+        if (room == 15 && station == 1) return "Altar job: Replace every enemy Ward with Wait."
+        if (room == 16 && station == 1) return "Altar job: Build allied moves: Ward for Strike, Strike for Wait."
+        if (room == 17 && station == 1) return "Altar job: Move the last reserve move to the end of allied moves."
+        if (room == 18 && station == 1) return "Altar job: Move the marked enemy power to the end of allied powers."
+        if (room == 19 && station == 1) return "Altar job: Get a random roster actor and hold that actor."
+        if (room == 20 && station == 1) return "Altar job: Reverse the order of all enemy moves."
+        if (room == 21 && station == 1) return "Altar job: Find the first enemy Strike; insert allied Ward in the same place."
+        if (room == 22 && station == 1) return "Altar job: Move the marked enemy target to the front."
+        if (room == 23 && station == 1) return "Altar job: Find and remove the first enemy Ward."
+        if (room == 24 && station == 1) return "Altar job: First altar: add Wait to the front of enemy moves."
+        if (room == 24 && station == 2) return "Altar job: Second altar: replace the shifted enemy Strike with Wait."
+        if (room == 25 && station == 1) return "Altar job: Replace allied Wait with Ward only opposite enemy Strike."
+        if (room == 26 && station == 1) return "Altar job: Ward per Strike; Mend once after an attack; Strike for other Waits."
+        if (room == 27 && station == 1) return "Altar job: Hold every actor in the roster."
+        if (room == 27 && station == 2) return "Altar job: Replace every enemy Ward with Wait."
+        return "No altar job is assigned here."
+    }
+    export function explain(room: number, station: number): string {
+        if (room == 1 && station == 1) return "Start with an empty allied move list. Add the setup's number of leading Waits, then Ward, Mend, Strike and Strike, in that order. Save the finished move list. The power and target lists are independent: filling the move list does not move their entries. A runs your current altar code; this is the job to write."
+        if (room == 2 && station == 1) return "Get the actor stored at the marked roster position, then give that actor to hold. Getting an entry reads it without removing it or shifting the roster. Holding stops that actor from casting; it can still be targeted. The marked position belongs to this setup; moving the viewing selector does not change it. A runs your current altar code; this is the job to write."
+        if (room == 3 && station == 1) return "Replace the move at the marked enemy position with Wait, then save enemy moves. Setting an entry keeps the list the same length and leaves every other move in place. Moves, powers and targets are three independent lists: no power or target moves with this replacement. A runs your current altar code; this is the job to write."
+        if (room == 4 && station == 1) return "Append means add one entry after the current last entry. Add Strike to the end of allied moves and save that list. Earlier moves keep their positions. Moves, powers and targets are independent lists: the new Strike uses the power and target already waiting at its new position. A runs your current altar code; this is the job to write."
+        if (room == 5 && station == 1) return "Insert Ward at the marked position in allied moves, then save the list. The old move at that position and all later moves shift one place toward the end; the list grows by one. Powers and targets are separate lists and stay still. Ward therefore uses the power already at the insertion position. A runs your current altar code; this is the job to write."
+        if (room == 6 && station == 1) return "Prepend means add a new first entry. Add Wait to the front of enemy moves and save the list. Every old enemy move shifts one place toward the end. Enemy powers and targets are independent lists and stay still, so the shifted moves use different positions in those lists. A runs your current altar code; this is the job to write."
+        if (room == 7 && station == 1) return "Remove the enemy move at the marked position and save the shorter list. Discard the removed move. Every later move shifts one place toward the front. Enemy moves, powers and targets are independent lists: removing a move leaves every power and target where it was. A runs your current altar code; this is the job to write."
+        if (room == 8 && station == 1) return "Find the current last entry of allied moves and set it to Strike, then save the list. Length minus one gives the last entry's code position because counting in code starts at zero. This replaces an existing entry; it does not append another. Powers and targets stay in place. A runs your current altar code; this is the job to write."
+        if (room == 9 && station == 1) return "Remove the first entry of allied moves and save the shorter list. Every remaining move shifts one place toward the front. Moves, powers and targets are independent lists: leave the powers and targets in place. The new first move now uses the first power and first target. A runs your current altar code; this is the job to write."
+        if (room == 10 && station == 1) return "Remove the last entry of enemy moves and save the shorter list. The earlier moves do not shift. The removed entry is gone, rather than replaced with Wait. Enemy powers and targets are independent lists: they keep their lengths and their entries. A runs your current altar code; this is the job to write."
+        if (room == 11 && station == 1) return "Get-and-remove the first actor from the roster. Save the shorter roster, then give the returned actor to banish. The remaining roster entries shift toward the front. Removing a roster entry alone does not remove an actor from battle; banishing that same actor makes it absent. A runs your current altar code; this is the job to write."
+        if (room == 12 && station == 1) return "Search enemy moves from the beginning for Ward. If Ward is found, set that entry to Wait and save the list. Finding gives the entry's position; it does not remove anything. Replacing it keeps every other move in place. Powers and targets stay still. A runs your current altar code; this is the job to write."
+        if (room == 13 && station == 1) return "Go through the roster from beginning to end. For each entry, give the actual actor stored there to hold. Holding stops that actor from casting but leaves it present as a target. Keep the roster entries: this job visits each actor without removing or rearranging the list. A runs your current altar code; this is the job to write."
+        if (room == 14 && station == 1) return "Save the first allied power in a temporary number. Put the fourth power in the first place, then put the saved number in the fourth place. Save allied powers. Saving first prevents one number from being lost when you overwrite it. These are always the first and fourth powers; move and target lists stay still. A runs your current altar code; this is the job to write."
+        if (room == 15 && station == 1) return "Visit every position in enemy moves. Whenever the move is Ward, set that same entry to Wait. Save the list after the loop. Keep all other moves in place. This searches the whole list, so it clears later Wards too. Power and target lists remain independent and unchanged. A runs your current altar code; this is the job to write."
+        if (room == 16 && station == 1) return "Start an empty allied move list. Read the source enemy moves from beginning to end. For each Strike, add Ward to the new list; for each Wait, add Strike. Save the new allied list. Reading the source does not remove or reorder it. Allied powers and targets remain in place. A runs your current altar code; this is the job to write."
+        if (room == 17 && station == 1) return "Get-and-remove the last entry from the reserve move list. Save the shorter reserve, append the returned move to allied moves, then save allied moves. Use the move that was returned: different setups can end with different abilities. Powers and targets are separate lists and stay still. A runs your current altar code; this is the job to write."
+        if (room == 18 && station == 1) return "Get-and-remove the marked number from enemy powers and save that shorter list. Later enemy numbers shift toward the front. Append the returned number to allied powers and save that list. Move names, powers and targets are independent: only these two power lists change. A runs your current altar code; this is the job to write."
+        if (room == 19 && station == 1) return "Choose a random position from the first through the last roster entry. Get the actor stored there and give that returned actor to hold. Getting does not remove it: keep the whole roster. The random choice can be either listed threat; this job does not always pick one named actor. A runs your current altar code; this is the job to write."
+        if (room == 20 && station == 1) return "Reverse the entire enemy move list, then save it. The last move becomes first, the next-to-last becomes second, and so on. Moves, powers and targets are independent lists: reverse only move names. Their powers and targets stay in their old positions. A runs your current altar code; this is the job to write."
+        if (room == 21 && station == 1) return "Find the first Strike in enemy moves. Insert Ward at the matching position in allied moves and save allied moves. The old allied move there and later allied moves shift toward the end. Do not change enemy moves. All powers and targets are separate lists and stay still. A runs your current altar code; this is the job to write."
+        if (room == 22 && station == 1) return "Get-and-remove the actor at the marked position in enemy targets. Later target entries shift toward the front. Put that same returned actor at the beginning and save enemy targets; other targets keep their relative order. Move names, powers and targets are independent lists: only enemy targets change. A runs your current altar code; this is the job to write."
+        if (room == 23 && station == 1) return "Search enemy moves from the beginning for Ward. Remove that entry, discard the returned move, and save the shorter list. Later moves shift toward the front. This removes an entry rather than setting it to Wait. Powers and targets are separate lists and stay in place. A runs your current altar code; this is the job to write."
+        if (room == 24 && station == 1) return "Use this altar first. Prepend Wait to enemy moves and save the list. Every old enemy move shifts one place toward the end. Powers and targets are independent lists and stay still. The other altar must then replace the Strike at its shifted, marked position. Both altar jobs are needed. A runs your current altar code; this is the job to write."
+        if (room == 24 && station == 2) return "Use the first altar before this one. Its new Wait shifts the old enemy Strike one place toward the end. At this altar, set the marked enemy entry to Wait and save enemy moves. Setting keeps the length and other moves in place. The marked position comes from the setup, not the viewing selector. A runs your current altar code; this is the job to write."
+        if (room == 25 && station == 1) return "Visit every allied move position. If that allied entry is Wait AND the enemy entry in the same place is Strike, set the allied entry to Ward. Leave harmless Waits and existing attacks alone. Save allied moves after the loop. These are independent lists; no enemy move, power or target shifts. A runs your current altar code; this is the job to write."
+        if (room == 26 && station == 1) return "Start an empty allied move list and read source moves in order. Add Ward for each Strike. Remember whether you have seen an attack and whether you have added Mend. At the first Wait after an attack, add Mend once. Add Strike for every other Wait, including any before the first attack. Save allied moves. A runs your current altar code; this is the job to write."
+        if (room == 27 && station == 1) return "Go through the roster and give each actual actor to hold. Keep every entry in the roster. Holding stops those actors from casting but leaves them present for the later cleanup attacks. This altar does not edit enemy moves; use the second altar too, to replace every enemy Ward. A runs your current altar code; this is the job to write."
+        if (room == 27 && station == 2) return "Visit every position in enemy moves and set each Ward to Wait. Keep the other moves in place, then save enemy moves. Powers and targets are independent lists and stay still. This clears the King's shield casts; it does not hold the attackers. Use the first altar too, to hold the roster actors. A runs your current altar code; this is the job to write."
+        return "No altar job is assigned here."
+    }
 }
 
 // SUPPLIED SOURCE supplied-world/save.ts
@@ -10551,7 +10615,7 @@ namespace apocView {
     const CENTER = 288
     const JOBS = ["Write plan", "Hold threat", "Rewrite", "Append", "Insert Ward", "Delay", "Remove Ward", "Repair last", "Remove first", "Remove last", "Banish first", "Find Ward", "Hold hazards", "Swap power", "Clear Wards", "Build counters", "Use reserve", "Steal power", "Hold one", "Reverse", "Find defense", "Move target", "Find + remove", "Delay", "Repair gaps", "Build recovery", "Hold hazards"]
     const OPS = ["create", "get", "set", "append", "insert", "prepend", "remove", "length", "remove", "remove", "remove", "find", "foreach", "swap", "foreach", "build", "transfer", "transfer", "get", "reverse", "find", "transfer", "find", "order", "foreach", "build", "foreach"]
-    const MENU = ["Use first altar", "Use second altar", "Release time", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Room instructions + strategy", "Reset saved progress"]
+    const MENU = ["Use first altar", "Use second altar", "Release time", "Reset this attempt", "Retry this setup", "Try another setup", "Continue through the gate", "Revisit an unlocked room", "Altar help + room strategy", "Reset saved progress"]
     const MOVES = ["Strike", "Flurry", "Mend", "Ward", "Venom", "Reap", "Empower", "Wait"]
     let moveIcons: Image[] = []
     let actorRefs: Sprite[] = []
@@ -11035,11 +11099,22 @@ namespace apocView {
         if (apocWorld.uiEraseConfirm()) { centered("Reset saved expedition progress?", CENTER, 235, 2); centered("A confirm    B keep progress", CENTER, 270, 1); return }
         if (apocWorld.uiPicking()) { centered("Revisit an unlocked room", CENTER, 174, 9); centered("Room " + apocWorld.uiPickRoom(), CENTER, 230, 5); centered("Left/Right choose. A travel. B back.", CENTER, 278, 1); return }
         if (apocWorld.uiHelp()) {
-            centered("ROOM " + apocWorld.uiRoom() + " INSTRUCTIONS", CENTER, 134, 9)
-            let y = wrap(apocWorld.uiSpec().instruction, 83, 170, 408)
-            y = wrap("Walk to the glowing altar. A uses your current code. The crystal at the top releases time. B beside a moment previews only that action.", 83, y + 22, 408)
-            text("IF YOU NEED IT, HERE IS A STRATEGY", 83, y + 25, 5); wrap(apocAdvice.text(apocWorld.uiRoom(), apocWorld.uiVariant()), 83, y + 48, 408)
-            centered("B returns to the room", CENTER, 547, 9); return
+            const page = apocWorld.uiHelpPage(), pages = apocWorld.uiHelpPages(), strategy = page == pages - 1
+            centered("ROOM " + apocWorld.uiRoom() + (strategy ? " STRATEGY" : page == 0 ? " FIRST ALTAR" : " SECOND ALTAR"), CENTER, 134, 9)
+            if (strategy) {
+                let y = wrap(apocWorld.uiSpec().instruction, 83, 174, 408)
+                text("IF YOU NEED IT, HERE IS A STRATEGY", 83, y + 20, 5)
+                y = wrap(apocAdvice.text(apocWorld.uiRoom(), apocWorld.uiVariant()), 83, y + 45, 408)
+                wrap("A at an altar runs your code. The top crystal releases time. B beside a moment watches that action; B beside an altar explains its job.", 83, y + 24, 408, 11)
+            } else {
+                const station = page + 1
+                centered("HOW THIS LIST OPERATION WORKS", CENTER, 156, 5)
+                let y = wrap(apocAdvice.operation(apocWorld.uiRoom(), station), 83, 190, 408, 5)
+                y = wrap(apocAdvice.explain(apocWorld.uiRoom(), station), 83, y + 24, 408)
+                if (apocWorld.uiRoom() == 1) text("Leading Waits in this setup: " + apocWorld.uiSpec().numberHint, 83, y + 22, 9)
+            }
+            centered("PAGE " + (page + 1) + " / " + pages, CENTER, 515, 11)
+            centered("Left/Right pages    B returns", CENTER, 547, 9); return
         }
         centered("EXPEDITION MENU", CENTER, 132, 9)
         const progress = apocWorld.uiProgress(), spec = apocWorld.uiSpec()
@@ -11054,6 +11129,7 @@ namespace apocView {
     function footer(now: number): void {
         screen.fillRect(14, 690, WIDTH - 28, 25, 15)
         let s = apocWorld.uiNotice(), row = apocWorld.uiNearRow(), side = apocWorld.uiNearSide()
+        let controls = "Arrows walk | A select/use | B watch/help/menu | X = fallen by this moment"
         if (!apocWorld.uiPlaying() && !apocWorld.uiAnimating() && row >= 0) {
             const t = apocWorld.uiTrial(), moves = side == 0 ? t.lists.allyMoves : t.lists.enemyMoves, values = side == 0 ? t.lists.allyValues : t.lists.enemyValues
             const ref = chosen(t, side, row), a = actorFor(ref, t)
@@ -11064,9 +11140,22 @@ namespace apocView {
             const moves = side == 0 ? tMoves(before, 0) : tMoves(before, 1), move = row < moves.length ? moves[row] : "No move", phase = apocWorld.uiCombatProgress()
             s = apocWorld.uiCombatSkipped() ? "No action: " + apocWorld.uiSkipReason(side, row) : phase < .22 ? "The number charges " + move + "." : phase < .5 ? move + " travels to " + (actor ? shortName(actor.id) : "its actor") + "." : phase < .8 ? (actor ? shortName(actor.id) : "The actor") + " sends " + move + " to its target." : "The effect lands. This action is spent."
         } else if (apocWorld.uiAnimating()) s = activating(now) ? "These glowing pieces are about to move." : now - apocWorld.uiEditStarted() < apocWorld.uiEditDuration() ? "The changed pieces travel to their new positions." : "The room returns with the new future already resolved."
+        if (!apocWorld.uiAnimating() && !apocWorld.uiHelp() && !apocWorld.uiPicking() && !apocWorld.uiEraseConfirm()) {
+            const near = apocWorld.uiNearStation(), suggested = apocWorld.uiSuggestedStation(), menu = apocWorld.uiMenu()
+            let station = -1
+            if (menu && apocWorld.uiMenuIndex() <= 1 && (apocWorld.uiMenuIndex() == 0 || apocWorld.uiSpec().twoStations)) station = apocWorld.uiMenuIndex()
+            else if (!menu && (near == 0 || near == 1)) station = near
+            else if (!menu && near < 0 && row < 0 && (suggested == 0 || suggested == 1)) station = suggested
+            if (station >= 0) {
+                s = apocAdvice.operation(apocWorld.uiRoom(), station + 1)
+                controls = menu ? "A runs your altar code | B closes menu | Altar help is also in this menu" : near == station ? "A runs your altar code | B explains this list operation | Arrows walk" : "At the glowing altar: A use code, B explanation | B here opens the menu"
+                if (apocWorld.uiRoom() == 1) controls = "Leading Waits: " + apocWorld.uiSpec().numberHint + ". " + (menu ? "A use code | B close menu | Choose Altar help for steps" : near == station ? "A use code | B explains the operation" : "Approach the altar: A use code, B explanation")
+            }
+        }
+        if (apocWorld.uiHelp()) controls = "Left/Right turn the help pages | B returns | Reading does not use the altar"
         if (s.length > 89) s = s.substr(0, 86) + "..."
         tiny(s, 23, 695, apocWorld.uiPlaying() ? 5 : 1)
-        tiny("Arrows walk | A select/use | B watch/menu | X = fallen by this moment", 23, 706, 11)
+        tiny(controls, 23, 706, 11)
     }
     function tMoves(state: apocTypes.TrialSnapshot, side: number): string[] { return !state ? [] : side == 0 ? state.lists.allyMoves : state.lists.enemyMoves }
     export function draw(): void {
@@ -11185,6 +11274,8 @@ namespace apocWorld {
     let resultingVictory = false
     let eraseConfirm = false
     let help = false
+    let helpPage = 0
+    let helpReturnMenu = false
     let observerLockX = 171
     let observerLockY = 650
     let motionLocked = false
@@ -11587,6 +11678,8 @@ namespace apocWorld {
         previewing = false
         eraseConfirm = false
         help = false
+        helpPage = 0
+        helpReturnMenu = false
         updateNear()
     }
     function roomLabel(): string { return selectedRoom < 10 ? "0" + selectedRoom : "" + selectedRoom }
@@ -11716,12 +11809,19 @@ namespace apocWorld {
             if (completed && selectedRoom < 27) travel(selectedRoom + 1)
             else recent = selectedRoom == 27 && completed ? "The End - replay any earned room from B" : "EXIT locked: finish task AND win"
         } else if (n == 7) { roomPicker = true; pickerRoom = selectedRoom; lockObserver() }
-        else if (n == 8) { help = true; lockObserver(); recent = "Room instructions and advice. B returns to the room." }
+        else if (n == 8) openHelp(0, true)
         else if (n == 9) {
             eraseConfirm = true
             lockObserver()
             recent = "ERASE game progress? A confirm, B cancel"
         }
+    }
+    function openHelp(page: number, fromMenu: boolean): void {
+        helpPage = Math.constrain(page, 0, roomSpec && roomSpec.twoStations ? 2 : 1)
+        helpReturnMenu = fromMenu
+        help = true
+        lockObserver()
+        recent = "Left/Right turns help pages. B returns without using the altar."
     }
     function stationAction(): void {
         if (!observer) return
@@ -11734,7 +11834,12 @@ namespace apocWorld {
         } else recent = "Walk beside a moment to select it, or approach a room object. B opens the menu."
     }
     function menuUp(delta: number): void {
-        if (animationActive() || help || eraseConfirm) return
+        if (animationActive() || eraseConfirm) return
+        if (help) {
+            const pages = uiHelpPages()
+            helpPage = (helpPage + delta + pages) % pages
+            return
+        }
         if (roomPicker) { pickerRoom += delta; if (pickerRoom < 1) pickerRoom = 1; if (pickerRoom > progress.highestUnlocked) pickerRoom = progress.highestUnlocked }
         else if (menu) { menuIndex += delta; if (menuIndex < 0) menuIndex = 9; if (menuIndex > 9) menuIndex = 0 }
     }
@@ -11780,18 +11885,24 @@ namespace apocWorld {
         })
         controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             if (busy || animationActive()) return
-            if (help) { help = false; recent = "Back in the room. A selects a nearby moment; B previews it."; return }
+            if (help) {
+                help = false
+                if (helpReturnMenu) { menu = true; menuIndex = 8 }
+                recent = "Back from help. Your lists are unchanged."
+                return
+            }
             if (eraseConfirm) { eraseConfirm = false; recent = "Progress erase canceled"; return }
             if (roomPicker) { roomPicker = false; return }
             updateNear()
+            if (!menu && (nearStation == 0 || nearStation == 1)) { openHelp(nearStation, false); return }
             if (!menu && nearRow >= 0) { previewMoment(nearSide, nearRow); return }
             menu = !menu
             if (menu) { menuIndex = 0; lockObserver() }
         })
         controller.up.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(-1) })
         controller.down.onEvent(ControllerButtonEvent.Pressed, function () { menuUp(1) })
-        controller.left.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker) menuUp(-1) })
-        controller.right.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker) menuUp(1) })
+        controller.left.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker || help) menuUp(-1) })
+        controller.right.onEvent(ControllerButtonEvent.Pressed, function () { if (roomPicker || help) menuUp(1) })
         game.onUpdate(function () {
             if (observer) {
                 const lock = menu || roomPicker || animationActive() || busy || eraseConfirm || help
@@ -11916,6 +12027,8 @@ namespace apocWorld {
     export function uiEditRecord(): apocTypes.StationRecord { return editRecord }
     export function uiAnimating(): boolean { return animationActive() }
     export function uiHelp(): boolean { return help }
+    export function uiHelpPage(): number { return helpPage }
+    export function uiHelpPages(): number { return roomSpec && roomSpec.twoStations ? 3 : 2 }
     export function uiLastAction(): string { return lastAction }
     // Guide the physical interaction, without doing or grading the learner's edit.
     export function uiSuggestedStation(): number {
