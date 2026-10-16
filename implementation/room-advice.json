@@ -229,11 +229,28 @@
       "room": 14,
       "station": 1,
       "operation": "Altar job: Swap the first and fourth allied powers.",
-      "explain": "Save the first allied power in a temporary number. Put the fourth power in the first place, then put the saved number in the fourth place. Save allied powers. Saving first prevents one number from being lost when you overwrite it. These are always the first and fourth powers; move and target lists stay still. A runs your current altar code; this is the job to write.",
+      "explain": "First use Roll first power at the other altar. Save the first allied power in a temporary number. Put the fourth power in the first place, then put the saved number in the fourth place. Save allied powers. Saving first prevents one number from being lost when you overwrite it. These are always the first and fourth powers; move and target lists stay still. A runs your current altar code; this is the job to write.",
       "provenance": {
         "reference": "implementation/learner-states/rooms/R14.ts",
-        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "reference_sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
         "callback": "apocTypes.Station.Primary",
+        "encounters": [
+          "R14-V1",
+          "R14-V2",
+          "R14-V3"
+        ],
+        "adaptation": "Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text"
+      }
+    },
+    {
+      "room": 14,
+      "station": 2,
+      "operation": "Altar job: Roll only the first allied power, from 4 to 9.",
+      "explain": "Read allied powers. Replace only the first entry with a random number from 4 through 9, then submit that power list. The fourth entry stays put: use Swap power to move the stronger first number there. If the roll is below this setup's needed power, roll again before swapping. Moves and targets stay still. A runs your current altar code; this is the job to write.",
+      "provenance": {
+        "reference": "implementation/learner-states/rooms/R14.ts",
+        "reference_sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
+        "callback": "apocTypes.Station.Secondary",
         "encounters": [
           "R14-V1",
           "R14-V2",
@@ -1009,40 +1026,40 @@
     {
       "room": 14,
       "variant": 1,
-      "text": "Swap allied powers at indices 0 and 3 using a saved number: 4 and 1 become 1 and 4. Blade's first Strike now deals 2 to Small (2 HP); the last deals 8 to Boss (8 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small.",
+      "text": "Use Roll first power until the FIRST power is at least 4; it rolls only that entry from 4 to 9. Then use Swap power to exchange first and fourth. The first Strike needs only 1 to clear Small's 2 HP; the fourth needs 4 or more to deal at least 8 to Boss. Release time only after the strong number is fourth. Rolling alone or swapping the starting 1s cannot win.",
       "provenance": {
         "encounter": "implementation/encounters.json#/variants/39",
-        "encounter_sha256": "d2cc0479adf9efb7dfb01351c89103a2f130f44bdc2f542325d5053820390956",
+        "encounter_sha256": "57394a3f54ecca5fbf5d7d6a199d1479e83ab962517ddac9302a0a0090206c34",
         "reference": "implementation/learner-states/rooms/R14.ts",
-        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
-        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
-        "instruction": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values."
+        "reference_sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
+        "goal": "Current encounter plus supplied-world/goals.ts historyR14: legal roll/swap history is the list task; Boss HP determines the separate combat power threshold.",
+        "instruction": "Reroll the first allied value at Secondary, then use a temporary number at Primary to swap the first and fourth values. The fourth value needs at least 4 to finish the boss."
       }
     },
     {
       "room": 14,
       "variant": 2,
-      "text": "Swap allied powers at indices 0 and 3 using a saved number: 5 and 1 become 1 and 5. Blade's first Strike now deals 2 to Small (2 HP); the last deals 10 to Boss (10 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small.",
+      "text": "Use Roll first power until the FIRST power is at least 5; it rolls only that entry from 4 to 9. Then use Swap power to exchange first and fourth. The first Strike needs only 1 to clear Small's 2 HP; the fourth needs 5 or more to deal at least 10 to Boss. Release time only after the strong number is fourth. Rolling alone or swapping the starting 1s cannot win.",
       "provenance": {
         "encounter": "implementation/encounters.json#/variants/40",
-        "encounter_sha256": "8ebe990e958e4c3536cd8fc695ab5aeb7282d66048d2ca057b8a966169630428",
+        "encounter_sha256": "763dddb4113fb9f0151f4f698edfc335e6441a36c166f4a3cb6a98ec47d0e384",
         "reference": "implementation/learner-states/rooms/R14.ts",
-        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
-        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
-        "instruction": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values."
+        "reference_sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
+        "goal": "Current encounter plus supplied-world/goals.ts historyR14: legal roll/swap history is the list task; Boss HP determines the separate combat power threshold.",
+        "instruction": "Reroll the first allied value at Secondary, then use a temporary number at Primary to swap the first and fourth values. The fourth value needs at least 5 to finish the boss."
       }
     },
     {
       "room": 14,
       "variant": 3,
-      "text": "Swap allied powers at indices 0 and 3 using a saved number: 6 and 1 become 1 and 6. Blade's first Strike now deals 2 to Small (2 HP); the last deals 12 to Boss (12 HP). Leech and Mend keep Blade alive between hits. Do not spend the large hit on Small.",
+      "text": "Use Roll first power until the FIRST power is at least 6; it rolls only that entry from 4 to 9. Then use Swap power to exchange first and fourth. The first Strike needs only 1 to clear Small's 2 HP; the fourth needs 6 or more to deal at least 12 to Boss. Release time only after the strong number is fourth. Rolling alone or swapping the starting 1s cannot win.",
       "provenance": {
         "encounter": "implementation/encounters.json#/variants/41",
-        "encounter_sha256": "c3517f31a00ee51cb30bccd3cb90427773efae9bef48bb1436c1aace1b9b0782",
+        "encounter_sha256": "c410aa9d40e0d3dd33de6b5fb278852646f2ca4a5554349f56f8d6b933e61d16",
         "reference": "implementation/learner-states/rooms/R14.ts",
-        "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
-        "goal": "expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json",
-        "instruction": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values."
+        "reference_sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
+        "goal": "Current encounter plus supplied-world/goals.ts historyR14: legal roll/swap history is the list task; Boss HP determines the separate combat power threshold.",
+        "instruction": "Reroll the first allied value at Secondary, then use a temporary number at Primary to swap the first and fourth values. The fourth value needs at least 6 to finish the boss."
       }
     },
     {

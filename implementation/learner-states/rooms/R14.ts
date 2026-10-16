@@ -6,3 +6,9 @@ apocalypse.onInteract(apocTypes.Room.R14, apocTypes.Station.Primary, function ()
     allyValues[3] = savedNumber
     apocalypse.setValues(apocTypes.Side.Ally, allyValues)
 })
+
+apocalypse.onInteract(apocTypes.Room.R14, apocTypes.Station.Secondary, function () {
+    let rerollValues: number[] = apocalypse.values(apocTypes.Side.Ally)
+    rerollValues[0] = randint(4, 9)
+    apocalypse.setValues(apocTypes.Side.Ally, rerollValues)
+})

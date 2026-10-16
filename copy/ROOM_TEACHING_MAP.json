@@ -1443,8 +1443,8 @@
     {
       "room": "R14",
       "sequence": 14,
-      "room_situation": "Use a temporary number to exchange allyValues[0] and allyValues[3], preserving both original values.",
-      "native_construction": "numeric temporary-variable swap",
+      "room_situation": "Reroll only allyValues[0] from 4 through 9 at Secondary, then use the unchanged Primary first/fourth swap to move that donor to the Boss hit.",
+      "native_construction": "fixed-index random numeric replacement; numeric temporary-variable swap",
       "source_support": [
         {
           "id": "MCA-CSINTRO2-ARRAYS-INTRO",
@@ -1461,8 +1461,22 @@
       ],
       "stations": [
         {
+          "station": "Secondary",
+          "physical_action": "A at Roll first power rerolls only the first allied power; B explains the operation",
+          "edits": [
+            "allyValues"
+          ],
+          "effects": [],
+          "marked_index": 0,
+          "allowed_index": 0,
+          "random_range": [
+            4,
+            9
+          ]
+        },
+        {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "A at Swap power exchanges first/fourth allied powers; B explains the operation",
           "edits": [
             "allyValues"
           ],
@@ -1470,25 +1484,31 @@
           "marked_index": 0
         }
       ],
-      "index_identity_rule": "0-based array indices and exact detached commits",
+      "index_identity_rule": "0-based code index0 is the only reroll donor; swap is fixed0↔3; viewing selection is irrelevant; runtime validates legal continuous history rather than one literal final power list",
       "examples": [
         {
           "variant_id": "R14-V1",
-          "initial_summary": "allyValues: [4, 1, 2, 1]",
-          "expected_summary": "allyValues: [1, 1, 2, 4]",
-          "goal_ref": "common/ROOM_GOALS.json#variants/R14-V1"
+          "initial_summary": "allyValues: [1, 1, 2, 1]",
+          "expected_summary": "Secondary rolls first power from 4 through 9; Primary swaps first/fourth. Legal continuous use of both operations meets the list task; victory needs fourth power at least 4.",
+          "goal_ref": "implementation/encounters.json#/variants/39",
+          "runtime_goal_ref": "implementation/supplied-world/goals.ts#historyR14",
+          "minimum_boss_power": 4
         },
         {
           "variant_id": "R14-V2",
-          "initial_summary": "allyValues: [5, 1, 2, 1]",
-          "expected_summary": "allyValues: [1, 1, 2, 5]",
-          "goal_ref": "common/ROOM_GOALS.json#variants/R14-V2"
+          "initial_summary": "allyValues: [1, 1, 2, 1]",
+          "expected_summary": "Secondary rolls first power from 4 through 9; Primary swaps first/fourth. Legal continuous use of both operations meets the list task; victory needs fourth power at least 5.",
+          "goal_ref": "implementation/encounters.json#/variants/40",
+          "runtime_goal_ref": "implementation/supplied-world/goals.ts#historyR14",
+          "minimum_boss_power": 5
         },
         {
           "variant_id": "R14-V3",
-          "initial_summary": "allyValues: [6, 1, 2, 1]",
-          "expected_summary": "allyValues: [1, 1, 2, 6]",
-          "goal_ref": "common/ROOM_GOALS.json#variants/R14-V3"
+          "initial_summary": "allyValues: [1, 1, 2, 1]",
+          "expected_summary": "Secondary rolls first power from 4 through 9; Primary swaps first/fourth. Legal continuous use of both operations meets the list task; victory needs fourth power at least 6.",
+          "goal_ref": "implementation/encounters.json#/variants/41",
+          "runtime_goal_ref": "implementation/supplied-world/goals.ts#historyR14",
+          "minimum_boss_power": 6
         }
       ],
       "reference_file": "implementation/learner-states/rooms/R14.ts",
@@ -1504,6 +1524,7 @@
           "artifact_path": null,
           "variant_id": "R14-V1",
           "station_interactions": [
+            "Secondary",
             "Primary"
           ],
           "dimensions": [
@@ -1512,9 +1533,9 @@
           ],
           "id": "R14-blocks",
           "kind": "assembled_native_blocks",
-          "focal_change": "numeric temporary-variable swap",
-          "intended_visible_change": "Editable Arcade Blocks for numeric temporary-variable swap",
-          "alt_text": "R14 native editable Arcade Blocks showing numeric temporary-variable swap, inside Primary onInteract handler; submit `allyValues`."
+          "focal_change": "Secondary fixed-index randint(4,9); Primary unchanged temporary-variable first/fourth swap",
+          "intended_visible_change": "Two complete native Blocks examples: Secondary rerollValues[0]=randint(4,9), then Primary first/fourth swap.",
+          "alt_text": "R14 complete native Blocks: reroll only the first allied power, then swap first and fourth using a saved number."
         },
         {
           "status": "planned",
@@ -1523,6 +1544,7 @@
           "artifact_path": null,
           "variant_id": "R14-V1",
           "station_interactions": [
+            "Secondary",
             "Primary"
           ],
           "dimensions": [
@@ -1531,9 +1553,9 @@
           ],
           "id": "R14-before-after",
           "kind": "game_before_after",
-          "focal_change": "The first and fourth allied powers exchange places; the second and third stay untouched. These positions are fixed, regardless of which moment you select.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The first and fourth allied powers exchange places; the second and third stay untouched. These positions are fixed, regardless of which moment you select.",
-          "alt_text": "R14 spatial chamber before and after its altar job. The first and fourth allied powers exchange places; the second and third stay untouched. These positions are fixed, regardless of which moment you select."
+          "focal_change": "Roll the first allied power, then exchange first/fourth so the strong number reaches Boss.",
+          "intended_visible_change": "R14 actual roll at the first position, unchanged fourth power until Swap power, then Release time and combat outcome.",
+          "alt_text": "R14: use Roll first power, then Swap power to move the rolled donor to the fourth-moment Boss hit, then release time."
         }
       ],
       "next_recipe": "R15",
@@ -1542,9 +1564,10 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Swap two numbers",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "title": "Roll, then swap",
+      "runtime_navigation": "Secondary Roll first power until strong enough; Primary Swap power; top Release time crystal",
       "visual_jobs": [
+        "R14-secondary",
         "R14-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",

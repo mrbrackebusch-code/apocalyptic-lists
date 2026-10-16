@@ -16,10 +16,12 @@ export function buildVisualRecipes(opts) {
  const get=rel=>JSON.parse(read(rel)),outputs=new Map(),media=[],index=[],sourceHashes={};
  const plan=get('copy/visual-lessons.json'),mapping=get('copy/ROOM_TEACHING_MAP.json'),catalog=get('implementation/LEARNER_STATE_CATALOG.json');
  const reuse=get('copy/media/NATIVE_BLOCKS_REUSE.json'),sources=projectSources(root,common),runtime=suppliedRuntime(sources),screen=runtimeDimensions(sources);
- assert.equal(plan.schema,'AL-VISUAL-LESSONS-1');assert.equal(plan.jobs.length,29);assert.equal(new Set(plan.jobs.map(j=>j.id)).size,29);
+ assert.equal(plan.schema,'AL-VISUAL-LESSONS-1');assert.ok(plan.jobs.length>=29&&plan.jobs.length<=54);assert.equal(new Set(plan.jobs.map(j=>j.id)).size,plan.jobs.length);
  assert.equal(plan.complete_visible_examples,true);assert.equal(plan.automatic_fading,false);
  assert.equal(mapping.rooms.length,27);assert.equal(catalog.rooms.length,27);
  for(const [file,expected]of Object.entries(reuse.native_api_lf_sha256))assert.equal(hash(sources[file]),expected,'Retained native API '+file);
+ if(reuse.owner_revision){assert.equal(reuse.owner_revision.native_delta_status,'passed');for(const [kind,key]of [['isolated','isolated'],['cumulative','cumulative']]){const proof=reuse.owner_revision[kind];assert.equal(proof.success,true);assert.equal(proof.opaque_blocks,0);assert.equal(proof.source_sha256,reuse.references[proof.id][key]);}}
+ const jobCount=plan.jobs.length,requiredMedia=2*jobCount+27;
  const captures=new Map();
  for(const file of ['copy/media/visual-captures.json','copy/media/game-captures.json'])if(fs.existsSync(safe(root,file)))for(const record of get(file).captures){if(record.verification_status!=='passed'){if(opts.strict)throw Error(record.id+' has not passed visual review');continue;}if(file.endsWith('game-captures.json')&&!record.full_sequence&&!record.outcome_observed)continue;assert.ok(!captures.has(record.id));captures.set(record.id,record);}
  const link=id=>'#recipe:https://github.com/'+opts.repository+'/recipes/'+id.toLowerCase();
@@ -27,7 +29,9 @@ export function buildVisualRecipes(opts) {
  const hint=code=>'#### ~ tutorialhint\n\n```blocks\n'+code.trim()+'\n```';
  const cumulativeParts=[],header='// CUMULATIVE INSTRUCTIONAL REFERENCE ONLY; never automatically install as learner code.\n// World progress belongs to supplied world settings; behavior belongs to the currently edited program.\n\n';
  function asset({id,kind,room,job,sourceHash,description}) {
-  const capture=captures.get(id),binding={id,kind,room,job_id:job?.id||null,reference_sha256:sourceHash,capture_status:'planned',verification_status:'not_run',status:'planned',artifact_path:null,alt_text:description};
+  let capture=captures.get(id);
+  if(capture){let stale=capture.reference_sha256!==sourceHash;if(!job)for(const item of capture.runtime_sources||[]){const file=item.file==='contracts.ts'?safe(common,item.file):safe(root,'implementation/'+item.file);if(hash(fs.readFileSync(file))!==item.sha256)stale=true;}if(stale){if(opts.strict)throw Error(id+' capture requires refresh for current source');capture=null;}}
+  const binding={id,kind,room,job_id:job?.id||null,reference_sha256:sourceHash,capture_status:'planned',verification_status:'not_run',status:'planned',artifact_path:null,alt_text:description};
   if(capture) {
    assert.equal(capture.reference_sha256,sourceHash,id+' actual source');
    assert.equal(capture.verification_status,'passed',id+' verified rendering');
@@ -57,7 +61,7 @@ export function buildVisualRecipes(opts) {
   const id='R'+String(n).padStart(2,'0'),item=mapping.rooms[n-1],record=catalog.rooms[n-1];
   assert.equal(item.room,id);assert.equal(record.room,id);
   const source=read(item.reference_file),sourceHash=hash(source),station=stationSources(source),jobs=plan.jobs.filter(j=>j.room===id);
-  assert.equal(sourceHash,record.isolated.sha256,id+' reference');assert.equal(station.length,[24,27].includes(n)?2:1);assert.equal(jobs.length,station.length);
+  assert.equal(sourceHash,record.isolated.sha256,id+' reference');assert.ok(station.length===1||station.length===2);assert.equal(jobs.length,station.length);
   cumulativeParts.push(source.replace(/^\/\/[^\n]*\n/,'').trim());
   const cumulative=header+cumulativeParts.join('\n\n')+'\n';
   assert.equal(hash(cumulative),reuse.references[id].cumulative,id+' retained cumulative reference');assert.equal(sourceHash,reuse.references[id].isolated,id+' retained isolated reference');
@@ -87,7 +91,7 @@ export function buildVisualRecipes(opts) {
   record.assembly_provenance={focused_hints:true,visible_examples:true,visual_jobs:jobs.map(j=>j.id),reference_api_reuse:'copy/media/NATIVE_BLOCKS_REUSE.json'};
   index.push({id,order:n,canonical:item.recipe_source,output:item.recipe_output,sha256:hash(render),next_recipe:item.next_recipe,reference_sha256:sourceHash,cumulative_sha256:hash(cumulative),hint_from:item.reference_file,hint_scope:'current station or current room only',media_ids:bindings.map(m=>m.id),visual_jobs:jobs.map(j=>j.id),overlay_only:true,initial_project_resources:false,supplied_runtime_sha256:hash(runtime),learner_template:false});
  }
- assert.equal(media.length,85);assert.equal(new Set(media.map(m=>m.id)).size,85);
+ assert.equal(media.length,requiredMedia);assert.equal(new Set(media.map(m=>m.id)).size,requiredMedia);
  let directory='# Apocalyptic Lists Recipes\n\n## Continue your current game\n\nOpen the Recipe for the room you are playing. Your code stays in this project.\n\n';
  for(const room of mapping.rooms)directory+='- ['+room.room+' — '+room.title+']('+link(room.room)+')\n';
  directory+='\n```customts\n'+runtime.trimEnd()+'\n```\n';
@@ -95,12 +99,12 @@ export function buildVisualRecipes(opts) {
  outputs.set('generated/tutorial/recipes/index.json',stable({schema:'AL-RECIPE-INDEX-2',existing_project_overlay:true,recipes:index}));
  outputs.set('generated/tutorial/setup.md',resolve(read('copy/setup.md')));
  const captured=media.filter(m=>m.capture_status==='captured').length,verified=media.filter(m=>m.verification_status==='passed').length;
- outputs.set('generated/tutorial/MEDIA_BINDINGS.json',stable({schema:'AL-VISUAL-INSTRUCTION-MEDIA-1',runtime_dimensions:screen,guide_width:318,supplied_runtime_sha256:hash(runtime),count:85,requirements:{jobs:29,native_menu_blocks:29,annotated_native_blocks:29,game_before_after:27},captures:verified===85?'complete':'incomplete',media}));
+ outputs.set('generated/tutorial/MEDIA_BINDINGS.json',stable({schema:'AL-VISUAL-INSTRUCTION-MEDIA-1',runtime_dimensions:screen,guide_width:318,supplied_runtime_sha256:hash(runtime),count:requiredMedia,requirements:{jobs:jobCount,native_menu_blocks:jobCount,annotated_native_blocks:jobCount,game_before_after:27},captures:verified===requiredMedia?'complete':'incomplete',media}));
  catalog.deferred=[];catalog.assembly_provenance={supplied_runtime_sha256:hash(runtime),runtime_dimensions:screen,focused_hints:true,complete_visible_examples:true,learner_main_comment_only:true,recipes_preserve_current_code:true,source_bound_native_blocks_reuse:'copy/media/NATIVE_BLOCKS_REUSE.json'};
  outputs.set('implementation/LEARNER_STATE_CATALOG.json',stable(catalog));
- outputs.set('generated/RECIPE_BUILD.json',stable({schema:'AL-VISUAL-RECIPE-BUILD-1',recipe_count:27,construction_count:29,required_media:85,media_planned:85-captured,media_captured:captured,media_verified:verified,release_complete:verified===85,release_strict_passed:verified===85,focused_hints:true,automatic_fading:false,accepted_program_cache:false,source_hashes:sourceHashes,teaching_plan_sha256:hash(read('copy/visual-lessons.json')),generated_files:[...outputs].filter(([p])=>p.startsWith('generated/tutorial')).map(([p,b])=>({path:p,sha256:hash(b),bytes:Buffer.byteLength(b)}))}));
- if(opts.strict)assert.equal(verified,85,'Release requires all 58 reviewed native visuals and 27 completed gameplay recordings');
+ outputs.set('generated/RECIPE_BUILD.json',stable({schema:'AL-VISUAL-RECIPE-BUILD-1',recipe_count:27,construction_count:jobCount,required_media:requiredMedia,media_planned:requiredMedia-captured,media_captured:captured,media_verified:verified,release_complete:verified===requiredMedia,release_strict_passed:verified===requiredMedia,focused_hints:true,automatic_fading:false,accepted_program_cache:false,source_hashes:sourceHashes,teaching_plan_sha256:hash(read('copy/visual-lessons.json')),generated_files:[...outputs].filter(([p])=>p.startsWith('generated/tutorial')).map(([p,b])=>({path:p,sha256:hash(b),bytes:Buffer.byteLength(b)}))}));
+ if(opts.strict)assert.equal(verified,requiredMedia,'Release requires every reviewed native visual and27 completed gameplay recordings');
  let written=0,compared=0;const absent=[];
  for(const [rel,data]of outputs){const out=safe(root,rel);if(opts.check){if(!fs.existsSync(out))absent.push(rel);else{assert.equal(fs.readFileSync(out,'utf8'),data,rel+' stale');compared++;}}else{fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,data);written++;}}
- return {recipe_count:27,construction_count:29,media_captured:captured,media_verified:verified,media_planned:85-captured,written,compared,outputs_absent_in_check:absent,native_compile:'retained exact reference/API proof',hint_scope:'current construction or current room only'};
+ return {recipe_count:27,construction_count:jobCount,media_captured:captured,media_verified:verified,media_planned:requiredMedia-captured,written,compared,outputs_absent_in_check:absent,native_compile:'retained exact reference/API proof',hint_scope:'current construction or current room only'};
 }

@@ -1483,15 +1483,122 @@
       "focused_hint": true
     },
     {
+      "id": "R14-secondary",
+      "room": "R14",
+      "station": "Secondary",
+      "purpose": "Roll only the first power to make a stronger donor.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R14.ts",
+        "room": "R14",
+        "station": "Secondary",
+        "sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
+        "native_xml": null,
+        "native_capture_required": true
+      },
+      "variables": [
+        {
+          "name": "rerollValues",
+          "type": "number[]",
+          "creation": "Make a Variable: rerollValues; reuse it if already created.",
+          "purpose": "The allied powers to reroll at the first position only."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R14 station Secondary",
+          "purpose": "Run the Roll first power altar job."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set rerollValues to",
+          "purpose": "Keep the current allied power list."
+        },
+        {
+          "type": "al_values",
+          "category": "Apocalyptic Lists",
+          "label": "Ally value list",
+          "purpose": "Read the current allied powers."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace only the first power: code index 0."
+        },
+        {
+          "type": "device_random",
+          "category": "Math",
+          "label": "pick random 4 to 9",
+          "purpose": "Roll an integer from 4 through 9."
+        },
+        {
+          "type": "al_set_values",
+          "category": "Apocalyptic Lists",
+          "label": "use rerollValues as Ally value list",
+          "purpose": "Submit the power list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "rerollValues",
+          "purpose": "Put the current power list into the list inputs.",
+          "variable_names": [
+            "rerollValues"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Only the first power changes. The fourth stays put.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "rerollValues",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Roll 4 through 9. Roll again if this setup needs more.",
+          "target": {
+            "block_type": "device_random",
+            "label": "pick random 4 to 9",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The first power becomes 4 through 9; the fourth remains unchanged.",
+      "play": "A at Roll first power until the first power meets the setup minimum, then use Swap power.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true,
+      "construction_order": 1,
+      "allowed_index": 0,
+      "random_range": [
+        4,
+        9
+      ]
+    },
+    {
       "id": "R14-primary",
       "room": "R14",
       "station": "Primary",
-      "purpose": "Give Small the small first hit; keep the larger hit for Boss.",
+      "purpose": "Move the strong first power to Boss's fourth-moment Strike.",
       "source_event": {
         "path": "implementation/learner-states/rooms/R14.ts",
         "room": "R14",
         "station": "Primary",
-        "sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
         "native_xml": "validation/native-tutorial/R14.blocks"
       },
       "variables": [
@@ -1589,7 +1696,7 @@
         }
       ],
       "result": "The first and fourth powers exchange places; the middle two stay put.",
-      "play": "A at Swap power, then A at the top Release time crystal.",
+      "play": "Roll first power to the setup minimum, then A at Swap power and A at Release time.",
       "source_support": [
         {
           "id": "MCA-CSINTRO2-ARRAYS-INTRO",
@@ -1597,7 +1704,8 @@
         }
       ],
       "visible_complete_example": true,
-      "focused_hint": true
+      "focused_hint": true,
+      "construction_order": 2
     },
     {
       "id": "R15-primary",
