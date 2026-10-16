@@ -6,41 +6,17 @@
 
 ## Build your first move list
 
-A move list keeps a team's script in one place. Your first job is to build the allied script, then give it to the room.
+Build the script that protects Medic, then finishes the enemies.
 
-![Actual menu blocks used in R01](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-menu.png)
+Expand the simulator. Move with arrows; **A** uses nearby room objects.
 
-*Find these native blocks in the toolbox.* [Open the menu picture at full size](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-menu.png)
+![Native blocks and variable setup for R01-primary](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/v0.4.0/R01-primary-menu.svg)
 
-![R01 native editable Arcade Blocks showing create string array; prefix loop; append, inside Primary onInteract handler; submit `allyMoves`.](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-blocks.png)
+![Complete Primary construction for R01, with explanations at the relevant blocks](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/v0.4.0/R01-primary-assembled.svg)
 
-[Open the assembled Blocks at full size](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/instructions/R01-blocks.png)
+#### ~ tutorialhint
 
-*Native MakeCode Blocks.*
-
-In ``||variables(noclick):Variables||``, choose **Make a Variable** and name it `allyMoves`. Open **Advanced →** ``||arrays(noclick):Arrays||`` and use ``||arrays(noclick):empty array||`` as its starting value. The move names you add below are text, so this becomes a list of strings.
-
-From ``||apocalypse(noclick):Apocalyptic Lists||``, add ``||apocalypse(noclick):on room R01 station Primary||``. Inside it, set ``||variables(noclick):allyMoves||`` to that empty list. The ``||apocalypse(noclick):shown leading Wait count||`` tells you how many `Wait` moves come first. Use ``||loops(noclick):for index from 0 to||`` with **shown leading Wait count − 1** as its final index, adding one `Wait` to the end each time. When the count is 0, this loop adds no moves. Then add `Ward`, `Mend`, `Strike`, `Strike` in order. Finish with ``||apocalypse(noclick):use allyMoves as Ally move list||``. Put the `allyMoves` reporter into that block's list input.
-
-A room event runs when you press **A** at its physical altar. The event block calls the altar a station: use the room and station dropdowns shown in the example. Your list work belongs inside that event, so it starts with the current attempt.
-
-**Try your code.** Walk the panda to **Write plan** (the Primary altar) and press **A** once. Watch the altar's changes to the pieces and actors. Then walk to the **Release time** crystal at the top and press **A**. Watch the battle and the outcome at the bottom.
-
-The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.
-
-![R01 spatial chamber before and after its altar job. The allied move list starts with the displayed number of Wait entries, followed by Ward, Mend, Strike, Strike. Its new length matches what you built.](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/demos/v0.3.0/r01.gif)
-
-*Before and after this station job in the actual game.*
-
-If the result differs, use **B** in open space and choose **Retry this setup**, revise your code, and use the altar again. After a code edit or restart, the room returns to its starting lists; run your current altar code again.
-
-**Need a reminder?** Press **B** beside the altar for its list-operation explanation. For the exact strategy for this setup, press **B** in open space, choose **Altar help + room strategy** with **A**, and use **Left / Right** to turn pages. Beside a moment pad, **A** selects its action and **B** watches it. Use **A** at the hourglass before releasing time to change animation speed.
-
-After success, walk to the bottom **Exit** gate and press **A** to enter the next room, then follow [Open R02](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r02). This link keeps your current project.
-
-[Recipe directory](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/directory)
-
-```ghost
+```blocks
 apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
     let allyMoves: string[] = []
     allyMoves = []
@@ -55,12 +31,38 @@ apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function ()
 })
 ```
 
+## Try your code
+
+**A** at **Write plan**, then **A** at the top **Release time** crystal.
+
+The shown Waits come first, then Ward, Mend, Strike, Strike.
+
+![R01 actual altar interaction, list change, battle and outcome](https://raw.githubusercontent.com/mrbrackebusch-code/apocalyptic-lists/main/assets/demos/v0.4.0/r01.gif)
+
+
+
+After success, use **A** at the bottom **Exit**, then [Open R02](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r02).
+
+[Recipe directory](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/directory)
+
 #### ~ tutorialhint
 
 ```blocks
-// CUMULATIVE INSTRUCTIONAL REFERENCE ONLY; never automatically install as learner code.
-// World progress belongs to supplied world settings; behavior belongs to the currently edited program.
+apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
+    let allyMoves: string[] = []
+    allyMoves = []
+    for (let i = 0; i <= apocalypse.numberHint() - 1; i++) {
+        allyMoves.push("Wait")
+    }
+    allyMoves.push("Ward")
+    allyMoves.push("Mend")
+    allyMoves.push("Strike")
+    allyMoves.push("Strike")
+    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
+})
+```
 
+```ghost
 apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
     let allyMoves: string[] = []
     allyMoves = []

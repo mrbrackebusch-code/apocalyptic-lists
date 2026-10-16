@@ -56,7 +56,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R01.ts",
       "recipe_source": "copy/recipes/r01.md",
       "recipe_output": "generated/tutorial/recipes/r01.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R01 -->",
+      "hint_binding": "<!-- AP_HINT room=R01 -->",
       "media": [
         {
           "status": "planned",
@@ -104,7 +104,12 @@
       },
       "accepted_program_cache": false,
       "title": "Build your first move list",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R01-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R02",
@@ -161,7 +166,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R02.ts",
       "recipe_source": "copy/recipes/r02.md",
       "recipe_output": "generated/tutorial/recipes/r02.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R02 -->",
+      "hint_binding": "<!-- AP_HINT room=R02 -->",
       "media": [
         {
           "status": "planned",
@@ -209,7 +214,12 @@
       },
       "accepted_program_cache": false,
       "title": "Hold one hazard",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R02-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R03",
@@ -266,7 +276,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R03.ts",
       "recipe_source": "copy/recipes/r03.md",
       "recipe_output": "generated/tutorial/recipes/r03.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R03 -->",
+      "hint_binding": "<!-- AP_HINT room=R03 -->",
       "media": [
         {
           "status": "planned",
@@ -314,7 +324,12 @@
       },
       "accepted_program_cache": false,
       "title": "Change one move",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R03-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R04",
@@ -371,7 +386,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R04.ts",
       "recipe_source": "copy/recipes/r04.md",
       "recipe_output": "generated/tutorial/recipes/r04.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R04 -->",
+      "hint_binding": "<!-- AP_HINT room=R04 -->",
       "media": [
         {
           "status": "planned",
@@ -419,7 +434,12 @@
       },
       "accepted_program_cache": false,
       "title": "Add a final attack",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R04-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R05",
@@ -476,7 +496,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R05.ts",
       "recipe_source": "copy/recipes/r05.md",
       "recipe_output": "generated/tutorial/recipes/r05.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R05 -->",
+      "hint_binding": "<!-- AP_HINT room=R05 -->",
       "media": [
         {
           "status": "planned",
@@ -524,7 +544,12 @@
       },
       "accepted_program_cache": false,
       "title": "Insert a shield",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R05-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R06",
@@ -581,7 +606,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R06.ts",
       "recipe_source": "copy/recipes/r06.md",
       "recipe_output": "generated/tutorial/recipes/r06.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R06 -->",
+      "hint_binding": "<!-- AP_HINT room=R06 -->",
       "media": [
         {
           "status": "planned",
@@ -629,7 +654,12 @@
       },
       "accepted_program_cache": false,
       "title": "Delay the enemy",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R06-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R07",
@@ -686,7 +716,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R07.ts",
       "recipe_source": "copy/recipes/r07.md",
       "recipe_output": "generated/tutorial/recipes/r07.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R07 -->",
+      "hint_binding": "<!-- AP_HINT room=R07 -->",
       "media": [
         {
           "status": "planned",
@@ -734,7 +764,12 @@
       },
       "accepted_program_cache": false,
       "title": "Remove one shield",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R07-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R08",
@@ -791,7 +826,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R08.ts",
       "recipe_source": "copy/recipes/r08.md",
       "recipe_output": "generated/tutorial/recipes/r08.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R08 -->",
+      "hint_binding": "<!-- AP_HINT room=R08 -->",
       "media": [
         {
           "status": "planned",
@@ -839,7 +874,12 @@
       },
       "accepted_program_cache": false,
       "title": "Find the final entry",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R08-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R09",
@@ -856,7 +896,7 @@
       "prerequisites": [
         "R08"
       ],
-      "support_level": "guided",
+      "support_level": "worked",
       "exposed_lists": [
         "allyMoves"
       ],
@@ -896,7 +936,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R09.ts",
       "recipe_source": "copy/recipes/r09.md",
       "recipe_output": "generated/tutorial/recipes/r09.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R09 -->",
+      "hint_binding": "<!-- AP_HINT room=R09 -->",
       "media": [
         {
           "status": "planned",
@@ -944,7 +984,12 @@
       },
       "accepted_program_cache": false,
       "title": "Remove the first move",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R09-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R10",
@@ -961,7 +1006,7 @@
       "prerequisites": [
         "R09"
       ],
-      "support_level": "guided",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves"
       ],
@@ -1001,7 +1046,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R10.ts",
       "recipe_source": "copy/recipes/r10.md",
       "recipe_output": "generated/tutorial/recipes/r10.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R10 -->",
+      "hint_binding": "<!-- AP_HINT room=R10 -->",
       "media": [
         {
           "status": "planned",
@@ -1049,7 +1094,12 @@
       },
       "accepted_program_cache": false,
       "title": "Remove the final move",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R10-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R11",
@@ -1067,7 +1117,7 @@
         "R10",
         "R02"
       ],
-      "support_level": "guided",
+      "support_level": "worked",
       "exposed_lists": [
         "hazardRoster"
       ],
@@ -1109,7 +1159,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R11.ts",
       "recipe_source": "copy/recipes/r11.md",
       "recipe_output": "generated/tutorial/recipes/r11.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R11 -->",
+      "hint_binding": "<!-- AP_HINT room=R11 -->",
       "media": [
         {
           "status": "planned",
@@ -1157,7 +1207,12 @@
       },
       "accepted_program_cache": false,
       "title": "Take a hazard out of play",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R11-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R12",
@@ -1179,7 +1234,7 @@
         "R11",
         "R03"
       ],
-      "support_level": "guided",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves"
       ],
@@ -1219,7 +1274,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R12.ts",
       "recipe_source": "copy/recipes/r12.md",
       "recipe_output": "generated/tutorial/recipes/r12.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R12 -->",
+      "hint_binding": "<!-- AP_HINT room=R12 -->",
       "media": [
         {
           "status": "planned",
@@ -1267,7 +1322,12 @@
       },
       "accepted_program_cache": false,
       "title": "Find a move by its value",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R12-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R13",
@@ -1285,7 +1345,7 @@
         "R12",
         "R02"
       ],
-      "support_level": "guided",
+      "support_level": "worked",
       "exposed_lists": [
         "hazardRoster"
       ],
@@ -1325,7 +1385,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R13.ts",
       "recipe_source": "copy/recipes/r13.md",
       "recipe_output": "generated/tutorial/recipes/r13.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R13 -->",
+      "hint_binding": "<!-- AP_HINT room=R13 -->",
       "media": [
         {
           "status": "planned",
@@ -1373,7 +1433,12 @@
       },
       "accepted_program_cache": false,
       "title": "Hold every hazard",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R13-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R14",
@@ -1390,7 +1455,7 @@
       "prerequisites": [
         "R13"
       ],
-      "support_level": "guided",
+      "support_level": "worked",
       "exposed_lists": [
         "allyValues"
       ],
@@ -1430,7 +1495,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R14.ts",
       "recipe_source": "copy/recipes/r14.md",
       "recipe_output": "generated/tutorial/recipes/r14.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R14 -->",
+      "hint_binding": "<!-- AP_HINT room=R14 -->",
       "media": [
         {
           "status": "planned",
@@ -1478,7 +1543,12 @@
       },
       "accepted_program_cache": false,
       "title": "Swap two numbers",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R14-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R15",
@@ -1496,7 +1566,7 @@
         "R14",
         "R08"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves"
       ],
@@ -1536,7 +1606,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R15.ts",
       "recipe_source": "copy/recipes/r15.md",
       "recipe_output": "generated/tutorial/recipes/r15.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R15 -->",
+      "hint_binding": "<!-- AP_HINT room=R15 -->",
       "media": [
         {
           "status": "planned",
@@ -1584,7 +1654,12 @@
       },
       "accepted_program_cache": false,
       "title": "Repair every shield",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R15-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R16",
@@ -1601,7 +1676,7 @@
       "prerequisites": [
         "R15"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "allyMoves",
         "sourceMoves (read-only enemyMoves alias)"
@@ -1642,7 +1717,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R16.ts",
       "recipe_source": "copy/recipes/r16.md",
       "recipe_output": "generated/tutorial/recipes/r16.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R16 -->",
+      "hint_binding": "<!-- AP_HINT room=R16 -->",
       "media": [
         {
           "status": "planned",
@@ -1690,7 +1765,12 @@
       },
       "accepted_program_cache": false,
       "title": "Build a response list",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R16-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R17",
@@ -1707,7 +1787,7 @@
       "prerequisites": [
         "R16"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "allyMoves",
         "sourceMoves"
@@ -1749,7 +1829,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R17.ts",
       "recipe_source": "copy/recipes/r17.md",
       "recipe_output": "generated/tutorial/recipes/r17.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R17 -->",
+      "hint_binding": "<!-- AP_HINT room=R17 -->",
       "media": [
         {
           "status": "planned",
@@ -1797,7 +1877,12 @@
       },
       "accepted_program_cache": false,
       "title": "Transfer a reserve move",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R17-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R18",
@@ -1814,7 +1899,7 @@
       "prerequisites": [
         "R17"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "allyValues",
         "enemyValues"
@@ -1856,7 +1941,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R18.ts",
       "recipe_source": "copy/recipes/r18.md",
       "recipe_output": "generated/tutorial/recipes/r18.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R18 -->",
+      "hint_binding": "<!-- AP_HINT room=R18 -->",
       "media": [
         {
           "status": "planned",
@@ -1904,7 +1989,12 @@
       },
       "accepted_program_cache": false,
       "title": "Transfer a number",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R18-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R19",
@@ -1922,7 +2012,7 @@
         "R18",
         "R02"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "hazardRoster"
       ],
@@ -1962,7 +2052,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R19.ts",
       "recipe_source": "copy/recipes/r19.md",
       "recipe_output": "generated/tutorial/recipes/r19.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R19 -->",
+      "hint_binding": "<!-- AP_HINT room=R19 -->",
       "media": [
         {
           "status": "planned",
@@ -2010,7 +2100,12 @@
       },
       "accepted_program_cache": false,
       "title": "Choose one hazard at random",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R19-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R20",
@@ -2027,7 +2122,7 @@
       "prerequisites": [
         "R19"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves"
       ],
@@ -2067,7 +2162,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R20.ts",
       "recipe_source": "copy/recipes/r20.md",
       "recipe_output": "generated/tutorial/recipes/r20.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R20 -->",
+      "hint_binding": "<!-- AP_HINT room=R20 -->",
       "media": [
         {
           "status": "planned",
@@ -2115,7 +2210,12 @@
       },
       "accepted_program_cache": false,
       "title": "Reverse the move order",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R20-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R21",
@@ -2137,7 +2237,7 @@
         "R20",
         "R12"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "allyMoves",
         "sourceMoves (read-only enemyMoves alias)"
@@ -2178,7 +2278,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R21.ts",
       "recipe_source": "copy/recipes/r21.md",
       "recipe_output": "generated/tutorial/recipes/r21.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R21 -->",
+      "hint_binding": "<!-- AP_HINT room=R21 -->",
       "media": [
         {
           "status": "planned",
@@ -2226,7 +2326,12 @@
       },
       "accepted_program_cache": false,
       "title": "Insert at the matching index",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R21-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R22",
@@ -2244,7 +2349,7 @@
         "R21",
         "R02"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyTargets"
       ],
@@ -2284,7 +2389,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R22.ts",
       "recipe_source": "copy/recipes/r22.md",
       "recipe_output": "generated/tutorial/recipes/r22.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R22 -->",
+      "hint_binding": "<!-- AP_HINT room=R22 -->",
       "media": [
         {
           "status": "planned",
@@ -2332,7 +2437,12 @@
       },
       "accepted_program_cache": false,
       "title": "Move the same target",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R22-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R23",
@@ -2354,7 +2464,7 @@
         "R22",
         "R12"
       ],
-      "support_level": "light",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves"
       ],
@@ -2394,7 +2504,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R23.ts",
       "recipe_source": "copy/recipes/r23.md",
       "recipe_output": "generated/tutorial/recipes/r23.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R23 -->",
+      "hint_binding": "<!-- AP_HINT room=R23 -->",
       "media": [
         {
           "status": "planned",
@@ -2442,7 +2552,12 @@
       },
       "accepted_program_cache": false,
       "title": "Search, then remove",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R23-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R24",
@@ -2459,7 +2574,7 @@
       "prerequisites": [
         "R23"
       ],
-      "support_level": "independent",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves"
       ],
@@ -2508,7 +2623,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R24.ts",
       "recipe_source": "copy/recipes/r24.md",
       "recipe_output": "generated/tutorial/recipes/r24.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R24 -->",
+      "hint_binding": "<!-- AP_HINT room=R24 -->",
       "media": [
         {
           "status": "planned",
@@ -2558,7 +2673,13 @@
       },
       "accepted_program_cache": false,
       "title": "Two altars, one changing list",
-      "runtime_navigation": "shared runtime_navigation; Primary before Secondary, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; Primary before Secondary, then top Release time crystal",
+      "visual_jobs": [
+        "R24-primary",
+        "R24-secondary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R25",
@@ -2576,7 +2697,7 @@
         "R24",
         "R08"
       ],
-      "support_level": "independent",
+      "support_level": "worked",
       "exposed_lists": [
         "allyMoves"
       ],
@@ -2616,7 +2737,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R25.ts",
       "recipe_source": "copy/recipes/r25.md",
       "recipe_output": "generated/tutorial/recipes/r25.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R25 -->",
+      "hint_binding": "<!-- AP_HINT room=R25 -->",
       "media": [
         {
           "status": "planned",
@@ -2664,7 +2785,12 @@
       },
       "accepted_program_cache": false,
       "title": "Match two lists by index",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R25-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R26",
@@ -2682,7 +2808,7 @@
         "R25",
         "R08"
       ],
-      "support_level": "independent",
+      "support_level": "worked",
       "exposed_lists": [
         "allyMoves",
         "sourceMoves (read-only enemyMoves alias)"
@@ -2723,7 +2849,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R26.ts",
       "recipe_source": "copy/recipes/r26.md",
       "recipe_output": "generated/tutorial/recipes/r26.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R26 -->",
+      "hint_binding": "<!-- AP_HINT room=R26 -->",
       "media": [
         {
           "status": "planned",
@@ -2771,7 +2897,12 @@
       },
       "accepted_program_cache": false,
       "title": "Remember what happened earlier",
-      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
+      "visual_jobs": [
+        "R26-primary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     },
     {
       "room": "R27",
@@ -2790,7 +2921,7 @@
         "R02",
         "R08"
       ],
-      "support_level": "independent",
+      "support_level": "worked",
       "exposed_lists": [
         "enemyMoves",
         "hazardRoster"
@@ -2840,7 +2971,7 @@
       "cumulative_file": "implementation/learner-states/cumulative/R27.ts",
       "recipe_source": "copy/recipes/r27.md",
       "recipe_output": "generated/tutorial/recipes/r27.md",
-      "hint_binding": "<!-- AP_HINT cumulative=R27 -->",
+      "hint_binding": "<!-- AP_HINT room=R27 -->",
       "media": [
         {
           "status": "planned",
@@ -2890,7 +3021,13 @@
       },
       "accepted_program_cache": false,
       "title": "Finish both jobs",
-      "runtime_navigation": "shared runtime_navigation; use both altars, then top Release time crystal"
+      "runtime_navigation": "shared runtime_navigation; use both altars, then top Release time crystal",
+      "visual_jobs": [
+        "R27-primary",
+        "R27-secondary"
+      ],
+      "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
+      "automatic_fading": false
     }
   ],
   "runtime_navigation": {
@@ -2906,24 +3043,12 @@
   },
   "copy_review": {
     "kind": "AGENT_EDITORIAL_REVIEW",
-    "scope": "All 27 canonical Recipes (29 altar jobs), setup and current 576x720 game-media captions",
-    "source_wording": "Retained callback constructions, AP_HINT bindings and source_support; game-specific navigation adapted to current world/view controls",
-    "factual_repairs": [
-      "R17 returned string uses removed to match reference/variable list",
-      "R18 returned number uses stolen to match reference/variable list",
-      "R08 uses length minus one directly, matching the reference without undeclared last variable",
-      "Variation described between setups, not guaranteed on same-setup retry"
-    ],
-    "uninspected": "Fresh rendered guide/media review is owned by tutorial integration; this is source-copy review",
     "status": "PASS_SOURCE_COPY_ONLY",
-    "source_context": "copy/SOURCE_LINEAGE.md and retained package-03 human arrays intro lines 1-104, strings lines 30-32 and 74-106, sprites lines 23-38 and 93-105; world.ts A/B/menu/help and view.ts spatial controls checked",
-    "retained_invariants": "All AP_RECIPE identities, AP_HINT cumulative tokens, AP_MEDIA IDs, same-project links and learner reference/cumulative paths retained; 29 callback constructions unchanged except R18 variable-name correction",
-    "resolved_copy_hazards": [
-      "Retired six-column/table description and B Run instructions replaced",
-      "R24 ordered physical altars; R27 both altar jobs required",
-      "Setup marker distinguished from moment selection",
-      "Current-setup strategy remains in runtime help; no variant-specific static damage values added"
-    ],
-    "media_dimensions": "Game plans 576x720; native Blocks plans retain 480x360 and actual specimen sizes bind from capture records"
-  }
+    "scope": "27 visual Recipes /29 exact station jobs; full sequence from purpose to code to result",
+    "method": "Reuse retained human source_support and owner-approved R14 method; compare each selective callout with current reference handler",
+    "protected": "No core algorithm, source fixture, room progression, source support or same-project link changed",
+    "uninspected": "Native visual geometry/readability at 318px and current gameplay GIF/playback owned by integration; not a learner outcome claim"
+  },
+  "visual_lessons": "copy/visual-lessons.json",
+  "presentation_override": "Owner requested complete visible examples for every room/job, overriding former R09+ link-only/fading delivery. Core algorithms and 81 setups unchanged."
 }

@@ -2,7 +2,7 @@
 
 ## Continue your current game
 
-Open the Recipe for your current room. These links keep the same project and your editable code. Complete each room in the game to open the next one.
+Open the Recipe for the room you are playing. Your code stays in this project.
 
 - [R01 — Build your first move list](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r01)
 - [R02 — Hold one hazard](#recipe:https://github.com/mrbrackebusch-code/apocalyptic-lists/recipes/r02)

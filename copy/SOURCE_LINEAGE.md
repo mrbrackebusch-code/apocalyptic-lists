@@ -13,9 +13,9 @@ The selected teaching excerpts are real retained passages in the incoming Packag
 
 The selected passages do **not** teach `indexOf` search-by-value as a complete worked lesson, the exact `shift`, `pop` and `removeAt` get-and-remove forms, combat list alignment, callback station order, per-list `set*` commit semantics or real-actor Hold/Banish; these are explicit room-specific adaptations. R25's paired inspection of two lists is **not** claimed as AP exam-required parallel traversal. The references teach a dynamic-length loop, but the native runtime can assess only the visible arrays/effects. Fixed-index and dynamically-derived correct results are therefore state-equivalent in some fixtures, by design.
 
-## How scaffold support fades
+## Current visual support — owner correction, 2026-10-16
 
-R01–R08 offer worked concrete operations → R09–R14 guided retrieval, search and object effects → R15–R23 short guided/low-support combinations → R24–R27 independent multi-step combinations. The specific prerequisite and source spans for each of the 27 constructions are recorded in `copy/ROOM_TEACHING_MAP.json`. These sources presuppose students already know events, conditions and variables; they do not establish a complete beginner course in those prerequisites.
+Every one of the 29 altar constructions keeps its native menu blocks and complete annotated example visible. Short explanations attach to meaningful blocks, values and connections. The optional hint shows only the current station callback, or this room's two callbacks on a shared result page. Earlier rooms' code remains in the learner's project and is not repeated in hints. R24 and R27 separate their two constructions before a shared actual-play demonstration. This supersedes the previous automatic worked/guided/light/independent display policy; that policy must not hide examples or replace them with links. The specific prerequisite and source spans remain in `copy/ROOM_TEACHING_MAP.json`, while `copy/visual-lessons.json` binds the visible support. The retained sources presuppose events, conditions and variables; visual reminders supply the actual creation and selection affordances.
 
 ## Reused donor engineering pattern (not a teaching source)
 

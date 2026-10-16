@@ -1,0 +1,3639 @@
+{
+  "schema": "AL-VISUAL-LESSONS-1",
+  "status": "AUTHORING_READY_FOR_NATIVE_RENDER",
+  "complete_visible_examples": true,
+  "automatic_fading": false,
+  "hints": "construction: current station callback only; play: current room callbacks only; never earlier-room code",
+  "guide_width": 318,
+  "method": {
+    "authority": "Owner-approved R14 purpose → needed native blocks → readable annotated complete example → focused hint → actual play/result GIF; all 29 jobs visible",
+    "study_reuse": "Farm per-job complete examples override automatic fading; Bakery native annotated examples and wider-stack detail crops at actual guide width.",
+    "source_lineage": "copy/SOURCE_LINEAGE.md; retained human arrays sequence and existing room source_support; custom game semantics remain explicit adaptations",
+    "callout_review": "AGENT_EDITORIAL_REVIEW: source-copy PASS; actual image geometry/render/playback remain uninspected integration surfaces"
+  },
+  "jobs": [
+    {
+      "id": "R01-primary",
+      "room": "R01",
+      "station": "Primary",
+      "purpose": "Build the script that protects Medic, then finishes the enemies.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R01.ts",
+        "room": "R01",
+        "station": "Primary",
+        "sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
+        "native_xml": "validation/native-tutorial/R01.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        },
+        {
+          "name": "i",
+          "type": "number",
+          "creation": "Provided by the loop; use its i reporter.",
+          "purpose": "The current list position."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R01 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "lists_create_with",
+          "category": "Arrays",
+          "label": "empty array",
+          "purpose": "Start with an empty list."
+        },
+        {
+          "type": "pxt_controls_for",
+          "category": "Loops",
+          "label": "for index from 0 to",
+          "purpose": "Visit each position."
+        },
+        {
+          "type": "math_arithmetic",
+          "category": "Math",
+          "label": "… − …",
+          "purpose": "Calculate the last position."
+        },
+        {
+          "type": "al_number_hint",
+          "category": "Apocalyptic Lists",
+          "label": "shown leading Wait count",
+          "purpose": "Read how many Waits go first."
+        },
+        {
+          "type": "array_push",
+          "category": "Arrays",
+          "label": "add value to end",
+          "purpose": "Append one value."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Start empty each time this altar runs.",
+          "target": {
+            "block_type": "lists_create_with",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Add only the shown number of leading Waits. Zero means none.",
+          "target": {
+            "block_type": "pxt_controls_for",
+            "label": "i",
+            "occurrence": 1,
+            "socket": "TO",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Submit the finished move list to the room.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use allyMoves as Ally move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The shown Waits come first, then Ward, Mend, Strike, Strike.",
+      "play": "A at Write plan, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R02-primary",
+      "room": "R02",
+      "station": "Primary",
+      "purpose": "Stop the marked attacker from casting.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R02.ts",
+        "room": "R02",
+        "station": "Primary",
+        "sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
+        "native_xml": "validation/native-tutorial/R02.blocks"
+      },
+      "variables": [
+        {
+          "name": "hazardRoster",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: hazardRoster; reuse it if already created.",
+          "purpose": "The actual actors in the roster."
+        },
+        {
+          "name": "marked",
+          "type": "number",
+          "creation": "Make a Variable: marked; reuse it if already created.",
+          "purpose": "This setup's marked position."
+        },
+        {
+          "name": "selected",
+          "type": "Sprite",
+          "creation": "Make a Variable: selected; reuse it if already created.",
+          "purpose": "The actual Sprite just retrieved."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R02 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_roster",
+          "category": "Apocalyptic Lists",
+          "label": "hazard roster",
+          "purpose": "Read the roster of actual actors."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "lists_index_get",
+          "category": "Arrays",
+          "label": "get value at",
+          "purpose": "Read an entry."
+        },
+        {
+          "type": "al_hold",
+          "category": "Apocalyptic Lists",
+          "label": "hold …",
+          "purpose": "Stop that actor from casting."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "hazardRoster, marked, selected",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "hazardRoster",
+            "marked",
+            "selected"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "This gets the actual actor, not its name.",
+          "target": {
+            "block_type": "lists_index_get",
+            "label": "hazardRoster",
+            "occurrence": 1,
+            "socket": "LIST",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Hold the actor you just got. Keep it in the roster.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "hold selected",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The marked actor is held; the roster keeps every entry.",
+      "play": "A at Hold threat, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R03-primary",
+      "room": "R03",
+      "station": "Primary",
+      "purpose": "Turn the marked enemy Strike into a harmless Wait.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R03.ts",
+        "room": "R03",
+        "station": "Primary",
+        "sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
+        "native_xml": "validation/native-tutorial/R03.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "marked",
+          "type": "number",
+          "creation": "Make a Variable: marked; reuse it if already created.",
+          "purpose": "This setup's marked position."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R03 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves, marked",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves",
+            "marked"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "The setup supplies this marker; your viewing choice does not.",
+          "target": {
+            "block_type": "al_marked_index",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Replace one move. The list does not grow or shrink.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The marked Strike becomes Wait; other entries stay in place.",
+      "play": "A at Rewrite, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R04-primary",
+      "room": "R04",
+      "station": "Primary",
+      "purpose": "Add the missing final Strike.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R04.ts",
+        "room": "R04",
+        "station": "Primary",
+        "sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
+        "native_xml": "validation/native-tutorial/R04.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R04 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_push",
+          "category": "Arrays",
+          "label": "add value to end",
+          "purpose": "Append one value."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Add after the last move, without replacing it.",
+          "target": {
+            "block_type": "array_push",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Submit moves only. Powers and targets stay put.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use allyMoves as Ally move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "A Strike appears after the current last allied move.",
+      "play": "A at Append, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R05-primary",
+      "room": "R05",
+      "station": "Primary",
+      "purpose": "Put a Ward before the incoming hit.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R05.ts",
+        "room": "R05",
+        "station": "Primary",
+        "sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
+        "native_xml": "validation/native-tutorial/R05.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R05 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_insertAt",
+          "category": "Arrays",
+          "label": "insert at",
+          "purpose": "Insert and shift later entries."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Insert at the setup marker. Later moves shift one place.",
+          "target": {
+            "block_type": "array_insertAt",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "The powers and targets do not move with these moves.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use allyMoves as Ally move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Ward is inserted; later allied moves shift toward later moments.",
+      "play": "A at Insert Ward, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R06-primary",
+      "room": "R06",
+      "station": "Primary",
+      "purpose": "Delay the enemy script until the shield is ready.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R06.ts",
+        "room": "R06",
+        "station": "Primary",
+        "sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+        "native_xml": "validation/native-tutorial/R06.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R06 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_unshift_statement",
+          "category": "Arrays",
+          "label": "insert at beginning",
+          "purpose": "Prepend one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "A new first entry pushes the old first move later.",
+          "target": {
+            "block_type": "array_unshift_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Save moves only; powers and targets stay still.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use enemyMoves as Enemy move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Wait becomes first; every old enemy move moves one place later.",
+      "play": "A at Delay, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R07-primary",
+      "room": "R07",
+      "station": "Primary",
+      "purpose": "Remove the marked enemy shield cast.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R07.ts",
+        "room": "R07",
+        "station": "Primary",
+        "sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
+        "native_xml": "validation/native-tutorial/R07.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "marked",
+          "type": "number",
+          "creation": "Make a Variable: marked; reuse it if already created.",
+          "purpose": "This setup's marked position."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R07 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "array_removeat_statement",
+          "category": "Arrays",
+          "label": "remove value at",
+          "purpose": "Remove an entry and close the gap."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves, marked",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves",
+            "marked"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Remove the marked entry. Later moves close the gap.",
+          "target": {
+            "block_type": "array_removeat_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Do not keep this removed move; only the shorter list is needed.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use enemyMoves as Enemy move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The marked Ward disappears; later enemy moves move earlier.",
+      "play": "A at Remove Ward, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R08-primary",
+      "room": "R08",
+      "station": "Primary",
+      "purpose": "Repair the last allied move, however long the list is.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R08.ts",
+        "room": "R08",
+        "station": "Primary",
+        "sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
+        "native_xml": "validation/native-tutorial/R08.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R08 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "math_arithmetic",
+          "category": "Math",
+          "label": "… − …",
+          "purpose": "Calculate the last position."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Length minus one finds the current last entry.",
+          "target": {
+            "block_type": "math_arithmetic",
+            "label": "MINUS",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Replace that entry. Do not add a new one.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Only the last allied move becomes Strike.",
+      "play": "A at Repair last, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R09-primary",
+      "room": "R09",
+      "station": "Primary",
+      "purpose": "Remove the opening Wait so the protection comes sooner.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R09.ts",
+        "room": "R09",
+        "station": "Primary",
+        "sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
+        "native_xml": "validation/native-tutorial/R09.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R09 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_shift_statement",
+          "category": "Arrays",
+          "label": "remove first value",
+          "purpose": "Remove first; keep the remaining order."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Remove first; the other moves close the gap.",
+          "target": {
+            "block_type": "array_shift_statement",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "The move list shrinks. Powers and targets keep their places.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use allyMoves as Ally move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The first move disappears; the remaining moves move earlier.",
+      "play": "A at Remove first, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R10-primary",
+      "room": "R10",
+      "station": "Primary",
+      "purpose": "Delete the enemy's final attack.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R10.ts",
+        "room": "R10",
+        "station": "Primary",
+        "sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+        "native_xml": "validation/native-tutorial/R10.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R10 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_pop_statement",
+          "category": "Arrays",
+          "label": "remove last value",
+          "purpose": "Remove the final entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Remove the last move, rather than replacing it with Wait.",
+          "target": {
+            "block_type": "array_pop_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Only the move list gets shorter.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use enemyMoves as Enemy move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The last enemy move is gone; earlier moves stay put.",
+      "play": "A at Remove last, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R11-primary",
+      "room": "R11",
+      "station": "Primary",
+      "purpose": "Banish the first roster actor from the battle.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R11.ts",
+        "room": "R11",
+        "station": "Primary",
+        "sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
+        "native_xml": "validation/native-tutorial/R11.blocks"
+      },
+      "variables": [
+        {
+          "name": "hazardRoster",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: hazardRoster; reuse it if already created.",
+          "purpose": "The actual actors in the roster."
+        },
+        {
+          "name": "removed",
+          "type": "Sprite",
+          "creation": "Make a Variable: removed; reuse it if already created.",
+          "purpose": "The value returned by removing an entry."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R11 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_roster",
+          "category": "Apocalyptic Lists",
+          "label": "hazard roster",
+          "purpose": "Read the roster of actual actors."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "array_shift",
+          "category": "Arrays",
+          "label": "get and remove first value",
+          "purpose": "Return the removed first entry."
+        },
+        {
+          "type": "al_set_roster",
+          "category": "Apocalyptic Lists",
+          "label": "use … as hazard roster",
+          "purpose": "Submit the shorter roster."
+        },
+        {
+          "type": "al_banish",
+          "category": "Apocalyptic Lists",
+          "label": "banish …",
+          "purpose": "Remove that actor from battle."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "hazardRoster, removed",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "hazardRoster",
+            "removed"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Keep the Sprite returned by removing the first entry.",
+          "target": {
+            "block_type": "array_shift",
+            "label": "hazardRoster",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Removing a list entry alone does not banish its actor.",
+          "target": {
+            "block_type": "al_banish",
+            "label": "banish removed",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The roster loses its first entry, and that same actor is banished.",
+      "play": "A at Banish first, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R12-primary",
+      "room": "R12",
+      "station": "Primary",
+      "purpose": "Find the enemy Ward and stop its shield cast.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R12.ts",
+        "room": "R12",
+        "station": "Primary",
+        "sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
+        "native_xml": "validation/native-tutorial/R12.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "found",
+          "type": "number",
+          "creation": "Make a Variable: found; reuse it if already created.",
+          "purpose": "The position found by searching."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R12 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_indexof",
+          "category": "Arrays",
+          "label": "index of",
+          "purpose": "Find the first matching value."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves, found",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves",
+            "found"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Search for Ward wherever it is in this setup.",
+          "target": {
+            "block_type": "array_indexof",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "A negative result means no match. Only replace a found entry.",
+          "target": {
+            "block_type": "controls_if",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The first Ward found becomes Wait; the list length stays the same.",
+      "play": "A at Find Ward, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        },
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R13-primary",
+      "room": "R13",
+      "station": "Primary",
+      "purpose": "Stop every actor in the hazard roster from casting.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R13.ts",
+        "room": "R13",
+        "station": "Primary",
+        "sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
+        "native_xml": "validation/native-tutorial/R13.blocks"
+      },
+      "variables": [
+        {
+          "name": "hazardRoster",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: hazardRoster; reuse it if already created.",
+          "purpose": "The actual actors in the roster."
+        },
+        {
+          "name": "actor",
+          "type": "Sprite",
+          "creation": "Provided by the loop; use its actor reporter.",
+          "purpose": "The current actual roster Sprite."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R13 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_roster",
+          "category": "Apocalyptic Lists",
+          "label": "hazard roster",
+          "purpose": "Read the roster of actual actors."
+        },
+        {
+          "type": "pxt_controls_for_of",
+          "category": "Loops",
+          "label": "for element … of …",
+          "purpose": "Visit each stored value."
+        },
+        {
+          "type": "al_hold",
+          "category": "Apocalyptic Lists",
+          "label": "hold …",
+          "purpose": "Stop that actor from casting."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "hazardRoster",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "hazardRoster"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "The loop gives you each actual Sprite in turn.",
+          "target": {
+            "block_type": "pxt_controls_for_of",
+            "label": "actor",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Hold this loop's actor, then visit the next one.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "hold actor",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Every roster actor is held; no roster entry is removed.",
+      "play": "A at Hold hazards, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R14-primary",
+      "room": "R14",
+      "station": "Primary",
+      "purpose": "Give Small the small first hit; keep the larger hit for Boss.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R14.ts",
+        "room": "R14",
+        "station": "Primary",
+        "sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
+        "native_xml": "validation/native-tutorial/R14.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyValues",
+          "type": "number[]",
+          "creation": "Make a Variable: allyValues; reuse it if already created.",
+          "purpose": "The allied powers."
+        },
+        {
+          "name": "savedNumber",
+          "type": "number",
+          "creation": "Make a Variable: savedNumber; reuse it if already created.",
+          "purpose": "The first power, kept safe during the swap."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R14 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_values",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy value list",
+          "purpose": "Read the current powers."
+        },
+        {
+          "type": "lists_index_get",
+          "category": "Arrays",
+          "label": "get value at",
+          "purpose": "Read an entry."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_values",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … value list",
+          "purpose": "Submit the changed power list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyValues, savedNumber",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyValues",
+            "savedNumber"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Save the first power before its place changes.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "savedNumber",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Fourth power goes first; saved first power goes fourth.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "allyValues",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Submit powers only. Moves and targets stay put.",
+          "target": {
+            "block_type": "al_set_values",
+            "label": "use allyValues as Ally value list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The first and fourth powers exchange places; the middle two stay put.",
+      "play": "A at Swap power, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R15-primary",
+      "room": "R15",
+      "station": "Primary",
+      "purpose": "Clear every enemy Ward, including repeats.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R15.ts",
+        "room": "R15",
+        "station": "Primary",
+        "sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
+        "native_xml": "validation/native-tutorial/R15.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "i",
+          "type": "number",
+          "creation": "Provided by the loop; use its i reporter.",
+          "purpose": "The current list position."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R15 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "pxt_controls_for",
+          "category": "Loops",
+          "label": "for index from 0 to",
+          "purpose": "Visit each position."
+        },
+        {
+          "type": "math_arithmetic",
+          "category": "Math",
+          "label": "… − …",
+          "purpose": "Calculate the last position."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_index_get",
+          "category": "Arrays",
+          "label": "get value at",
+          "purpose": "Read an entry."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Visit the entire current list, not just its first Ward.",
+          "target": {
+            "block_type": "pxt_controls_for",
+            "label": "i",
+            "occurrence": 1,
+            "socket": "TO",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Change this entry only when its move is Ward.",
+          "target": {
+            "block_type": "controls_if",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Save the list after the loop finishes.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use enemyMoves as Enemy move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "All enemy Wards become Wait; other moves stay put.",
+      "play": "A at Clear Wards, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R16-primary",
+      "room": "R16",
+      "station": "Primary",
+      "purpose": "Build a defense against each attack and a Strike in each opening.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R16.ts",
+        "room": "R16",
+        "station": "Primary",
+        "sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
+        "native_xml": "validation/native-tutorial/R16.blocks"
+      },
+      "variables": [
+        {
+          "name": "sourceMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: sourceMoves; reuse it if already created.",
+          "purpose": "The source or reserve moves."
+        },
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        },
+        {
+          "name": "move",
+          "type": "string",
+          "creation": "Provided by the loop; use its move reporter.",
+          "purpose": "The current source move."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R16 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_source_moves",
+          "category": "Apocalyptic Lists",
+          "label": "source move list",
+          "purpose": "Read the source or reserve moves."
+        },
+        {
+          "type": "lists_create_with",
+          "category": "Arrays",
+          "label": "empty array",
+          "purpose": "Start with an empty list."
+        },
+        {
+          "type": "pxt_controls_for_of",
+          "category": "Loops",
+          "label": "for element … of …",
+          "purpose": "Visit each stored value."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "array_push",
+          "category": "Arrays",
+          "label": "add value to end",
+          "purpose": "Append one value."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "sourceMoves, allyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "sourceMoves",
+            "allyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Build a new empty list; leave the source list alone.",
+          "target": {
+            "block_type": "lists_create_with",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Each source move adds exactly one response.",
+          "target": {
+            "block_type": "controls_if",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Append responses in the same order as the source.",
+          "target": {
+            "block_type": "array_push",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Every source Strike produces Ward; every source Wait produces Strike.",
+      "play": "A at Build counters, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R17-primary",
+      "room": "R17",
+      "station": "Primary",
+      "purpose": "Use the last move waiting in reserve.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R17.ts",
+        "room": "R17",
+        "station": "Primary",
+        "sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
+        "native_xml": "validation/native-tutorial/R17.blocks"
+      },
+      "variables": [
+        {
+          "name": "sourceMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: sourceMoves; reuse it if already created.",
+          "purpose": "The source or reserve moves."
+        },
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        },
+        {
+          "name": "removed",
+          "type": "string",
+          "creation": "Make a Variable: removed; reuse it if already created.",
+          "purpose": "The value returned by removing an entry."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R17 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_source_moves",
+          "category": "Apocalyptic Lists",
+          "label": "source move list",
+          "purpose": "Read the source or reserve moves."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "array_pop",
+          "category": "Arrays",
+          "label": "get and remove last value",
+          "purpose": "Return the removed last entry."
+        },
+        {
+          "type": "al_set_source_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as reserve move list",
+          "purpose": "Submit the shorter reserve."
+        },
+        {
+          "type": "array_push",
+          "category": "Arrays",
+          "label": "add value to end",
+          "purpose": "Append one value."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "sourceMoves, allyMoves, removed",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "sourceMoves",
+            "allyMoves",
+            "removed"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Keep the move returned by removing the last reserve entry.",
+          "target": {
+            "block_type": "array_pop",
+            "label": "sourceMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Append that returned move; the reserve may end in different abilities.",
+          "target": {
+            "block_type": "array_push",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The reserve loses its last move; that same move ends the allied list.",
+      "play": "A at Use reserve, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R18-primary",
+      "room": "R18",
+      "station": "Primary",
+      "purpose": "Take the marked enemy power for the final allied hit.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R18.ts",
+        "room": "R18",
+        "station": "Primary",
+        "sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
+        "native_xml": "validation/native-tutorial/R18.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyValues",
+          "type": "number[]",
+          "creation": "Make a Variable: enemyValues; reuse it if already created.",
+          "purpose": "The enemy powers."
+        },
+        {
+          "name": "allyValues",
+          "type": "number[]",
+          "creation": "Make a Variable: allyValues; reuse it if already created.",
+          "purpose": "The allied powers."
+        },
+        {
+          "name": "marked",
+          "type": "number",
+          "creation": "Make a Variable: marked; reuse it if already created.",
+          "purpose": "This setup's marked position."
+        },
+        {
+          "name": "stolen",
+          "type": "number",
+          "creation": "Make a Variable: stolen; reuse it if already created.",
+          "purpose": "The number removed from enemy powers."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R18 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_values",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy value list",
+          "purpose": "Read the current powers."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "array_removeat",
+          "category": "Arrays",
+          "label": "get and remove value at",
+          "purpose": "Return the entry removed at this position."
+        },
+        {
+          "type": "al_set_values",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … value list",
+          "purpose": "Submit the changed power list."
+        },
+        {
+          "type": "array_push",
+          "category": "Arrays",
+          "label": "add value to end",
+          "purpose": "Append one value."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyValues, allyValues, marked, stolen",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyValues",
+            "allyValues",
+            "marked",
+            "stolen"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Keep the removed number in stolen. Later enemy numbers shift.",
+          "target": {
+            "block_type": "array_removeat",
+            "label": "enemyValues",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Add the same number to the end of allied powers.",
+          "target": {
+            "block_type": "array_push",
+            "label": "allyValues",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Submit both changed power lists. Moves and targets stay put.",
+          "target": {
+            "block_type": "al_set_values",
+            "label": "use allyValues as Ally value list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Enemy powers lose the marked number; allied powers gain it at the end.",
+      "play": "A at Steal power, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R19-primary",
+      "room": "R19",
+      "station": "Primary",
+      "purpose": "Hold one randomly chosen roster actor.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R19.ts",
+        "room": "R19",
+        "station": "Primary",
+        "sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
+        "native_xml": "validation/native-tutorial/R19.blocks"
+      },
+      "variables": [
+        {
+          "name": "hazardRoster",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: hazardRoster; reuse it if already created.",
+          "purpose": "The actual actors in the roster."
+        },
+        {
+          "name": "randomIndex",
+          "type": "number",
+          "creation": "Make a Variable: randomIndex; reuse it if already created.",
+          "purpose": "The randomly chosen roster position."
+        },
+        {
+          "name": "selected",
+          "type": "Sprite",
+          "creation": "Make a Variable: selected; reuse it if already created.",
+          "purpose": "The actual Sprite just retrieved."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R19 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_roster",
+          "category": "Apocalyptic Lists",
+          "label": "hazard roster",
+          "purpose": "Read the roster of actual actors."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "device_random",
+          "category": "Math",
+          "label": "pick random",
+          "purpose": "Choose a roster position."
+        },
+        {
+          "type": "math_arithmetic",
+          "category": "Math",
+          "label": "… − …",
+          "purpose": "Calculate the last position."
+        },
+        {
+          "type": "lists_index_get",
+          "category": "Arrays",
+          "label": "get value at",
+          "purpose": "Read an entry."
+        },
+        {
+          "type": "al_hold",
+          "category": "Apocalyptic Lists",
+          "label": "hold …",
+          "purpose": "Stop that actor from casting."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "hazardRoster, randomIndex, selected",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "hazardRoster",
+            "randomIndex",
+            "selected"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Choose from the first entry through length minus one.",
+          "target": {
+            "block_type": "device_random",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Hold the Sprite returned from that random position.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "hold selected",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Either roster actor may be held; both entries remain in the list.",
+      "play": "A at Hold one, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-INTRO",
+          "span": "1-104"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R20-primary",
+      "room": "R20",
+      "station": "Primary",
+      "purpose": "Give your team time by reversing the enemy script.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R20.ts",
+        "room": "R20",
+        "station": "Primary",
+        "sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+        "native_xml": "validation/native-tutorial/R20.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R20 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_reverse",
+          "category": "Arrays",
+          "label": "reverse list",
+          "purpose": "Reverse the current order."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Reverse the whole move list: last becomes first.",
+          "target": {
+            "block_type": "array_reverse",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Do not reverse powers or targets with it.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use enemyMoves as Enemy move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The enemy move order reverses; its powers and targets stay put.",
+      "play": "A at Reverse, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R21-primary",
+      "room": "R21",
+      "station": "Primary",
+      "purpose": "Place Ward opposite the first enemy Strike.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R21.ts",
+        "room": "R21",
+        "station": "Primary",
+        "sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
+        "native_xml": "validation/native-tutorial/R21.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        },
+        {
+          "name": "found",
+          "type": "number",
+          "creation": "Make a Variable: found; reuse it if already created.",
+          "purpose": "The position found by searching."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R21 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_indexof",
+          "category": "Arrays",
+          "label": "index of",
+          "purpose": "Find the first matching value."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "array_insertAt",
+          "category": "Arrays",
+          "label": "insert at",
+          "purpose": "Insert and shift later entries."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves, allyMoves, found",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves",
+            "allyMoves",
+            "found"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Find the first Strike in the current enemy list.",
+          "target": {
+            "block_type": "array_indexof",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Insert Ward at that same position in allied moves.",
+          "target": {
+            "block_type": "array_insertAt",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The new allied Ward lines up with the first enemy Strike.",
+      "play": "A at Find defense, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        },
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R22-primary",
+      "room": "R22",
+      "station": "Primary",
+      "purpose": "Put the dangerous marked target first.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R22.ts",
+        "room": "R22",
+        "station": "Primary",
+        "sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
+        "native_xml": "validation/native-tutorial/R22.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyTargets",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemyTargets; reuse it if already created.",
+          "purpose": "The actual enemy target Sprites."
+        },
+        {
+          "name": "marked",
+          "type": "number",
+          "creation": "Make a Variable: marked; reuse it if already created.",
+          "purpose": "This setup's marked position."
+        },
+        {
+          "name": "selected",
+          "type": "Sprite",
+          "creation": "Make a Variable: selected; reuse it if already created.",
+          "purpose": "The actual Sprite just retrieved."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R22 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_targets",
+          "category": "Apocalyptic Lists",
+          "label": "Enemy target list",
+          "purpose": "Read the actual target Sprites."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "array_removeat",
+          "category": "Arrays",
+          "label": "get and remove value at",
+          "purpose": "Return the entry removed at this position."
+        },
+        {
+          "type": "array_unshift_statement",
+          "category": "Arrays",
+          "label": "insert at beginning",
+          "purpose": "Prepend one entry."
+        },
+        {
+          "type": "al_set_targets",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … target list",
+          "purpose": "Submit the changed targets."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyTargets, marked, selected",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyTargets",
+            "marked",
+            "selected"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Keep the exact Sprite returned by the removal.",
+          "target": {
+            "block_type": "array_removeat",
+            "label": "enemyTargets",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Put that same Sprite first, not a new name or actor.",
+          "target": {
+            "block_type": "array_unshift_statement",
+            "label": "enemyTargets",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The same marked Sprite moves to the front; the target count stays equal.",
+      "play": "A at Move target, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R23-primary",
+      "room": "R23",
+      "station": "Primary",
+      "purpose": "Find and delete the enemy's shield cast.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R23.ts",
+        "room": "R23",
+        "station": "Primary",
+        "sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
+        "native_xml": "validation/native-tutorial/R23.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "found",
+          "type": "number",
+          "creation": "Make a Variable: found; reuse it if already created.",
+          "purpose": "The position found by searching."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R23 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_indexof",
+          "category": "Arrays",
+          "label": "index of",
+          "purpose": "Find the first matching value."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "array_removeat_statement",
+          "category": "Arrays",
+          "label": "remove value at",
+          "purpose": "Remove an entry and close the gap."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves, found",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves",
+            "found"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Find the current position of the first Ward.",
+          "target": {
+            "block_type": "array_indexof",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Remove the found entry, rather than changing it to Wait.",
+          "target": {
+            "block_type": "array_removeat_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The found Ward disappears; later enemy moves move earlier.",
+      "play": "A at Find + remove, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        },
+        {
+          "id": "1C-074/string-arrays.md",
+          "span": "56-71, 79-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R24-primary",
+      "room": "R24",
+      "station": "Primary",
+      "purpose": "First, delay the enemy script by one moment.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R24.ts",
+        "room": "R24",
+        "station": "Primary",
+        "sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "native_xml": "validation/native-tutorial/R24.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R24 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "array_unshift_statement",
+          "category": "Arrays",
+          "label": "insert at beginning",
+          "purpose": "Prepend one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "This altar runs first: add Wait at the beginning.",
+          "target": {
+            "block_type": "array_unshift_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Save the shifted list for the second altar to read.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "use enemyMoves as Enemy move list",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "A new Wait is first; the old enemy moves shift later.",
+      "play": "A at Delay, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R24-secondary",
+      "room": "R24",
+      "station": "Secondary",
+      "purpose": "Then cancel the Strike at its shifted position.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R24.ts",
+        "room": "R24",
+        "station": "Secondary",
+        "sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+        "native_xml": "validation/native-tutorial/R24.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "shifted",
+          "type": "number",
+          "creation": "Make a Variable: shifted; reuse it if already created.",
+          "purpose": "The second altar's marker after the shift."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R24 station Secondary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "al_marked_index",
+          "category": "Apocalyptic Lists",
+          "label": "marked index",
+          "purpose": "Use this setup's marked position."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves, shifted",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves",
+            "shifted"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Read the list after the first altar has shifted it.",
+          "target": {
+            "block_type": "al_moves",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "The setup marker names the Strike's new place.",
+          "target": {
+            "block_type": "al_marked_index",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Replace the marked move. Do not remove it.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "The marked Strike in the shifted list becomes Wait.",
+      "play": "A at Rewrite, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R25-primary",
+      "room": "R25",
+      "station": "Primary",
+      "purpose": "Put a Ward only in a defense gap opposite a Strike.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R25.ts",
+        "room": "R25",
+        "station": "Primary",
+        "sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
+        "native_xml": "validation/native-tutorial/R25.blocks"
+      },
+      "variables": [
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        },
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "i",
+          "type": "number",
+          "creation": "Provided by the loop; use its i reporter.",
+          "purpose": "The current list position."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R25 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "pxt_controls_for",
+          "category": "Loops",
+          "label": "for index from 0 to",
+          "purpose": "Visit each position."
+        },
+        {
+          "type": "math_arithmetic",
+          "category": "Math",
+          "label": "… − …",
+          "purpose": "Calculate the last position."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_index_get",
+          "category": "Arrays",
+          "label": "get value at",
+          "purpose": "Read an entry."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "allyMoves, enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "allyMoves",
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Both tests must hold: our Wait AND their Strike.",
+          "target": {
+            "block_type": "logic_operation",
+            "label": "AND",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Use the same i to compare the two moves.",
+          "target": {
+            "block_type": "lists_index_get",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Only this allied move becomes Ward. Other moves stay put.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "allyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Wait opposite Strike becomes Ward. Other moves stay put.",
+      "play": "A at Repair gaps, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R26-primary",
+      "room": "R26",
+      "station": "Primary",
+      "purpose": "Build defenses, heal once after an attack, and strike in other openings.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R26.ts",
+        "room": "R26",
+        "station": "Primary",
+        "sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
+        "native_xml": "validation/native-tutorial/R26.blocks"
+      },
+      "variables": [
+        {
+          "name": "sourceMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: sourceMoves; reuse it if already created.",
+          "purpose": "The source or reserve moves."
+        },
+        {
+          "name": "allyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: allyMoves; reuse it if already created.",
+          "purpose": "The allied move list."
+        },
+        {
+          "name": "seenAttack",
+          "type": "boolean",
+          "creation": "Make a Variable: seenAttack; reuse it if already created.",
+          "purpose": "Whether an earlier source move was an attack."
+        },
+        {
+          "name": "didHeal",
+          "type": "boolean",
+          "creation": "Make a Variable: didHeal; reuse it if already created.",
+          "purpose": "Whether Mend has already been added."
+        },
+        {
+          "name": "move",
+          "type": "string",
+          "creation": "Provided by the loop; use its move reporter.",
+          "purpose": "The current source move."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R26 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_source_moves",
+          "category": "Apocalyptic Lists",
+          "label": "source move list",
+          "purpose": "Read the source or reserve moves."
+        },
+        {
+          "type": "lists_create_with",
+          "category": "Arrays",
+          "label": "empty array",
+          "purpose": "Start with an empty list."
+        },
+        {
+          "type": "logic_boolean",
+          "category": "Logic",
+          "label": "false / true",
+          "purpose": "Remember whether something happened."
+        },
+        {
+          "type": "pxt_controls_for_of",
+          "category": "Loops",
+          "label": "for element … of …",
+          "purpose": "Visit each stored value."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "array_push",
+          "category": "Arrays",
+          "label": "add value to end",
+          "purpose": "Append one value."
+        },
+        {
+          "type": "logic_operation",
+          "category": "Logic",
+          "label": "and",
+          "purpose": "Require both conditions."
+        },
+        {
+          "type": "logic_negate",
+          "category": "Logic",
+          "label": "not",
+          "purpose": "Check that healing has not happened yet."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "sourceMoves, allyMoves, seenAttack, didHeal",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "sourceMoves",
+            "allyMoves",
+            "seenAttack",
+            "didHeal"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Reset both memories at the start of this altar job.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "seenAttack",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Mend only after an attack, and only if we have not healed yet.",
+          "target": {
+            "block_type": "logic_operation",
+            "label": "AND",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Each source move adds one response to the new list.",
+          "target": {
+            "block_type": "pxt_controls_for_of",
+            "label": "move",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Ward answers each attack; Mend fills the first later opening only.",
+      "play": "A at Build recovery, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-STRING",
+          "span": "30-32, 74-106"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R27-primary",
+      "room": "R27",
+      "station": "Primary",
+      "purpose": "Stop both roster attackers while you deal with King.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R27.ts",
+        "room": "R27",
+        "station": "Primary",
+        "sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "native_xml": "validation/native-tutorial/R27.blocks"
+      },
+      "variables": [
+        {
+          "name": "hazardRoster",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: hazardRoster; reuse it if already created.",
+          "purpose": "The actual actors in the roster."
+        },
+        {
+          "name": "actor",
+          "type": "Sprite",
+          "creation": "Provided by the loop; use its actor reporter.",
+          "purpose": "The current actual roster Sprite."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R27 station Primary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_roster",
+          "category": "Apocalyptic Lists",
+          "label": "hazard roster",
+          "purpose": "Read the roster of actual actors."
+        },
+        {
+          "type": "pxt_controls_for_of",
+          "category": "Loops",
+          "label": "for element … of …",
+          "purpose": "Visit each stored value."
+        },
+        {
+          "type": "al_hold",
+          "category": "Apocalyptic Lists",
+          "label": "hold …",
+          "purpose": "Stop that actor from casting."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "hazardRoster",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "hazardRoster"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Visit every actual actor in the hazard roster.",
+          "target": {
+            "block_type": "pxt_controls_for_of",
+            "label": "actor",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Holding stops casting; it does not remove the actor.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "hold actor",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Both roster actors are held and remain available as targets.",
+      "play": "A at Hold hazards, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    },
+    {
+      "id": "R27-secondary",
+      "room": "R27",
+      "station": "Secondary",
+      "purpose": "Clear all of King's shield casts.",
+      "source_event": {
+        "path": "implementation/learner-states/rooms/R27.ts",
+        "room": "R27",
+        "station": "Secondary",
+        "sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+        "native_xml": "validation/native-tutorial/R27.blocks"
+      },
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list."
+        },
+        {
+          "name": "i",
+          "type": "number",
+          "creation": "Provided by the loop; use its i reporter.",
+          "purpose": "The current list position."
+        }
+      ],
+      "needed_blocks": [
+        {
+          "type": "al_on_interact",
+          "category": "Apocalyptic Lists",
+          "label": "on room R27 station Secondary",
+          "purpose": "Run this job at its physical altar."
+        },
+        {
+          "type": "variables_set",
+          "category": "Variables",
+          "label": "set … to …",
+          "purpose": "Remember a list or returned value."
+        },
+        {
+          "type": "al_moves",
+          "category": "Apocalyptic Lists",
+          "label": "Ally / Enemy move list",
+          "purpose": "Read the current moves."
+        },
+        {
+          "type": "pxt_controls_for",
+          "category": "Loops",
+          "label": "for index from 0 to",
+          "purpose": "Visit each position."
+        },
+        {
+          "type": "math_arithmetic",
+          "category": "Math",
+          "label": "… − …",
+          "purpose": "Calculate the last position."
+        },
+        {
+          "type": "lists_length",
+          "category": "Arrays",
+          "label": "length of array",
+          "purpose": "Count the current entries."
+        },
+        {
+          "type": "controls_if",
+          "category": "Logic",
+          "label": "if then",
+          "purpose": "Do the work only when the test holds."
+        },
+        {
+          "type": "logic_compare",
+          "category": "Logic",
+          "label": "… = … / … < … / … ≥ …",
+          "purpose": "Compare the current values."
+        },
+        {
+          "type": "lists_index_get",
+          "category": "Arrays",
+          "label": "get value at",
+          "purpose": "Read an entry."
+        },
+        {
+          "type": "lists_index_set",
+          "category": "Arrays",
+          "label": "set value at",
+          "purpose": "Replace one entry."
+        },
+        {
+          "type": "al_set_moves",
+          "category": "Apocalyptic Lists",
+          "label": "use … as … move list",
+          "purpose": "Submit the changed move list."
+        },
+        {
+          "type": "variables_get",
+          "category": "Variables",
+          "label": "enemyMoves",
+          "purpose": "Put the stored list or value into its matching input.",
+          "variable_names": [
+            "enemyMoves"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "text": "Search the whole list so no later Ward is missed.",
+          "target": {
+            "block_type": "pxt_controls_for",
+            "label": "i",
+            "occurrence": 1,
+            "socket": "TO",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        },
+        {
+          "text": "Replace only Ward entries; do not shift the list.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match block_type and semantic label first; occurrence counts those matches. Socket names are native XML inputs."
+          }
+        }
+      ],
+      "result": "Every enemy Ward becomes Wait; the other moves keep their places.",
+      "play": "A at Clear Wards, then A at the top Release time crystal.",
+      "source_support": [
+        {
+          "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
+          "span": "23-38, 93-105"
+        }
+      ],
+      "visible_complete_example": true,
+      "focused_hint": true
+    }
+  ]
+}

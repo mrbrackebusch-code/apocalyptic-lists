@@ -1,16 +1,17 @@
 {
   "existing_project_overlay": true,
-  "not_startup_project": true,
   "recipes": [
     {
       "canonical": "copy/recipes/r01.md",
       "cumulative_sha256": "5c5358008dd34a2fd3cb5dbc56d7561c825a7bff732aad9aed38787848811501",
-      "hint_from": "implementation/learner-states/cumulative/R01.ts",
+      "hint_from": "implementation/learner-states/rooms/R01.ts",
+      "hint_scope": "current station or current room only",
       "id": "R01",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R01-blocks",
+        "R01-primary-menu",
+        "R01-primary-assembled",
         "R01-before-after"
       ],
       "next_recipe": "R02",
@@ -18,18 +19,23 @@
       "output": "generated/tutorial/recipes/r01.md",
       "overlay_only": true,
       "reference_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
-      "sha256": "ae2ae9eb2e9ab651469a69485996ffc8679a6d709a099be35e64631c7e780d1c",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "8c70380db4ec5165beaf2ad657d6012cf6e0208c38d9660174b83dfe6ccca1cc",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R01-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r02.md",
       "cumulative_sha256": "8892e3bed3758aaeb6d72f964503ec5a378923a65feeb027370876bb6ad68412",
-      "hint_from": "implementation/learner-states/cumulative/R02.ts",
+      "hint_from": "implementation/learner-states/rooms/R02.ts",
+      "hint_scope": "current station or current room only",
       "id": "R02",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R02-blocks",
+        "R02-primary-menu",
+        "R02-primary-assembled",
         "R02-before-after"
       ],
       "next_recipe": "R03",
@@ -37,18 +43,23 @@
       "output": "generated/tutorial/recipes/r02.md",
       "overlay_only": true,
       "reference_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
-      "sha256": "dd6c809afc66ca0d893186cb81d6fba0316e9ea11a1ad2e788ff2cca79abdf9b",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "2b158977cffd6119ab570c72dd2bb5d46f9eeb058f9b97f18aab01f7e6f9c248",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R02-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r03.md",
       "cumulative_sha256": "fe497df4ac0dbf4546ae1818a8199c77c17ec4e6e2ed171d21f5b602fafbe4bb",
-      "hint_from": "implementation/learner-states/cumulative/R03.ts",
+      "hint_from": "implementation/learner-states/rooms/R03.ts",
+      "hint_scope": "current station or current room only",
       "id": "R03",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R03-blocks",
+        "R03-primary-menu",
+        "R03-primary-assembled",
         "R03-before-after"
       ],
       "next_recipe": "R04",
@@ -56,18 +67,23 @@
       "output": "generated/tutorial/recipes/r03.md",
       "overlay_only": true,
       "reference_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
-      "sha256": "3345295452a54019a644709a9dec7258ed600449d7b5036f3a9ef6a1bc353381",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "bd5e785808e13f28053be72b3212d6fdf286972479dd95ad782b7a02885f097e",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R03-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r04.md",
       "cumulative_sha256": "bd8a4db4dec639f0f038ef690326cdaa2f1c22e01f14e3c1f20d0a0f3fcab7dc",
-      "hint_from": "implementation/learner-states/cumulative/R04.ts",
+      "hint_from": "implementation/learner-states/rooms/R04.ts",
+      "hint_scope": "current station or current room only",
       "id": "R04",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R04-blocks",
+        "R04-primary-menu",
+        "R04-primary-assembled",
         "R04-before-after"
       ],
       "next_recipe": "R05",
@@ -75,18 +91,23 @@
       "output": "generated/tutorial/recipes/r04.md",
       "overlay_only": true,
       "reference_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
-      "sha256": "e0e34fbecffc15926db7dd979104d7fce08eb015e0ca0ec2fcd430d411c0763c",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "5e5d7132162cfef99d58a84cb2d797554204398a56343514896c599cc98b08c2",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R04-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r05.md",
       "cumulative_sha256": "3902d241efa153185222ebb0282878e3e4affe42e12276a8fc4b9813122cee9f",
-      "hint_from": "implementation/learner-states/cumulative/R05.ts",
+      "hint_from": "implementation/learner-states/rooms/R05.ts",
+      "hint_scope": "current station or current room only",
       "id": "R05",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R05-blocks",
+        "R05-primary-menu",
+        "R05-primary-assembled",
         "R05-before-after"
       ],
       "next_recipe": "R06",
@@ -94,18 +115,23 @@
       "output": "generated/tutorial/recipes/r05.md",
       "overlay_only": true,
       "reference_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
-      "sha256": "4a7cb62a48cf0d72af3b1d41304f6f68a40b9216f0327ed1831123eb8c86c6aa",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "4ff334a82974008f35bc082b60c3ecf25187429940e49ca808642f7b42d76a7d",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R05-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r06.md",
       "cumulative_sha256": "0bf9d57aaaee7747db1114696406ba6702c1c9effc56eddd9473b0b68a732649",
-      "hint_from": "implementation/learner-states/cumulative/R06.ts",
+      "hint_from": "implementation/learner-states/rooms/R06.ts",
+      "hint_scope": "current station or current room only",
       "id": "R06",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R06-blocks",
+        "R06-primary-menu",
+        "R06-primary-assembled",
         "R06-before-after"
       ],
       "next_recipe": "R07",
@@ -113,18 +139,23 @@
       "output": "generated/tutorial/recipes/r06.md",
       "overlay_only": true,
       "reference_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
-      "sha256": "03afc06cc1dfca6403dbe85cf6493e78c815b03c4ed8b47944f3aed2f7152f2d",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "6ff6e27ff1d235639916a8f3c12561bf9ccb30c0b5bb2a364e6bab7f167d26a4",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R06-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r07.md",
       "cumulative_sha256": "e772f167b60c0f802593d8736333e9653acf02b4b5aac059c5c7d059dde5235c",
-      "hint_from": "implementation/learner-states/cumulative/R07.ts",
+      "hint_from": "implementation/learner-states/rooms/R07.ts",
+      "hint_scope": "current station or current room only",
       "id": "R07",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R07-blocks",
+        "R07-primary-menu",
+        "R07-primary-assembled",
         "R07-before-after"
       ],
       "next_recipe": "R08",
@@ -132,18 +163,23 @@
       "output": "generated/tutorial/recipes/r07.md",
       "overlay_only": true,
       "reference_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
-      "sha256": "422c0feda1128231db9882781251542af681ccb1528b00229cb63c2fd581dbc4",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "a30b0b7d9a872dd3e929101a2990c948c9725742a819934603dffbc5c9139223",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R07-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r08.md",
       "cumulative_sha256": "587cdb304a5255e1305a3044d7988a7ae42259813da8bc71c981856f22273240",
-      "hint_from": "implementation/learner-states/cumulative/R08.ts",
+      "hint_from": "implementation/learner-states/rooms/R08.ts",
+      "hint_scope": "current station or current room only",
       "id": "R08",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R08-blocks",
+        "R08-primary-menu",
+        "R08-primary-assembled",
         "R08-before-after"
       ],
       "next_recipe": "R09",
@@ -151,18 +187,23 @@
       "output": "generated/tutorial/recipes/r08.md",
       "overlay_only": true,
       "reference_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
-      "sha256": "b5e0406e92ace9f8ff99c445fd5ec16d198ac98b244c1c1b0707b58ee4c9bdbe",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "ea189e30e3363201a668ed2e822e18216bbf3e611bea32e392ef9428c049672a",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R08-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r09.md",
       "cumulative_sha256": "ab07de8df506d77fd5e81b5b164c54ac87698ce9ba6dee63d96102ee7b7179bf",
-      "hint_from": "implementation/learner-states/cumulative/R09.ts",
+      "hint_from": "implementation/learner-states/rooms/R09.ts",
+      "hint_scope": "current station or current room only",
       "id": "R09",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R09-blocks",
+        "R09-primary-menu",
+        "R09-primary-assembled",
         "R09-before-after"
       ],
       "next_recipe": "R10",
@@ -170,18 +211,23 @@
       "output": "generated/tutorial/recipes/r09.md",
       "overlay_only": true,
       "reference_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
-      "sha256": "b9def8b8e8b84a47dd83c858af741a2e0b9483db3b28ba10643cb9373c8dae12",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "d6231e71b329b23f245d6aa93a5e6f239a7420dea68cc9c1d54824ecb5e06fc3",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R09-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r10.md",
       "cumulative_sha256": "dcbeb300b9415e54aaab56631cd0f10bf1115a7e958c390fdedc238b34af63ac",
-      "hint_from": "implementation/learner-states/cumulative/R10.ts",
+      "hint_from": "implementation/learner-states/rooms/R10.ts",
+      "hint_scope": "current station or current room only",
       "id": "R10",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R10-blocks",
+        "R10-primary-menu",
+        "R10-primary-assembled",
         "R10-before-after"
       ],
       "next_recipe": "R11",
@@ -189,18 +235,23 @@
       "output": "generated/tutorial/recipes/r10.md",
       "overlay_only": true,
       "reference_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
-      "sha256": "9643f9fdb4e24113708367e1b5f775b0957b163a47d33bd4b8db7970c2d149a4",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "b5ae25a8abe87b4a6c23cc740a936a644ec01ff2f85800298b587bece71bd4ac",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R10-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r11.md",
       "cumulative_sha256": "42cb177faea2b636962efafd5a44b746fb37e8f254facb583ddbd8d2953debe2",
-      "hint_from": "implementation/learner-states/cumulative/R11.ts",
+      "hint_from": "implementation/learner-states/rooms/R11.ts",
+      "hint_scope": "current station or current room only",
       "id": "R11",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R11-blocks",
+        "R11-primary-menu",
+        "R11-primary-assembled",
         "R11-before-after"
       ],
       "next_recipe": "R12",
@@ -208,18 +259,23 @@
       "output": "generated/tutorial/recipes/r11.md",
       "overlay_only": true,
       "reference_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
-      "sha256": "8153b7a17c9b2fb3810932a31734caed075c92b20eb973c3d84d693499277c6c",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "239b673f032dcf567d6f671b7b650272245d2043a7ccbb6aa124980f271425b3",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R11-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r12.md",
       "cumulative_sha256": "6d6eb503fc3ba21f66bbaa7fed6e81e7beb14c01ff30be585ce6780dc5e4978a",
-      "hint_from": "implementation/learner-states/cumulative/R12.ts",
+      "hint_from": "implementation/learner-states/rooms/R12.ts",
+      "hint_scope": "current station or current room only",
       "id": "R12",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R12-blocks",
+        "R12-primary-menu",
+        "R12-primary-assembled",
         "R12-before-after"
       ],
       "next_recipe": "R13",
@@ -227,18 +283,23 @@
       "output": "generated/tutorial/recipes/r12.md",
       "overlay_only": true,
       "reference_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
-      "sha256": "9a1f2c8e987df4ef00ccc8cdc9dc0605209bbb3e7c2d6325dd36eaf3763ef686",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "9de8a62c5b1a690585d4d9d44676e1c1bb742f55a85a7bf3c3ef7fcc5c36c0b7",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R12-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r13.md",
       "cumulative_sha256": "8c8a39d494bba26d056a40825c9556a88e9fc6f748976d2133393b5cc9706296",
-      "hint_from": "implementation/learner-states/cumulative/R13.ts",
+      "hint_from": "implementation/learner-states/rooms/R13.ts",
+      "hint_scope": "current station or current room only",
       "id": "R13",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R13-blocks",
+        "R13-primary-menu",
+        "R13-primary-assembled",
         "R13-before-after"
       ],
       "next_recipe": "R14",
@@ -246,18 +307,23 @@
       "output": "generated/tutorial/recipes/r13.md",
       "overlay_only": true,
       "reference_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
-      "sha256": "4d1b8c1b2c590a365e66f75c012294d1dffd70e9b96cc1d16edb094dcad9cd21",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "b265001625e38b7eb2321670dc7a2be0d8ee778c9d6ef995644512658d14e0c0",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R13-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r14.md",
       "cumulative_sha256": "3505d5322118090156133111ccb676a02607e1d76f8d75227bee12dec27d6717",
-      "hint_from": "implementation/learner-states/cumulative/R14.ts",
+      "hint_from": "implementation/learner-states/rooms/R14.ts",
+      "hint_scope": "current station or current room only",
       "id": "R14",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R14-blocks",
+        "R14-primary-menu",
+        "R14-primary-assembled",
         "R14-before-after"
       ],
       "next_recipe": "R15",
@@ -265,18 +331,23 @@
       "output": "generated/tutorial/recipes/r14.md",
       "overlay_only": true,
       "reference_sha256": "44f7e18ed0328e2a6783606446c6a85f2a54de80755196a87b51602d15c098b7",
-      "sha256": "1a8991d9dca549c443a2561404dfeb9243060de95cbddb21ffe195c40b14aed4",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "4458cebe4666f7b57503b630d06a15540eaa4e56648745f70c66bbd90be5c11b",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R14-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r15.md",
       "cumulative_sha256": "514d8e3ddd1f2bb1325de3673727b0772020c230440f81f1dc34b4c784fd3105",
-      "hint_from": "implementation/learner-states/cumulative/R15.ts",
+      "hint_from": "implementation/learner-states/rooms/R15.ts",
+      "hint_scope": "current station or current room only",
       "id": "R15",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R15-blocks",
+        "R15-primary-menu",
+        "R15-primary-assembled",
         "R15-before-after"
       ],
       "next_recipe": "R16",
@@ -284,18 +355,23 @@
       "output": "generated/tutorial/recipes/r15.md",
       "overlay_only": true,
       "reference_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
-      "sha256": "a6b94ce45c13003aecb8fe873d8c5893e76cfb3a3a7d5039efa7206886bb7447",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "a964ea102e0131cdd8765c72df3b8333ed39d49f949dc6425f695ac40f148c9f",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R15-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r16.md",
       "cumulative_sha256": "3b5bb4193e5a18c0aea38cc29038052774e3dee7ba5be65e80846c2d32d360aa",
-      "hint_from": "implementation/learner-states/cumulative/R16.ts",
+      "hint_from": "implementation/learner-states/rooms/R16.ts",
+      "hint_scope": "current station or current room only",
       "id": "R16",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R16-blocks",
+        "R16-primary-menu",
+        "R16-primary-assembled",
         "R16-before-after"
       ],
       "next_recipe": "R17",
@@ -303,18 +379,23 @@
       "output": "generated/tutorial/recipes/r16.md",
       "overlay_only": true,
       "reference_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
-      "sha256": "befcba43be221434949cf64ea93faec57046c58827071603d15bc9b1d5556845",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "25b0316b142a88d1fc671ba8a03fa8f9f39199411b857486fe0d440b058478b9",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R16-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r17.md",
       "cumulative_sha256": "9cfc6ffa705a59bf89cbe72e2869a9cd3d4db76c8544f3bd9c9980810fa4ea2c",
-      "hint_from": "implementation/learner-states/cumulative/R17.ts",
+      "hint_from": "implementation/learner-states/rooms/R17.ts",
+      "hint_scope": "current station or current room only",
       "id": "R17",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R17-blocks",
+        "R17-primary-menu",
+        "R17-primary-assembled",
         "R17-before-after"
       ],
       "next_recipe": "R18",
@@ -322,18 +403,23 @@
       "output": "generated/tutorial/recipes/r17.md",
       "overlay_only": true,
       "reference_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
-      "sha256": "238bda5a6f784eff673ccb90d015f9c3240473844aedae35272a63dabccd090b",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "a63416226621e9a387627aa91959e0b7453d387b23bd8d085d70ccacfb8e6943",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R17-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r18.md",
       "cumulative_sha256": "fbdf8e711ad0f519fbc745a9f461e09692edad31873734407765932d96a8c145",
-      "hint_from": "implementation/learner-states/cumulative/R18.ts",
+      "hint_from": "implementation/learner-states/rooms/R18.ts",
+      "hint_scope": "current station or current room only",
       "id": "R18",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R18-blocks",
+        "R18-primary-menu",
+        "R18-primary-assembled",
         "R18-before-after"
       ],
       "next_recipe": "R19",
@@ -341,18 +427,23 @@
       "output": "generated/tutorial/recipes/r18.md",
       "overlay_only": true,
       "reference_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
-      "sha256": "58d960183d7a94fd5c654bb8a1d493794325ce485ef90e657c00b5bd4565d13d",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "0adab5c2f000a3be0af6bea2c4eda8a483f16af1d8f414a2babcec525a9c353c",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R18-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r19.md",
       "cumulative_sha256": "3cd27136b353011a4189d3dfa575a9d8969d144127de1fac35e2431da4fdb694",
-      "hint_from": "implementation/learner-states/cumulative/R19.ts",
+      "hint_from": "implementation/learner-states/rooms/R19.ts",
+      "hint_scope": "current station or current room only",
       "id": "R19",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R19-blocks",
+        "R19-primary-menu",
+        "R19-primary-assembled",
         "R19-before-after"
       ],
       "next_recipe": "R20",
@@ -360,18 +451,23 @@
       "output": "generated/tutorial/recipes/r19.md",
       "overlay_only": true,
       "reference_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
-      "sha256": "9c2ccfbb368b9c0ab10be05d934d65fad78b56c20c3436a824577a4c836bc8e3",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "7199888667c97a38dd17436bdc1a1118f37ab46a3f61995c82ea837a73bfc31c",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R19-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r20.md",
       "cumulative_sha256": "81417a65b412ff50324afe905c408dc420b135d0185edbde02ecfc379901a1ac",
-      "hint_from": "implementation/learner-states/cumulative/R20.ts",
+      "hint_from": "implementation/learner-states/rooms/R20.ts",
+      "hint_scope": "current station or current room only",
       "id": "R20",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R20-blocks",
+        "R20-primary-menu",
+        "R20-primary-assembled",
         "R20-before-after"
       ],
       "next_recipe": "R21",
@@ -379,18 +475,23 @@
       "output": "generated/tutorial/recipes/r20.md",
       "overlay_only": true,
       "reference_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
-      "sha256": "3ef18a5f2b750c56b1723b67d6a5dbaf2f82a7a9ccd5dc347294a72b7cc162d9",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "fc438998d6ac0baaefd2399c8241986c7f845b7f7b1988512dff6d0776752c67",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R20-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r21.md",
       "cumulative_sha256": "6f6e413219a54a595a094bcc8326cf99000fbc4701e7b09b1de8d747c00f4149",
-      "hint_from": "implementation/learner-states/cumulative/R21.ts",
+      "hint_from": "implementation/learner-states/rooms/R21.ts",
+      "hint_scope": "current station or current room only",
       "id": "R21",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R21-blocks",
+        "R21-primary-menu",
+        "R21-primary-assembled",
         "R21-before-after"
       ],
       "next_recipe": "R22",
@@ -398,18 +499,23 @@
       "output": "generated/tutorial/recipes/r21.md",
       "overlay_only": true,
       "reference_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
-      "sha256": "c87415c5a0e40dc4b242f155cfb18879a7b525fb06639b89dabe55ac19ca0c26",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "420db383146edd2696f38246c31229f31ed56e15cfc22365ab601a7a2ab5ceb8",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R21-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r22.md",
       "cumulative_sha256": "af0e5d8f87633e6c1062204ddb34cef2c56e3154579319cc2d24549156624028",
-      "hint_from": "implementation/learner-states/cumulative/R22.ts",
+      "hint_from": "implementation/learner-states/rooms/R22.ts",
+      "hint_scope": "current station or current room only",
       "id": "R22",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R22-blocks",
+        "R22-primary-menu",
+        "R22-primary-assembled",
         "R22-before-after"
       ],
       "next_recipe": "R23",
@@ -417,18 +523,23 @@
       "output": "generated/tutorial/recipes/r22.md",
       "overlay_only": true,
       "reference_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
-      "sha256": "3b767a9aad7ebf9c7292373ca1a8e7b08c9770166fd5cf921ae542af39c9cecb",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "854805ecd7112a1c41826e302f8118d70e8f39195033e81a56f66b5331b127d3",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R22-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r23.md",
       "cumulative_sha256": "255f39e19e3f337f31381a1d0386629a3fd742f53b17247d3e34366f63d0fb38",
-      "hint_from": "implementation/learner-states/cumulative/R23.ts",
+      "hint_from": "implementation/learner-states/rooms/R23.ts",
+      "hint_scope": "current station or current room only",
       "id": "R23",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R23-blocks",
+        "R23-primary-menu",
+        "R23-primary-assembled",
         "R23-before-after"
       ],
       "next_recipe": "R24",
@@ -436,18 +547,25 @@
       "output": "generated/tutorial/recipes/r23.md",
       "overlay_only": true,
       "reference_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
-      "sha256": "96a1648f622b335ac2c5b52fdbee7204864f361ca457c5e9df0faa4de93b946a",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "d78edbf352766eebc4ba64c5aed8387318f7a5576e7c1c60d2ba8159e026ed5d",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R23-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r24.md",
       "cumulative_sha256": "b642b5dda8e510c45b96e1add56abc16278d1107c4fe86017265471546a7e3fa",
-      "hint_from": "implementation/learner-states/cumulative/R24.ts",
+      "hint_from": "implementation/learner-states/rooms/R24.ts",
+      "hint_scope": "current station or current room only",
       "id": "R24",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R24-blocks",
+        "R24-primary-menu",
+        "R24-primary-assembled",
+        "R24-secondary-menu",
+        "R24-secondary-assembled",
         "R24-before-after"
       ],
       "next_recipe": "R25",
@@ -455,18 +573,24 @@
       "output": "generated/tutorial/recipes/r24.md",
       "overlay_only": true,
       "reference_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
-      "sha256": "38fd05289bbc2cdef1c6db0aa1df12b761eabd86655d5dd53edbfc553c15f4c8",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "b468be3728a03c4bac7e47506e0ada7df858009a9a08d1af6cfb333154ccc2db",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R24-primary",
+        "R24-secondary"
+      ]
     },
     {
       "canonical": "copy/recipes/r25.md",
       "cumulative_sha256": "e29255a7738efb22a8580b19feb2c626b2fc275aa741cdaf4bfbe4e68e50cfbb",
-      "hint_from": "implementation/learner-states/cumulative/R25.ts",
+      "hint_from": "implementation/learner-states/rooms/R25.ts",
+      "hint_scope": "current station or current room only",
       "id": "R25",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R25-blocks",
+        "R25-primary-menu",
+        "R25-primary-assembled",
         "R25-before-after"
       ],
       "next_recipe": "R26",
@@ -474,18 +598,23 @@
       "output": "generated/tutorial/recipes/r25.md",
       "overlay_only": true,
       "reference_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
-      "sha256": "53988dd3383659b1e23ec4f0bf5f02edba316ddf7eea6568e88115ef80e3d168",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "9ba511b426db0342c8537e6c07a4eb07591f3599b01eb1ff4c5f9868bbb0fd56",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R25-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r26.md",
       "cumulative_sha256": "734fbae90762fa2cf36da003eeaf1ffdedb224bef6b513f52becc9a321f2f72a",
-      "hint_from": "implementation/learner-states/cumulative/R26.ts",
+      "hint_from": "implementation/learner-states/rooms/R26.ts",
+      "hint_scope": "current station or current room only",
       "id": "R26",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R26-blocks",
+        "R26-primary-menu",
+        "R26-primary-assembled",
         "R26-before-after"
       ],
       "next_recipe": "R27",
@@ -493,18 +622,25 @@
       "output": "generated/tutorial/recipes/r26.md",
       "overlay_only": true,
       "reference_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
-      "sha256": "f484a1b7ef5184f2912766cc5fb354bb3e5bbc8637e6f2c69e75b46f10f2c3d1",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "925963a85813fb627f82eed1a6910f23fd9b3520942f3db96d8f3f3d76ed2010",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R26-primary"
+      ]
     },
     {
       "canonical": "copy/recipes/r27.md",
       "cumulative_sha256": "c4514e142810d2ccf5613b0c339086cacdfe879121f24ba2d38515bc3545eb8d",
-      "hint_from": "implementation/learner-states/cumulative/R27.ts",
+      "hint_from": "implementation/learner-states/rooms/R27.ts",
+      "hint_scope": "current station or current room only",
       "id": "R27",
       "initial_project_resources": false,
       "learner_template": false,
       "media_ids": [
-        "R27-blocks",
+        "R27-primary-menu",
+        "R27-primary-assembled",
+        "R27-secondary-menu",
+        "R27-secondary-assembled",
         "R27-before-after"
       ],
       "next_recipe": null,
@@ -512,10 +648,13 @@
       "output": "generated/tutorial/recipes/r27.md",
       "overlay_only": true,
       "reference_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
-      "sha256": "f89a4c3d59f67e147c429be1f5631ee8a9bcdc2e8e1ffac2ac521f6ccbc4fbb2",
-      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4"
+      "sha256": "1e391219ce1e0f2ca6966e0c6e46f976c3952460c1b855dc4cf995bf859ef612",
+      "supplied_runtime_sha256": "08a1ae3c381380098e6667165804baa10197108edaf6adc24a0da98c6a7613b4",
+      "visual_jobs": [
+        "R27-primary",
+        "R27-secondary"
+      ]
     }
   ],
-  "repository": "mrbrackebusch-code/apocalyptic-lists",
-  "schema": "AL-RECIPE-INDEX-1"
+  "schema": "AL-RECIPE-INDEX-2"
 }
