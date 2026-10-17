@@ -1,6 +1,6 @@
 {
   "game": "apocalyptic-lists",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": "mrbrackebusch-code/apocalyptic-lists",
   "quality_status": "complete-current-release",
   "media": {
@@ -2046,8 +2046,8 @@
     },
     {
       "path": "DEVELOPMENT.md",
-      "bytes": 1722,
-      "sha256": "bc6d02f8d9ee8271c59b2f3d5e11ba38696339584b0be4a769567413a943274f"
+      "bytes": 1855,
+      "sha256": "3b9416fd826984d68b156b3f99e4405dc7fa9d12c927f1d4094a971b175b7af5"
     },
     {
       "path": "FIRST.md",
@@ -2432,7 +2432,7 @@
     {
       "path": "pxt.json",
       "bytes": 1226,
-      "sha256": "07f25787b806c9763861ddb8138d17b81ea9351e5865f16b21e656431b2a64aa"
+      "sha256": "a325fe26445fc0a8f3a57b7e304becd5eff9ab972a1949973622f27b89bc5caa"
     },
     {
       "path": "README.md",
@@ -2441,148 +2441,148 @@
     },
     {
       "path": "recipes/directory.md",
-      "bytes": 745164,
-      "sha256": "24e3e1922440bab9bab06e8f9fe9584697c00cea65ba4dfbc7e84f5c3d7c1dbc"
+      "bytes": 3232,
+      "sha256": "51cbce94ae0409d79ea2126439e53914a3b3a06e2ce1e5bdc0bd022fbaa2c26a"
     },
     {
       "path": "recipes/index.json",
       "bytes": 25920,
-      "sha256": "72a0df6aa9b5b4b81e427d50b45c8afa673a2a757d611483eed049c171c4f4d4"
+      "sha256": "47988262aa57ba92f7c414d7d70aa28fc0998dc96b2a798e846335958b4f838e"
     },
     {
       "path": "recipes/r01.md",
-      "bytes": 744509,
-      "sha256": "12d6658efdff440c3c75c9563a73960b071e64a7c36b212dfef45baca2a1f0ec"
+      "bytes": 2578,
+      "sha256": "8094ceb91f405dbdd652097aab15264141639b0bc18fd9c703b9ffcaefdf6b2c"
     },
     {
       "path": "recipes/r02.md",
-      "bytes": 744188,
-      "sha256": "33a51f5554c1a65f15af99e677cb897d65bfe743a8d392d0abf9d018f8812667"
+      "bytes": 2257,
+      "sha256": "45e8568beb80d2a58813bef5dbc8554e9d10c3ee4402f26ccc44231ceda642d5"
     },
     {
       "path": "recipes/r03.md",
-      "bytes": 744293,
-      "sha256": "e001ec5d11a7fc555b020b506e9ad97d38381b191c631acf8dca04677bbf0fa2"
+      "bytes": 2362,
+      "sha256": "02f6881748a2ae801d3fdb35c8b7cef8957d8fb581681ebf402c9216994f8d7d"
     },
     {
       "path": "recipes/r04.md",
-      "bytes": 743851,
-      "sha256": "5f354b1854116635fad138ecc9b52132d0d0deb9a99b93516d77b75ab610028c"
+      "bytes": 1920,
+      "sha256": "35b3b356825f9228e878681e7dae00acc58fa1e68b2e210af8c786721b443e26"
     },
     {
       "path": "recipes/r05.md",
-      "bytes": 743956,
-      "sha256": "b4857619d927b6a8edf996b2ee1566a4aed87502cc9ba85d8677a28773546b7e"
+      "bytes": 2025,
+      "sha256": "a555a65a1b35f1c06b16dbc886ec0b51ee752a71e58ded6bbd1d3993cf5d33a3"
     },
     {
       "path": "recipes/r06.md",
-      "bytes": 743905,
-      "sha256": "bb2e91bd5cf69c9ca1c9ce2b913ab1096bbdacf27dc3e2a2f4c6f335ee1b75dd"
+      "bytes": 1974,
+      "sha256": "e60553ecfccd9e3509b02c6c021379e27944382f7da81e6750d7f5e8d113af5f"
     },
     {
       "path": "recipes/r07.md",
-      "bytes": 744284,
-      "sha256": "03ab4ef3f9adcbb402eb0f378168c5a90ad24c06b2ab08fae44922d699f01d51"
+      "bytes": 2353,
+      "sha256": "84eaa12247f477e11a87a2bb5b25914a1aab6a7793ead98822c9636360781dc1"
     },
     {
       "path": "recipes/r08.md",
-      "bytes": 744051,
-      "sha256": "9d2fa3118b9af860847ecac31460f80a9d65e1c7892b3582b43d81b4371c9820"
+      "bytes": 2120,
+      "sha256": "14d4bc41754c1be4280111d18ad4f7a05507abefcb60ea508fcf77e28d225efe"
     },
     {
       "path": "recipes/r09.md",
-      "bytes": 743873,
-      "sha256": "d996348ddded3bbdf5e19020479c6038be0901ad8c3f93fd98319ce8bf564e88"
+      "bytes": 1942,
+      "sha256": "4e8a89ef38c9184800aa58f493f79d82968562046849328ae3d6fc05f1d7f2fd"
     },
     {
       "path": "recipes/r10.md",
-      "bytes": 743864,
-      "sha256": "31a6c3b7278e0fe1bd50717ef39d93ae296ba8280a08aee7162c951a6f44f68d"
+      "bytes": 1933,
+      "sha256": "d7f36187ee4d7a945f11ae798dcc64df5abf56756e06c25de98b7045cb64345f"
     },
     {
       "path": "recipes/r11.md",
-      "bytes": 744089,
-      "sha256": "02612132b35bf1632cb38e02ebb3bf3ed5e4bab84307c45cf894318afe282cac"
+      "bytes": 2158,
+      "sha256": "c1e70ee0ea5a372a94c4d84decbad46fe7b4318a81d8d9c873d14290a95200b7"
     },
     {
       "path": "recipes/r12.md",
-      "bytes": 744228,
-      "sha256": "8c0e6feb1a16010625ba2bc0efec7ed38b4b0cdc107130f123d268b81146d1a6"
+      "bytes": 2297,
+      "sha256": "2a69aa73e592708bc29f5cef82faf9be66652e0ddc1b4771029daa3635b0b035"
     },
     {
       "path": "recipes/r13.md",
-      "bytes": 743767,
-      "sha256": "ca3d739c86fc2e586ebab15ecfd3277a0240c9b2910c609f25170114c5eb5e84"
+      "bytes": 1836,
+      "sha256": "42b3ff6f1b0e61abf9a2cb952ff2d8d5582ace4c90542887e43475a6c6a66185"
     },
     {
       "path": "recipes/r14.md",
-      "bytes": 745669,
-      "sha256": "49d07b41882c656cf0202fecf08d50bb9b5abdfd8352409b6604839f02e0217b"
+      "bytes": 3738,
+      "sha256": "fc2bf5b17e54a0c5c0eb972a12509e5cf68ec1b91f1faa0186d4f459879e6828"
     },
     {
       "path": "recipes/r15.md",
-      "bytes": 744312,
-      "sha256": "2b36a38de9da12c967027ad8e431287b9ce8ab70d02b9176c55e414cc3740673"
+      "bytes": 2381,
+      "sha256": "e4234584e6d279fa012913e09a91f8f5eb272dd24199d2410086880d6b18f225"
     },
     {
       "path": "recipes/r16.md",
-      "bytes": 744481,
-      "sha256": "74529d181657719822fb14b4178464e0ddf8cf173b147051d948c4727423b596"
+      "bytes": 2550,
+      "sha256": "9c004dd6b4a02ebb6bf2eeb91c2cf8ec23b1d664a8f49bf1c317cc36efbb9c7e"
     },
     {
       "path": "recipes/r17.md",
-      "bytes": 744523,
-      "sha256": "0b07a24393eb3890996d10ca83309c0187f433540b1a4ecaa3920e295f26ba81"
+      "bytes": 2592,
+      "sha256": "7be6dfa4adf4162f7d154c98b0b9251887e957c3e78c45559323f2dc88af4f54"
     },
     {
       "path": "recipes/r18.md",
-      "bytes": 744895,
-      "sha256": "018028d20da3d801845ff2f7a8af2fa80916e87eb1980030193985fa4e739ca0"
+      "bytes": 2964,
+      "sha256": "4891a7f9e86ff578921b6e953904a0268ffc8a3e2d55c241f640b0f94ca6a094"
     },
     {
       "path": "recipes/r19.md",
-      "bytes": 744147,
-      "sha256": "e3b570ea7ded375a56b887b8f60eaa047e904b084f8afb93b564969e2ef47397"
+      "bytes": 2216,
+      "sha256": "ba75a358eef8d78d058167a35e22bba21e18d6a4066758e0587b88df4eeae80d"
     },
     {
       "path": "recipes/r20.md",
-      "bytes": 743907,
-      "sha256": "eddd0367be952b70ec76ea9b3f458d113f62d16d11b64d07206ec4c9ece01b24"
+      "bytes": 1976,
+      "sha256": "5eec9dd61c2ada20838e58437c588088e713f48f859b53078c7468b06eeeb6c0"
     },
     {
       "path": "recipes/r21.md",
-      "bytes": 744540,
-      "sha256": "638039b17f9610792c820d46d37e4695de0860c549ea1002bc38c2a610d37f99"
+      "bytes": 2609,
+      "sha256": "b260419c75f42528132d5efb864a0983f06f71ddadd34526518b1a288fcd6710"
     },
     {
       "path": "recipes/r22.md",
-      "bytes": 744608,
-      "sha256": "dd06eb9d3dabf1edf6659cc9bfe077f85bb44c94b33e30186e250269e1d22e24"
+      "bytes": 2677,
+      "sha256": "3be0107f1ce846e87359487fb57921ada98da6fe88cc91db88145a3698bfbb82"
     },
     {
       "path": "recipes/r23.md",
-      "bytes": 744203,
-      "sha256": "f7543bbf74461d03da955dcb8c394a2b6dc40b6d306fd939f7cb95ee8b174cd1"
+      "bytes": 2272,
+      "sha256": "9c5321061271d59ac2f33fb01ebf861d6737c456f4a4c0819e8f70421a2cb732"
     },
     {
       "path": "recipes/r24.md",
-      "bytes": 745709,
-      "sha256": "1066ef68bd97254c1f55ac40c53b199a395e4e0159830c0f24ce6c217cde0713"
+      "bytes": 3778,
+      "sha256": "1887ae633f8a3402a23505a940288a24294474c3dae403b5b45653f556a01f04"
     },
     {
       "path": "recipes/r25.md",
-      "bytes": 744609,
-      "sha256": "3ed2fd012967c5ee307ea1d121472430dde0bd29045db6b9ced283512878547a"
+      "bytes": 2678,
+      "sha256": "aaef61d136629d2c24930ab454e166041052ac072353e6e10ddc78fb35e8d94d"
     },
     {
       "path": "recipes/r26.md",
-      "bytes": 745208,
-      "sha256": "a3be255112ef7a74d59e69152164c288bb2f027439b771804cbe3446d34abea5"
+      "bytes": 3277,
+      "sha256": "e1e72a2e97448bb91da45ed8cf4a3f453f9e74145fe8032c1b61e706696374c5"
     },
     {
       "path": "recipes/r27.md",
-      "bytes": 745524,
-      "sha256": "d21e27d3bee73faadd0a57d83233c3018484083ea9de12a1883fcd59b3b795a7"
+      "bytes": 3593,
+      "sha256": "ee53dc994c0513adf48a8ae22ce54016af0b6772f94f8a18cd2b060ea49b146c"
     },
     {
       "path": "setup.md",
@@ -2676,8 +2676,8 @@
     },
     {
       "path": "tools/build.mjs",
-      "bytes": 10223,
-      "sha256": "643c78038db4de235cbe1fd40022dbe00c691ff028dd84615f4e544594fae52d"
+      "bytes": 10237,
+      "sha256": "dbb601458254830fc9c0296ade8ce2d0b05753be18312069b9572918d1ba27f7"
     },
     {
       "path": "tools/generate-room-advice.mjs",
@@ -2716,8 +2716,8 @@
     },
     {
       "path": "tools/visual-recipes.mjs",
-      "bytes": 15115,
-      "sha256": "d6f04bca4d7c5698d5ef5b1adf1cff192e412b5b347329aabc253208e77878b0"
+      "bytes": 15254,
+      "sha256": "5a79909d799ab3661a143e4c5a9929b281954fc4e5a681ec34dd439591ed7dd8"
     }
   ]
 }

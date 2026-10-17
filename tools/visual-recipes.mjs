@@ -90,7 +90,9 @@ export function buildVisualRecipes(opts) {
   // MakeCode treats everything after a tutorialhint heading as hint content.
   // Keep visible result/navigation outside it even if a source token is earlier.
   canonical=canonical.split(/(?=^## )/m).map(section=>{const found=[...section.matchAll(/^#### ~ tutorialhint\n\n```blocks\n[\s\S]*?^```/gm)];assert.ok(found.length<=1,id+' one focused hint per page');if(!found.length)return section;return section.replace(found[0][0],'').trimEnd()+'\n\n'+found[0][0]+'\n\n';}).join('');
-  const render=resolve(canonical).trimEnd()+ghost+'\n```customts\n'+runtime.trimEnd()+'\n```\n';
+  // Existing-project Recipes retain tutorial.custom.ts. Reinstalling the full
+  // runtime at each transition overlaps package reload and background typecheck.
+  const render=resolve(canonical).trimEnd()+ghost+'\n';
   outputs.set(item.recipe_output,render);
   const bindings=media.filter(m=>m.room===id);record.media=bindings;record.cumulative.sha256=hash(cumulative);
   record.native_media_capture=bindings.filter(m=>m.kind!=='game_before_after').every(m=>m.verification_status==='passed')?'captured':'not_run';
@@ -100,7 +102,7 @@ export function buildVisualRecipes(opts) {
  assert.equal(media.length,requiredMedia);assert.equal(new Set(media.map(m=>m.id)).size,requiredMedia);
  let directory='# Apocalyptic Lists Recipes\n\n## Continue your current game\n\nOpen the Recipe for the room you are playing. Your code stays in this project.\n\n';
  for(const room of mapping.rooms)directory+='- [Room '+Number(room.room.slice(1))+' — '+room.title+']('+link(room.room)+')\n';
- directory+='\n```customts\n'+runtime.trimEnd()+'\n```\n';
+ // The directory is also an overlay on the existing project, not a new game.
  outputs.set('generated/tutorial/recipes/directory.md',directory);
  outputs.set('generated/tutorial/recipes/index.json',stable({schema:'AL-RECIPE-INDEX-2',existing_project_overlay:true,recipes:index}));
  outputs.set('generated/tutorial/setup.md',resolve(read('copy/setup.md')));

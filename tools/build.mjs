@@ -76,7 +76,7 @@ function run(o){
   if(/^```(?:template|customts|assetjson|package)\b/m.test(setup))throw Error('Starter copy cannot own runtime fences');
   const tutorial=setup.trimEnd()+'\n\n```template\n'+learnerMain.trimEnd()+'\n```\n\n```customts\n'+supplied.trimEnd()+'\n```\n';
   const firstRecipe=fs.readFileSync(safe(o.gameRoot,'generated/tutorial/recipes/r01.md'),'utf8');
-  const first=firstRecipe.replace(/\n```customts\n/,'\n```template\n'+learnerMain.trimEnd()+'\n```\n\n```customts\n');
+  const first=firstRecipe.trimEnd()+'\n\n```template\n'+learnerMain.trimEnd()+'\n```\n\n```customts\n'+supplied.trimEnd()+'\n```\n';
   if((first.match(/^```template$/gm)||[]).length!==1)throw Error('FIRST must have one blank learner template');
   const tutorialFiles=['main.ts','README.md','FIRST.md','recipes/directory.md',...recipes.recipes.map(r=>'recipes/'+r.id.toLowerCase()+'.md')];
   outputs.set('generated/tutorial/main.ts',learnerMain);

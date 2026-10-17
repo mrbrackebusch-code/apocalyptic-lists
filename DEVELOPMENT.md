@@ -1,6 +1,6 @@
 # Maintain Apocalyptic Lists
 
-The native Arcade tutorial starts directly from FIRST.md, or from the README.md introduction. All 27 Recipes and their directory carry the current supplied runtime, preserve the current learner program, and have no starter template. FIRST and README alone install a blank template.
+The native Arcade tutorial starts directly from FIRST.md, or from the README.md introduction. FIRST and README install the supplied runtime and a blank starter. All 27 Recipes and their directory preserve the existing runtime and current learner program; they contain no runtime or starter template. Reinstalling tutorial.custom.ts during every Recipe transition caused overlapping package reload/typecheck errors.
 
 Canonical supplied code is under implementation/. npm build recreates FIRST, README, the full Recipe route and the supplied runtime together. Learner references are under implementation/learner-states/ and are never installed as hidden solutions. Copy is under copy/, shared contracts/data under shared/, and actual instruction/gameplay media under assets/.
 
