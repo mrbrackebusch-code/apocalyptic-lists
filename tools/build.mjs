@@ -5,7 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {sourceOrder,suppliedRuntime} from './project-source.mjs';
+import {sourceOrder,suppliedRuntime,sourcePath} from './project-source.mjs';
 const defaultRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const digest=x=>crypto.createHash('sha256').update(x).digest('hex');
 const sort=x=>Array.isArray(x)?x.map(sort):(x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sort(x[k])])):x);
@@ -34,10 +34,10 @@ function run(o){
  // Only comments and blank lines are accepted; generated runtime must not hide a reference solution.
  if(withoutComments(learnerMain).trim()!=='')throw Error('Canonical learner main.ts must be comment-only; do not ship a solution or registration');
  const files={},missing=[],sourceRecords=[];
- for(const rel of order){const sourcePath=rel==='contracts.ts'?safe(o.commonRoot,'contracts.ts'):safe(o.gameRoot,'implementation/'+rel);
-  if(!fs.existsSync(sourcePath)){missing.push('implementation/'+rel);continue;}
-  const value=fs.readFileSync(sourcePath,'utf8').replace(/\r\n/g,'\n');files[rel]=value;
-  sourceRecords.push({file:rel,source:rel==='contracts.ts'?'frozen common input':'package-owned implementation',bytes:Buffer.byteLength(value),sha256:digest(value)});
+ for(const rel of order){const inputPath=sourcePath(o.gameRoot,o.commonRoot,rel);
+  if(!fs.existsSync(inputPath)){missing.push('implementation/'+rel);continue;}
+  const value=fs.readFileSync(inputPath,'utf8').replace(/\r\n/g,'\n');files[rel]=value;
+  sourceRecords.push({file:rel,source:path.relative(o.gameRoot,inputPath).replace(/\\/g,'/'),bytes:Buffer.byteLength(value),sha256:digest(value)});
  }
  // A normal integrated build must reject missing peer inputs before generating anything.
  // Partial mode is the explicitly authorized authoring-only path.

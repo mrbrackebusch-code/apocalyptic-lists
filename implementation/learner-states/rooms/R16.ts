@@ -1,14 +1,14 @@
 // R16 isolated REFERENCE only. Not runtime starter or accepted-program cache.
 apocalypse.onInteract(apocTypes.Room.R16, apocTypes.Station.Primary, function () {
-    let sourceMoves: string[] = apocalypse.sourceMoves()
-    let allyMoves: string[] = []
-    allyMoves = []
-    for (let move of sourceMoves) {
-        if (move == "Strike") {
-            allyMoves.push("Ward")
+    let reserveMoves: string[] = apocalypse.sourceMoves()
+    let ourMoves: string[] = []
+    ourMoves = []
+    for (let move of reserveMoves) {
+        if (move == "Attack") {
+            ourMoves.push("Shield")
         } else {
-            allyMoves.push("Strike")
+            ourMoves.push("Attack")
         }
     }
-    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
+    apocalypse.setMoves(apocTypes.Side.Ally, ourMoves)
 })

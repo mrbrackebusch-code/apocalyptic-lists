@@ -1,11 +1,11 @@
 // R25 isolated REFERENCE only. Not runtime starter or accepted-program cache.
 apocalypse.onInteract(apocTypes.Room.R25, apocTypes.Station.Primary, function () {
-    let allyMoves: string[] = apocalypse.moves(apocTypes.Side.Ally)
+    let ourMoves: string[] = apocalypse.moves(apocTypes.Side.Ally)
     let enemyMoves: string[] = apocalypse.moves(apocTypes.Side.Enemy)
-    for (let i = 0; i <= allyMoves.length - 1; i++) {
-        if (allyMoves[i] == "Wait" && enemyMoves[i] == "Strike") {
-            allyMoves[i] = "Ward"
+    for (let index = 0; index <= ourMoves.length - 1; index++) {
+        if (ourMoves[index] == "Wait" && enemyMoves[index] == "Attack") {
+            ourMoves[index] = "Shield"
         }
     }
-    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
+    apocalypse.setMoves(apocTypes.Side.Ally, ourMoves)
 })

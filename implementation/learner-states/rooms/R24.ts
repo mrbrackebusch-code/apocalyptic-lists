@@ -6,10 +6,10 @@ apocalypse.onInteract(apocTypes.Room.R24, apocTypes.Station.Primary, function ()
 })
 
 apocalypse.onInteract(apocTypes.Room.R24, apocTypes.Station.Secondary, function () {
-    let enemyMoves: string[] = apocalypse.moves(apocTypes.Side.Enemy)
-    let shifted = apocalypse.markedIndex()
-    if (shifted >= 0 && shifted < enemyMoves.length) {
-        enemyMoves[shifted] = "Wait"
-        apocalypse.setMoves(apocTypes.Side.Enemy, enemyMoves)
+    let shiftedMoves: string[] = apocalypse.moves(apocTypes.Side.Enemy)
+    let markedIndex = apocalypse.markedIndex()
+    if (markedIndex >= 0 && markedIndex < shiftedMoves.length) {
+        shiftedMoves[markedIndex] = "Wait"
+        apocalypse.setMoves(apocTypes.Side.Enemy, shiftedMoves)
     }
 })

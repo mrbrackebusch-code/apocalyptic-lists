@@ -1,0 +1,2803 @@
+{
+  "schema": "AL-INSTRUCTION-SOURCE-AUDIT-1",
+  "version": "0.6.0",
+  "authority": "design/LEARNER_LANGUAGE_v0.6.0.json",
+  "review_class": "AGENT_SOURCE_AND_EDITORIAL_REVIEW",
+  "human_source_reuse": "copy/SOURCE_LINEAGE.md: arrays intro 1-104, strings 30-32/74-106 and Sprite-reference passages; complete-example owner override. Changed terms are literal game-adaptation substitutions.",
+  "checks": {
+    "rooms": 27,
+    "jobs": 30,
+    "construction_pages": 30,
+    "play_pages": 27,
+    "algorithm_normalization": "Within each callback, local identifiers canonicalized in declaration order, excluding property accesses; friendly move literals reverse-mapped; whitespace removed; exact equality required.",
+    "all_normalized_sources_equal": true,
+    "runtime_or_native_compile_claim": false,
+    "fresh_native_geometry_and_readability": "pending integration capture/review",
+    "marker_and_page_scope": "30 current-job construction hints +27 current-room play hints;27 Recipes/57 pages; no cumulative hint tokens",
+    "normalized_room_sources": 27,
+    "native_selector_spec": "ExactOP/BOOL variants from retained actual nativeXML; configure fields separate from honest palette defaults; current native geometry/target resolution pending.",
+    "construction_group_order": "Read current lists → perform the source operation/guard/loop → send changed lists; returned enemy/number/move stays with its getter before use. R14 Right construction then Left then play; R24/R27 Left then Right then play. Native composition still must preserve exact source order.",
+    "empty_array_native_selector": "Capture integration: actual lists_create_with mutation items=0 required for explicit empty-array examples; no first-type array-of-two fallback. Source and copy unchanged.",
+    "loop_setup_integration": "Anchored to actual native loop VAR reporter/field. If its name differs: The loop creates this variable. Name it NAME. If already correct: The loop creates this variable; reuse it here. No manual variable-creation dialog for loop-provided variables.",
+    "r01_setter_cue": "Root-requested Choose ourMoves cue anchors the actual unmodified native variables_set VAR dropdown; metadata only."
+  },
+  "sources": [
+    {
+      "room": "R01",
+      "before_sha256": "ef1d33f42e0ac2d87f226f96087cfcd43c420bd9d83a54878e7d277a1b55a49a",
+      "after_sha256": "2ef333b71728814e940ed4f7312fec69edeeddb41ae9327f9282d1aa51086756",
+      "normalized_before_sha256": "9230da533e44990b4e7875fad0d7a7372049ab715e0eeb64e55f8754eb3428e7",
+      "normalized_after_sha256": "9230da533e44990b4e7875fad0d7a7372049ab715e0eeb64e55f8754eb3428e7",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R02",
+      "before_sha256": "e4d8536a31fe466a285f2ac2e7b3c4cd487018a961ba9d2cf2e3848396e6f571",
+      "after_sha256": "74fc2fd5d475155cd1aed8776560e49ff46ccb0640de486614ed07a67c5bfb7d",
+      "normalized_before_sha256": "172116a23e70c4214b00f2d249c7622421d1fee7745d8168b8199abea3a2ed8c",
+      "normalized_after_sha256": "172116a23e70c4214b00f2d249c7622421d1fee7745d8168b8199abea3a2ed8c",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R03",
+      "before_sha256": "6d8ec58a4f09b724e3ceb438fe1b8aaaa751a2870b92b67a6ab3adb9b410f1b5",
+      "after_sha256": "98f6692da044e4e9ba0bf2f2af9b5342988ef65df5f537d6e23562414a125994",
+      "normalized_before_sha256": "6b8ea04f16867a6097f53914a85d4351c01b1f1f96e35448cf95883ed8c72752",
+      "normalized_after_sha256": "6b8ea04f16867a6097f53914a85d4351c01b1f1f96e35448cf95883ed8c72752",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R04",
+      "before_sha256": "64bf61b9c435bfd7303d8643225f34ffb88cb3f96f1d52ce2a211a73b2442124",
+      "after_sha256": "888ecbfc23eb19a09604c1c3537cba487f39b1068c7f18e4fceef539ae644009",
+      "normalized_before_sha256": "85582947c1655c2811898abbc386d377d1d700449e516e42ddd8062ccd5c426e",
+      "normalized_after_sha256": "85582947c1655c2811898abbc386d377d1d700449e516e42ddd8062ccd5c426e",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R05",
+      "before_sha256": "b5682f384319c0589ce4b34cd9d17b5d1b02f44374ff1ed69a4559be2783f7d4",
+      "after_sha256": "e2b3d653c56f77c5e4fd0e97e7bea473954806248d81cd235dbb2d4937205e48",
+      "normalized_before_sha256": "984d3b1abf7fbe1ab23d3faa68d80c115725e86bfa5c0019dac3ec34d45a5e8f",
+      "normalized_after_sha256": "984d3b1abf7fbe1ab23d3faa68d80c115725e86bfa5c0019dac3ec34d45a5e8f",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R06",
+      "before_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+      "after_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+      "normalized_before_sha256": "bea678c83712578613b4b3e79d8cb34e65b31fc2ab2f02950fcb4dcd4030c701",
+      "normalized_after_sha256": "bea678c83712578613b4b3e79d8cb34e65b31fc2ab2f02950fcb4dcd4030c701",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R07",
+      "before_sha256": "d23fa45d0fe17fcbc82670b95fe523d56f6b6d0fcc6cce4aa67b4ffa4f00c99d",
+      "after_sha256": "a595acf508d52f10d210a903df02635c8ebcb4ff8b6663dad445ab2c06fa1aca",
+      "normalized_before_sha256": "6b8e1be99c4b2f3d35d4c14ec956779dc93521c221b39c3578e88a163b46deb9",
+      "normalized_after_sha256": "6b8e1be99c4b2f3d35d4c14ec956779dc93521c221b39c3578e88a163b46deb9",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R08",
+      "before_sha256": "5e61c04da90aec74f7f99621ec3cb44896ec3f7fe9c720a605646d57d52964df",
+      "after_sha256": "82438b32e294773b5f8f64d4f36920e6888b39b8e522c747724c01d41b90d5db",
+      "normalized_before_sha256": "a4a7e57d664dfb4dd9a7bd2842e4eafd778f93158fe1e164d89da47acf7fce15",
+      "normalized_after_sha256": "a4a7e57d664dfb4dd9a7bd2842e4eafd778f93158fe1e164d89da47acf7fce15",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R09",
+      "before_sha256": "009191c80b60b1280b3a500e00a0fc8164cd0a9bfa530fcdd66c960e83bf386d",
+      "after_sha256": "4a6b348cff721b81face8007cf714f7d2dc183bce2cbd13b73d9442ea69b423f",
+      "normalized_before_sha256": "b9ed3df388a47c4166eb44d6467a48a9116915d002a02ac4c9cc0367c24ee5b3",
+      "normalized_after_sha256": "b9ed3df388a47c4166eb44d6467a48a9116915d002a02ac4c9cc0367c24ee5b3",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R10",
+      "before_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+      "after_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+      "normalized_before_sha256": "7c2de86fa438faaa4d98f278baaf4b548f58523db4bed8baa5b838df9a885f5f",
+      "normalized_after_sha256": "7c2de86fa438faaa4d98f278baaf4b548f58523db4bed8baa5b838df9a885f5f",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R11",
+      "before_sha256": "c5906aaedfec1b0cd6f176c5ae8a555a6a6977a33fea3dcd821c2c35dc9e54af",
+      "after_sha256": "7998c1a036422b694df0ea9fc2c1283bae3a664485166ee43d784b914c0b0bfe",
+      "normalized_before_sha256": "8dca7af3acd82a0216bfea453309aa21beff43ef9aa95a4aef6c5e72646744b4",
+      "normalized_after_sha256": "8dca7af3acd82a0216bfea453309aa21beff43ef9aa95a4aef6c5e72646744b4",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R12",
+      "before_sha256": "0e807499c753ae8e410f91c932c76c62c16ad59c2fbc3adf72c3f0e431337d01",
+      "after_sha256": "3213aacf6a147071bb5b48c88d89c49713611738f2a28589de35205695a25ba6",
+      "normalized_before_sha256": "41349f0c7585f8ac825de9d55d80aede3b98a093b3625db17760e4bdfaadbcf1",
+      "normalized_after_sha256": "41349f0c7585f8ac825de9d55d80aede3b98a093b3625db17760e4bdfaadbcf1",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R13",
+      "before_sha256": "b87e77db4a9989de6d01833231a1f43d4e45e8b07781d0540c4f6e6f8527ddef",
+      "after_sha256": "1d24a6b55c7e1277e8252bc1933905acd6bd764599609e86cd4edcf012061fa5",
+      "normalized_before_sha256": "e7b2a3e36a9e5c254fe086e3bb5cb9c4f641d62b08c9365911b9284ac827826c",
+      "normalized_after_sha256": "e7b2a3e36a9e5c254fe086e3bb5cb9c4f641d62b08c9365911b9284ac827826c",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R14",
+      "before_sha256": "7279775e877d4ae9472d39d853d6b4bc8ca4d679f8eb783984a243666019d58e",
+      "after_sha256": "2b21f615c6a4c0920a09bd19626f3d16421f8b4947de93f07eb927d816dcfd52",
+      "normalized_before_sha256": "c880ea3ff1b5ab94f304fcaf043af507b619aa19c9ff0e08d2e2317b5c859a06",
+      "normalized_after_sha256": "c880ea3ff1b5ab94f304fcaf043af507b619aa19c9ff0e08d2e2317b5c859a06",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R15",
+      "before_sha256": "5663be64bb986f8a369bab39d21d5107cd2719ce84f60b4d67fce887e9d27157",
+      "after_sha256": "db75615a8246a50c71f94bbf6d8eeb58af18e0d5e1e52d69c36155374d70f228",
+      "normalized_before_sha256": "1cbcd78b97611bb4e812d666e64348c8882246cdc0afeeb18c2a1ccdc29de81f",
+      "normalized_after_sha256": "1cbcd78b97611bb4e812d666e64348c8882246cdc0afeeb18c2a1ccdc29de81f",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R16",
+      "before_sha256": "f995b329fac49aa70ceb4313627a57f35f45cc90fd20fce3bd1435b955d300b6",
+      "after_sha256": "398be7b8407fcaed6ed98fcfb9c9d96f51fdfd902106f074855f3d4c0833ab38",
+      "normalized_before_sha256": "2db321491abe8029d02892b08128c94e9301d7a0ff5f314e26807a04118db62c",
+      "normalized_after_sha256": "2db321491abe8029d02892b08128c94e9301d7a0ff5f314e26807a04118db62c",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R17",
+      "before_sha256": "f154ea8f533a05fee51c34c92475fa986f6c47816da1732bab7c2bb1b62d053e",
+      "after_sha256": "072149dfca26161096633d6eac6312b18fa1d95fbb1a18bc31d573fdf985c82c",
+      "normalized_before_sha256": "5253d5e9dd250868f0cf247c9b6348fa3972a921b90efbacbcec870fd128f129",
+      "normalized_after_sha256": "5253d5e9dd250868f0cf247c9b6348fa3972a921b90efbacbcec870fd128f129",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R18",
+      "before_sha256": "2741416c9afdb2744fba089b2d0f03b16f581988b7d0d85840c54aa137065473",
+      "after_sha256": "5975d8c1bd9e26cb077d2befcccb20344c63a6d71e3951e5d1902194a8205e63",
+      "normalized_before_sha256": "3dddee0eef20fdc6bb3162e0c44557fcc8e09f1656107a057266165206a85882",
+      "normalized_after_sha256": "3dddee0eef20fdc6bb3162e0c44557fcc8e09f1656107a057266165206a85882",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R19",
+      "before_sha256": "ca2d287cd77935ff6b5ac781ea5367765ee1fce92c6f32663fcb4ce42226c94e",
+      "after_sha256": "45016898be206f5b91e7e732c1e6608d4f05b1592c2d87a8228143e1376cfb1c",
+      "normalized_before_sha256": "77cb8be930516d6567ee9b5fb27a1454cc3d2fdaa0fe2b74b65c8f2d145f2ee6",
+      "normalized_after_sha256": "77cb8be930516d6567ee9b5fb27a1454cc3d2fdaa0fe2b74b65c8f2d145f2ee6",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R20",
+      "before_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+      "after_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+      "normalized_before_sha256": "8f14855bc5428fd8d8cc9cd33279f71f74b33cdd6c1ac2e9ada2a964cc8baad1",
+      "normalized_after_sha256": "8f14855bc5428fd8d8cc9cd33279f71f74b33cdd6c1ac2e9ada2a964cc8baad1",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R21",
+      "before_sha256": "29de751ff0917ac1a1885ef2a7344cc9d25adee55220f2bddfc982e206791c62",
+      "after_sha256": "e70f43ad5349a15f7d83ae30637ae910644a734acbc15195eca223cdc38cde62",
+      "normalized_before_sha256": "02b0543fcfdb870cc0d04390108d2f9018fc8a496872a3ffe9efd3cb597676ec",
+      "normalized_after_sha256": "02b0543fcfdb870cc0d04390108d2f9018fc8a496872a3ffe9efd3cb597676ec",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R22",
+      "before_sha256": "0de4a47d32095695cc310e7520524fd98144ca323eb84f7aa4d8c21c31e959a1",
+      "after_sha256": "1e22fa6f60c89709886af884a80a805880f478eaaeccb7f129f2e4bc0919c155",
+      "normalized_before_sha256": "69f3efb05a8c33d92f10c5a7fa6e1ccb6a314065064502294a4efa1584aa233e",
+      "normalized_after_sha256": "69f3efb05a8c33d92f10c5a7fa6e1ccb6a314065064502294a4efa1584aa233e",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R23",
+      "before_sha256": "9a5e16de4ed78f899c1d15bac6d8f86a1d852ae2c6680924eb53727f5b85c205",
+      "after_sha256": "c9cef2cd322bba0e550ec3ffbd6c810f6e165ae2917859e20271982d0c371e03",
+      "normalized_before_sha256": "bf4b9f6d583a5cff163a6c44852f0c17f01b01eebbc4b229947302ca201a951b",
+      "normalized_after_sha256": "bf4b9f6d583a5cff163a6c44852f0c17f01b01eebbc4b229947302ca201a951b",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R24",
+      "before_sha256": "af8c7d64a1dfd9d2d5d8e90f7571b087ff8ff1e048153c195c84f719a58386b8",
+      "after_sha256": "401260de46e49ba45e905ec2b2e188f17cf044e90205031357cc42182c1ad870",
+      "normalized_before_sha256": "fa433c6d493191592f4bd6621b44ad6e6cf6ea741f09f49eae6fd984ae411df6",
+      "normalized_after_sha256": "fa433c6d493191592f4bd6621b44ad6e6cf6ea741f09f49eae6fd984ae411df6",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R25",
+      "before_sha256": "02785fe4528dbc162d78a7538b8417ec2916f538d683c7ca4961ddb6222f8a1e",
+      "after_sha256": "590d9cb18f2a8e8582d0dd7e7eb02f25fd2d56e04a06b8e5b31101539655365e",
+      "normalized_before_sha256": "1c209ca147ffd4a8f416d2b72ce2327e3ef537248a742f3c2e11d2af990d6796",
+      "normalized_after_sha256": "1c209ca147ffd4a8f416d2b72ce2327e3ef537248a742f3c2e11d2af990d6796",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R26",
+      "before_sha256": "3cdfd774909c6f4fbadb09a6fb005dc869d2563863a32820920e9d2671d54477",
+      "after_sha256": "60992a5acf0bd173a30a8ac212ae752ea81d0b3656040bbf596910bf75b9f524",
+      "normalized_before_sha256": "26c52fb8418b6b155d67a25a1cb96884691be60debd1eaec6e8cd280e43216c5",
+      "normalized_after_sha256": "26c52fb8418b6b155d67a25a1cb96884691be60debd1eaec6e8cd280e43216c5",
+      "control_flow_and_list_operations_preserved": true
+    },
+    {
+      "room": "R27",
+      "before_sha256": "9c7f174eb2f739ae34170100099a7c58e2fb4f3be24bfa6b935dc8e6fe4ba961",
+      "after_sha256": "7646b4c9fee12d4d52a2324de1cdf99c2be09eae2b31fa43d61900e55b4a0454",
+      "normalized_before_sha256": "0440a72063da765df92cd28cb4d5830c9aa0a636208ddbecb67b6bb6b279ff81",
+      "normalized_after_sha256": "0440a72063da765df92cd28cb4d5830c9aa0a636208ddbecb67b6bb6b279ff81",
+      "control_flow_and_list_operations_preserved": true
+    }
+  ],
+  "jobs": [
+    {
+      "id": "R01-primary",
+      "room_display": "room 1",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "creation": "Provided by the loop: index.",
+          "purpose": "The loop’s current index.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it index."
+        }
+      ],
+      "source_sha256": "2ef333b71728814e940ed4f7312fec69edeeddb41ae9327f9282d1aa51086756",
+      "focused_sha256": "e80587156d8fda73b7c1cf4dab35a36e596d83f3d5998d19b2809d464e5a6f51",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R01",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "variables_set",
+          "configure_fields": {
+            "VAR": "ourMoves"
+          }
+        },
+        {
+          "type": "lists_create_with",
+          "mutation": {
+            "items": 0
+          }
+        },
+        {
+          "type": "math_arithmetic",
+          "fields": {
+            "OP": "MINUS"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for": "Add one Wait per repeat; this room supplies the count."
+      },
+      "callouts": [
+        {
+          "text": "This room tells you how many Waits to add first. Zero means none.",
+          "target": {
+            "block_type": "al_number_hint",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "The loop includes its end: count minus 1 gives exactly that many Waits.",
+          "target": {
+            "block_type": "math_arithmetic",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "MINUS"
+            },
+            "field": "OP"
+          }
+        },
+        {
+          "text": "Send our finished move list to the room.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R02-primary",
+      "room_display": "room 2",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemies",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemies; reuse it if already created.",
+          "purpose": "The enemy list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemies. Reuse it if it exists."
+        },
+        {
+          "name": "markedIndex",
+          "type": "number",
+          "creation": "Make a Variable: markedIndex; reuse it if already created.",
+          "purpose": "The index marked by this altar.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable markedIndex. Reuse it if it exists."
+        },
+        {
+          "name": "enemyToFreeze",
+          "type": "Sprite",
+          "creation": "Make a Variable: enemyToFreeze; reuse it if already created.",
+          "purpose": "The actual enemy to freeze.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyToFreeze. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "74fc2fd5d475155cd1aed8776560e49ff46ccb0640de486614ed07a67c5bfb7d",
+      "focused_sha256": "285c8eae32c52991e131fc1172669a97595fb82bd4a4305e037b1cd13421fee2",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R02",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LT"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Use the marked index only when it is inside enemies.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Keep the actual enemy retrieved at the marked index.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "enemyToFreeze",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "VAR": "enemyToFreeze"
+            }
+          }
+        },
+        {
+          "text": "Freeze that enemy; keep it in the enemy list.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "enemyToFreeze",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R03-primary",
+      "room_display": "room 3",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "markedIndex",
+          "type": "number",
+          "creation": "Make a Variable: markedIndex; reuse it if already created.",
+          "purpose": "The index marked by this altar.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable markedIndex. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "98f6692da044e4e9ba0bf2f2af9b5342988ef65df5f537d6e23562414a125994",
+      "focused_sha256": "8952a9984323382d51ff3a289880202dd39ba81ed261fe88ceee07f0cf20503f",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R03",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LT"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Replace only an index inside enemyMoves.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "The altar marks this index; selecting a moment does not change it.",
+          "target": {
+            "block_type": "al_marked_index",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Replace the marked Attack with Wait. No entries shift.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R04-primary",
+      "room_display": "room 4",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "888ecbfc23eb19a09604c1c3537cba487f39b1068c7f18e4fceef539ae644009",
+      "focused_sha256": "72020fb928741dab2704cb838bdff1c584b84a88f1fdf021e8003e7400b78f4c",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R04",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Add Attack after our last move; keep the old entries.",
+          "target": {
+            "block_type": "array_push",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Only moves change. Powers and targets keep their places.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R05-primary",
+      "room_display": "room 5",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "e2b3d653c56f77c5e4fd0e97e7bea473954806248d81cd235dbb2d4937205e48",
+      "focused_sha256": "a4a60a383ced1ff15db6edab0ddc9afa1adb99c8f4048b00a38697a4d9669bdc",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R05",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Insert Shield here. This move and later moves shift one place later.",
+          "target": {
+            "block_type": "array_insertAt",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Send only moves; powers and targets do not shift with them.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R06-primary",
+      "room_display": "room 6",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "39b68707a1441bfbe895aecbdc641e1bf7fb5f69b69e51519886664b783d4981",
+      "focused_sha256": "6b837fb33e3c4f815247e66625a1866d91f0ba3e66b08fa573c14029aa8e3aba",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R06",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Add Wait first. Every old enemy move shifts one place later.",
+          "target": {
+            "block_type": "array_unshift_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Only moves shift. Enemy powers and targets stay put.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R07-primary",
+      "room_display": "room 7",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "markedIndex",
+          "type": "number",
+          "creation": "Make a Variable: markedIndex; reuse it if already created.",
+          "purpose": "The index marked by this altar.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable markedIndex. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "a595acf508d52f10d210a903df02635c8ebcb4ff8b6663dad445ab2c06fa1aca",
+      "focused_sha256": "fa4413a7a64769082327a63a056a9cd6287a5c8f6fab1914fb3dc315175f3273",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R07",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LT"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Remove only an index inside enemyMoves.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Remove this marked move. Later moves close the gap.",
+          "target": {
+            "block_type": "array_removeat_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Use the removal statement: we do not need the removed move back.",
+          "target": {
+            "block_type": "array_removeat_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R08-primary",
+      "room_display": "room 8",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "82438b32e294773b5f8f64d4f36920e6888b39b8e522c747724c01d41b90d5db",
+      "focused_sha256": "67a829e21cec4a4d6c8ebde4d63ad23008d7d51f1a2298bb535870b5ddb67b3a",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R08",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GT"
+          }
+        },
+        {
+          "type": "math_arithmetic",
+          "fields": {
+            "OP": "MINUS"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Only repair the last move when ourMoves is not empty."
+      },
+      "callouts": [
+        {
+          "text": "Indices start at 0, so length minus 1 is the last index.",
+          "target": {
+            "block_type": "math_arithmetic",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "MINUS"
+            },
+            "field": "OP"
+          }
+        },
+        {
+          "text": "Replace the last move with Attack; keep the list length.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R09-primary",
+      "room_display": "room 9",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "4a6b348cff721b81face8007cf714f7d2dc183bce2cbd13b73d9442ea69b423f",
+      "focused_sha256": "1ebb155700ed448b286ff8e8d015f7fd66dd667603c9087d5f8fb9d1311a0976",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R09",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Remove our first move. Later moves close the gap.",
+          "target": {
+            "block_type": "array_shift_statement",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Only moves shift. Our powers and targets stay put.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R10-primary",
+      "room_display": "room 10",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "9f107780d0c092ab93d8be9e9a8ba9ec64c9ccd43a17a976a19f349cc4d9e592",
+      "focused_sha256": "83ded752b28885d0b9916cc5d37c26b28fca524fe7e0626701051675ba742ff6",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R10",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Remove the last enemy move; do not replace it with Wait.",
+          "target": {
+            "block_type": "array_pop_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Send the shorter move list. Powers and targets stay put.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R11-primary",
+      "room_display": "room 11",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemies",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemies; reuse it if already created.",
+          "purpose": "The enemy list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemies. Reuse it if it exists."
+        },
+        {
+          "name": "removedEnemy",
+          "type": "Sprite",
+          "creation": "Make a Variable: removedEnemy; reuse it if already created.",
+          "purpose": "The enemy removed from the list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable removedEnemy. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "7998c1a036422b694df0ea9fc2c1283bae3a664485166ee43d784b914c0b0bfe",
+      "focused_sha256": "6c03a371bcdfd6a8eff1d1e68d4c606da2826dea4239d8b3152e794e7515f867",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R11",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GT"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Only remove an enemy when enemies is not empty."
+      },
+      "callouts": [
+        {
+          "text": "Keep the enemy returned by removing the first entry.",
+          "target": {
+            "block_type": "array_shift",
+            "label": "enemies",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Banish that same enemy. Removing its list entry alone does not.",
+          "target": {
+            "block_type": "al_banish",
+            "label": "removedEnemy",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R12-primary",
+      "room_display": "room 12",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "shieldIndex",
+          "type": "number",
+          "creation": "Make a Variable: shieldIndex; reuse it if already created.",
+          "purpose": "The first Shield’s index, or −1.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable shieldIndex. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "3213aacf6a147071bb5b48c88d89c49713611738f2a28589de35205695a25ba6",
+      "focused_sha256": "e1c3b85b57b834ac69ee51c891d24fa3132232d6fed9c0980ac41ca1aeabb244",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R12",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Only replace a Shield when the search returns index 0 or more."
+      },
+      "callouts": [
+        {
+          "text": "Find the first Shield; its index can differ between setups.",
+          "target": {
+            "block_type": "array_indexof",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "No match returns −1. Change an entry only when the index is 0 or more.",
+          "target": {
+            "block_type": "logic_compare",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "GTE"
+            },
+            "field": "OP"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R13-primary",
+      "room_display": "room 13",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemies",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemies; reuse it if already created.",
+          "purpose": "The enemy list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemies. Reuse it if it exists."
+        },
+        {
+          "name": "enemy",
+          "type": "Sprite",
+          "creation": "Provided by the loop: enemy.",
+          "purpose": "The enemy provided by this loop.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it enemy."
+        }
+      ],
+      "source_sha256": "1d24a6b55c7e1277e8252bc1933905acd6bd764599609e86cd4edcf012061fa5",
+      "focused_sha256": "7eaf0716a3a4bbcbf8f8126e9d40d4fc1b639e2a08d795498730f1d2561622b9",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R13",
+            "station": "apocTypes.Station.Primary"
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for_of": "Take each enemy from enemies, one at a time."
+      },
+      "callouts": [
+        {
+          "text": "The loop provides enemy: each enemy in the list, in turn.",
+          "target": {
+            "block_type": "pxt_controls_for_of",
+            "label": "enemy",
+            "occurrence": 1,
+            "socket": "VAR",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Freeze this enemy, then let the loop take the next one.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "enemy",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R14-secondary",
+      "room_display": "room 14",
+      "station_display": "Right altar",
+      "variables": [
+        {
+          "name": "rolledPowers",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable rolledPowers. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "2b21f615c6a4c0920a09bd19626f3d16421f8b4947de93f07eb927d816dcfd52",
+      "focused_sha256": "4fb8e042f0a3d906f6616cbf80c23a40e480115ea34aa9b5a2e1faad90133287",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R14",
+            "station": "apocTypes.Station.Secondary"
+          }
+        },
+        {
+          "type": "al_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "al_set_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Index 0 is the first power. Only this entry changes.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "rolledPowers",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Roll from 4 through 9. Roll again if this setup needs a higher power.",
+          "target": {
+            "block_type": "device_random",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R14-primary",
+      "room_display": "room 14",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourPowers",
+          "type": "number[]",
+          "creation": "Make a Variable: ourPowers; reuse it if already created.",
+          "purpose": "Our team’s power list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourPowers. Reuse it if it exists."
+        },
+        {
+          "name": "savedPower",
+          "type": "number",
+          "creation": "Make a Variable: savedPower; reuse it if already created.",
+          "purpose": "The first power, kept safe during the swap.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable savedPower. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "2b21f615c6a4c0920a09bd19626f3d16421f8b4947de93f07eb927d816dcfd52",
+      "focused_sha256": "4e46f0e4b424cf4b942f8fd377eb12476e256b3efea367f6b931420c24528970",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R14",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "al_set_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Save the first power before overwriting its place.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "savedPower",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "VAR": "savedPower"
+            }
+          }
+        },
+        {
+          "text": "Copy the fourth power into the first place.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "ourPowers",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Put the saved first power into the fourth place.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "ourPowers",
+            "occurrence": 2,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R15-primary",
+      "room_display": "room 15",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "creation": "Provided by the loop: index.",
+          "purpose": "The loop’s current index.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it index."
+        }
+      ],
+      "source_sha256": "db75615a8246a50c71f94bbf6d8eeb58af18e0d5e1e52d69c36155374d70f228",
+      "focused_sha256": "114d51542aa17fa8792551ec7c008ebbdb93ab5db0a50e10e016ede48c52f4a4",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R15",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "math_arithmetic",
+          "fields": {
+            "OP": "MINUS"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "EQ"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for": "Check each move from index 0 through length minus 1.",
+        "controls_if": "Replace this enemy move only when it is Shield."
+      },
+      "callouts": [
+        {
+          "text": "Length minus 1 reaches the last index without going past the list.",
+          "target": {
+            "block_type": "math_arithmetic",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "MINUS"
+            },
+            "field": "OP"
+          }
+        },
+        {
+          "text": "Change this move only if it is Shield. Keep checking later moves.",
+          "target": {
+            "block_type": "logic_compare",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "EQ"
+            }
+          }
+        },
+        {
+          "text": "Send the list after the whole loop finishes.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R16-primary",
+      "room_display": "room 16",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "reserveMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: reserveMoves; reuse it if already created.",
+          "purpose": "The reserve move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable reserveMoves. Reuse it if it exists."
+        },
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        },
+        {
+          "name": "move",
+          "type": "string",
+          "creation": "Provided by the loop: move.",
+          "purpose": "The reserve move provided by this loop.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it move."
+        }
+      ],
+      "source_sha256": "398be7b8407fcaed6ed98fcfb9c9d96f51fdfd902106f074855f3d4c0833ab38",
+      "focused_sha256": "781aaf114ce779dfb35b9560e91a7200e71d32bcc162c831e6d3a3d449634ac7",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R16",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "controls_if",
+          "configure_structure": {
+            "elseif": 0,
+            "else": 1
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "EQ"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "lists_create_with",
+          "mutation": {
+            "items": 0
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for_of": "Take each move from reserveMoves, in order.",
+        "controls_if": "For Attack add Shield; otherwise add Attack."
+      },
+      "callouts": [
+        {
+          "text": "Start a fresh response list whenever this altar runs.",
+          "target": {
+            "block_type": "lists_create_with",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Attack in reserve gets Shield; Wait gets Attack.",
+          "target": {
+            "block_type": "logic_compare",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "EQ"
+            }
+          }
+        },
+        {
+          "text": "Append one response per reserve move, in the same order.",
+          "target": {
+            "block_type": "array_push",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R17-primary",
+      "room_display": "room 17",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "reserveMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: reserveMoves; reuse it if already created.",
+          "purpose": "The reserve move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable reserveMoves. Reuse it if it exists."
+        },
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        },
+        {
+          "name": "reserveMove",
+          "type": "string",
+          "creation": "Make a Variable: reserveMove; reuse it if already created.",
+          "purpose": "The move taken from the reserve.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable reserveMove. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "072149dfca26161096633d6eac6312b18fa1d95fbb1a18bc31d573fdf985c82c",
+      "focused_sha256": "f28cd7e9d35f617064a723f98e13defa5166b17cd36094a38c04c18017ffb2f7",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R17",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GT"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Only take a move when reserveMoves is not empty."
+      },
+      "callouts": [
+        {
+          "text": "Keep the move returned from the end of the reserve.",
+          "target": {
+            "block_type": "array_pop",
+            "label": "reserveMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Append that exact move; different setups have different last moves.",
+          "target": {
+            "block_type": "array_push",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R18-primary",
+      "room_display": "room 18",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyPowers",
+          "type": "number[]",
+          "creation": "Make a Variable: enemyPowers; reuse it if already created.",
+          "purpose": "The enemy power list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyPowers. Reuse it if it exists."
+        },
+        {
+          "name": "ourPowers",
+          "type": "number[]",
+          "creation": "Make a Variable: ourPowers; reuse it if already created.",
+          "purpose": "Our team’s power list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourPowers. Reuse it if it exists."
+        },
+        {
+          "name": "markedIndex",
+          "type": "number",
+          "creation": "Make a Variable: markedIndex; reuse it if already created.",
+          "purpose": "The index marked by this altar.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable markedIndex. Reuse it if it exists."
+        },
+        {
+          "name": "stolenPower",
+          "type": "number",
+          "creation": "Make a Variable: stolenPower; reuse it if already created.",
+          "purpose": "The power removed from the enemies.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable stolenPower. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "5975d8c1bd9e26cb077d2befcccb20344c63a6d71e3951e5d1902194a8205e63",
+      "focused_sha256": "b2e61334caaa51b73cca5d7e1ac54de7f63c59d6cbe861f76732424fcdcdc5d2",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R18",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LT"
+          }
+        },
+        {
+          "type": "al_set_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_set_values",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Take the power only when the marked index is inside enemyPowers.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Keep the removed power. Later enemy powers close the gap.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "stolenPower",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "VAR": "stolenPower"
+            }
+          }
+        },
+        {
+          "text": "Append that same stolenPower to our powers.",
+          "target": {
+            "block_type": "array_push",
+            "label": "ourPowers",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Send both changed power lists. Moves and targets stay put.",
+          "target": {
+            "block_type": "al_set_values",
+            "label": "ourPowers",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R19-primary",
+      "room_display": "room 19",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemies",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemies; reuse it if already created.",
+          "purpose": "The enemy list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemies. Reuse it if it exists."
+        },
+        {
+          "name": "randomIndex",
+          "type": "number",
+          "creation": "Make a Variable: randomIndex; reuse it if already created.",
+          "purpose": "The randomly chosen roster position.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable randomIndex. Reuse it if it exists."
+        },
+        {
+          "name": "enemyToFreeze",
+          "type": "Sprite",
+          "creation": "Make a Variable: enemyToFreeze; reuse it if already created.",
+          "purpose": "The actual enemy to freeze.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyToFreeze. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "45016898be206f5b91e7e732c1e6608d4f05b1592c2d87a8228143e1376cfb1c",
+      "focused_sha256": "b8e5d4ba71ea588a9a24719e9bf36e22ae362de1d05844ca1f2e03a376f2b5df",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R19",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GT"
+          }
+        },
+        {
+          "type": "math_arithmetic",
+          "fields": {
+            "OP": "MINUS"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Only pick a random enemy when enemies is not empty."
+      },
+      "callouts": [
+        {
+          "text": "Choose a random index from 0 through the last valid index.",
+          "target": {
+            "block_type": "device_random",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Freeze the enemy retrieved at that random index.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "enemyToFreeze",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R20-primary",
+      "room_display": "room 20",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "838a680bf6a1dc33ddb4259165ac72e16af943f27f9318209d4f56beb34ae2f4",
+      "focused_sha256": "9c258876e995b98975257cee1c922cdb6b81738d6aa1ab156eb6efbad8dd6b41",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R20",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Reverse every enemy move: the last becomes first.",
+          "target": {
+            "block_type": "array_reverse",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Only moves reverse. Powers and targets keep their places.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R21-primary",
+      "room_display": "room 21",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        },
+        {
+          "name": "attackIndex",
+          "type": "number",
+          "creation": "Make a Variable: attackIndex; reuse it if already created.",
+          "purpose": "The first Attack’s index, or −1.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable attackIndex. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "e70f43ad5349a15f7d83ae30637ae910644a734acbc15195eca223cdc38cde62",
+      "focused_sha256": "f0d3c2724e7021c61d3505e388175a01f22ee3fb2d55557bcad2b717bd984901",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R21",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LTE"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Insert only when Attack was found and its index fits ourMoves.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Find the first enemy Attack, wherever it is now.",
+          "target": {
+            "block_type": "array_indexof",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Insert our Shield at that same index. Our later moves shift.",
+          "target": {
+            "block_type": "array_insertAt",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R22-primary",
+      "room_display": "room 22",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyTargets",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemyTargets; reuse it if already created.",
+          "purpose": "Enemy portraits our attacks aim at.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyTargets. Reuse it if it exists."
+        },
+        {
+          "name": "markedIndex",
+          "type": "number",
+          "creation": "Make a Variable: markedIndex; reuse it if already created.",
+          "purpose": "The index marked by this altar.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable markedIndex. Reuse it if it exists."
+        },
+        {
+          "name": "movedTarget",
+          "type": "Sprite",
+          "creation": "Make a Variable: movedTarget; reuse it if already created.",
+          "purpose": "The target moved to the front.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable movedTarget. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "1e22fa6f60c89709886af884a80a805880f478eaaeccb7f129f2e4bc0919c155",
+      "focused_sha256": "2e9a38722ba7ec4de44f1ef1c52ad4fbb17341890db8d71c0785f6cc7819400d",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R22",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_targets",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LT"
+          }
+        },
+        {
+          "type": "al_set_targets",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Move only an index inside enemyTargets.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "These enemy portraits are the targets our attacks aim at.",
+          "target": {
+            "block_type": "al_targets",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Keep the exact enemy portrait removed at this index.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "movedTarget",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "VAR": "movedTarget"
+            }
+          }
+        },
+        {
+          "text": "Insert that same target first so our opening attack aims there.",
+          "target": {
+            "block_type": "array_unshift_statement",
+            "label": "enemyTargets",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R23-primary",
+      "room_display": "room 23",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "shieldIndex",
+          "type": "number",
+          "creation": "Make a Variable: shieldIndex; reuse it if already created.",
+          "purpose": "The first Shield’s index, or −1.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable shieldIndex. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "c9cef2cd322bba0e550ec3ffbd6c810f6e165ae2917859e20271982d0c371e03",
+      "focused_sha256": "052e7e94f8c362bc8b767b8506d22babf16d1812dce6df54f51bccd19c157482",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R23",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Only remove a Shield when the search returns index 0 or more."
+      },
+      "callouts": [
+        {
+          "text": "Find the first Shield’s current index.",
+          "target": {
+            "block_type": "array_indexof",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Remove the found Shield. Later moves close the gap.",
+          "target": {
+            "block_type": "array_removeat_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R24-primary",
+      "room_display": "room 24",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "401260de46e49ba45e905ec2b2e188f17cf044e90205031357cc42182c1ad870",
+      "focused_sha256": "43c83ae9bb14a11c75078ac8d78f52c8e7eb486ee154cfac7ef3c2d7a4959c2b",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R24",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {},
+      "callouts": [
+        {
+          "text": "Use the Left altar first: add Wait before every old move.",
+          "target": {
+            "block_type": "array_unshift_statement",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Send this shifted list so the Right altar can read it.",
+          "target": {
+            "block_type": "al_set_moves",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "list",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R24-secondary",
+      "room_display": "room 24",
+      "station_display": "Right altar",
+      "variables": [
+        {
+          "name": "shiftedMoves",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable shiftedMoves. Reuse it if it exists."
+        },
+        {
+          "name": "markedIndex",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable markedIndex. Reuse it if it exists."
+        }
+      ],
+      "source_sha256": "401260de46e49ba45e905ec2b2e188f17cf044e90205031357cc42182c1ad870",
+      "focused_sha256": "bcea59ee5acfe336c1e5ce522b7cf50405a46a800acc8141ecab1bc387a0008e",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R24",
+            "station": "apocTypes.Station.Secondary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "GTE"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "LT"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "controls_if": "Replace only the marked index inside shiftedMoves.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Read the list after using the Left altar.",
+          "target": {
+            "block_type": "al_moves",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "This altar marks the Attack’s new index after the shift.",
+          "target": {
+            "block_type": "al_marked_index",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Replace that move with Wait; do not remove it.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "shiftedMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R25-primary",
+      "room_display": "room 25",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        },
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "creation": "Provided by the loop: index.",
+          "purpose": "The loop’s current index.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it index."
+        }
+      ],
+      "source_sha256": "590d9cb18f2a8e8582d0dd7e7eb02f25fd2d56e04a06b8e5b31101539655365e",
+      "focused_sha256": "b80b9930eb04615a7cd70c5f14f89ec925b9f242bb0d7c6d300de510b0b7cd68",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R25",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "math_arithmetic",
+          "fields": {
+            "OP": "MINUS"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "EQ"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for": "Check each move from index 0 through length minus 1.",
+        "controls_if": "Replace only our Wait opposite an enemy Attack.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Both tests must be true: our Wait AND their Attack.",
+          "target": {
+            "block_type": "logic_operation",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "AND"
+            },
+            "field": "OP"
+          }
+        },
+        {
+          "text": "The same index compares moves at the same moment.",
+          "target": {
+            "block_type": "lists_index_get",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "INDEX",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Only that Wait becomes Shield. Other moves stay put.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "ourMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R26-primary",
+      "room_display": "room 26",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "reserveMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: reserveMoves; reuse it if already created.",
+          "purpose": "The reserve move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable reserveMoves. Reuse it if it exists."
+        },
+        {
+          "name": "ourMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: ourMoves; reuse it if already created.",
+          "purpose": "Our team’s move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable ourMoves. Reuse it if it exists."
+        },
+        {
+          "name": "seenAttack",
+          "type": "boolean",
+          "creation": "Make a Variable: seenAttack; reuse it if already created.",
+          "purpose": "Whether an earlier source move was an attack.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable seenAttack. Reuse it if it exists."
+        },
+        {
+          "name": "didHeal",
+          "type": "boolean",
+          "creation": "Make a Variable: didHeal; reuse it if already created.",
+          "purpose": "Whether Heal has already been added.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable didHeal. Reuse it if it exists."
+        },
+        {
+          "name": "move",
+          "type": "string",
+          "creation": "Provided by the loop: move.",
+          "purpose": "The reserve move provided by this loop.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it move."
+        }
+      ],
+      "source_sha256": "60992a5acf0bd173a30a8ac212ae752ea81d0b3656040bbf596910bf75b9f524",
+      "focused_sha256": "e8e8814cbb51321bbb2e1526e2b9b8e2aa8e945ced1d3bd4a69345e3c26a2642",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R26",
+            "station": "apocTypes.Station.Primary"
+          }
+        },
+        {
+          "type": "logic_boolean",
+          "fields": {
+            "BOOL": "FALSE"
+          }
+        },
+        {
+          "type": "logic_boolean",
+          "fields": {
+            "BOOL": "TRUE"
+          }
+        },
+        {
+          "type": "controls_if",
+          "configure_structure": {
+            "elseif": 1,
+            "else": 1
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "EQ"
+          }
+        },
+        {
+          "type": "logic_operation",
+          "fields": {
+            "OP": "AND"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Ally"
+          }
+        },
+        {
+          "type": "lists_create_with",
+          "mutation": {
+            "items": 0
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for_of": "Take each move from reserveMoves, in order.",
+        "controls_if": "Attack gets Shield; the first later Wait gets Heal; other Waits get Attack.",
+        "logic_operation": "Require both conditions to be true."
+      },
+      "callouts": [
+        {
+          "text": "Start seenAttack as false: no reserve move has been read yet.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "seenAttack",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "VAR": "seenAttack"
+            }
+          }
+        },
+        {
+          "text": "Heal only after an Attack AND before the first Heal.",
+          "target": {
+            "block_type": "logic_operation",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "AND"
+            },
+            "field": "OP"
+          }
+        },
+        {
+          "text": "Set didHeal to true so later openings get Attack instead.",
+          "target": {
+            "block_type": "variables_set",
+            "label": "didHeal",
+            "occurrence": 2,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "VAR": "didHeal"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "R27-primary",
+      "room_display": "room 27",
+      "station_display": "Left altar",
+      "variables": [
+        {
+          "name": "enemies",
+          "type": "Sprite[]",
+          "creation": "Make a Variable: enemies; reuse it if already created.",
+          "purpose": "The enemy list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemies. Reuse it if it exists."
+        },
+        {
+          "name": "enemy",
+          "type": "Sprite",
+          "creation": "Provided by the loop: enemy.",
+          "purpose": "The enemy provided by this loop.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it enemy."
+        }
+      ],
+      "source_sha256": "7646b4c9fee12d4d52a2324de1cdf99c2be09eae2b31fa43d61900e55b4a0454",
+      "focused_sha256": "c007539903f60c5ad51093d7fb95370504a37558bcb84d5b58c414bb85110872",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R27",
+            "station": "apocTypes.Station.Primary"
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for_of": "Take each enemy from enemies, one at a time."
+      },
+      "callouts": [
+        {
+          "text": "The loop provides enemy: each enemy in the list, in turn.",
+          "target": {
+            "block_type": "pxt_controls_for_of",
+            "label": "enemy",
+            "occurrence": 1,
+            "socket": "VAR",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        },
+        {
+          "text": "Freeze this enemy without removing it as a possible target.",
+          "target": {
+            "block_type": "al_hold",
+            "label": "enemy",
+            "occurrence": 1,
+            "socket": "actor",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R27-secondary",
+      "room_display": "room 27",
+      "station_display": "Right altar",
+      "variables": [
+        {
+          "name": "enemyMoves",
+          "type": "string[]",
+          "creation": "Make a Variable: enemyMoves; reuse it if already created.",
+          "purpose": "The enemy move list.",
+          "creation_kind": "manual",
+          "creation_note": "Name this variable enemyMoves. Reuse it if it exists."
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "creation": "Provided by the loop: index.",
+          "purpose": "The loop’s current index.",
+          "creation_kind": "loop_provided",
+          "creation_note": "The loop creates this variable. Name it index."
+        }
+      ],
+      "source_sha256": "7646b4c9fee12d4d52a2324de1cdf99c2be09eae2b31fa43d61900e55b4a0454",
+      "focused_sha256": "03ce79ce65c212ab03f21e8ca1945f01020a011896ef7ff7f8553c3df96d607e",
+      "native_selector_variants": [
+        {
+          "type": "al_on_interact",
+          "configure_fields": {
+            "room": "apocTypes.Room.R27",
+            "station": "apocTypes.Station.Secondary"
+          }
+        },
+        {
+          "type": "al_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        },
+        {
+          "type": "math_arithmetic",
+          "fields": {
+            "OP": "MINUS"
+          }
+        },
+        {
+          "type": "logic_compare",
+          "fields": {
+            "OP": "EQ"
+          }
+        },
+        {
+          "type": "al_set_moves",
+          "configure_fields": {
+            "side": "apocTypes.Side.Enemy"
+          }
+        }
+      ],
+      "control_captions": {
+        "pxt_controls_for": "Check each move from index 0 through length minus 1.",
+        "controls_if": "Replace this enemy move only when it is Shield."
+      },
+      "callouts": [
+        {
+          "text": "Length minus 1 includes every valid move index.",
+          "target": {
+            "block_type": "math_arithmetic",
+            "label": "",
+            "occurrence": 1,
+            "socket": null,
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input.",
+            "fields": {
+              "OP": "MINUS"
+            },
+            "field": "OP"
+          }
+        },
+        {
+          "text": "Replace only Shield entries. Do not shift other moves.",
+          "target": {
+            "block_type": "lists_index_set",
+            "label": "enemyMoves",
+            "occurrence": 1,
+            "socket": "VALUE",
+            "match_rule": "Match native type, selector fields and semantic label; occurrence counts matches. Point to the named field or input."
+          }
+        }
+      ]
+    }
+  ],
+  "source_ready": {
+    "cumulative_R27_sha256": "522ab5a38e02af1a6256ee803c84d0cc55d77f67ee7b6e7efe9ba6211a6c4fd6",
+    "visual_lessons_sha256": "18d9b8340ae550f9b9516644c719b96c248e9d1035d0f0cd178984143e55e782"
+  },
+  "native_local_alias_repair": {
+    "reason": "Prevent native decompiler suffixes on distinct same-named locals across room callbacks; only Secondary local aliases change.",
+    "repairs": [
+      {
+        "room": "R14",
+        "station": "Secondary",
+        "from": "ourPowers",
+        "to": "rolledPowers",
+        "before_source_sha256": "2476d67e86cd0083a333cd53b9ec9a10faa9860b23f1871b3622639bef18120b",
+        "after_source_sha256": "2b21f615c6a4c0920a09bd19626f3d16421f8b4947de93f07eb927d816dcfd52",
+        "before_focused_sha256": "4066449b01f172117abad59ee5577358dce328205ba4b07591138bafc9e15257",
+        "after_focused_sha256": "4fb8e042f0a3d906f6616cbf80c23a40e480115ea34aa9b5a2e1faad90133287",
+        "reverse_alias_sha256": "4066449b01f172117abad59ee5577358dce328205ba4b07591138bafc9e15257",
+        "exact_reverse_alias_equal": true,
+        "primary_focused_before_sha256": "4e46f0e4b424cf4b942f8fd377eb12476e256b3efea367f6b931420c24528970",
+        "primary_focused_after_sha256": "4e46f0e4b424cf4b942f8fd377eb12476e256b3efea367f6b931420c24528970"
+      },
+      {
+        "room": "R24",
+        "station": "Secondary",
+        "from": "enemyMoves",
+        "to": "shiftedMoves",
+        "before_source_sha256": "67da1b03157e7e2271d3415134460bea95e1bc4227380ac942eecb77f0cea49a",
+        "after_source_sha256": "401260de46e49ba45e905ec2b2e188f17cf044e90205031357cc42182c1ad870",
+        "before_focused_sha256": "eb55c6616392f8127326194e89e683e93d6e6f2834956ceb04f5f9bfe03dd09f",
+        "after_focused_sha256": "bcea59ee5acfe336c1e5ce522b7cf50405a46a800acc8141ecab1bc387a0008e",
+        "reverse_alias_sha256": "eb55c6616392f8127326194e89e683e93d6e6f2834956ceb04f5f9bfe03dd09f",
+        "exact_reverse_alias_equal": true,
+        "primary_focused_before_sha256": "43c83ae9bb14a11c75078ac8d78f52c8e7eb486ee154cfac7ef3c2d7a4959c2b",
+        "primary_focused_after_sha256": "43c83ae9bb14a11c75078ac8d78f52c8e7eb486ee154cfac7ef3c2d7a4959c2b"
+      }
+    ],
+    "before_cumulative_R27_sha256": "c3987ccc78a4fdebe93bfd8656a22f72b4ede207cfc2d7b4fcec60a0a9d4917f",
+    "after_cumulative_R27_sha256": "522ab5a38e02af1a6256ee803c84d0cc55d77f67ee7b6e7efe9ba6211a6c4fd6",
+    "operations_or_control_flow_changed": false
+  }
+}

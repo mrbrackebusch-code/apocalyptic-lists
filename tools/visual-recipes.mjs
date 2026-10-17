@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
-import {sourceOrder,projectSources,suppliedRuntime,runtimeDimensions} from './project-source.mjs';
+import {sourceOrder,sourcePath,projectSources,suppliedRuntime,runtimeDimensions} from './project-source.mjs';
 import {stationSources,currentRoomSource} from './instruction-sources.mjs';
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const sort=x=>Array.isArray(x)?x.map(sort):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sort(x[k])])):x;
@@ -20,17 +20,21 @@ export function buildVisualRecipes(opts) {
  assert.equal(plan.complete_visible_examples,true);assert.equal(plan.automatic_fading,false);
  assert.equal(mapping.rooms.length,27);assert.equal(catalog.rooms.length,27);
  for(const [file,expected]of Object.entries(reuse.native_api_lf_sha256))assert.equal(hash(sources[file]),expected,'Retained native API '+file);
- if(reuse.owner_revision){assert.equal(reuse.owner_revision.native_delta_status,'passed');for(const [kind,key]of [['isolated','isolated'],['cumulative','cumulative']]){const proof=reuse.owner_revision[kind];assert.equal(proof.success,true);assert.equal(proof.opaque_blocks,0);assert.equal(proof.source_sha256,reuse.references[proof.id][key]);}}
+ const currentProof=reuse.owner_revision;
+ if(currentProof?.native_delta_status==='passed')for(const key of ['isolated','cumulative'])for(const proof of [currentProof[key]].flat()){assert.equal(proof.success,true);assert.equal(proof.opaque_blocks,0);assert.equal(proof.source_sha256,reuse.references[proof.id][key]);}
+ else if(opts.strict&&currentProof)throw Error('Current native instruction proof is pending; draft assembly is not release qualification');
  const jobCount=plan.jobs.length,requiredMedia=2*jobCount+27;
  const captures=new Map();
  for(const file of ['copy/media/visual-captures.json','copy/media/game-captures.json'])if(fs.existsSync(safe(root,file)))for(const record of get(file).captures){if(record.verification_status!=='passed'){if(opts.strict)throw Error(record.id+' has not passed visual review');continue;}if(file.endsWith('game-captures.json')&&!record.full_sequence&&!record.outcome_observed)continue;assert.ok(!captures.has(record.id));captures.set(record.id,record);}
  const link=id=>'#recipe:https://github.com/'+opts.repository+'/recipes/'+id.toLowerCase();
- const resolve=s=>s.replace(/\{\{recipe:(R\d{2})\}\}/g,(_,id)=>'[Open '+id+']('+link(id)+')').replace(/\{\{directory\}\}/g,'[Recipe directory](#recipe:https://github.com/'+opts.repository+'/recipes/directory)');
+ const roomLabel=id=>'room '+Number(id.slice(1));
+ const altarLabel=job=>job.station_display||(job.station==='Primary'?'Left altar':'Right altar');
+ const resolve=s=>s.replace(/\{\{recipe:(R\d{2})\}\}/g,(_,id)=>'[Open '+roomLabel(id)+']('+link(id)+')').replace(/\{\{directory\}\}/g,'[Recipe directory](#recipe:https://github.com/'+opts.repository+'/recipes/directory)');
  const hint=code=>'#### ~ tutorialhint\n\n```blocks\n'+code.trim()+'\n```';
  const cumulativeParts=[],header='// CUMULATIVE INSTRUCTIONAL REFERENCE ONLY; never automatically install as learner code.\n// World progress belongs to supplied world settings; behavior belongs to the currently edited program.\n\n';
  function asset({id,kind,room,job,sourceHash,description}) {
   let capture=captures.get(id);
-  if(capture){let stale=capture.reference_sha256!==sourceHash;if(!job)for(const item of capture.runtime_sources||[]){const file=item.file==='contracts.ts'?safe(common,item.file):safe(root,'implementation/'+item.file);if(hash(fs.readFileSync(file))!==item.sha256)stale=true;}if(stale){if(opts.strict)throw Error(id+' capture requires refresh for current source');capture=null;}}
+  if(capture){let stale=capture.reference_sha256!==sourceHash;if(job&&currentProof?.scope==='all27-naming-and-instruction-rework'&&stable(capture.native_api_lf_sha256)!==stable(reuse.native_api_lf_sha256))stale=true;if(!job)for(const item of capture.runtime_sources||[]){const file=sourcePath(root,common,item.file);if(hash(fs.readFileSync(file))!==item.sha256)stale=true;}if(stale){if(opts.strict)throw Error(id+' capture requires refresh for current source/API');capture=null;}}
   const binding={id,kind,room,job_id:job?.id||null,reference_sha256:sourceHash,capture_status:'planned',verification_status:'not_run',status:'planned',artifact_path:null,alt_text:description};
   if(capture) {
    assert.equal(capture.reference_sha256,sourceHash,id+' actual source');
@@ -43,9 +47,10 @@ export function buildVisualRecipes(opts) {
     const focused=stationSources(read('implementation/learner-states/rooms/'+room+'.ts')).find(s=>s.id===job.id);
     assert.equal(capture.focused_source_sha256||capture.focused_handler_sha256,hash(focused.code),id+' exact focused callback');
    } else {
+    if(capture.canonical_reference_binding){const b=capture.canonical_reference_binding,p=get(b.path);assert.equal(hash(read(b.path)),b.sha256,id+' local-name proof bytes');assert.equal(p.passed,true);assert.equal(p.schema,'AL-FILM-LOCAL-NAME-EQUIVALENCE-1');assert.equal(p.jobs.length,30);assert.equal(p.changed_jobs,2);assert.equal(p.current_cumulative.sha256,hash(read(p.current_cumulative.path)),id+' current cumulative alias binding');assert.equal(p.recorded_cumulative.sha256,capture.executed_reference_sha256);assert.equal(p.actual_compile.binary_sha256,capture.native_binary_sha256);assert.equal(b.current_isolated_sha256,sourceHash);assert.equal(b.recorded_isolated_sha256,capture.recorded_isolated_reference_sha256);assert.equal(capture.executed_reference_path,p.recorded_cumulative.path);}
     assert.deepEqual([capture.width,capture.height],screen,id+' native game dimensions');
     assert.equal(capture.runtime_sources.length,sourceOrder.length-1,id+' current runtime');
-    for(const s of capture.runtime_sources){assert.notEqual(s.file,'main.ts');assert.equal(s.hash_form,'raw-bytes');const input=s.file==='contracts.ts'?safe(common,s.file):safe(root,'implementation/'+s.file);assert.equal(hash(fs.readFileSync(input)),s.sha256,id+':'+s.file);}
+    for(const s of capture.runtime_sources){assert.notEqual(s.file,'main.ts');assert.equal(s.hash_form,'raw-bytes');const input=sourcePath(root,common,s.file);assert.equal(hash(fs.readFileSync(input)),s.sha256,id+':'+s.file);}
     assert.equal(capture.outcome_observed,true,id+' actual completed outcome');
     assert.equal(capture.full_sequence,true,id+' whole physical edit and battle');
    }
@@ -73,12 +78,12 @@ export function buildVisualRecipes(opts) {
    assert.equal(job.source_event.sha256,sourceHash,job.id+' teaching source');
    const code=station.find(s=>s.id===job.id);assert.ok(code,job.id+' exact event');
    const visual='<!-- AP_VISUAL job='+job.id+' -->';assert.equal(canonical.split(visual).length,2,job.id+' visible construction');
-   const pictures=asset({id:job.id+'-menu',kind:'native_menu_blocks',room:id,job,sourceHash,description:'Native blocks and variable setup for '+job.id})+'\n\n'+asset({id:job.id+'-assembled',kind:'annotated_native_blocks',room:id,job,sourceHash,description:'Complete '+job.station+' construction for '+id+', with explanations at the relevant blocks'});
+   const pictures=asset({id:job.id+'-menu',kind:'native_menu_blocks',room:id,job,sourceHash,description:'Blocks and variable setup for '+altarLabel(job)+' in '+roomLabel(id)})+'\n\n'+asset({id:job.id+'-assembled',kind:'annotated_native_blocks',room:id,job,sourceHash,description:'Complete '+altarLabel(job)+' code for '+roomLabel(id)+', with explanations beside the relevant blocks'});
    canonical=canonical.replace(visual,pictures);
    const token='<!-- AP_HINT station='+job.station+' -->';assert.equal(canonical.split(token).length,2,job.id+' focused hint');canonical=canonical.replace(token,hint(code.code));
   }
   const resultToken='<!-- AP_MEDIA id='+id+'-before-after -->';assert.equal(canonical.split(resultToken).length,2,id+' expected actual gameplay');
-  canonical=canonical.replace(resultToken,asset({id:id+'-before-after',kind:'game_before_after',room:id,sourceHash,description:id+' actual altar interaction, list change, battle and outcome'}));
+  canonical=canonical.replace(resultToken,asset({id:id+'-before-after',kind:'game_before_after',room:id,sourceHash,description:'Actual altar interaction, list change, battle and outcome in '+roomLabel(id)}));
   const roomHint='<!-- AP_HINT room='+id+' -->';assert.equal(canonical.split(roomHint).length,2,id+' room-only result backup');canonical=canonical.replace(roomHint,hint(currentRoomSource(source)));
   assert.ok(!/<!-- AP_(VISUAL|HINT|MEDIA)\b/.test(canonical),id+' resolved visual bindings');
   const ghost='\n\n```ghost\n'+currentRoomSource(source)+'\n```\n';
@@ -88,12 +93,13 @@ export function buildVisualRecipes(opts) {
   const render=resolve(canonical).trimEnd()+ghost+'\n```customts\n'+runtime.trimEnd()+'\n```\n';
   outputs.set(item.recipe_output,render);
   const bindings=media.filter(m=>m.room===id);record.media=bindings;record.cumulative.sha256=hash(cumulative);
+  record.native_media_capture=bindings.filter(m=>m.kind!=='game_before_after').every(m=>m.verification_status==='passed')?'captured':'not_run';
   record.assembly_provenance={focused_hints:true,visible_examples:true,visual_jobs:jobs.map(j=>j.id),reference_api_reuse:'copy/media/NATIVE_BLOCKS_REUSE.json'};
   index.push({id,order:n,canonical:item.recipe_source,output:item.recipe_output,sha256:hash(render),next_recipe:item.next_recipe,reference_sha256:sourceHash,cumulative_sha256:hash(cumulative),hint_from:item.reference_file,hint_scope:'current station or current room only',media_ids:bindings.map(m=>m.id),visual_jobs:jobs.map(j=>j.id),overlay_only:true,initial_project_resources:false,supplied_runtime_sha256:hash(runtime),learner_template:false});
  }
  assert.equal(media.length,requiredMedia);assert.equal(new Set(media.map(m=>m.id)).size,requiredMedia);
  let directory='# Apocalyptic Lists Recipes\n\n## Continue your current game\n\nOpen the Recipe for the room you are playing. Your code stays in this project.\n\n';
- for(const room of mapping.rooms)directory+='- ['+room.room+' — '+room.title+']('+link(room.room)+')\n';
+ for(const room of mapping.rooms)directory+='- [Room '+Number(room.room.slice(1))+' — '+room.title+']('+link(room.room)+')\n';
  directory+='\n```customts\n'+runtime.trimEnd()+'\n```\n';
  outputs.set('generated/tutorial/recipes/directory.md',directory);
  outputs.set('generated/tutorial/recipes/index.json',stable({schema:'AL-RECIPE-INDEX-2',existing_project_overlay:true,recipes:index}));
@@ -106,5 +112,5 @@ export function buildVisualRecipes(opts) {
  if(opts.strict)assert.equal(verified,requiredMedia,'Release requires every reviewed native visual and27 completed gameplay recordings');
  let written=0,compared=0;const absent=[];
  for(const [rel,data]of outputs){const out=safe(root,rel);if(opts.check){if(!fs.existsSync(out))absent.push(rel);else{assert.equal(fs.readFileSync(out,'utf8'),data,rel+' stale');compared++;}}else{fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,data);written++;}}
- return {recipe_count:27,construction_count:jobCount,media_captured:captured,media_verified:verified,media_planned:requiredMedia-captured,written,compared,outputs_absent_in_check:absent,native_compile:'retained exact reference/API proof',hint_scope:'current construction or current room only'};
+ return {recipe_count:27,construction_count:jobCount,media_captured:captured,media_verified:verified,media_planned:requiredMedia-captured,written,compared,outputs_absent_in_check:absent,native_compile:currentProof?'current source-bound native proof: '+currentProof.native_delta_status:'retained exact reference/API proof',hint_scope:'current construction or current room only'};
 }

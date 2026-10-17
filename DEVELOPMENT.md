@@ -9,3 +9,5 @@ With Node.js, run npm run build to rebuild the project, Recipes and manifests; n
 Tested editor: Arcade4.1.25 / PXT13.1.23. The older4.0.14 baseline is historical, not an unrun compatibility claim. Palette is applied in supplied config.ts as well as pxt.json because tutorial transport does not inherit package palette.
 
 Conserve usage indefinitely: reuse coherent working methods and sufficient evidence, keep repairs together, and preserve complete quality.
+
+The frozen return under shared/ records historical design inputs. In particular, shared/contracts.ts is historical; implementation/contracts.ts is the authoritative current runtime contract. Numeric enum values and internal block/function IDs remain stable while their learner-facing labels are clearer.

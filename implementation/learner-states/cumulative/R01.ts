@@ -2,14 +2,14 @@
 // World progress belongs to supplied world settings; behavior belongs to the currently edited program.
 
 apocalypse.onInteract(apocTypes.Room.R01, apocTypes.Station.Primary, function () {
-    let allyMoves: string[] = []
-    allyMoves = []
-    for (let i = 0; i <= apocalypse.numberHint() - 1; i++) {
-        allyMoves.push("Wait")
+    let ourMoves: string[] = []
+    ourMoves = []
+    for (let index = 0; index <= apocalypse.numberHint() - 1; index++) {
+        ourMoves.push("Wait")
     }
-    allyMoves.push("Ward")
-    allyMoves.push("Mend")
-    allyMoves.push("Strike")
-    allyMoves.push("Strike")
-    apocalypse.setMoves(apocTypes.Side.Ally, allyMoves)
+    ourMoves.push("Shield")
+    ourMoves.push("Heal")
+    ourMoves.push("Attack")
+    ourMoves.push("Attack")
+    apocalypse.setMoves(apocTypes.Side.Ally, ourMoves)
 })

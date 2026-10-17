@@ -6,6 +6,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import vm from 'node:vm';
 import {fileURLToPath} from 'node:url';
+import {sourcePath} from './project-source.mjs';
 const defaultRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const sorted=x=>Array.isArray(x)?x.map(sorted):(x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sorted(x[k])])):x);
@@ -25,6 +26,9 @@ function adapt(source,id) {
 }
 const listNames=['allyMoves','allyValues','allyTargets','enemyMoves','enemyValues','enemyTargets'];
 const moveNames=new Set(['Empower','Flurry','Mend','Reap','Strike','Venom','Wait','Ward']);
+const moveDisplay={Strike:'Attack',Ward:'Shield',Mend:'Heal',Flurry:'Attack all',Reap:'Finish',Venom:'Poison',Empower:'Boost next',Wait:'Wait'};
+const moveInternal=Object.fromEntries(Object.entries(moveDisplay).map(([key,value])=>[value,key]));
+const moveList=(list,dictionary)=>Array.isArray(list)?list.map(name=>dictionary[name]??name):list;
 const same=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((x,i)=>x===b[i]);
 // The frozen handoff remains unchanged. R14 alone now has a donor-reroll altar;
 // its current canonical encounter data overlays the historical host fixtures.
@@ -63,15 +67,15 @@ function makeFixture(input, station, controls={}) {
  const en=()=>{if(!active)throw Error('Getter/commit outside active station');return active;};
  const api={
   onInteract(room,s,fn){if(!Number.isInteger(room)||!Number.isInteger(s)||typeof fn!=='function')throw Error('bad registration');stations.set(`${room}-${s}`,fn);},
-  moves(side){en();return expose(state.lists[side===0?'allyMoves':'enemyMoves']);},
+  moves(side){en();return expose(moveList(state.lists[side===0?'allyMoves':'enemyMoves'],moveDisplay));},
   values(side){en();return expose(state.lists[side===0?'allyValues':'enemyValues']);},
   targets(side){en();return expose(state.lists[side===0?'allyTargets':'enemyTargets']);},
   roster(){en();return expose(state.roster);},
-  sourceMoves(){en();return expose(state.sourceMoves);},
-  setMoves(side,list){commit(side===0?'allyMoves':'enemyMoves',list);},
+  sourceMoves(){en();return expose(moveList(state.sourceMoves,moveDisplay));},
+  setMoves(side,list){commit(side===0?'allyMoves':'enemyMoves',moveList(list,moveInternal));},
   setValues(side,list){commit(side===0?'allyValues':'enemyValues',list);},
   setTargets(side,list){commit(side===0?'allyTargets':'enemyTargets',list);},
-  setRoster(list){commit('roster',list);},setSourceMoves(list){commit('sourceMoves',list);},
+  setRoster(list){commit('roster',list);},setSourceMoves(list){commit('sourceMoves',moveList(list,moveInternal));},
   hold(sprite){effect('hold',sprite);},banish(sprite){effect('banish',sprite);},
   markedIndex(){en();return stationSpec(currentStation).markedIndex;},
   numberHint(){en();return station.variants.find(v=>v.id===input.id).numberHint;}
@@ -175,15 +179,36 @@ function main(opt){
  const station=JSON.parse(read(opt.commonRoot,'STATION_MAP.json'));
  const encounterSource=read(opt.gameRoot,'implementation/encounters.json'),fixtureOverlay=overlayR14(data,station,JSON.parse(encounterSource));fixtureOverlay.canonical_sha256=hash(encounterSource);fixtureOverlay.hash_form='LF-normalized source';
  const catalog=JSON.parse(read(opt.gameRoot,'implementation/LEARNER_STATE_CATALOG.json'));
- const nativeProof=opt.nativeRoundtrip?JSON.parse(read(opt.gameRoot,'validation/native-tutorial/RESULTS.json')):null;
- const deltaPath='validation/visual-instructions-v0.5.0/native/RESULTS.json',deltaProof=opt.nativeRoundtrip?JSON.parse(read(opt.gameRoot,deltaPath)):null;
- if(opt.nativeRoundtrip&&(!nativeProof.passed||!deltaProof.passed))throw Error('Native roundtrip verification requires retained unchanged proof plus fresh R14/cumulative proof');
+ let nativeProof=null,deltaProof=null,deltaPath=null,nativeBinding=null,fullCurrentNative=false;
+ if(opt.nativeRoundtrip){
+  nativeBinding=JSON.parse(read(opt.gameRoot,'copy/media/NATIVE_BLOCKS_REUSE.json'));
+  const revision=nativeBinding.owner_revision,receipt=revision?.native_delta_receipt;
+  if(revision?.native_delta_status!=='passed'||!receipt?.path||!receipt.sha256)throw Error('Native roundtrip verification requires the bound current native receipt');
+  deltaPath=receipt.path;
+  const bytes=fs.readFileSync(path.join(opt.gameRoot,deltaPath));
+  if(hash(bytes)!==receipt.sha256)throw Error('Changed current native receipt '+deltaPath);
+  deltaProof=JSON.parse(bytes);
+  if(deltaProof.passed!==true)throw Error('Current native source proof did not pass');
+  for(const file of ['learner-api.ts','contracts.ts'])if(hash(fs.readFileSync(sourcePath(opt.gameRoot,opt.commonRoot,file),'utf8').replace(/\r\n/g,'\n'))!==nativeBinding.native_api_lf_sha256[file])throw Error('Stale native API proof '+file);
+  fullCurrentNative=revision.scope==='all27-naming-and-instruction-rework';
+  if(fullCurrentNative){
+   if(deltaProof.isolated.length!==27||new Set(deltaProof.isolated.map(r=>r.id)).size!==27)throw Error('Expected all27 fresh native isolated references');
+  } else {
+   // Historical packages can still use a bounded delta plus their unchanged
+   // baseline; current all-room naming revisions must never take this fallback.
+   const historical=nativeBinding.historical_receipt;
+   if(!historical?.path||hash(fs.readFileSync(path.join(opt.gameRoot,historical.path)))!==historical.sha256)throw Error('Changed historical native receipt');
+   nativeProof=JSON.parse(read(opt.gameRoot,historical.path));
+   if(nativeProof.passed!==true)throw Error('Historical native source proof did not pass');
+  }
+ }
  const sourceFor=id=>{
   const canonical=read(opt.gameRoot,`implementation/learner-states/rooms/${id}.ts`);
   if(!opt.nativeRoundtrip)return canonical;
-  const selected=opt.nativeCumulative||id==='R14'?deltaProof:nativeProof;
+  const selected=opt.nativeCumulative||fullCurrentNative||deltaProof.isolated.some(r=>r.id===id)?deltaProof:nativeProof;
   const proof=opt.nativeCumulative?selected.cumulative.find(r=>(r.id==='R27'||r.id==='R27-cumulative')&&r.success&&r.source_sha256===hash(read(opt.gameRoot,'implementation/learner-states/cumulative/R27.ts'))):selected.isolated.find(r=>r.id===id&&r.success&&r.source_sha256===hash(canonical));
   if(!proof)throw Error('Missing/stale native source evidence '+id);
+  if(proof.opaque_blocks!==0||proof.diagnostics.length!==0)throw Error('Native source has opaque blocks or diagnostics '+id);
   const source=read(opt.gameRoot,proof.roundtrip_path);
   if(hash(source)!==proof.roundtrip_sha256)throw Error('Changed native roundtrip source '+id);
   return source;
@@ -211,7 +236,7 @@ function main(opt){
   if(item.isolated.sha256!==hash(source))throw Error(rid+' isolated source hash does not match catalog');
   if((source.match(/apocalypse\.onInteract\(/g)||[]).length!==(r===14||r===24||r===27?2:1))throw Error(rid+' wrong handler registration count');
   // Source construction audit, informational, distinct from runtime completion checks.
-  const nativeTokens=['.push(','.hold(','.setMoves(','.push(','.insertAt(','.unshift(','.removeAt(','.length - 1','.shift(','.pop(','.banish(','.indexOf(', 'for (let actor of', 'savedNumber', 'for (let i =', 'let allyMoves: string[] = []', '.pop(','.removeAt(', 'randint(','.reverse(','.indexOf(','.removeAt(','.indexOf(','.unshift(','.length - 1','seenAttack','for (let actor of'];
+  const nativeTokens=['.push(','.hold(','.setMoves(','.push(','.insertAt(','.unshift(','.removeAt(','.length - 1','.shift(','.pop(','.banish(','.indexOf(', 'for (let enemy of', 'savedPower', 'for (let index =', 'let ourMoves: string[] = []', '.pop(','.removeAt(', 'randint(','.reverse(','.indexOf(','.removeAt(','.indexOf(','.unshift(','.length - 1','seenAttack','for (let enemy of'];
   if(!source.includes(nativeTokens[r-1]))throw Error(rid+' pedagogical source token absent '+nativeTokens[r-1]);
   sourceReviewed++;
   for(let v=1;v<=3;v++){
@@ -227,10 +252,10 @@ function main(opt){
   {id:'R03-V1',source:'// intentionally no handler\n',order:[1],reason:'no handler'},
   {id:'R04-V1',source:'apocalypse.onInteract(apocTypes.Room.R04, apocTypes.Station.Primary, function () { let allyMoves: string[] = apocalypse.moves(apocTypes.Side.Ally); allyMoves.push("Strike") })\n',order:[1],reason:'no commit'},
   {id:'R11-V1',source:null,order:[1],controls:{dropEffect:'banish'},reason:'missing effect'},
-  {id:'R14-V1',source:r14Source.replaceAll('allyValues[3]','allyValues[2]'),order:[2,1],reason:'wrong swap index after real reroll'},
+  {id:'R14-V1',source:r14Source.replaceAll('ourPowers[3]','ourPowers[2]'),order:[2,1],reason:'wrong swap index after real reroll'},
   {id:'R14-V1',source:null,order:[1],reason:'R14 swap alone'},
   {id:'R14-V1',source:null,order:[2],reason:'R14 reroll alone'},
-  {id:'R14-V1',source:r14Source.replace('rerollValues[0] = randint(4, 9)','rerollValues[0] = 6; rerollValues[3] = 7'),order:[2,1],reason:'R14 Secondary cannot edit fourth index'},
+  {id:'R14-V1',source:r14Source.replace('rolledPowers[0] = randint(4, 9)','rolledPowers[0] = 6; rolledPowers[3] = 7'),order:[2,1],reason:'R14 Secondary cannot edit fourth index'},
   {id:'R14-V1',source:r14Source.replace('randint(4, 9)','randint(0, 3)'),order:[2,1],reason:'R14 Secondary cannot roll below4'},
   {id:'R17-V1',source:null,order:[1],controls:{dropCommit:'sourceMoves'},reason:'missing reserve source commit'},
   {id:'R18-V1',source:null,order:[1],controls:{dropCommit:'allyValues'},reason:'missing numeric destination commit'},
@@ -242,7 +267,7 @@ function main(opt){
  ];
  for(const n of negatives){const run=execute(n.id,n.order,n.controls||{},n.source,'unmet');negative++;results.push({id:n.id,negative:n.reason,pass:run.pass,problems:run.problems});}
  // Observable-state equivalence: a fixed-six loop passes V1 but fails extended V3.
- const fixedSix='apocalypse.onInteract(apocTypes.Room.R25, apocTypes.Station.Primary, function () { let allyMoves: string[] = apocalypse.moves(apocTypes.Side.Ally); let enemyMoves: string[] = apocalypse.moves(apocTypes.Side.Enemy); for (let i = 0; i <= 5; i++) { if (allyMoves[i] == "Wait" && enemyMoves[i] == "Strike") { allyMoves[i] = "Ward"; } } apocalypse.setMoves(apocTypes.Side.Ally, allyMoves); })\n';
+ const fixedSix='apocalypse.onInteract(apocTypes.Room.R25, apocTypes.Station.Primary, function () { let ourMoves: string[] = apocalypse.moves(apocTypes.Side.Ally); let enemyMoves: string[] = apocalypse.moves(apocTypes.Side.Enemy); for (let index = 0; index <= 5; index++) { if (ourMoves[index] == "Wait" && enemyMoves[index] == "Attack") { ourMoves[index] = "Shield"; } } apocalypse.setMoves(apocTypes.Side.Ally, ourMoves); })\n';
  const equivalenceV1=execute('R25-V1',[1],{},fixedSix,'met');const extendedV3=execute('R25-V3',[1],{},fixedSix,'unmet');
  // Setter defensive-copy guarantee, separately measured in the exact mock.
  const alias=makeFixture(variants.get('R04-V1'),station);
@@ -269,7 +294,7 @@ function main(opt){
  rollbackCase('callback-timeout',
   'apocalypse.onInteract(apocTypes.Room.R04, apocTypes.Station.Primary, function () { while (true) { } })',
   'Script execution timed out');
- rollbackCase('r14-secondary-fixed-index',r14Source.replace('rerollValues[0] = randint(4, 9)','rerollValues[0] = 6; rerollValues[3] = 7'),'R14 Secondary','R14-V1',2);
+ rollbackCase('r14-secondary-fixed-index',r14Source.replace('rolledPowers[0] = randint(4, 9)','rolledPowers[0] = 6; rolledPowers[3] = 7'),'R14 Secondary','R14-V1',2);
  rollbackCase('r14-secondary-range',r14Source.replace('randint(4, 9)','randint(0, 3)'),'R14 Secondary','R14-V1',2);
  // These deliberate record/final-state corruptions test the assessment seam,
  // independently of the actual reference callbacks and their variable rolls.
@@ -298,8 +323,9 @@ function main(opt){
  // ensure our own host adapter cannot silently over-credit invalid code.
  // Goal/variant totals and stable report. Native proof deliberately not claimed.
  const report={schema:'AL-LEARNER-VERIFICATION-1',run_command:'node tools/verify-learner-states.mjs --common-root PATH_TO_ATTACHED_COMMON',adapter:'Node vm executes exact returned native handler source after removing only explicit let-variable simple type annotations (: Sprite, string, number or []); no TS compilation, no rewriting of algorithm, no learner solution replacement',test_only_methods:'Host getter copies add insertAt(index,item), removeAt(index) with strict in-range indices; ES shift/pop/unshift/push/reverse/indexOf/for-of remain native. randint mock controls low/high ends. Setters copy staged values; actor and ALL target references are stable objects. R14 Secondary validates the whole staged attempt against its fixed-index/range capability before acceptance.',fixture_overlays:[fixtureOverlay],room_count:27,shared_variant_count:81,positive_trials:positives,random_trials:random,negative_trials:negative,equivalence_regressions:2,alias_defensive_copy_trials:1,harness_integrity_assertions:harnessIntegrity,total_trials:tested,source_construction_reviews:sourceReviewed,passed:failures.length===0,failures,results,accepted_program_cache:false,semantic_scope:['exact arrays by value/reference identity','fresh variant starter data each run','registered current handler, station rules, explicit setters and real object effects','R24 ordered snapshots','R14 relative exact first/fourth swaps and fixed first-value rerolls with record continuity/protected state/actual final snapshot; both operations required','both R14 and R19 random endpoints across three variants'],checks:{native_compile:'not_run',native_blocks_decompile:'not_run',native_sprite_allocation:'not_run',native_gameplay_and_save:'not_run',native_recipe_attachment:'not_run',instructional_media:'not_run'},limitations:['Host controls actor identity via real JavaScript objects, not Arcade Sprite allocation.','No battle engine or victory replay is run; R14 accepts legal operation history independently of whether the chosen roll wins combat.','No new native TypeScript/Blocks structural proof is claimed by this host run.','R25 state-equivalent fixed-six V1 accepted behaviorally; copy teaches dynamic current-length traversal.']};
+ report.move_transport={fixture_names:'unchanged internal combat IDs',getter_names:'friendly learner display names',setter_names:'friendly or legacy internal names, translated to internal copies',actual_api_host_check:'validation/learner-language-v0.6.0/RESULTS.json'};
  report.source_mode=opt.nativeCumulative?'actual_editor_generated_cumulative_typescript':opt.nativeRoundtrip?'actual_editor_generated_typescript':'canonical_reference_typescript';report.same_callback_fresh_attempt_trials=repeats;
- if(nativeProof)report.native_evidence={path:'validation/native-tutorial/RESULTS.json',sha256:hash(read(opt.gameRoot,'validation/native-tutorial/RESULTS.json')),target:nativeProof.target,changed_room_and_cumulative:{path:deltaPath,sha256:hash(read(opt.gameRoot,deltaPath)),target:deltaProof.target},selection:'Fresh R14 and cumulative R27 proof; unchanged other26 isolated native sources use retained historical proof.'};
+ if(deltaProof)report.native_evidence={binding:'copy/media/NATIVE_BLOCKS_REUSE.json',binding_sha256:hash(fs.readFileSync(path.join(opt.gameRoot,'copy/media/NATIVE_BLOCKS_REUSE.json'))),current_receipt:{path:deltaPath,sha256:hash(fs.readFileSync(path.join(opt.gameRoot,deltaPath))),target:deltaProof.target},selection:fullCurrentNative?'Fresh all27 isolated references and current cumulative R27, bound to current API and exact saved native roundtrip source.':'Bound native delta plus exact unchanged historical references.',historical_receipt:nativeProof?nativeBinding.historical_receipt:undefined};
  const out=path.join(opt.gameRoot,'validation/learner-states/'+(opt.nativeCumulative?'NATIVE_CUMULATIVE_RESULTS.json':opt.nativeRoundtrip?'NATIVE_ROUNDTRIP_RESULTS.json':'RESULTS.json'));const bytes=json(report);
  if(opt.check){if(!fs.existsSync(out))throw Error('Missing validation RESULTS.json');if(fs.readFileSync(out,'utf8')!==bytes)throw Error('Stale validation RESULTS.json');}else{fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,bytes);}
  if(!opt.noCatalog){for(const c of catalog.rooms){c[opt.nativeCumulative?'native_cumulative_host_verification':opt.nativeRoundtrip?'native_roundtrip_host_verification':'host_verification']=failures.filter(f=>f.id.startsWith(c.room+'-')).length?'fail':'pass';}

@@ -12,7 +12,7 @@ Ten moment pads run from top to bottom: allies act, then enemies. Icons show eac
 
 Each Recipe shows the needed native blocks and the complete example. Keep your earlier room events; add the new job beside them.
 
-At a physical altar, **A** runs your current code. **B** explains the list operation. Selecting a moment does not change the setup's marked position.
+Use Left altar or Right altar to match the event in your code. At an altar, **A** runs your current code. **B** explains the list operation. Selecting a moment does not change the setup's marked position.
 
 Start with {{recipe:R01}}.
 

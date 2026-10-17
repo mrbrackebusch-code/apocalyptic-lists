@@ -6,7 +6,7 @@
     {
       "room": "R01",
       "sequence": 1,
-      "room_situation": "Create an entire allied move list, including any visible leading Wait cells, in Ward→Mend→Strike→Strike order.",
+      "room_situation": "Create an entire allied move list, including any visible leading Wait cells, in Shield→Heal→Attack→Attack order.",
       "native_construction": "create string array; prefix loop; append",
       "source_support": [
         {
@@ -18,14 +18,14 @@
       "prerequisites": [],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves"
+        "ourMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -35,20 +35,20 @@
       "examples": [
         {
           "variant_id": "R01-V1",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R01-V1"
         },
         {
           "variant_id": "R01-V2",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R01-V2"
         },
         {
           "variant_id": "R01-V3",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Wait\", \"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R01-V3"
         }
       ],
@@ -75,7 +75,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "create string array; prefix loop; append",
           "intended_visible_change": "Editable Arcade Blocks for create string array; prefix loop; append",
-          "alt_text": "R01 native editable Arcade Blocks showing create string array; prefix loop; append, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R01 native editable Arcade Blocks showing create string array; prefix loop; append, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -92,9 +92,9 @@
           ],
           "id": "R01-before-after",
           "kind": "game_before_after",
-          "focal_change": "The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The allied move list starts with the displayed number of `Wait` entries, followed by `Ward`, `Mend`, `Strike`, `Strike`. Its new length matches what you built.",
-          "alt_text": "R01 spatial chamber before and after its altar job. The allied move list starts with the displayed number of Wait entries, followed by Ward, Mend, Strike, Strike. Its new length matches what you built."
+          "focal_change": "The allied move list starts with the displayed number of `Wait` entries, followed by `Shield`, `Heal`, `Attack`, `Attack`. Its new length matches what you built.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The allied move list starts with the displayed number of `Wait` entries, followed by `Shield`, `Heal`, `Attack`, `Attack`. Its new length matches what you built.",
+          "alt_text": "R01 spatial chamber before and after its altar job. The allied move list starts with the displayed number of Wait entries, followed by Shield, Heal, Attack, Attack. Its new length matches what you built."
         }
       ],
       "next_recipe": "R02",
@@ -109,7 +109,8 @@
         "R01-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R02",
@@ -128,12 +129,12 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "hazardRoster"
+        "enemies"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [],
           "effects": [
             "hold"
@@ -213,18 +214,19 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Hold one hazard",
+      "title": "Freeze one enemy",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R02-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R03",
       "sequence": 3,
-      "room_situation": "Target selector highlights enemy move index 0; replace Strike with Wait.",
+      "room_situation": "Target selector highlights enemy move index 0; replace Attack with Wait.",
       "native_construction": "indexed string replacement",
       "source_support": [
         {
@@ -243,7 +245,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -255,19 +257,19 @@
       "examples": [
         {
           "variant_id": "R03-V1",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\"]",
           "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R03-V1"
         },
         {
           "variant_id": "R03-V2",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R03-V2"
         },
         {
           "variant_id": "R03-V3",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R03-V3"
         }
@@ -312,9 +314,9 @@
           ],
           "id": "R03-before-after",
           "kind": "game_before_after",
-          "focal_change": "The marked enemy `Strike` becomes `Wait`. No item is inserted or removed.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked enemy `Strike` becomes `Wait`. No item is inserted or removed.",
-          "alt_text": "R03 spatial chamber before and after its altar job. The marked enemy Strike becomes Wait. No item is inserted or removed."
+          "focal_change": "The marked enemy `Attack` becomes `Wait`. No item is inserted or removed.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked enemy `Attack` becomes `Wait`. No item is inserted or removed.",
+          "alt_text": "R03 spatial chamber before and after its altar job. The marked enemy Attack becomes Wait. No item is inserted or removed."
         }
       ],
       "next_recipe": "R04",
@@ -329,12 +331,13 @@
         "R03-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R04",
       "sequence": 4,
-      "room_situation": "Append supplied Strike to complete the last damage row; preset final power is 3.",
+      "room_situation": "Append supplied Attack to complete the last damage row; preset final power is 3.",
       "native_construction": "push string",
       "source_support": [
         {
@@ -348,14 +351,14 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves"
+        "ourMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -365,20 +368,20 @@
       "examples": [
         {
           "variant_id": "R04-V1",
-          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R04-V1"
         },
         {
           "variant_id": "R04-V2",
-          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R04-V2"
         },
         {
           "variant_id": "R04-V3",
-          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R04-V3"
         }
       ],
@@ -405,7 +408,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "push string",
           "intended_visible_change": "Editable Arcade Blocks for push string",
-          "alt_text": "R04 native editable Arcade Blocks showing push string, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R04 native editable Arcade Blocks showing push string, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -422,9 +425,9 @@
           ],
           "id": "R04-before-after",
           "kind": "game_before_after",
-          "focal_change": "One `Strike` appears at the end of `allyMoves`. The other allied lists keep their original lengths.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. One `Strike` appears at the end of `allyMoves`. The other allied lists keep their original lengths.",
-          "alt_text": "R04 spatial chamber before and after its altar job. One Strike appears at the end of allyMoves. The other allied lists keep their original lengths."
+          "focal_change": "One `Attack` appears at the end of `ourMoves`. The other allied lists keep their original lengths.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. One `Attack` appears at the end of `ourMoves`. The other allied lists keep their original lengths.",
+          "alt_text": "R04 spatial chamber before and after its altar job. One Attack appears at the end of ourMoves. The other allied lists keep their original lengths."
         }
       ],
       "next_recipe": "R05",
@@ -439,12 +442,13 @@
         "R04-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R05",
       "sequence": 5,
-      "room_situation": "Insert the supplied Ward at index 1 just before the second incoming hit.",
+      "room_situation": "Insert the supplied Shield at index 1 just before the second incoming hit.",
       "native_construction": "insertAt marked index",
       "source_support": [
         {
@@ -458,14 +462,14 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves"
+        "ourMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": 1
@@ -475,20 +479,20 @@
       "examples": [
         {
           "variant_id": "R05-V1",
-          "initial_summary": "allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Attack\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Attack\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R05-V1"
         },
         {
           "variant_id": "R05-V2",
-          "initial_summary": "allyMoves: [\"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Attack\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Attack\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R05-V2"
         },
         {
           "variant_id": "R05-V3",
-          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Wait\", \"Attack\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Wait\", \"Attack\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R05-V3"
         }
       ],
@@ -515,7 +519,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "insertAt marked index",
           "intended_visible_change": "Editable Arcade Blocks for insertAt marked index",
-          "alt_text": "R05 native editable Arcade Blocks showing insertAt marked index, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R05 native editable Arcade Blocks showing insertAt marked index, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -532,9 +536,9 @@
           ],
           "id": "R05-before-after",
           "kind": "game_before_after",
-          "focal_change": "`Ward` appears at the marked insertion position; all later allied moves shift toward later moments.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. `Ward` appears at the marked insertion position; all later allied moves shift toward later moments.",
-          "alt_text": "R05 spatial chamber before and after its altar job. Ward appears at the marked insertion position; all later allied moves shift toward later moments."
+          "focal_change": "`Shield` appears at the marked insertion position; all later allied moves shift toward later moments.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. `Shield` appears at the marked insertion position; all later allied moves shift toward later moments.",
+          "alt_text": "R05 spatial chamber before and after its altar job. Shield appears at the marked insertion position; all later allied moves shift toward later moments."
         }
       ],
       "next_recipe": "R06",
@@ -549,12 +553,13 @@
         "R05-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R06",
       "sequence": 6,
-      "room_situation": "Prepend supplied Wait at enemyMoves index zero; enemy first Strike must move to the protected row.",
+      "room_situation": "Prepend supplied Wait at enemyMoves index zero; enemy first Attack must move to the protected row.",
       "native_construction": "unshift string",
       "source_support": [
         {
@@ -573,7 +578,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -585,20 +590,20 @@
       "examples": [
         {
           "variant_id": "R06-V1",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R06-V1"
         },
         {
           "variant_id": "R06-V2",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R06-V2"
         },
         {
           "variant_id": "R06-V3",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R06-V3"
         }
       ],
@@ -642,9 +647,9 @@
           ],
           "id": "R06-before-after",
           "kind": "game_before_after",
-          "focal_change": "A new `Wait` becomes the first enemy move. The original first `Strike` becomes the second move.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. A new `Wait` becomes the first enemy move. The original first `Strike` becomes the second move.",
-          "alt_text": "R06 spatial chamber before and after its altar job. A new Wait becomes the first enemy move. The original first Strike becomes the second move."
+          "focal_change": "A new `Wait` becomes the first enemy move. The original first `Attack` becomes the second move.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. A new `Wait` becomes the first enemy move. The original first `Attack` becomes the second move.",
+          "alt_text": "R06 spatial chamber before and after its altar job. A new Wait becomes the first enemy move. The original first Attack becomes the second move."
         }
       ],
       "next_recipe": "R07",
@@ -659,12 +664,13 @@
         "R06-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R07",
       "sequence": 7,
-      "room_situation": "Remove marked enemy Ward at index 0 and discard the returned string.",
+      "room_situation": "Remove marked enemy Shield at index 0 and discard the returned string.",
       "native_construction": "removeAt marked index",
       "source_support": [
         {
@@ -683,7 +689,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -695,20 +701,20 @@
       "examples": [
         {
           "variant_id": "R07-V1",
-          "initial_summary": "enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Shield\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R07-V1"
         },
         {
           "variant_id": "R07-V2",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Shield\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R07-V2"
         },
         {
           "variant_id": "R07-V3",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R07-V3"
         }
       ],
@@ -752,9 +758,9 @@
           ],
           "id": "R07-before-after",
           "kind": "game_before_after",
-          "focal_change": "The marked enemy `Ward` is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked enemy `Ward` is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments.",
-          "alt_text": "R07 spatial chamber before and after its altar job. The marked enemy Ward is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments."
+          "focal_change": "The marked enemy `Shield` is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The marked enemy `Shield` is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments.",
+          "alt_text": "R07 spatial chamber before and after its altar job. The marked enemy Shield is gone. The enemy move list is shorter by one, with later items shifted toward earlier moments."
         }
       ],
       "next_recipe": "R08",
@@ -769,12 +775,13 @@
         "R07-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R08",
       "sequence": 8,
-      "room_situation": "Compute allyMoves.length - 1 and set that existing last element to the supplied Strike. Do not append.",
+      "room_situation": "Compute ourMoves.length - 1 and set that existing last element to the supplied Attack. Do not append.",
       "native_construction": "length-minus-one indexed set",
       "source_support": [
         {
@@ -788,14 +795,14 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves"
+        "ourMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -805,20 +812,20 @@
       "examples": [
         {
           "variant_id": "R08-V1",
-          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R08-V1"
         },
         {
           "variant_id": "R08-V2",
-          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R08-V2"
         },
         {
           "variant_id": "R08-V3",
-          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R08-V3"
         }
       ],
@@ -845,7 +852,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "length-minus-one indexed set",
           "intended_visible_change": "Editable Arcade Blocks for length-minus-one indexed set",
-          "alt_text": "R08 native editable Arcade Blocks showing length-minus-one indexed set, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R08 native editable Arcade Blocks showing length-minus-one indexed set, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -862,9 +869,9 @@
           ],
           "id": "R08-before-after",
           "kind": "game_before_after",
-          "focal_change": "Only the last allied `Wait` changes to `Strike`; list length does not change, even in a longer setup.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only the last allied `Wait` changes to `Strike`; list length does not change, even in a longer setup.",
-          "alt_text": "R08 spatial chamber before and after its altar job. Only the last allied Wait changes to Strike; list length does not change, even in a longer setup."
+          "focal_change": "Only the last allied `Wait` changes to `Attack`; list length does not change, even in a longer setup.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only the last allied `Wait` changes to `Attack`; list length does not change, even in a longer setup.",
+          "alt_text": "R08 spatial chamber before and after its altar job. Only the last allied Wait changes to Attack; list length does not change, even in a longer setup."
         }
       ],
       "next_recipe": "R09",
@@ -879,12 +886,13 @@
         "R08-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R09",
       "sequence": 9,
-      "room_situation": "Remove the first existing allyMoves element, a real Wait; preserve the independent allyValues and target streams.",
+      "room_situation": "Remove the first existing ourMoves element, a real Wait; preserve the independent ourPowers and target streams.",
       "native_construction": "shift move",
       "source_support": [
         {
@@ -898,14 +906,14 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves"
+        "ourMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -915,20 +923,20 @@
       "examples": [
         {
           "variant_id": "R09-V1",
-          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R09-V1"
         },
         {
           "variant_id": "R09-V2",
-          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Attack\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Attack\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R09-V2"
         },
         {
           "variant_id": "R09-V3",
-          "initial_summary": "allyMoves: [\"Wait\", \"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Shield\", \"Heal\", \"Attack\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R09-V3"
         }
       ],
@@ -955,7 +963,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "shift move",
           "intended_visible_change": "Editable Arcade Blocks for shift move",
-          "alt_text": "R09 native editable Arcade Blocks showing shift move, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R09 native editable Arcade Blocks showing shift move, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -989,7 +997,8 @@
         "R09-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R10",
@@ -1013,7 +1022,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -1025,20 +1034,20 @@
       "examples": [
         {
           "variant_id": "R10-V1",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Strike\"]",
-          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Attack\"]",
+          "expected_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R10-V1"
         },
         {
           "variant_id": "R10-V2",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\", \"Strike\"]",
-          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\", \"Attack\"]",
+          "expected_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R10-V2"
         },
         {
           "variant_id": "R10-V3",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Strike\"]",
-          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Attack\"]",
+          "expected_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R10-V3"
         }
       ],
@@ -1099,12 +1108,13 @@
         "R10-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R11",
       "sequence": 11,
-      "room_situation": "Get-and-remove FIRST actual Sprite from hazardRoster, then give the returned reference to the banish station.",
+      "room_situation": "Get-and-remove FIRST actual Sprite from enemies, then give the returned reference to the banish station.",
       "native_construction": "shift Sprite; setRoster; banish identity",
       "source_support": [
         {
@@ -1119,12 +1129,12 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "hazardRoster"
+        "enemies"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "roster"
           ],
@@ -1138,20 +1148,20 @@
       "examples": [
         {
           "variant_id": "R11-V1",
-          "initial_summary": "hazardRoster: [\"E-Raider\", \"E-Wisp\", \"E-Shaman\"]",
-          "expected_summary": "hazardRoster: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider",
+          "initial_summary": "enemies: [\"E-Raider\", \"E-Wisp\", \"E-Shaman\"]",
+          "expected_summary": "enemies: [\"E-Wisp\", \"E-Shaman\"]; Banish: E-Raider",
           "goal_ref": "common/ROOM_GOALS.json#variants/R11-V1"
         },
         {
           "variant_id": "R11-V2",
-          "initial_summary": "hazardRoster: [\"E-Wisp\", \"E-Raider\", \"E-Shaman\"]",
-          "expected_summary": "hazardRoster: [\"E-Raider\", \"E-Shaman\"]; Banish: E-Wisp",
+          "initial_summary": "enemies: [\"E-Wisp\", \"E-Raider\", \"E-Shaman\"]",
+          "expected_summary": "enemies: [\"E-Raider\", \"E-Shaman\"]; Banish: E-Wisp",
           "goal_ref": "common/ROOM_GOALS.json#variants/R11-V2"
         },
         {
           "variant_id": "R11-V3",
-          "initial_summary": "hazardRoster: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\"]",
-          "expected_summary": "hazardRoster: [\"E-Shaman\", \"E-Wisp\"]; Banish: E-Raider",
+          "initial_summary": "enemies: [\"E-Raider\", \"E-Shaman\", \"E-Wisp\"]",
+          "expected_summary": "enemies: [\"E-Shaman\", \"E-Wisp\"]; Banish: E-Raider",
           "goal_ref": "common/ROOM_GOALS.json#variants/R11-V3"
         }
       ],
@@ -1206,18 +1216,19 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Take a hazard out of play",
+      "title": "Take an enemy out of play",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R11-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R12",
       "sequence": 12,
-      "room_situation": "Find indexOf(\"Ward\") in enemyMoves and set the existing element at that index to Wait.",
+      "room_situation": "Find indexOf(\"Shield\") in enemyMoves and set the existing element at that index to Wait.",
       "native_construction": "indexOf + indexed set with -1 guard",
       "source_support": [
         {
@@ -1241,7 +1252,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -1253,20 +1264,20 @@
       "examples": [
         {
           "variant_id": "R12-V1",
-          "initial_summary": "enemyMoves: [\"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Shield\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R12-V1"
         },
         {
           "variant_id": "R12-V2",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Shield\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R12-V2"
         },
         {
           "variant_id": "R12-V3",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R12-V3"
         }
       ],
@@ -1310,9 +1321,9 @@
           ],
           "id": "R12-before-after",
           "kind": "game_before_after",
-          "focal_change": "The current enemy `Ward` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The current enemy `Ward` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
-          "alt_text": "R12 spatial chamber before and after its altar job. The current enemy Ward changes to Wait wherever the search finds it. Other entries remain unchanged."
+          "focal_change": "The current enemy `Shield` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The current enemy `Shield` changes to `Wait` wherever the search finds it. Other entries remain unchanged.",
+          "alt_text": "R12 spatial chamber before and after its altar job. The current enemy Shield changes to Wait wherever the search finds it. Other entries remain unchanged."
         }
       ],
       "next_recipe": "R13",
@@ -1327,12 +1338,13 @@
         "R12-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R13",
       "sequence": 13,
-      "room_situation": "For each real Sprite in hazardRoster, submit the Sprite to hold station; every actor would otherwise act.",
+      "room_situation": "For each real Sprite in enemies, submit the Sprite to hold station; every actor would otherwise act.",
       "native_construction": "for-of Sprite traversal; hold each",
       "source_support": [
         {
@@ -1347,12 +1359,12 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "hazardRoster"
+        "enemies"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [],
           "effects": [
             "hold"
@@ -1432,18 +1444,19 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Hold every hazard",
+      "title": "Freeze every enemy",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R13-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R14",
       "sequence": 14,
-      "room_situation": "Reroll only allyValues[0] from 4 through 9 at Secondary, then use the unchanged Primary first/fourth swap to move that donor to the Boss hit.",
+      "room_situation": "Reroll only ourPowers[0] from 4 through 9 at Secondary, then use the unchanged Primary first/fourth swap to move that donor to the Boss hit.",
       "native_construction": "fixed-index random numeric replacement; numeric temporary-variable swap",
       "source_support": [
         {
@@ -1457,14 +1470,15 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyValues"
+        "ourPowers",
+        "rolledPowers"
       ],
       "stations": [
         {
           "station": "Secondary",
-          "physical_action": "A at Roll first power rerolls only the first allied power; B explains the operation",
+          "physical_action": "Walk to Right altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyValues"
+            "rolledPowers"
           ],
           "effects": [],
           "marked_index": 0,
@@ -1476,9 +1490,9 @@
         },
         {
           "station": "Primary",
-          "physical_action": "A at Swap power exchanges first/fourth allied powers; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyValues"
+            "ourPowers"
           ],
           "effects": [],
           "marked_index": 0
@@ -1488,7 +1502,7 @@
       "examples": [
         {
           "variant_id": "R14-V1",
-          "initial_summary": "allyValues: [1, 1, 2, 1]",
+          "initial_summary": "ourPowers: [1, 1, 2, 1]",
           "expected_summary": "Secondary rolls first power from 4 through 9; Primary swaps first/fourth. Legal continuous use of both operations meets the list task; victory needs fourth power at least 4.",
           "goal_ref": "implementation/encounters.json#/variants/39",
           "runtime_goal_ref": "implementation/supplied-world/goals.ts#historyR14",
@@ -1496,7 +1510,7 @@
         },
         {
           "variant_id": "R14-V2",
-          "initial_summary": "allyValues: [1, 1, 2, 1]",
+          "initial_summary": "ourPowers: [1, 1, 2, 1]",
           "expected_summary": "Secondary rolls first power from 4 through 9; Primary swaps first/fourth. Legal continuous use of both operations meets the list task; victory needs fourth power at least 5.",
           "goal_ref": "implementation/encounters.json#/variants/40",
           "runtime_goal_ref": "implementation/supplied-world/goals.ts#historyR14",
@@ -1504,7 +1518,7 @@
         },
         {
           "variant_id": "R14-V3",
-          "initial_summary": "allyValues: [1, 1, 2, 1]",
+          "initial_summary": "ourPowers: [1, 1, 2, 1]",
           "expected_summary": "Secondary rolls first power from 4 through 9; Primary swaps first/fourth. Legal continuous use of both operations meets the list task; victory needs fourth power at least 6.",
           "goal_ref": "implementation/encounters.json#/variants/41",
           "runtime_goal_ref": "implementation/supplied-world/goals.ts#historyR14",
@@ -1534,7 +1548,7 @@
           "id": "R14-blocks",
           "kind": "assembled_native_blocks",
           "focal_change": "Secondary fixed-index randint(4,9); Primary unchanged temporary-variable first/fourth swap",
-          "intended_visible_change": "Two complete native Blocks examples: Secondary rerollValues[0]=randint(4,9), then Primary first/fourth swap.",
+          "intended_visible_change": "Two complete native Blocks examples: Secondary ourPowers[0]=randint(4,9), then Primary first/fourth swap.",
           "alt_text": "R14 complete native Blocks: reroll only the first allied power, then swap first and fourth using a saved number."
         },
         {
@@ -1571,12 +1585,13 @@
         "R14-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R15",
       "sequence": 15,
-      "room_situation": "Traverse enemyMoves by index, setting EACH Ward to Wait, leaving all non-Wards untouched.",
+      "room_situation": "Traverse enemyMoves by index, setting EACH Shield to Wait, leaving all non-Shields untouched.",
       "native_construction": "length-derived indexed conditional loop",
       "source_support": [
         {
@@ -1596,7 +1611,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -1608,20 +1623,20 @@
       "examples": [
         {
           "variant_id": "R15-V1",
-          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Shield\", \"Attack\", \"Shield\", \"Attack all\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Attack all\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R15-V1"
         },
         {
           "variant_id": "R15-V2",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Shield\", \"Attack\", \"Shield\", \"Attack all\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Attack all\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R15-V2"
         },
         {
           "variant_id": "R15-V3",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Flurry\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Attack\", \"Shield\", \"Attack all\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Attack all\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R15-V3"
         }
       ],
@@ -1665,9 +1680,9 @@
           ],
           "id": "R15-before-after",
           "kind": "game_before_after",
-          "focal_change": "All enemy `Ward` moves become `Wait`; existing attacks and other moves stay in their original positions.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. All enemy `Ward` moves become `Wait`; existing attacks and other moves stay in their original positions.",
-          "alt_text": "R15 spatial chamber before and after its altar job. All enemy Ward moves become Wait; existing attacks and other moves stay in their original positions."
+          "focal_change": "All enemy `Shield` moves become `Wait`; existing attacks and other moves stay in their original positions.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. All enemy `Shield` moves become `Wait`; existing attacks and other moves stay in their original positions.",
+          "alt_text": "R15 spatial chamber before and after its altar job. All enemy Shield moves become Wait; existing attacks and other moves stay in their original positions."
         }
       ],
       "next_recipe": "R16",
@@ -1676,18 +1691,19 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Repair every shield",
+      "title": "Replace every Shield",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R15-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R16",
       "sequence": 16,
-      "room_situation": "Begin with EMPTY allyMoves. For each entry in read-only enemyMoves, append Ward for Strike or Strike for Wait, preserving source order.",
+      "room_situation": "Begin with EMPTY ourMoves. For each entry in read-only enemyMoves, append Shield for Attack or Attack for Wait, preserving source order.",
       "native_construction": "typed empty string array; for-of; push counters",
       "source_support": [
         {
@@ -1701,15 +1717,15 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves",
-        "sourceMoves (read-only enemyMoves alias)"
+        "ourMoves",
+        "reserveMoves (read-only enemyMoves alias)"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -1719,20 +1735,20 @@
       "examples": [
         {
           "variant_id": "R16-V1",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Shield\", \"Attack\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R16-V1"
         },
         {
           "variant_id": "R16-V2",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Attack\", \"Shield\", \"Attack\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R16-V2"
         },
         {
           "variant_id": "R16-V3",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Ward\", \"Strike\", \"Strike\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Shield\", \"Attack\", \"Attack\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R16-V3"
         }
       ],
@@ -1759,7 +1775,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "typed empty string array; for-of; push counters",
           "intended_visible_change": "Editable Arcade Blocks for typed empty string array; for-of; push counters",
-          "alt_text": "R16 native editable Arcade Blocks showing typed empty string array; for-of; push counters, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R16 native editable Arcade Blocks showing typed empty string array; for-of; push counters, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -1776,9 +1792,9 @@
           ],
           "id": "R16-before-after",
           "kind": "game_before_after",
-          "focal_change": "Each source move produces one allied move in the same order: `Strike` → `Ward`, and `Wait` → `Strike`. The source list stays unchanged.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Each source move produces one allied move in the same order: `Strike` → `Ward`, and `Wait` → `Strike`. The source list stays unchanged.",
-          "alt_text": "R16 spatial chamber before and after its altar job. Each source move produces one allied move in the same order: Strike → Ward, and Wait → Strike. The source list stays unchanged."
+          "focal_change": "Each source move produces one allied move in the same order: `Attack` → `Shield`, and `Wait` → `Attack`. The source list stays unchanged.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Each source move produces one allied move in the same order: `Attack` → `Shield`, and `Wait` → `Attack`. The source list stays unchanged.",
+          "alt_text": "R16 spatial chamber before and after its altar job. Each source move produces one allied move in the same order: Attack → Shield, and Wait → Attack. The source list stays unchanged."
         }
       ],
       "next_recipe": "R17",
@@ -1793,12 +1809,13 @@
         "R16-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R17",
       "sequence": 17,
-      "room_situation": "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to allyMoves. The last reserved ability may change between setups.",
+      "room_situation": "Get-and-remove last from reserveMoves, and APPEND exactly the returned allied ability to ourMoves. The last reserved ability may change between setups.",
       "native_construction": "pop source + push returned string; two setters",
       "source_support": [
         {
@@ -1812,16 +1829,16 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves",
-        "sourceMoves"
+        "ourMoves",
+        "reserveMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves",
-            "sourceMoves"
+            "ourMoves",
+            "reserveMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -1831,20 +1848,20 @@
       "examples": [
         {
           "variant_id": "R17-V1",
-          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Wait\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Wait\"]",
+          "initial_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\"]; reserveMoves: [\"Wait\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]; reserveMoves: [\"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R17-V1"
         },
         {
           "variant_id": "R17-V2",
-          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Mend\", \"Wait\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Strike\"]; reserveMoves: [\"Mend\", \"Wait\"]",
+          "initial_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\"]; reserveMoves: [\"Heal\", \"Wait\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Attack\"]; reserveMoves: [\"Heal\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R17-V2"
         },
         {
           "variant_id": "R17-V3",
-          "initial_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\"]; reserveMoves: [\"Ward\", \"Mend\", \"Wait\", \"Reap\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Wait\", \"Reap\"]; reserveMoves: [\"Ward\", \"Mend\", \"Wait\"]",
+          "initial_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\"]; reserveMoves: [\"Shield\", \"Heal\", \"Wait\", \"Finish\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Wait\", \"Finish\"]; reserveMoves: [\"Shield\", \"Heal\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R17-V3"
         }
       ],
@@ -1871,7 +1888,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "pop source + push returned string; two setters",
           "intended_visible_change": "Editable Arcade Blocks for pop source + push returned string; two setters",
-          "alt_text": "R17 native editable Arcade Blocks showing pop source + push returned string; two setters, inside Primary onInteract handler; submit `allyMoves`, `sourceMoves`."
+          "alt_text": "R17 native editable Arcade Blocks showing pop source + push returned string; two setters, inside Primary onInteract handler; submit `ourMoves`, `reserveMoves`."
         },
         {
           "status": "planned",
@@ -1888,9 +1905,9 @@
           ],
           "id": "R17-before-after",
           "kind": "game_before_after",
-          "focal_change": "The source/reserve list loses its last move; that exact string is now the final move of `allyMoves`.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The source/reserve list loses its last move; that exact string is now the final move of `allyMoves`.",
-          "alt_text": "R17 spatial chamber before and after its altar job. The source/reserve list loses its last move; that exact string is now the final move of allyMoves."
+          "focal_change": "The source/reserve list loses its last move; that exact string is now the final move of `ourMoves`.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The source/reserve list loses its last move; that exact string is now the final move of `ourMoves`.",
+          "alt_text": "R17 spatial chamber before and after its altar job. The source/reserve list loses its last move; that exact string is now the final move of ourMoves."
         }
       ],
       "next_recipe": "R18",
@@ -1905,12 +1922,13 @@
         "R17-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R18",
       "sequence": 18,
-      "room_situation": "Get-and-remove the marked enemyValues number, then append that very returned number to allyValues.",
+      "room_situation": "Get-and-remove the marked enemyPowers number, then append that very returned number to ourPowers.",
       "native_construction": "removeAt numeric value + append returned number; two setters",
       "source_support": [
         {
@@ -1924,16 +1942,16 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyValues",
-        "enemyValues"
+        "ourPowers",
+        "enemyPowers"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "enemyValues",
-            "allyValues"
+            "enemyPowers",
+            "ourPowers"
           ],
           "effects": [],
           "marked_index": 2
@@ -1943,20 +1961,20 @@
       "examples": [
         {
           "variant_id": "R18-V1",
-          "initial_summary": "allyValues: [2, 2, 1, 1]; enemyValues: [1, 1, 5, 1, 1]",
-          "expected_summary": "allyValues: [2, 2, 1, 1, 5]; enemyValues: [1, 1, 1, 1]",
+          "initial_summary": "ourPowers: [2, 2, 1, 1]; enemyPowers: [1, 1, 5, 1, 1]",
+          "expected_summary": "ourPowers: [2, 2, 1, 1, 5]; enemyPowers: [1, 1, 1, 1]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R18-V1"
         },
         {
           "variant_id": "R18-V2",
-          "initial_summary": "allyValues: [1, 2, 2, 1, 1]; enemyValues: [1, 1, 1, 6, 1, 1]",
-          "expected_summary": "allyValues: [1, 2, 2, 1, 1, 6]; enemyValues: [1, 1, 1, 1, 1]",
+          "initial_summary": "ourPowers: [1, 2, 2, 1, 1]; enemyPowers: [1, 1, 1, 6, 1, 1]",
+          "expected_summary": "ourPowers: [1, 2, 2, 1, 1, 6]; enemyPowers: [1, 1, 1, 1, 1]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R18-V2"
         },
         {
           "variant_id": "R18-V3",
-          "initial_summary": "allyValues: [1, 1, 2, 2, 1, 1]; enemyValues: [1, 1, 1, 1, 7, 1, 1]",
-          "expected_summary": "allyValues: [1, 1, 2, 2, 1, 1, 7]; enemyValues: [1, 1, 1, 1, 1, 1]",
+          "initial_summary": "ourPowers: [1, 1, 2, 2, 1, 1]; enemyPowers: [1, 1, 1, 1, 7, 1, 1]",
+          "expected_summary": "ourPowers: [1, 1, 2, 2, 1, 1, 7]; enemyPowers: [1, 1, 1, 1, 1, 1]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R18-V3"
         }
       ],
@@ -1983,7 +2001,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "removeAt numeric value + append returned number; two setters",
           "intended_visible_change": "Editable Arcade Blocks for removeAt numeric value + append returned number; two setters",
-          "alt_text": "R18 native editable Arcade Blocks showing removeAt numeric value + append returned number; two setters, inside Primary onInteract handler; submit `allyValues`, `enemyValues`."
+          "alt_text": "R18 native editable Arcade Blocks showing removeAt numeric value + append returned number; two setters, inside Primary onInteract handler; submit `ourPowers`, `enemyPowers`."
         },
         {
           "status": "planned",
@@ -2000,9 +2018,9 @@
           ],
           "id": "R18-before-after",
           "kind": "game_before_after",
-          "focal_change": "`enemyValues` loses its marked number, and `allyValues` gains that same number at the end.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. `enemyValues` loses its marked number, and `allyValues` gains that same number at the end.",
-          "alt_text": "R18 spatial chamber before and after its altar job. enemyValues loses its marked number, and allyValues gains that same number at the end."
+          "focal_change": "`enemyPowers` loses its marked number, and `ourPowers` gains that same number at the end.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. `enemyPowers` loses its marked number, and `ourPowers` gains that same number at the end.",
+          "alt_text": "R18 spatial chamber before and after its altar job. enemyPowers loses its marked number, and ourPowers gains that same number at the end."
         }
       ],
       "next_recipe": "R19",
@@ -2011,13 +2029,14 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Transfer a number",
+      "title": "Steal a power",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R18-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R19",
@@ -2037,12 +2056,12 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "hazardRoster"
+        "enemies"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [],
           "effects": [
             "hold"
@@ -2122,18 +2141,19 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Choose one hazard at random",
+      "title": "Choose one enemy at random",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R19-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R20",
       "sequence": 20,
-      "room_situation": "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyValues and enemyTargets unchanged.",
+      "room_situation": "Reverse the entire existing enemyMoves list IN PLACE. Leave enemyPowers and enemyTargets unchanged.",
       "native_construction": "reverse existing string array",
       "source_support": [
         {
@@ -2152,7 +2172,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -2164,20 +2184,20 @@
       "examples": [
         {
           "variant_id": "R20-V1",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Flurry\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Attack all\", \"Wait\", \"Shield\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Wait\", \"Attack all\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R20-V1"
         },
         {
           "variant_id": "R20-V2",
-          "initial_summary": "enemyMoves: [\"Flurry\", \"Strike\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Strike\", \"Flurry\"]",
+          "initial_summary": "enemyMoves: [\"Attack all\", \"Attack\", \"Wait\", \"Shield\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Wait\", \"Attack\", \"Attack all\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R20-V2"
         },
         {
           "variant_id": "R20-V3",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Flurry\", \"Wait\", \"Ward\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Wait\", \"Flurry\", \"Strike\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Attack all\", \"Wait\", \"Shield\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Wait\", \"Attack all\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R20-V3"
         }
       ],
@@ -2238,13 +2258,14 @@
         "R20-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R21",
       "sequence": 21,
-      "room_situation": "Find indexOf(Strike) in enemyMoves and insert the one supplied Ward into allyMoves at that computed index.",
-      "native_construction": "indexOf Strike + insertAt other list",
+      "room_situation": "Find indexOf(Attack) in enemyMoves and insert the one supplied Shield into ourMoves at that computed index.",
+      "native_construction": "indexOf Attack + insertAt other list",
       "source_support": [
         {
           "id": "MCA-CSINTRO2-ARRAYS-STRING",
@@ -2262,15 +2283,15 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves",
-        "sourceMoves (read-only enemyMoves alias)"
+        "ourMoves",
+        "reserveMoves (read-only enemyMoves alias)"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -2280,20 +2301,20 @@
       "examples": [
         {
           "variant_id": "R21-V1",
-          "initial_summary": "allyMoves: [\"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Attack\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Attack\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R21-V1"
         },
         {
           "variant_id": "R21-V2",
-          "initial_summary": "allyMoves: [\"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Attack\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Attack\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R21-V2"
         },
         {
           "variant_id": "R21-V3",
-          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Mend\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Ward\", \"Mend\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Wait\", \"Attack\", \"Heal\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Wait\", \"Attack\", \"Shield\", \"Heal\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R21-V3"
         }
       ],
@@ -2318,9 +2339,9 @@
           ],
           "id": "R21-blocks",
           "kind": "assembled_native_blocks",
-          "focal_change": "indexOf Strike + insertAt other list",
-          "intended_visible_change": "Editable Arcade Blocks for indexOf Strike + insertAt other list",
-          "alt_text": "R21 native editable Arcade Blocks showing indexOf Strike + insertAt other list, inside Primary onInteract handler; submit `allyMoves`."
+          "focal_change": "indexOf Attack + insertAt other list",
+          "intended_visible_change": "Editable Arcade Blocks for indexOf Attack + insertAt other list",
+          "alt_text": "R21 native editable Arcade Blocks showing indexOf Attack + insertAt other list, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -2337,9 +2358,9 @@
           ],
           "id": "R21-before-after",
           "kind": "game_before_after",
-          "focal_change": "A new allied `Ward` appears at the index where the current enemy list contains its first `Strike`.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. A new allied `Ward` appears at the index where the current enemy list contains its first `Strike`.",
-          "alt_text": "R21 spatial chamber before and after its altar job. A new allied Ward appears at the index where the current enemy list contains its first Strike."
+          "focal_change": "A new allied `Shield` appears at the index where the current enemy list contains its first `Attack`.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. A new allied `Shield` appears at the index where the current enemy list contains its first `Attack`.",
+          "alt_text": "R21 spatial chamber before and after its altar job. A new allied Shield appears at the index where the current enemy list contains its first Attack."
         }
       ],
       "next_recipe": "R22",
@@ -2354,12 +2375,13 @@
         "R21-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R22",
       "sequence": 22,
-      "room_situation": "Get-and-remove the marked E-Raider Sprite from enemyTargets and prepend the SAME Sprite reference to enemyTargets; other five streams must not move.",
+      "room_situation": "Move the marked enemy portrait to the first target entry so our opening harmful move aims there; preserve the same target objects.",
       "native_construction": "removeAt marked Sprite + unshift same identity",
       "source_support": [
         {
@@ -2379,7 +2401,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyTargets"
           ],
@@ -2459,19 +2481,20 @@
         "world_progress": "supplied_world_settings"
       },
       "accepted_program_cache": false,
-      "title": "Move the same target",
+      "title": "Move a target to the front",
       "runtime_navigation": "shared runtime_navigation; use Primary altar, then top Release time crystal",
       "visual_jobs": [
         "R22-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R23",
       "sequence": 23,
-      "room_situation": "Find indexOf(Ward) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyValues or either target list.",
-      "native_construction": "indexOf Ward + removeAt guarded",
+      "room_situation": "Find indexOf(Shield) in enemyMoves, removeAt that computed index and DISCARD the returned string. Do not change enemyPowers or either target list.",
+      "native_construction": "indexOf Shield + removeAt guarded",
       "source_support": [
         {
           "id": "MCA-CSINTRO2-ARRAYS-STRING",
@@ -2494,7 +2517,7 @@
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -2506,20 +2529,20 @@
       "examples": [
         {
           "variant_id": "R23-V1",
-          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Shield\", \"Attack\", \"Wait\", \"Attack\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Attack\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R23-V1"
         },
         {
           "variant_id": "R23-V2",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Shield\", \"Attack\", \"Wait\", \"Attack\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Attack\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R23-V2"
         },
         {
           "variant_id": "R23-V3",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Strike\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Shield\", \"Attack\", \"Wait\", \"Attack\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Attack\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R23-V3"
         }
       ],
@@ -2544,9 +2567,9 @@
           ],
           "id": "R23-blocks",
           "kind": "assembled_native_blocks",
-          "focal_change": "indexOf Ward + removeAt guarded",
-          "intended_visible_change": "Editable Arcade Blocks for indexOf Ward + removeAt guarded",
-          "alt_text": "R23 native editable Arcade Blocks showing indexOf Ward + removeAt guarded, inside Primary onInteract handler; submit `enemyMoves`."
+          "focal_change": "indexOf Shield + removeAt guarded",
+          "intended_visible_change": "Editable Arcade Blocks for indexOf Shield + removeAt guarded",
+          "alt_text": "R23 native editable Arcade Blocks showing indexOf Shield + removeAt guarded, inside Primary onInteract handler; submit `enemyMoves`."
         },
         {
           "status": "planned",
@@ -2563,9 +2586,9 @@
           ],
           "id": "R23-before-after",
           "kind": "game_before_after",
-          "focal_change": "The found `Ward` is removed from `enemyMoves`; following entries shift toward earlier moments and the list becomes shorter.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The found `Ward` is removed from `enemyMoves`; following entries shift toward earlier moments and the list becomes shorter.",
-          "alt_text": "R23 spatial chamber before and after its altar job. The found Ward is removed from enemyMoves; following entries shift toward earlier moments and the list becomes shorter."
+          "focal_change": "The found `Shield` is removed from `enemyMoves`; following entries shift toward earlier moments and the list becomes shorter.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. The found `Shield` is removed from `enemyMoves`; following entries shift toward earlier moments and the list becomes shorter.",
+          "alt_text": "R23 spatial chamber before and after its altar job. The found Shield is removed from enemyMoves; following entries shift toward earlier moments and the list becomes shorter."
         }
       ],
       "next_recipe": "R24",
@@ -2580,12 +2603,13 @@
         "R23-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R24",
       "sequence": 24,
-      "room_situation": "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Strike at index (old index+1) to Wait. Reverse-order and single-station play must fail.",
+      "room_situation": "Use Station 1 to PREPEND supplied Wait to enemyMoves; THEN Station 2 SETS the shifted enemy Attack at index (old index+1) to Wait. Reverse-order and single-station play must fail.",
       "native_construction": "primary unshift then secondary post-shift indexed set",
       "source_support": [
         {
@@ -2599,12 +2623,13 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "enemyMoves"
+        "enemyMoves",
+        "shiftedMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -2613,9 +2638,9 @@
         },
         {
           "station": "Secondary",
-          "physical_action": "Walk to the Secondary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Right altar; A runs your current code; B explains this operation.",
           "edits": [
-            "enemyMoves"
+            "shiftedMoves"
           ],
           "effects": [],
           "marked_index": 1
@@ -2625,19 +2650,19 @@
       "examples": [
         {
           "variant_id": "R24-V1",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
           "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R24-V1"
         },
         {
           "variant_id": "R24-V2",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
           "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R24-V2"
         },
         {
           "variant_id": "R24-V3",
-          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Wait\"]",
+          "initial_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Wait\", \"Wait\"]",
           "expected_summary": "enemyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R24-V3"
         }
@@ -2684,9 +2709,9 @@
           ],
           "id": "R24-before-after",
           "kind": "game_before_after",
-          "focal_change": "After **Primary**, the enemy move list grows by one and existing moves shift toward later moments. After **Secondary**, the post-shift marked `Strike` becomes `Wait`. Do these in that order before running combat.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. After **Primary**, the enemy move list grows by one and existing moves shift toward later moments. After **Secondary**, the post-shift marked `Strike` becomes `Wait`. Do these in that order before running combat.",
-          "alt_text": "R24 spatial chamber before and after its altar job. After Primary, the enemy move list grows by one and existing moves shift toward later moments. After Secondary, the post-shift marked Strike becomes Wait. Do these in that order before running combat."
+          "focal_change": "After **Primary**, the enemy move list grows by one and existing moves shift toward later moments. After **Secondary**, the post-shift marked `Attack` becomes `Wait`. Do these in that order before running combat.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. After **Primary**, the enemy move list grows by one and existing moves shift toward later moments. After **Secondary**, the post-shift marked `Attack` becomes `Wait`. Do these in that order before running combat.",
+          "alt_text": "R24 spatial chamber before and after its altar job. After Primary, the enemy move list grows by one and existing moves shift toward later moments. After Secondary, the post-shift marked Attack becomes Wait. Do these in that order before running combat."
         }
       ],
       "next_recipe": "R25",
@@ -2702,12 +2727,13 @@
         "R24-secondary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R25",
       "sequence": 25,
-      "room_situation": "Loop from i=0 to allyMoves.length-1; IF allyMoves[i] is Wait AND enemyMoves[i] is Strike, set allyMoves[i] to Ward. Leave harmless Wait fillers and existing Strikes unchanged.",
+      "room_situation": "Loop from i=0 to ourMoves.length-1; IF ourMoves[i] is Wait AND enemyMoves[i] is Attack, set ourMoves[i] to Shield. Leave harmless Wait fillers and existing Attacks unchanged.",
       "native_construction": "dynamic indexed conditional parallel list check",
       "source_support": [
         {
@@ -2722,14 +2748,14 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves"
+        "ourMoves"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -2739,20 +2765,20 @@
       "examples": [
         {
           "variant_id": "R25-V1",
-          "initial_summary": "allyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Attack\", \"Wait\", \"Heal\", \"Wait\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Shield\", \"Attack\", \"Shield\", \"Heal\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R25-V1"
         },
         {
           "variant_id": "R25-V2",
-          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Heal\", \"Wait\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Shield\", \"Attack\", \"Shield\", \"Heal\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R25-V2"
         },
         {
           "variant_id": "R25-V3",
-          "initial_summary": "allyMoves: [\"Wait\", \"Wait\", \"Wait\", \"Strike\", \"Wait\", \"Mend\", \"Wait\", \"Strike\", \"Strike\"]",
-          "expected_summary": "allyMoves: [\"Wait\", \"Wait\", \"Ward\", \"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: [\"Wait\", \"Wait\", \"Wait\", \"Attack\", \"Wait\", \"Heal\", \"Wait\", \"Attack\", \"Attack\"]",
+          "expected_summary": "ourMoves: [\"Wait\", \"Wait\", \"Shield\", \"Attack\", \"Shield\", \"Heal\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R25-V3"
         }
       ],
@@ -2779,7 +2805,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "dynamic indexed conditional parallel list check",
           "intended_visible_change": "Editable Arcade Blocks for dynamic indexed conditional parallel list check",
-          "alt_text": "R25 native editable Arcade Blocks showing dynamic indexed conditional parallel list check, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R25 native editable Arcade Blocks showing dynamic indexed conditional parallel list check, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -2796,9 +2822,9 @@
           ],
           "id": "R25-before-after",
           "kind": "game_before_after",
-          "focal_change": "Only allied `Wait` entries opposite an enemy `Strike` turn into `Ward`. Harmless `Wait` entries, attacks and `Mend` remain untouched.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only allied `Wait` entries opposite an enemy `Strike` turn into `Ward`. Harmless `Wait` entries, attacks and `Mend` remain untouched.",
-          "alt_text": "R25 spatial chamber before and after its altar job. Only allied Wait entries opposite an enemy Strike turn into Ward. Harmless Wait entries, attacks and Mend remain untouched."
+          "focal_change": "Only allied `Wait` entries opposite an enemy `Attack` turn into `Shield`. Harmless `Wait` entries, attacks and `Heal` remain untouched.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. Only allied `Wait` entries opposite an enemy `Attack` turn into `Shield`. Harmless `Wait` entries, attacks and `Heal` remain untouched.",
+          "alt_text": "R25 spatial chamber before and after its altar job. Only allied Wait entries opposite an enemy Attack turn into Shield. Harmless Wait entries, attacks and Heal remain untouched."
         }
       ],
       "next_recipe": "R26",
@@ -2813,12 +2839,13 @@
         "R25-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R26",
       "sequence": 26,
-      "room_situation": "Build allyMoves by traversing all enemy moves: Ward for a Strike, Mend for the first opening after an attack, and Strike for remaining openings.",
+      "room_situation": "Build ourMoves by traversing all enemy moves: Shield for a Attack, Heal for the first opening after an attack, and Attack for remaining openings.",
       "native_construction": "stateful for-of result construction with seenAttack/didHeal",
       "source_support": [
         {
@@ -2833,15 +2860,15 @@
       ],
       "support_level": "worked",
       "exposed_lists": [
-        "allyMoves",
-        "sourceMoves (read-only enemyMoves alias)"
+        "ourMoves",
+        "reserveMoves (read-only enemyMoves alias)"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [
-            "allyMoves"
+            "ourMoves"
           ],
           "effects": [],
           "marked_index": -1
@@ -2851,20 +2878,20 @@
       "examples": [
         {
           "variant_id": "R26-V1",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R26-V1"
         },
         {
           "variant_id": "R26-V2",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Strike\", \"Ward\", \"Mend\", \"Ward\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Attack\", \"Shield\", \"Heal\", \"Shield\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R26-V2"
         },
         {
           "variant_id": "R26-V3",
-          "initial_summary": "allyMoves: []",
-          "expected_summary": "allyMoves: [\"Ward\", \"Mend\", \"Strike\", \"Ward\", \"Strike\", \"Strike\", \"Strike\"]",
+          "initial_summary": "ourMoves: []",
+          "expected_summary": "ourMoves: [\"Shield\", \"Heal\", \"Attack\", \"Shield\", \"Attack\", \"Attack\", \"Attack\"]",
           "goal_ref": "common/ROOM_GOALS.json#variants/R26-V3"
         }
       ],
@@ -2891,7 +2918,7 @@
           "kind": "assembled_native_blocks",
           "focal_change": "stateful for-of result construction with seenAttack/didHeal",
           "intended_visible_change": "Editable Arcade Blocks for stateful for-of result construction with seenAttack/didHeal",
-          "alt_text": "R26 native editable Arcade Blocks showing stateful for-of result construction with seenAttack/didHeal, inside Primary onInteract handler; submit `allyMoves`."
+          "alt_text": "R26 native editable Arcade Blocks showing stateful for-of result construction with seenAttack/didHeal, inside Primary onInteract handler; submit `ourMoves`."
         },
         {
           "status": "planned",
@@ -2908,9 +2935,9 @@
           ],
           "id": "R26-before-after",
           "kind": "game_before_after",
-          "focal_change": "There is one output for each source move: `Ward` against an attack, one `Mend` at the first later opening, and `Strike` at other openings.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. There is one output for each source move: `Ward` against an attack, one `Mend` at the first later opening, and `Strike` at other openings.",
-          "alt_text": "R26 spatial chamber before and after its altar job. There is one output for each source move: Ward against an attack, one Mend at the first later opening, and Strike at other openings."
+          "focal_change": "There is one output for each source move: `Shield` against an attack, one `Heal` at the first later opening, and `Attack` at other openings.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. There is one output for each source move: `Shield` against an attack, one `Heal` at the first later opening, and `Attack` at other openings.",
+          "alt_text": "R26 spatial chamber before and after its altar job. There is one output for each source move: Shield against an attack, one Heal at the first later opening, and Attack at other openings."
         }
       ],
       "next_recipe": "R27",
@@ -2925,13 +2952,14 @@
         "R26-primary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     },
     {
       "room": "R27",
       "sequence": 27,
-      "room_situation": "Foreach REAL Sprite in hazardRoster, hold that actor; independently traverse enemyMoves by index and set EVERY Ward to Wait. Finish with two visible cleanup attacks.",
-      "native_construction": "primary Sprite for-of effects + secondary indexed Ward replacements",
+      "room_situation": "Foreach REAL Sprite in enemies, hold that actor; independently traverse enemyMoves by index and set EVERY Shield to Wait. Finish with two visible cleanup attacks.",
+      "native_construction": "primary Sprite for-of effects + secondary indexed Shield replacements",
       "source_support": [
         {
           "id": "MCA-CSINTRO2-ARRAYS-SPRITES",
@@ -2947,12 +2975,12 @@
       "support_level": "worked",
       "exposed_lists": [
         "enemyMoves",
-        "hazardRoster"
+        "enemies"
       ],
       "stations": [
         {
           "station": "Primary",
-          "physical_action": "Walk to the Primary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Left altar; A runs your current code; B explains this operation.",
           "edits": [],
           "effects": [
             "hold"
@@ -2961,7 +2989,7 @@
         },
         {
           "station": "Secondary",
-          "physical_action": "Walk to the Secondary altar; A runs current learner code; B explains the operation",
+          "physical_action": "Walk to Right altar; A runs your current code; B explains this operation.",
           "edits": [
             "enemyMoves"
           ],
@@ -2973,20 +3001,20 @@
       "examples": [
         {
           "variant_id": "R27-V1",
-          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Ward\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "initial_summary": "enemyMoves: [\"Shield\", \"Attack\", \"Wait\", \"Shield\", \"Attack all\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Wait\", \"Attack all\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
           "goal_ref": "common/ROOM_GOALS.json#variants/R27-V1"
         },
         {
           "variant_id": "R27-V2",
-          "initial_summary": "enemyMoves: [\"Strike\", \"Ward\", \"Wait\", \"Flurry\", \"Ward\", \"Wait\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Strike\", \"Wait\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "initial_summary": "enemyMoves: [\"Attack\", \"Shield\", \"Wait\", \"Attack all\", \"Shield\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Attack\", \"Wait\", \"Wait\", \"Attack all\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
           "goal_ref": "common/ROOM_GOALS.json#variants/R27-V2"
         },
         {
           "variant_id": "R27-V3",
-          "initial_summary": "enemyMoves: [\"Ward\", \"Strike\", \"Wait\", \"Flurry\", \"Ward\", \"Wait\", \"Wait\", \"Wait\"]",
-          "expected_summary": "enemyMoves: [\"Wait\", \"Strike\", \"Wait\", \"Flurry\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
+          "initial_summary": "enemyMoves: [\"Shield\", \"Attack\", \"Wait\", \"Attack all\", \"Shield\", \"Wait\", \"Wait\", \"Wait\"]",
+          "expected_summary": "enemyMoves: [\"Wait\", \"Attack\", \"Wait\", \"Attack all\", \"Wait\", \"Wait\", \"Wait\", \"Wait\"]; Hold: E-Raider, E-Wisp",
           "goal_ref": "common/ROOM_GOALS.json#variants/R27-V3"
         }
       ],
@@ -3012,9 +3040,9 @@
           ],
           "id": "R27-blocks",
           "kind": "assembled_native_blocks",
-          "focal_change": "primary Sprite for-of effects + secondary indexed Ward replacements",
-          "intended_visible_change": "Editable Arcade Blocks for primary Sprite for-of effects + secondary indexed Ward replacements",
-          "alt_text": "R27 native editable Arcade Blocks showing primary Sprite for-of effects + secondary indexed Ward replacements, inside Primary followed by Secondary onInteract handlers; submit `enemyMoves` and apply `hold` to the retrieved Sprite(s)."
+          "focal_change": "primary Sprite for-of effects + secondary indexed Shield replacements",
+          "intended_visible_change": "Editable Arcade Blocks for primary Sprite for-of effects + secondary indexed Shield replacements",
+          "alt_text": "R27 native editable Arcade Blocks showing primary Sprite for-of effects + secondary indexed Shield replacements, inside Primary followed by Secondary onInteract handlers; submit `enemyMoves` and apply `hold` to the retrieved Sprite(s)."
         },
         {
           "status": "planned",
@@ -3032,9 +3060,9 @@
           ],
           "id": "R27-before-after",
           "kind": "game_before_after",
-          "focal_change": "After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Ward` moves become `Wait` while the other enemy moves remain in place.",
-          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Ward` moves become `Wait` while the other enemy moves remain in place.",
-          "alt_text": "R27 spatial chamber before and after its altar job. After Primary, both listed hazard actors are held. After Secondary, all enemy Ward moves become Wait while the other enemy moves remain in place."
+          "focal_change": "After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Shield` moves become `Wait` while the other enemy moves remain in place.",
+          "intended_visible_change": "In the spatial chamber, show the altar effect on the moment pieces and actors. After **Primary**, both listed hazard actors are held. After **Secondary**, all enemy `Shield` moves become `Wait` while the other enemy moves remain in place.",
+          "alt_text": "R27 spatial chamber before and after its altar job. After Primary, both listed hazard actors are held. After Secondary, all enemy Shield moves become Wait while the other enemy moves remain in place."
         }
       ],
       "next_recipe": null,
@@ -3050,7 +3078,8 @@
         "R27-secondary"
       ],
       "visual_delivery": "purpose, visible needed native blocks, readable annotated full station example, current-job hint, actual play/result GIF",
-      "automatic_fading": false
+      "automatic_fading": false,
+      "language_contract": "design/LEARNER_LANGUAGE_v0.6.0.json"
     }
   ],
   "runtime_navigation": {

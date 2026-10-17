@@ -9,6 +9,11 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const variants=JSON.parse(read('implementation/encounters.json')).variants;
+const language=JSON.parse(read('design/LEARNER_LANGUAGE_v0.6.0.json'));
+// Translate wording after calculating the strategy from unchanged internal IDs.
+// This mapper never edits encounter fixtures, powers, moves or target identities.
+const words=[['Strikes','Attacks'],['Wards','Shields'],...Object.entries(language.move_display),['Primary','Left altar'],['Secondary','Right altar'],['Station 1','Left altar'],['Station 2','Right altar'],['First altar','Left altar'],['Second altar','Right altar'],['first altar','Left altar'],['second altar','Right altar'],['allied move list','move list for our team'],['allied moves','our moves'],['allied','our team'],['Allied','Our team'],['Holding','Freezing'],['holding','freezing'],['Hold','Freeze'],['hold','freeze'],['held','frozen'],['roster','enemy list'],['Sprites','characters'],['Sprite','character'],['actors','characters'],['actor','character'],['source moves','reserve moves'],['values','powers'],['value','power']];
+const friendly=s=>words.reduce((text,[from,to])=>text.replace(new RegExp('\\b'+from+'\\b','g'),to),s);
 const name=id=>id==='ALL'?'ALL':id.replace(/^[AE]-/,'');
 const names=ids=>ids.map(name).join(', ');
 const order=a=>a.join(', ');
@@ -51,8 +56,8 @@ const operations=jobs.map(([room,station,short,long])=>{
  const reference=`implementation/learner-states/rooms/R${String(room).padStart(2,'0')}.ts`;
  const callback=`apocTypes.Station.${station===1?'Primary':'Secondary'}`;
  if(!read(reference).includes(callback))throw Error(`Missing callback ${room}/${station}`);
- const operation='Altar job: '+short;
- const explain=long+' A runs your current altar code; this is the job to write.';
+ const operation=friendly('Altar job: '+short);
+ const explain=friendly(long+' A runs your current altar code; this is the job to write.');
  if(operation.length>85||explain.length>500)throw Error(`Help too long ${room}/${station}: ${operation.length}/${explain.length}`);
  return {room,station,operation,explain,provenance:{reference,reference_sha256:hash(read(reference)),callback,encounters:variants.filter(x=>x.room===room).map(x=>`R${String(room).padStart(2,'0')}-V${x.variant}`),adaptation:'Owner-requested mechanical reminder of the existing handler; new game-specific wording, not quoted source text'}};
 });
@@ -95,7 +100,7 @@ function strategy(x){
 const entries=variants.map(x=>{
  const rid='R'+String(x.room).padStart(2,'0');
  const reference=`implementation/learner-states/rooms/${rid}.ts`;
- return {room:x.room,variant:x.variant,text:strategy(x),provenance:{encounter:`implementation/encounters.json#/variants/${variants.indexOf(x)}`,encounter_sha256:hash(JSON.stringify(x)),reference,reference_sha256:hash(read(reference)),goal:x.room===14?'Current encounter plus supplied-world/goals.ts historyR14: legal roll/swap history is the list task; Boss HP determines the separate combat power threshold.':'expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json',instruction:x.instruction}};
+ return {room:x.room,variant:x.variant,text:friendly(strategy(x)),provenance:{encounter:`implementation/encounters.json#/variants/${variants.indexOf(x)}`,encounter_sha256:hash(JSON.stringify(x)),reference,reference_sha256:hash(read(reference)),goal:x.room===14?'Current encounter plus supplied-world/goals.ts historyR14: legal roll/swap history is the list task; Boss HP determines the separate combat power threshold.':'expected lists/effects/history in the named encounter; checked against retained learner-states/RESULTS.json',instruction:x.instruction}};
 });
 if(entries.length!==81||new Set(entries.map(e=>e.room+'-'+e.variant)).size!==81)throw Error('Expected all 27 x 3 variants');
 for(let r=1;r<=27;r++)for(let v=1;v<=3;v++)if(!entries.some(e=>e.room===r&&e.variant===v))throw Error('Missing '+r+'-'+v);
